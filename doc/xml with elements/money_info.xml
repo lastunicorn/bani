@@ -1,0 +1,518 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<money version="1.0" xmlFormat="elem">
+	<coins>
+		<coin>
+			<id>1</id>
+			<country>România</country>
+			<timeInterval>
+				<endDate>2006-12-31</endDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>1</value>
+			<diameter>19</diameter>
+			<weight>2.50</weight>
+			<substance>oţel placat cu cupru</substance>
+			<description>
+				<back>Are stema României pe spate.</back>
+			</description>
+		</coin>
+		<coin>
+			<id>2</id>
+			<country>România</country>
+			<timeInterval>
+				<endDate>2006-12-31</endDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>100</value>
+			<diameter>29</diameter>
+			<weight>8.75</weight>
+			<substance>oţel placat cu nichel</substance>
+			<description>
+				<back>Mihai Viteazu pe spate.</back>
+			</description>
+		</coin>
+		<coin>
+			<id>3</id>
+			<country>România</country>
+			<timeInterval>
+				<endDate>2006-12-31</endDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>500</value>
+			<diameter>24</diameter>
+			<weight>3.75</weight>
+			<substance>aluminiu</substance>
+			<description>
+				<back>Are stema româniei pe spate.</back>
+			</description>
+		</coin>
+		<coin>
+			<id>4</id>
+			<country>România</country>
+			<timeInterval>
+				<endDate>2006-12-31</endDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>1000</value>
+			<diameter>22</diameter>
+			<weight>2</weight>
+			<substance>aliaj AlMg3</substance>
+			<description>
+				<back>Mihai Viteazu pe spate.</back>
+			</description>
+		</coin>
+		<coin>
+			<id>5</id>
+			<country>România</country>
+			<timeInterval>
+				<endDate>2006-12-31</endDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>5000</value>
+			<diameter>24</diameter>
+			<weight>2.50</weight>
+			<substance>aliaj AlMg3</substance>
+			<description>
+				<back>Are stema româniei pe spate.</back>
+			</description>
+		</coin>
+		<coin>
+			<id>6</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2005-07-01</startDate>
+			</timeInterval>
+			<currency>ban</currency>
+			<value>1</value>
+			<diameter>16.75</diameter>
+			<edge>neted</edge>
+			<substance>Oţel placat cu alamă</substance>
+			<color>galbenă</color>
+		</coin>
+		<coin>
+			<id>7</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2005-07-01</startDate>
+			</timeInterval>
+			<currency>ban</currency>
+			<value>5</value>
+			<diameter>18.25</diameter>
+			<edge>zimţat</edge>
+			<substance>Oţel placat cu cupru</substance>
+			<color>roşie</color>
+		</coin>
+		<coin>
+			<id>8</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2005-07-01</startDate>
+			</timeInterval>
+			<currency>ban</currency>
+			<value>10</value>
+			<diameter>20.5</diameter>
+			<edge>trei grupe de zimţi</edge>
+			<substance>Oţel placat cu nichel</substance>
+			<color>albă</color>
+		</coin>
+		<coin>
+			<id>9</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2005-07-01</startDate>
+			</timeInterval>
+			<currency>ban</currency>
+			<value>50</value>
+			<diameter>23.75</diameter>
+			<edge>inscripţionat</edge>
+			<substance>Alamă</substance>
+			<color>galben deschis</color>
+		</coin>
+		<coin>
+			<id>10</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2010-01-01</startDate>
+			</timeInterval>
+			<currency>ban</currency>
+			<value>50</value>
+			<diameter>23.75</diameter>
+			<edge>inscripţionat</edge>
+			<substance>Alamă</substance>
+			<color>galben</color>
+		</coin>
+	</coins>
+	<banknotes>
+		<banknote>
+			<id>1</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2000-09-01</startDate>
+				<endDate>2006-12-31</endDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>10000</value>
+			<width>150</width>
+			<height>67</height>
+			<substance>polimer</substance>
+			<color>verde şi verde deschis</color>
+			<description>
+				<front>Portretul istoricului, scriitorului şi jurnalistului Nicolae Iorga, privit din faţă. În centru, este ilustrat un element floral reprezentând Lumânărica pământului (Gentiana asclepiadaea). Sus, stema României, denumirea băncii centrale emitente "BANCA NAŢIONALĂ A ROMÂNIEI", şi medalion cu sigla "BNR". Jos, valoarea nominală în cifre şi litere "10.000 lei ZECE MII". În stînga, semnăturile guvernatorului, casierului central şi anul emisiunii "2000". În dreapta, vertical, valoarea "ZECE MII 10.000".</front>
+				<back>În centru, este ilustrată imaginea Catedralei Episcopale a mânăstirii Curtea de Argeş, construită de domnitorul Neagoe Basarab (1512-1521). La stânga acesteia este reprezentată stilizat acvila cruciată din vechea stemă a Ţării Româneşti de pe timpul domnitorului Constantin Brâncoveanu (1688-1714). Sus, sunt imprimate: valoarea nominală "10.000" atât pe verticală cât şi pe orizontală, denumirea băncii centrale "BANCA NAŢIONALĂ A ROMÂNIEI" şi sigla B.N.R. Jos, în dreapta, valoarea nominală în litere şi cifre "ZECE MII lei 10.000". În planul din dreapta catedralei episcopale este redat, vertical, textul penalităţii în caz de falsuri: "FALSIFICAREA ACESTOR BILETE SE PEDEPSESTE CONFORM LEGILOR". Seria şi numărul bancnotei, imprimate cu litere şi cifre în două culori, sunt amplasate astfel: cele cu cerneală neagră şi caractere de aceeaşi înălţime, pe verticală, în stânga; cele cu cerneală roşie şi caractere de înălţime crescătoare, pe orizontală, în dreapta.</back>
+			</description>
+			<securityElements>
+				<securityElement name="Fereastra transparentă">Zona clară, din partea stângă, pe aversul bancnotei. În interior este imprimată valoarea nominală "10000".</securityElement>
+				<securityElement name="Filigranul">imaginea în oglindă a portretului lui Nicolae Iorga deasupra ferestrei transparente şi sigla BNR aflată în dreapta ferestrei (privind aversul). Filigranul este vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Elementul de suprapunere avers-revers">Când bancnota este luminată din partea opusă privitorului, elemente ale motivului floral stilizat, aflate pe avers sub denumirea băncii centrale, se suprapun perfect cu elementele imprimate pe revers formând o imagine completă.</securityElement>
+			</securityElements>
+		</banknote>
+		<banknote>
+			<id>2</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2001-11-01</startDate>
+				<endDate>2006-12-31</endDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>50000</value>
+			<width>155</width>
+			<height>70</height>
+			<substance>polimer</substance>
+			<color>violet</color>
+			<description>
+				<front>portretul compozitorului George Enescu (1881-1955), privit din faţă. În centru, sînt ilustrate: un element floral reprezentînd o garoafă (Dianthus dianthus), două note muzicale şi o vioară. Sus, stema României, denumirea băncii centrale emitente, "BANCA NAŢIONALĂ A ROMÂNIEI", şi medalion cu sigla "B.N.R.". Jos, valoarea nominală în cifre şi litere "50.000 lei CINCIZECI MII". În stînga, semnăturile guvernatorului, casierului central şi anul emisiunii "2001". În dreapta, vertical, valoarea "CINCIZECI MII 50.000".</front>
+				<back>În centru, este ilustrat Atheneul Român. În dreapta, imaginea unui pian. Sus, sînt imprimate: valoarea nominală "50.000" atît pe verticală cît şi pe orizontală, denumirea băncii centrale "BANCA NAŢIONALĂ A ROMÂNIEI" şi sigla B.N.R. Jos, în dreapta, valoarea nominală în litere şi cifre "CINCIZECI MII lei 50.000", iar în stînga, dreptunghi cu sigla B.N.R. În planul din stînga ferestrei transparente este redat vertical textul: "FALSIFICAREA ACESTOR BILETE SE PEDEPSEŞTE CONFORM LEGILOR". Seria şi numărul bancnotei, tipărite cu litere şi cifre în două culori, negru şi roşu, sînt imprimate astfel: cele cu cerneală neagră şi caractere de aceeaşi înălţime sînt amplasate vertical în stînga reversului bancnotei; cele cu cerneală roşie şi caractere de înălţime crescătoare sînt amplasate în dreapta reversului bancnotei.</back>
+			</description>
+			<securityElements>
+				<securityElement name="Fereastra transparentă">Zona clară, din partea stîngă, pe aversul bancnotei. În interior este imprimată valoarea nominală "50000".</securityElement>
+				<securityElement name="Filigranul">imaginea în oglindă a portretului lui George Enescu şi sigla BNR aflate deasupra ferestrei transparente (privind aversul). Filigranul este vizibil cînd bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Elementul de suprapunere avers-revers">Cînd bancnota este luminată din partea opusă privitorului, elemente ale lirei aflate pe avers, sub denumirea băncii centrale, se suprapun perfect cu elementele imprimate pe revers formînd o imagine completă.</securityElement>
+				<securityElement name="Supraimprimare sidefată">pe avers, portretul şi sigla BNR. Cînd bancnota este înclinată, apare efectul sidefat.</securityElement>
+			</securityElements>
+		</banknote>
+		<banknote>
+			<id>3</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2001-11-01</startDate>
+				<endDate>2006-12-31</endDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>100000</value>
+			<width>160</width>
+			<height>73</height>
+			<substance>polimer</substance>
+			<color>portocaliu</color>
+			<description>
+				<front>Portretul pictorului Nicolae Grigorescu (1838-1907). În centru, sînt ilustrate: un element floral reprezentînd o floare de nalbă (Althea officinalis), pensula şi paleta artistului. Sus, stema României, denumirea băncii centrale emitente, "BANCA NAŢIONALĂ A ROMÂNIEI", şi medalion cu sigla "B.N.R.". Jos, valoarea nominală în cifre şi litere "100.000 lei UNA SUTA MII". În stînga, semnăturile guvernatorului, casierului central şi anul emisiunii "2001". În dreapta, vertical, valoarea "UNA SUTA MII 100.000".</front>
+				<back>În centru, este ilustrată o casă din Oltenia. În stînga, imaginea tabloului lui Nicolae Grigorescu "Rodica", reprezentînd un portret de fată. Sus, sînt imprimate: valoarea nominală "100.000" atît pe verticală cît şi pe orizontală, denumirea băncii centrale "BANCA NAŢIONALĂ A ROMÂNIEI" şi sigla B.N.R. Jos, în dreapta, valoarea nominală în litere şi cifre "UNA SUTA MII lei 100.000", iar în stînga, dreptunghi cu sigla B.N.R. În planul din dreapta ferestrei transparente este redat vertical textul penalităţii "FALSIFICAREA ACESTOR BILETE SE PEDEPSEŞTE CONFORM LEGILOR". Seria şi numărul bancnotei, tipărite cu litere şi cifre în două culori, negru şi roşu, sînt imprimate astfel: cele cu cerneală neagră şi caractere de aceeaşi înălţime sînt amplasate vertical în stînga reversului bancnotei; cele cu cerneală roşie şi caractere de înălţime crescătoare sînt amplasate în dreapta reversului bancnotei.</back>
+			</description>
+			<securityElements>
+				<securityElement name="Fereastra transparentă">Zona clară, din partea stîngă, pe aversul bancnotei. În interior este imprimată valoarea nominală "100000".</securityElement>
+				<securityElement name="Filigranul">Imaginea în oglindă a portretului lui Nicolae Grigorescu şi sigla BNR aflate deasupra ferestrei transparente (privind aversul). Filigranul este vizibil cînd bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Elementul de suprapunere avers-revers">Cînd bancnota este luminată din partea opusă privitorului, elemente ale paletei pictorului aflate pe avers, sub denumirea băncii centrale, se suprapun perfect cu elementele imprimate pe revers formînd o imagine completă.</securityElement>
+				<securityElement name="Element auriu supraimprimat">Pe latura din dreapta, pe avers, zona aurie sub forma paletei pictorului.</securityElement>
+				<securityElement name="Supraimprimare sidefată">Pe avers, portretul şi ansamblul floral. Cînd bancnota este înclinată, apare efectul sidefat.</securityElement>
+			</securityElements>
+		</banknote>
+		<banknote>
+			<id>4</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2000-10-01</startDate>
+				<endDate>2006-12-31</endDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>500000</value>
+			<width>165</width>
+			<height>76</height>
+			<substance>polimer</substance>
+			<color>galben, verde şi oranj</color>
+			<description>
+				<front>Portretul inginerului constructor de avioane inventatorului şi pilotului român Aurel Vlaicu, privit din faţă. În centru, este ilustrat un element floral reprezentînd Floarea de colţ sau Albumiţa (Leontopodium alpinum) şi o elice de avion stilizată. Sus, stema României, denumirea băncii centrale emitente, "BANCA NAŢIONALĂ A ROMÂNIEI", şi medalion cu sigla "B.N.R.". Jos, valoarea nominală în cifre şi litere "500.000 lei CINCI SUTE MII". În stînga, semnăturile guvernatorului, casierului central şi anul emisiunii "2000". În dreapta, vertical, valoarea "CINCI SUTE MII 500.000".</front>
+				<back>În centru, este ilustrată imaginea unui cap de acvilă de munte (Aquila chrysaetos). La stînga acesteia este reprezentată schiţa avionului "Vlaicu II", văzut din faţă. În plan secund este redată schema în secţiune a motorului "Gnome" cu care era echipat avionul "Vlaicu II". Sus, sînt imprimate: valoarea nominală "500.000" atît pe verticală cît şi pe orizontală, denumirea băncii centrale "BANCA NAŢIONALĂ A ROMÂNIEI" şi sigla B.N.R. Jos, în dreapta, valoarea nominală în litere şi cifre "CINCI SUTE MII lei 500.000", iar în stînga semnul pentru nevăzători sub formă de dreptunghi cu sigla B.N.R. În planul din dreapta ferestrei transparente este redat vertical textul penalităţii în caz de falsuri "FALSIFICAREA ACESTOR BILETE SE PEDEPSEŞTE CONFORM LEGILOR". Seria şi numărul bancnotei, tipărite cu litere şi cifre în două culori, negru şi roşu, sînt imprimate astfel: cele cu cerneală neagră şi caractere de aceeaşi înălţime sînt amplasate vertical în stînga reversului bancnotei; cele cu cerneală roşie şi caractere de înălţime crescătoare sînt amplasate în dreapta reversului bancnotei.</back>
+			</description>
+			<securityElements>
+				<securityElement name="Fereastra transparentă">Zona clară, din partea stîngă, pe aversul bancnotei. În interior este imprimată valoarea nominală "500000".</securityElement>
+				<securityElement name="Filigranul">imaginea în oglindă a portretului lui Aurel Vlaicu şi sigla BNR aflate deasupra ferestrei transparente (privind aversul). Filigranul este vizibil cînd bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Elementul de suprapunere avers-revers">Cînd bancnota este luminată din partea opusă privitorului, elemente ale rozei vînturilor aflate pe avers, sub denumirea băncii centrale, se suprapun perfect cu elementele imprimate pe revers formînd o imagine completă.</securityElement>
+				<securityElement name="Imagine latentă">pe latura din dreapta, pe avers, zona aurie imprimată continuu cu alb cu literele "BNR"; la privirea directă a bancnotei este vizibil înscrisul "BNR"; aplecînd lent latura de sus a bancnotei pe verticala zonei aurii apare, în alb transparent, imaginea monumentului de la Băneşti.</securityElement>
+				<securityElement name="Semn pentru nevăzători">pe revers, sub forma unui dreptunghi în interiorul căruia se află sigla BNR.</securityElement>
+			</securityElements>
+		</banknote>
+		<banknote>
+			<id>4</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2003-12-01</startDate>
+				<endDate>2006-12-31</endDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>1000000</value>
+			<width>168</width>
+			<height>78</height>
+			<substance>polimer</substance>
+			<color>albastru deschis</color>
+			<description>
+				<front>Portretul dramaturgului, scriitorului şi nuvelistului Ion Luca Caragiale (1852-1912), privit din faţă. În centru, sînt ilustrate: un element floral reprezentînd o violetă (Viola sororia), o mască de teatru stilizată şi o altă mască, a Comediei, simbol al teatrului. Sus, stema României, denumirea băncii centrale emitente "BANCA NAŢIONALĂ A ROMÂNIEI" şi medalion cu sigla "BNR". Jos, valoarea nominală în cifre şi litere "1.000.000 lei UN MILION" şi anul emisiunii "2003". Sub floare, semnăturile guvernatorului şi casierului central. În dreapta, sub portret, semnătura în facsimil a scriitorului. Tot în dreapta, vertical, valoarea nominală "UN MILION 1.000.000".</front>
+				<back>În centru este ilustrată vechea clădire a Teatrului National din Bucureşti. În dreapta, imprimată cu auriu, masca Tragediei, celălalt simbol al Teatrului.În stînga, statuia scriitorului Ion Luca Caragiale. Sus sînt imprimate: valoarea nominală "1.000.000" atît pe verticală cît şi pe orizontală, denumirea băncii centrale "BANCA NAŢIONALĂ A ROMÂNIEI" şi sigla B.N.R. Jos, în dreapta, valoarea nominală în litere şi cifre "UN MILION lei 1.000.000", iar în stînga, dreptunghi cu sigla BNR. Sub statuie este imprimat, orizontal, textul: "FALSIFICAREA ACESTOR BILETE SE PEDEPSESTE CONFORM LEGILOR". Seria şi numărul bancnotei, imprimate cu litere şi cifre în două culori, sînt amplasate astfel: cele cu cerneală neagră şi caractere de aceeaşi înălţime, pe verticală, în stînga; cele cu cerneală roşie şi caractere de înălţime crescătoare, pe orizontală, în dreapta.</back>
+			</description>
+			<securityElements>
+				<securityElement name="Fereastra transparentă">Zona clară, din partea stîngă, pe aversul bancnotei. În interior este imprimată valoarea nominală "1000000".</securityElement>
+				<securityElement name="Filigranul">portretul lui Ion Luca Caragiale deasupra ferestrei transparente şi sigla BNR aflată în stînga ferestrei (privind aversul). Filigranul este vizibil cînd bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Elementul de suprapunere avers-revers">cînd bancnota este luminată din partea opusă privitorului, elemente ale amfiteatrului stilizat, aflate pe avers sub denumirea băncii centrale, se suprapun perfect cu elementele imprimate pe revers formînd o imagine completă.</securityElement>
+				<securityElement name="Imprimarea în relief">detectabilă prin palpare, pe avers: portretul, elementul floral, stema României, denumirea băncii centrale emitente, medalionul cu sigla BNR, valoarea nominală în litere şi cifre, anul emisiunii, semnăturile guvernatorului şi casierului central; pe revers: clădirea teatrului, statuia dramaturgului, valoarea nominală, denumirea băncii centrale, sigla BNR, dreptunghiul cu sigla BNR.</securityElement>
+				<securityElement name="Microperforaţiile">situate pe avers în dreptul florii - constituite din valoarea "1000000" - vizibile cînd bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Cerneala care îşi schimbă culoarea din auriu în verde, pe avers">"lei UN MILION" vizibilă cînd bancnota este înclinată.</securityElement>
+				<securityElement name="Supraimprimarea sidefată, pe avers">masca de teatru stilizată şi masca reprezentînd Comedia, efectul sidefat observîndu-se cînd bancnota este înclinată.</securityElement>
+				<securityElement name="Microtextul">"BNR" în interiorul cifrelor 1.000.000 pe avers şi pe revers, vizibil folosind o lupă.</securityElement>
+				<securityElement name="Imaginea latentă, pe revers">iniţialele I,L,C în partea de jos a clădirii teatrului, vizibile cînd bancnota este înclinată.</securityElement>
+				<securityElement name="Element auriu supraimprimat, pe revers">masca Tragediei.</securityElement>
+			</securityElements>
+		</banknote>
+		<banknote>
+			<id>6</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>1999-08-02</startDate>
+				<endDate>2006-12-31</endDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>2000</value>
+			<width>143</width>
+			<height>63</height>
+			<substance>polimer</substance>
+			<color>albastra</color>
+			<description>
+				<general>Prima bancnotă din polimer din Europa.</general>
+				<front>Reprezentarea stilizată a sistemului nostru solar; în dreapta jos, fereastra cu filtrul metameric; sus, stema României, fereastra transparentă, denumirea băncii centrale emitente, "BANCA NAŢIONALĂ A ROMÂNIEI" şi medalion cu sigla "BNR"; jos, valoarea nominală în cifre şi litere "2.000 lei DOUA MII" şi deasupra, anul emisiunii "1999"; în stânga, amplasate vertical, semnăturile guvernatorului şi casierului central, precum şi reprezentarea stilizată a Soarelui; în dreapta, vertical, valoarea nominală "DOUA MII 2.000".</front>
+				<back>In centru este ilustrată harta României, colorată în roşu, galben şi albastru, având marcate zona şi localităţile din care eclipsa totală de soare a avut vizibilitate maximă; sus sunt imprimate: valoarea nominală "2.000" atât pe verticală, cât şi pe orizontală, denumirea băncii centrale "BANCA NAŢIONALĂ A ROMÂNIEI" şi sigla "BNR"; sub denumirea băncii centrale, fereastra transparentă; jos, în stânga, fereastra cu filtrul metameric; în dreapta, valoarea nominală în litere şi cifre "DOUA MII lei 2.000"; în dreapta, deasupra valorii nominale este imprimat, orizontal, textul "FALSIFICAREA ACESTOR BILETE SE PEDEPSESTE CONFORM LEGILOR"; seria şi numărul bancnotei, imprimate cu litere şi cifre în două culori, sunt amplasate astfel: cele cu cerneală neagră şi caractere de aceeaşi înălţime, pe verticală, în stânga; cele cu cerneală roşie şi caractere de înălţime crescătoare, pe orizontală, în dreapta.</back>
+			</description>
+			<securityElements/>
+		</banknote>
+		<banknote>
+			<id>7</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2005-07-01</startDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>1</value>
+			<width>120</width>
+			<height>62</height>
+			<substance>polimer</substance>
+			<color></color>
+			<description>
+				<general>Nicolae Iorga.</general>
+			</description>
+			<securityElements>
+				<securityElement name="Fereastra transparentă">Fereastra transparentă se află în stânga aversului bancnotei şi are forma de acvila cruciată.</securityElement>
+				<securityElement name="Filigranul">Filigranul este constituit din două componente poziţionate în stânga aversului, pe zona neimprimată: portretul personalităţii de pe bancnotă şi emblema BNR. Filigranul este vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Firul de siguranţă">În zona centrală există un fir ce devine vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Elementul de suprapunere">Fragmente ale unui element floral stilizat imprimate în acelaşi loc pe ambele feţe, astfel că atunci când sunt privite prin transparenţă şi luminate din partea opusă privitorului, imaginea este văzută în întregime. Aceasta se află plasată, pe avers, sub denumirea băncii centrale de emisiune.</securityElement>
+				<securityElement name="Banda iridescentă">Pe revers e imprimată, în partea dreaptă, o bandă verticală de culoare transparent aurie care are înscrisă, pe verticală, de şapte ori, valoarea nominală.</securityElement>
+				<securityElement name="Microtextul">Pe avers şi pe revers, există zone imprimate cu caractere foarte mici, sub 1 mm înălţime, ce se pot vedea cu ajutorul unei lupe.</securityElement>
+				<securityElement name="Imprimare vizibilă în lumină ultravioletă">Pe revers este imprimat cu cerneală vizibilă numai în lumină ultravioletă, un patrulater ce conţine valoarea nominală. Seria bancnotelor este formată din trei cifre şi o literă, iar numărul din şapte cifre. Numărul fiecărei bancnote este unic. Seria şi numărul tipărite cu cerneală neagră, pe verticală, în stânga, se văd de culoare verde, iar seria şi numărul imprimate cu cerneală roşie, cu caractere de înălţime crescătoare, pe orizontală în dreapta, se văd de culoare portocalie în lumină ultravioletă.</securityElement>
+			</securityElements>
+		</banknote>
+		<banknote>
+			<id>8</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2005-07-01</startDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>5</value>
+			<width>127</width>
+			<height>67</height>
+			<substance>polimer</substance>
+			<color></color>
+			<description>
+				<general>George Enescu.</general>
+			</description>
+			<securityElements>
+				<securityElement name="Fereastra transparentă">Fereastra transparentă se află în stânga aversului bancnotei şi are forma de notă muzicală.</securityElement>
+				<securityElement name="Filigranul">Filigranul este constituit din două componente poziţionate în stânga aversului, pe zona neimprimată: portretul personalităţii de pe bancnotă şi emblema BNR. Filigranul este vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Firul de siguranţă">În zona centrală există un fir ce devine vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Elementul de suprapunere">Fragmente ale unei lire (instrument muzical) imprimate în acelaşi loc pe ambele feţe, astfel că atunci când sunt privite prin transparenţă şi luminate din partea opusă privitorului, imaginea este văzută în întregime. Aceasta se află plasată, pe avers, sub denumirea băncii centrale de emisiune.</securityElement>
+				<securityElement name="Banda iridescentă">Pe revers e imprimată, în partea dreaptă, o bandă verticală de culoare transparent aurie care are înscrisă, pe verticală, de şapte ori, valoarea nominală.</securityElement>
+				<securityElement name="Microtextul">Pe avers şi pe revers, există zone imprimate cu caractere foarte mici, sub 1 mm înălţime, ce se pot vedea cu ajutorul unei lupe.</securityElement>
+				<securityElement name="Imprimare vizibilă în lumină ultravioletă">Pe revers este imprimat cu cerneală vizibilă numai în lumină ultravioletă, un patrulater ce conţine valoarea nominală. Seria bancnotelor este formată din trei cifre şi o literă, iar numărul din şapte cifre. Numărul fiecărei bancnote este unic. Seria şi numărul tipărite cu cerneală neagră, pe verticală, în stânga, se văd de culoare verde, iar seria şi numărul imprimate cu cerneală roşie, cu caractere de înălţime crescătoare, pe orizontală în dreapta, se văd de culoare portocalie în lumină ultravioletă.</securityElement>
+			</securityElements>
+		</banknote>
+		<banknote>
+			<id>9</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2005-07-01</startDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>10</value>
+			<width>133</width>
+			<height>72</height>
+			<substance>polimer</substance>
+			<color></color>
+			<description>
+				<general>Nicolae Grigorescu.</general>
+			</description>
+			<securityElements>
+				<securityElement name="Fereastra transparentă">Fereastra transparentă se află în stânga aversului bancnotei şi are forma de paletă de pictură. Prezinta ca element de siguranţă în fereastră, valoarea nominală ambutisată.</securityElement>
+				<securityElement name="Filigranul">Filigranul este constituit din două componente poziţionate în stânga aversului, pe zona neimprimată: portretul personalităţii de pe bancnotă şi emblema BNR. Filigranul este vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Firul de siguranţă">În zona centrală există un fir ce devine vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Elementul de suprapunere">Fragmente ale unei palete de pictură imprimate în acelaşi loc pe ambele feţe, astfel că atunci când sunt privite prin transparenţă şi luminate din partea opusă privitorului, imaginea este văzută în întregime. Aceasta se află plasată, pe avers, sub denumirea băncii centrale de emisiune.</securityElement>
+				<securityElement name="Banda iridescentă">Pe revers e imprimată, în partea dreaptă, o bandă verticală de culoare transparent aurie care are înscrisă, pe verticală, de şapte ori, valoarea nominală.</securityElement>
+				<securityElement name="Microtextul">Pe avers şi pe revers, există zone imprimate cu caractere foarte mici, sub 1 mm înălţime, ce se pot vedea cu ajutorul unei lupe.</securityElement>
+				<securityElement name="Imprimare vizibilă în lumină ultravioletă">Pe revers este imprimat cu cerneală vizibilă numai în lumină ultravioletă, un patrulater ce conţine valoarea nominală. Seria bancnotelor este formată din trei cifre şi o literă, iar numărul din şapte cifre. Numărul fiecărei bancnote este unic. Seria şi numărul tipărite cu cerneală neagră, pe verticală, în stânga, se văd de culoare verde, iar seria şi numărul imprimate cu cerneală roşie, cu caractere de înălţime crescătoare, pe orizontală în dreapta, se văd de culoare portocalie în lumină ultravioletă.</securityElement>
+				<securityElement name="Imprimarea aurie">Pe aversul bancnotei, în partea dreaptă, există imprimată cu cerneală de culoare aurie o paletă de pictură.</securityElement>
+				<securityElement name="Imprimarea în relief">Principalele elemente de design de pe ambele feţe sunt imprimate în relief.</securityElement>
+				<securityElement name="Imaginea latentă">Imaginea latentă (umărul stâng al portretului, pe avers) nu este percepută la examinarea directă, dar devine vizibilă când bancnota este privită razant.</securityElement>
+			</securityElements>
+		</banknote>
+		<banknote>
+			<id>10</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2008-12-01</startDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>10</value>
+			<width>133</width>
+			<height>72</height>
+			<substance>polimer</substance>
+			<color></color>
+			<description>
+				<general>Nicolae Grigorescu.</general>
+			</description>
+			<securityElements>
+				<securityElement name="Fereastra transparentă">Fereastra transparentă se află în stânga aversului bancnotei şi are forma de paletă de pictură. Prezinta ca element de siguranţă în fereastră, două pensule aurii.</securityElement>
+				<securityElement name="Filigranul">Filigranul este constituit din două componente poziţionate în stânga aversului, pe zona neimprimată: portretul personalităţii de pe bancnotă şi emblema BNR. Filigranul este vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Firul de siguranţă">În zona centrală există un fir ce devine vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Elementul de suprapunere">Fragmente ale unei palete de pictură imprimate în acelaşi loc pe ambele feţe, astfel că atunci când sunt privite prin transparenţă şi luminate din partea opusă privitorului, imaginea este văzută în întregime. Aceasta se află plasată, pe avers, sub denumirea băncii centrale de emisiune.</securityElement>
+				<securityElement name="Banda iridescentă">Pe revers e imprimată, în partea dreaptă, o bandă verticală de culoare transparent aurie care are înscrisă, pe verticală, de şapte ori, valoarea nominală.</securityElement>
+				<securityElement name="Microtextul">Pe avers şi pe revers, există zone imprimate cu caractere foarte mici, sub 1 mm înălţime, ce se pot vedea cu ajutorul unei lupe.</securityElement>
+				<securityElement name="Imprimare vizibilă în lumină ultravioletă">Pe revers este imprimat cu cerneală vizibilă numai în lumină ultravioletă, un patrulater ce conţine valoarea nominală. Seria bancnotelor este formată din trei cifre şi o literă, iar numărul din şapte cifre. Numărul fiecărei bancnote este unic. Seria şi numărul tipărite cu cerneală neagră, pe verticală, în stânga, se văd de culoare verde, iar seria şi numărul imprimate cu cerneală roşie, cu caractere de înălţime crescătoare, pe orizontală în dreapta, se văd de culoare portocalie în lumină ultravioletă.</securityElement>
+				<securityElement name="Imprimarea aurie">Pe aversul bancnotei, în partea dreaptă, există imprimată cu cerneală de culoare aurie o paletă de pictură, iar în fereastra transparentă, două pensule.</securityElement>
+			</securityElements>
+		</banknote>
+		<banknote>
+			<id>11</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2005-07-01</startDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>50</value>
+			<width>140</width>
+			<height>77</height>
+			<substance>polimer</substance>
+			<color></color>
+			<description>
+				<general>Aurel Vlaicu.</general>
+			</description>
+			<securityElements>
+				<securityElement name="Fereastra transparentă">Fereastra transparentă se află în stânga aversului bancnotei şi are forma de cap de acvilă. Prezinta ca element de siguranţă în fereastră, valoarea nominală ambutisată.</securityElement>
+				<securityElement name="Filigranul">Filigranul este constituit din două componente poziţionate în stânga aversului, pe zona neimprimată: portretul personalităţii de pe bancnotă şi emblema BNR. Filigranul este vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Firul de siguranţă">În zona centrală există un fir ce devine vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Elementul de suprapunere">Fragmente ale unei roze a vânturilor (busolă) imprimate în acelaşi loc pe ambele feţe, astfel că atunci când sunt privite prin transparenţă şi luminate din partea opusă privitorului, imaginea este văzută în întregime. Aceasta se află plasată, pe avers, sub denumirea băncii centrale de emisiune.</securityElement>
+				<securityElement name="Banda iridescentă">Pe revers e imprimată, în partea dreaptă, o bandă verticală de culoare transparent aurie care are înscrisă, pe verticală, de şapte ori, valoarea nominală.</securityElement>
+				<securityElement name="Microtextul">Pe avers şi pe revers, există zone imprimate cu caractere foarte mici, sub 1 mm înălţime, ce se pot vedea cu ajutorul unei lupe.</securityElement>
+				<securityElement name="Imprimare vizibilă în lumină ultravioletă">Pe revers este imprimat cu cerneală vizibilă numai în lumină ultravioletă, un patrulater ce conţine valoarea nominală. Seria bancnotelor este formată din trei cifre şi o literă, iar numărul din şapte cifre. Numărul fiecărei bancnote este unic. Seria şi numărul tipărite cu cerneală neagră, pe verticală, în stânga, se văd de culoare verde, iar seria şi numărul imprimate cu cerneală roşie, cu caractere de înălţime crescătoare, pe orizontală în dreapta, se văd de culoare portocalie în lumină ultravioletă.</securityElement>
+				<securityElement name="Imprimarea aurie">Pe aversul bancnotei, în partea dreaptă, există imprimat cu cerneală de culoare aurie un cap de acvilă de munte.</securityElement>
+				<securityElement name="Imprimarea în relief">Principalele elemente de design de pe ambele feţe sunt imprimate în relief.</securityElement>
+				<securityElement name="Imaginea latentă">Imaginea latentă (umărul stâng al portretului, pe avers) nu este percepută la examinarea directă, dar devine vizibilă când bancnota este privită razant.</securityElement>
+				<securityElement name="Microperforaţiile">În zona elementului floral pe avers este înscrisă valoarea nominală prin perforaţii foarte fine. Acestea devin vizibile numai când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Cerneala care îşi schimbă culoarea">Pe avers, în partea stângă jos există textul "LEI CINCIZECI" imprimat cu cerneală care îşi schimbă culoarea din auriu în verde, în funcţie de unghiul din care este privită.</securityElement>
+			</securityElements>
+		</banknote>
+		<banknote>
+			<id>12</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2005-07-01</startDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>100</value>
+			<width>147</width>
+			<height>82</height>
+			<substance>polimer</substance>
+			<color></color>
+			<description>
+				<general>Ion Luca Caragiale.</general>
+			</description>
+			<securityElements>
+				<securityElement name="Fereastra transparentă">Fereastra transparentă se află în stânga aversului bancnotei şi are forma de măşti de teatru. Prezinta ca element de siguranţă în fereastră, valoarea nominală ambutisată şi element auriu sub formă de panglică.</securityElement>
+				<securityElement name="Filigranul">Filigranul este constituit din două componente poziţionate în stânga aversului, pe zona neimprimată: portretul personalităţii de pe bancnotă şi emblema BNR. Filigranul este vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Firul de siguranţă">În zona centrală există un fir ce devine vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Elementul de suprapunere">Fragmente ale unei flori stilizate de violetă imprimate în acelaşi loc pe ambele feţe, astfel că atunci când sunt privite prin transparenţă şi luminate din partea opusă privitorului, imaginea este văzută în întregime. Aceasta se află plasată, pe avers, sub denumirea băncii centrale de emisiune.</securityElement>
+				<securityElement name="Banda iridescentă">Pe revers e imprimată, în partea dreaptă, o bandă verticală de culoare transparent aurie care are înscrisă, pe verticală, de şapte ori, valoarea nominală.</securityElement>
+				<securityElement name="Microtextul">Pe avers şi pe revers, există zone imprimate cu caractere foarte mici, sub 1 mm înălţime, ce se pot vedea cu ajutorul unei lupe.</securityElement>
+				<securityElement name="Imprimare vizibilă în lumină ultravioletă">Pe revers este imprimat cu cerneală vizibilă numai în lumină ultravioletă, un patrulater ce conţine valoarea nominală. Seria bancnotelor este formată din trei cifre şi o literă, iar numărul din şapte cifre. Numărul fiecărei bancnote este unic. Seria şi numărul tipărite cu cerneală neagră, pe verticală, în stânga, se văd de culoare verde, iar seria şi numărul imprimate cu cerneală roşie, cu caractere de înălţime crescătoare, pe orizontală în dreapta, se văd de culoare portocalie în lumină ultravioletă.</securityElement>
+				<securityElement name="Imprimarea aurie">Pe aversul bancnotei, în fereastra transparentă, există imprimată cu cerneală de culoare aurie o panglică.</securityElement>
+				<securityElement name="Imprimarea în relief">Principalele elemente de design de pe ambele feţe sunt imprimate în relief.</securityElement>
+				<securityElement name="Imaginea latentă">Imaginea latentă (uşile clădirii, pe revers) nu este percepută la examinarea directă, dar devine vizibilă când bancnota este privită razant.</securityElement>
+				<securityElement name="Microperforaţiile">În zona elementului floral pe avers este înscrisă valoarea nominală prin perforaţii foarte fine. Acestea devin vizibile numai când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Cerneala care îşi schimbă culoarea">Pe avers, în partea stângă jos există textul "LEI UNA SUTĂ" imprimat cu cerneală care îşi schimbă culoarea din auriu în verde, în funcţie de unghiul din care este privită.</securityElement>
+			</securityElements>
+		</banknote>
+		<banknote>
+			<id>13</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2005-07-01</startDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>200</value>
+			<width>150</width>
+			<height>82</height>
+			<substance>polimer</substance>
+			<color></color>
+			<description>
+				<general>Lucian Blaga.</general>
+			</description>
+			<securityElements>
+				<securityElement name="Fereastra transparentă">Fereastra transparentă se află în stânga aversului bancnotei şi are forma de filă de carte. Prezinta ca element de siguranţă în fereastră, valoarea nominală ambutisată şi element auriu sub formă de carte deschisă.</securityElement>
+				<securityElement name="Filigranul">Filigranul este constituit din două componente poziţionate în stânga aversului, pe zona neimprimată: portretul personalităţii de pe bancnotă şi emblema BNR. Filigranul este vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Firul de siguranţă">În zona centrală există un fir ce devine vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Elementul de suprapunere">Fragmente ale unei călimare cu capac imprimate în acelaşi loc pe ambele feţe, astfel că atunci când sunt privite prin transparenţă şi luminate din partea opusă privitorului, imaginea este văzută în întregime. Aceasta se află plasată, pe avers, sub denumirea băncii centrale de emisiune.</securityElement>
+				<securityElement name="Banda iridescentă">Pe revers e imprimată, în partea dreaptă, o bandă verticală de culoare transparent aurie care are înscrisă, pe verticală, de şapte ori, valoarea nominală.</securityElement>
+				<securityElement name="Microtextul">Pe avers şi pe revers, există zone imprimate cu caractere foarte mici, sub 1 mm înălţime, ce se pot vedea cu ajutorul unei lupe.</securityElement>
+				<securityElement name="Imprimare vizibilă în lumină ultravioletă">Pe revers este imprimat cu cerneală vizibilă numai în lumină ultravioletă, un patrulater ce conţine valoarea nominală. Seria bancnotelor este formată din trei cifre şi o literă, iar numărul din şapte cifre. Numărul fiecărei bancnote este unic. Seria şi numărul tipărite cu cerneală neagră, pe verticală, în stânga, se văd de culoare verde, iar seria şi numărul imprimate cu cerneală roşie, cu caractere de înălţime crescătoare, pe orizontală în dreapta, se văd de culoare portocalie în lumină ultravioletă.</securityElement>
+				<securityElement name="Imprimarea aurie">Pe aversul bancnotei, în fereastra transparentă, există imprimată cu cerneală de culoare aurie o carte deschisă.</securityElement>
+				<securityElement name="Imprimarea în relief">Principalele elemente de design de pe ambele feţe sunt imprimate în relief.</securityElement>
+				<securityElement name="Imaginea latentă">Imaginea latentă (peretele clădirii, pe revers) nu este percepută la examinarea directă, dar devine vizibilă când bancnota este privită razant.</securityElement>
+				<securityElement name="Microperforaţiile">În zona elementului floral pe avers este înscrisă valoarea nominală prin perforaţii foarte fine. Acestea devin vizibile numai când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Cerneala care îşi schimbă culoarea">Pe avers, în partea stângă jos există textul "LEI DOUĂ SUTE" imprimat cu cerneală care îşi schimbă culoarea din auriu în verde, în funcţie de unghiul din care este privită.</securityElement>
+			</securityElements>
+		</banknote>
+		<banknote>
+			<id>14</id>
+			<country>România</country>
+			<timeInterval>
+				<startDate>2005-07-01</startDate>
+			</timeInterval>
+			<currency>leu</currency>
+			<value>500</value>
+			<width>153</width>
+			<height>82</height>
+			<substance>polimer</substance>
+			<color></color>
+			<description>
+				<general>Mihai Eminescu.</general>
+			</description>
+			<securityElements>
+				<securityElement name="Fereastra transparentă">Fereastra transparentă se află în stânga aversului bancnotei şi are forma de clepsidră. Prezinta ca element de siguranţă în fereastră, valoarea nominală ambutisată şi element auriu sub forma nisipului ce se scurge în clepsidră.</securityElement>
+				<securityElement name="Filigranul">Filigranul este constituit din două componente poziţionate în stânga aversului, pe zona neimprimată: portretul personalităţii de pe bancnotă şi emblema BNR. Filigranul este vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Firul de siguranţă">În zona centrală există un fir ce devine vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Elementul de suprapunere">Fragmente ale unei călimare şi a unei pane de scris imprimate în acelaşi loc pe ambele feţe, astfel că atunci când sunt privite prin transparenţă şi luminate din partea opusă privitorului, imaginea este văzută în întregime. Aceasta se află plasată, pe avers, sub denumirea băncii centrale de emisiune.</securityElement>
+				<securityElement name="Banda iridescentă">Pe revers e imprimată, în partea dreaptă, o bandă verticală de culoare transparent aurie care are înscrisă, pe verticală, de şapte ori, valoarea nominală.</securityElement>
+				<securityElement name="Microtextul">Pe avers şi pe revers, există zone imprimate cu caractere foarte mici, sub 1 mm înălţime, ce se pot vedea cu ajutorul unei lupe.</securityElement>
+				<securityElement name="Imprimare vizibilă în lumină ultravioletă">Pe revers este imprimat cu cerneală vizibilă numai în lumină ultravioletă, un patrulater ce conţine valoarea nominală. Seria bancnotelor este formată din trei cifre şi o literă, iar numărul din şapte cifre. Numărul fiecărei bancnote este unic. Seria şi numărul tipărite cu cerneală neagră, pe verticală, în stânga, se văd de culoare verde, iar seria şi numărul imprimate cu cerneală roşie, cu caractere de înălţime crescătoare, pe orizontală în dreapta, se văd de culoare portocalie în lumină ultravioletă.</securityElement>
+				<securityElement name="Imprimarea aurie">Pe aversul bancnotei, în partea centrală, există imprimată cu cerneală de culoare aurie o clepsidră, iar în fereastra transparentă, nisipul ce se scurge din clepsidră.</securityElement>
+				<securityElement name="Imprimarea în relief">Principalele elemente de design de pe ambele feţe sunt imprimate în relief.</securityElement>
+				<securityElement name="Imaginea latentă">Imaginea latentă (ferestrele clădirii, pe revers) nu este percepută la examinarea directă, dar devine vizibilă când bancnota este privită razant.</securityElement>
+				<securityElement name="Microperforaţiile">În zona elementului floral pe avers este înscrisă valoarea nominală prin perforaţii foarte fine. Acestea devin vizibile numai când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Cerneala care îşi schimbă culoarea">Pe avers, în partea stângă jos textul "LEI CINCI SUTE" element imprimate cu cerneală care îşi schimbă culoarea din auriu în verde, în funcţie de unghiul din care este privită.</securityElement>
+			</securityElements>
+		</banknote>
+	</banknotes>
+</money>

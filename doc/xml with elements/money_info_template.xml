@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf8"?>
+<money version="1.0" xmlFormat="elem">
+	<coins>
+		<coin>
+			<id></id> <!-- integer -->
+			<country></country> <!-- string -->
+			<timeInterval>
+				<startDate></startDate> <!-- yyyy-MM-dd -->
+				<endDate></endDate> <!-- yyyy-MM-dd -->
+				<name></name> <!-- string -->
+				<description></description> <!-- string -->
+			</timeInterval>
+			<currency></currency> <!-- string -->
+			<value></value> <!-- integer -->
+			<diameter></diameter> <!-- float in millimeters -->
+			<thickness></thickness> <!-- float in millimeters -->
+			<edge></edge> <!-- string -->
+			<weight></weight> <!-- float in grams -->
+			<substance></substance> <!-- string -->
+			<color></color> <!-- string -->
+			<description>
+				<general></general> <!-- string -->
+				<front></front> <!-- string -->
+				<back></back> <!-- string -->
+			</description>
+		</coin>
+	</coins>
+	<banknotes>
+		<banknote>
+			<id></id> <!-- integer -->
+			<country></country> <!-- string -->
+			<timeInterval>
+				<startDate></startDate> <!-- yyyy-MM-dd -->
+				<endDate></endDate> <!-- yyyy-MM-dd -->
+				<name></name> <!-- string -->
+				<description></description> <!-- string -->
+			</timeInterval>
+			<currency></currency> <!-- string -->
+			<value></value> <!-- integer -->
+			<width></width> <!-- integer in millimeters -->
+			<height></height> <!-- integer in millimeters -->
+			<substance></substance> <!-- string -->
+			<color></color> <!-- string -->
+			<description>
+				<general></general> <!-- string -->
+				<front></front> <!-- string -->
+				<back></back> <!-- string -->
+			</description>
+			<securityElements>
+				<securityElement name=""></securityElement> <!-- string -->
+			</securityElements>
+		</banknote>
+	</banknotes>
+</money>

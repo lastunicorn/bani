@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<money version="1.0" type="attr">
+	<coins>
+		<coin id="1" country="România" currency="leu" value="1" diameter="19" weight="2.50" substance="oţel placat cu cupru">
+			<timeInterval endDate="2006-12-31"/>
+			<description>
+				<back>Are stema româniei pe spate.</back>
+			</description>
+		</coin>
+		<coin id="6" country="România" currency="ban" value="1" diameter="16.75" thickness="1" weight="2.4" substance="Oțel cu înveliș de alamă" edge="zimţat">
+			<timeInterval startDate="2005"/>
+		</coin>
+		<coin id="7" country="România" currency="ban" value="5" diameter="18.25" thickness="1.5" weight="2.78" edge="zimţat" substance="Oţel placat cu cupru" color="roşie">
+			<timeInterval startDate="2005-07-01"/>
+		</coin>
+		<coin id="9" country="România" currency="ban" value="10" diameter="20.5" thickness="1.9" weight="4" substance="Oțel cu înveliș de nichel" edge="zimţat">
+			<timeInterval startDate="2005"/>
+		</coin>
+		<coin id="10" country="România" currency="ban" value="50" diameter="23.75" thickness="2" weight="6.10" substance="aliaj cupru-zinc cu nichel" edge="neted">
+			<timeInterval startDate="2005"/>
+		</coin>
+		<coin id="11" country="România" currency="ban" value="50" substance="alamă">
+			<timeInterval startDate="2010-10-25"/>
+			<description>
+				<general>La 25 octombrie 2010, Banca Națională a României a pus în circulație moneda cu valoare nominală de 50 bani "Aurel Vlaicu" din alamă, dedicată aniversării a 100 de ani de la primul zbor românesc efectuat de Aurel Vlaicu, cu un aparat de construcție proprie. Aversul prezintă, de sus în jos, următoarele elemente: anul emisiunii „2010”, valoarea nominală „50 BANI”, stema României și inscripția în arc de cerc „ROMANIA”; pe un fundal cu linii orizontale, este reluată, la dimensiuni mai mari, valoarea nominală a monedei „50”. Reversul prezintă, în stânga, pe un fundal cu linii verticale, inscripția în arc de cerc „AUREL VLAICU” și anul „1910”, când a avut loc primul zbor efectuat de Aurel Vlaicu, cu un aparat de construcție proprie, iar în dreapta, portretul acestuia; în partea de jos, aeroplanul „Vlaicu I” și anii între care a trăit Aurel Vlaicu „1882” și „1913”. Are aceleași caracteristici tehnice cu monedele aflate în circulație la cupiura de 50 bani și va circula în paralel cu monedele de 50 bani, emisiunea 2005. A fost scoasă într-un milion de exemplare. Separat, a fost emisă și o monedă pentru colecționari, tot din metal comun (alamă), cu valoarea nominală de 50 de bani, de calitate „proof”[9], într-un tiraj de 5.000 de exemplare, elementele grafice fiind asemănătoare cu cele aflate pe moneda emisă pentru circulația obișnuită.</general>
+			</description>
+		</coin>
+		<coin id="12" country="România" currency="ban" value="50" substance="alamă">
+			<timeInterval startDate="2011-09-12"/>
+			<description>
+				<general>La 12 septembrie 2011, Banca Națională a României a pus în circulație moneda cu valoare nominală de 50 bani "Mircea cel Bătrân", din alamă, dedicată aniversării a 625 de ani de la urcarea pe tron a domnitorului Mircea cel Bătrân. Are pe avers, suprapus parțial peste un cerc hașurat, un grupaj de elemente: inscripțiile „ROMANIA“ și „50“, un fragment din imaginea mănăstirii Cozia, anul de emisiune „2011“, valoarea nominală a monedei „50 BANI“ și stema României, iar pe revers portretul domnitorului Mircea cel Bătrân într-un medalion oval și inscripția în arc de cerc „MIRCEA CEL BATRAN 1386-1418” pe un fundal care sugerează un ornament mural de pe biserica mănăstirii Cozia. Are aceleași caracteristici tehnice cu monedele aflate în circulație la cupiura de 50 bani și va circula în paralel cu monedele de 50 bani, emisiunea 2005 și emisiunea 2010. Simultan, Banca Națională a României a lansat în circuitul numismatic o monedă din aur, de calitate „proof”[9], pentru colecționare, cu valoare nominală de 200 lei, dedicată aniversării a 625 de ani de la urcarea pe tron a domnitorului Mircea cel Bătrân.</general>
+			</description>
+		</coin>
+		<coin id="13" country="România" currency="ban" value="50">
+			<timeInterval startDate="2012-06-25"/>
+			<description>
+				<general>La 25 iunie 2012, Banca Națională a României pune în circulație o monedă cu valoarea nominală de 50 de bani, cu ocazia împlinirii a „500 de ani de la urcarea pe tronul Țării Românești a Sfântului Voievod Neagoe Basarab și de la începerea construirii bisericii Mănăstirii Curtea de Argeș”. Moneda este din metal comun (alamă: Cu80%, Zn15%, Ni5%) și este emisă într-un tiraj de 1.000.000 de exemplare. Pe avers, este gravată valoarea nominală „50 BANI”, stema României, inscripția, în arc de cerc, „ROMANIA”, precum și milesimul (anul emisiunii) „2012”. Pe fundal se află gravată reprezentată biserica Mănăstirii Curtea de Argeș, în secțiune. Pe revers, este gravat portretul lui Neagoe Basarab, o imagine a bisericii mănăstirii Curtea de Argeș, anul „1512”, precum și inscripțiile „BISERICA MANASTIRII CURTEA DE ARGES” și „NEAGOE BASARAB”. Tăietura este netedă, având inscripția „ROMANIA” (de două ori) și cu steluță între cele două cuvinte. Moneda are toate celelalte caracteristici întâlnite la moneda cu valoare nominală de 50 de bani, edițiile 2005 și următoarele. Odată cu moneda cu valoare nominală de 50 de bani, este emisă și o monedă de aur, având titlul de 900‰, de calitate „proof”[9], cu valoarea nominală de 100 de lei, având greutatea de 6,452g, diametrul de 21 mm. Această monedă din aur este emisă într-un tiraj de 250 de exemplare.</general>
+			</description>
+		</coin>
+		<coin id="14" country="România" currency="ban" value="50" substance="alamă">
+			<timeInterval startDate="2014-04-28"/>
+			<description>
+				<general>La 28 aprilie 2014, pentru comemorarea a 650 de ani de la urcarea pe tron a voievodului Vladislav I Vlaicu, Banca Națională a României a emis o monedă de circulație, de alamă, având valoarea nominală de 50 de bani, într-un tiraj de 1.000.000 de exemplare. Diametrul monedei este de 23,75 mm, greutatea de 6,1 g. Cantul monedei este inscripționat cu textul ROMANIA de două ori, cu steluță între cele două cuvinte.Din aceeași emisiune face parte și o monedă de aur, cu titlul de 900‰, având valoarea nominală de 100 de lei, cu diametrul de 21 mm, greutatea de 6,452 de grame și de calitate proof. Cantul monedei este zimțat. Moneda de aur a fost emisă în 250 de exemplare.</general>
+			</description>
+		</coin>
+		<coin id="15" country="România" currency="ban" value="50" substance="alamă">
+			<timeInterval startDate="2015-07-01"/>
+			<description>
+				<general>La 1 iulie 2015 Banca Națională a României a pus în circulație o monedă comemorativă de circulație, cu valoarea nominală de 50 de bani, cu ocazia „împlinirii a 10 ani de la denominarea monedei naționale”, într-un tiraj de1.000.000 de exemplare. Moneda este din alamă, rotundă, având diametrul de 23,75 mm, greutatea de 6,1 grame, iar pe cant este inscripționat de două ori textul ROMANIA, intercalat de câte o steluță. Moneda are aceeași putere de circulație ca și toate celelalte monede cu valoarea nominală de 50 de bani aflate în circulație.</general>
+			</description>
+		</coin>
+	</coins>
+	<banknotes>
+		<banknote id="1" country="România" currency="leu" value="10000" width="150" height="67" substance="polimer" color="verde şi verde deschis">
+			<timeInterval startDate="2000-09-01" endDate="2006-12-31"/>
+			<description>
+				<front>Portretul istoricului, scriitorului şi jurnalistului Nicolae Iorga, privit din faţă. În centru, este ilustrat un element floral reprezentând Lumânărica pământului (Gentiana asclepiadaea). Sus, stema României, denumirea băncii centrale emitente "BANCA NAŢIONALĂ A ROMÂNIEI", şi medalion cu sigla "BNR". Jos, valoarea nominală în cifre şi litere "10.000 lei ZECE MII". În stînga, semnăturile guvernatorului, casierului central şi anul emisiunii "2000". În dreapta, vertical, valoarea "ZECE MII 10.000".</front>
+				<back>În centru, este ilustrată imaginea Catedralei Episcopale a mânăstirii Curtea de Argeş, construită de domnitorul Neagoe Basarab (1512-1521). La stânga acesteia este reprezentată stilizat acvila cruciată din vechea stemă a Ţării Româneşti de pe timpul domnitorului Constantin Brâncoveanu (1688-1714). Sus, sunt imprimate: valoarea nominală "10.000" atât pe verticală cât şi pe orizontală, denumirea băncii centrale "BANCA NAŢIONALĂ A ROMÂNIEI" şi sigla B.N.R. Jos, în dreapta, valoarea nominală în litere şi cifre "ZECE MII lei 10.000". În planul din dreapta catedralei episcopale este redat, vertical, textul penalităţii în caz de falsuri: "FALSIFICAREA ACESTOR BILETE SE PEDEPSESTE CONFORM LEGILOR". Seria şi numărul bancnotei, imprimate cu litere şi cifre în două culori, sunt amplasate astfel: cele cu cerneală neagră şi caractere de aceeaşi înălţime, pe verticală, în stânga; cele cu cerneală roşie şi caractere de înălţime crescătoare, pe orizontală, în dreapta.</back>
+			</description>
+			<securityElements>
+				<securityElement name="Fereastra transparentă">Zona clară, din partea stângă, pe aversul bancnotei. În interior este imprimată valoarea nominală "10000".</securityElement>
+				<securityElement name="Filigranul">imaginea în oglindă a portretului lui Nicolae Iorga deasupra ferestrei transparente şi sigla BNR aflată în dreapta ferestrei (privind aversul). Filigranul este vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Elementul de suprapunere avers-revers">Când bancnota este luminată din partea opusă privitorului, elemente ale motivului floral stilizat, aflate pe avers sub denumirea băncii centrale, se suprapun perfect cu elementele imprimate pe revers formând o imagine completă.</securityElement>
+			</securityElements>
+		</banknote>
+		<banknote id="7" country="România" currency="leu" value="1" width="120" height="62" substance="polimer" color="verde">
+			<timeInterval startDate="2005-07-01"/>
+			<description>
+				<general>Dimensiunea este identică cu cea a bancnotei de 5 €. Pe față se află portretul istoricului Nicolae Iorga, iar pe verso Mănăstirea Curtea de Argeș precum și stema Țării Românești.</general>
+			</description>
+		</banknote>
+		<banknote id="8" country="România" currency="leu" value="5" width="127" height="67" substance="polimer" color="violet">
+			<timeInterval startDate="2005-07-01"/>
+			<description>
+				<general>Dimensiunea este identică cu cea a bancnotei de 10 €. Pe față se află portretul compozitorului George Enescu, iar pe verso Ateneul Român precum și un pian și un fragment de partitură muzicală.</general>
+			</description>
+		</banknote>
+		<banknote id="9" country="România" currency="leu" value="10" width="133" height="72" substance="polimer" color="roșu">
+			<timeInterval startDate="2005-07-01"/>
+			<description>
+				<general>Dimensiunea este identică cu cea a bancnotei de 20 €. Pe față se află portretul pictorului Nicolae Grigorescu, iar pe verso o casă țărănească și un fragment dintr-o pictură de-a sa.</general>
+			</description>
+		</banknote>
+		<banknote id="10" country="România" currency="leu" value="10" width="133" height="72" substance="polimer" color="roșu">
+			<timeInterval startDate="2008-12-01"/>
+			<description>
+				<general>Dimensiunea este identică cu cea a bancnotei de 20 €. Pe față se află portretul pictorului Nicolae Grigorescu, iar pe verso o casă țărănească și un fragment dintr-o pictură de-a sa.</general>
+			</description>
+		</banknote>
+		<banknote id="11" country="România" currency="leu" value="50" width="140" height="77" substance="polimer" color="galben">
+			<timeInterval startDate="2005-07-01"/>
+			<description>
+				<general>Dimensiunea este identică cu cea a bancnotei de 50 €. Pe față se află portretul aviatorului și inventatorului Aurel Vlaicu, iar pe verso Avionul Vlaicu II și un cap de vultur.</general>
+			</description>
+		</banknote>
+		<banknote id="12" country="România" currency="leu" value="100" width="147" height="82" substance="polimer" color="albastru">
+			<timeInterval startDate="2005-07-01"/>
+			<description>
+				<general>Dimensiunea este identică cu cea a bancnotei de 100 €. Pe față se află portretul scriitorului Ion Luca Caragiale, iar pe verso o statuie a sa și vechea clădire a Teatru Național din București.</general>
+			</description>
+		</banknote>
+		<banknote id="13" country="România" currency="leu" value="200" width="150" height="82" substance="polimer" color="portocaliu">
+			<timeInterval startDate="2006-12-01"/>
+			<description>
+				<general>Pe față se află portretul scriitorului și filosofului Lucian Blaga, iar pe verso Gânditorul de la Hamangia și o veche moară de apă.</general>
+			</description>
+		</banknote>
+		<banknote id="14" country="România" currency="leu" value="500" width="153" height="82" substance="polimer" color="gri">
+			<timeInterval startDate="2005-07-01"/>
+			<description>
+				<general>Dimensiunea este identică cu cea a bancnotei de 200 €. Pe față se află portretul poetului Mihai Eminescu, iar pe verso o pagină din ziarul „Timpul”, un tei, și clădirea Bibliotecii Centrale Universitare din Iași</general>
+			</description>
+			<securityElements>
+				<securityElement name="Fereastra transparentă">Fereastra transparentă se află în stânga aversului bancnotei şi are forma de clepsidră. Prezinta ca element de siguranţă în fereastră, valoarea nominală ambutisată şi element auriu sub forma nisipului ce se scurge în clepsidră.</securityElement>
+				<securityElement name="Filigranul">Filigranul este constituit din două componente poziţionate în stânga aversului, pe zona neimprimată: portretul personalităţii de pe bancnotă şi emblema BNR. Filigranul este vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Firul de siguranţă">În zona centrală există un fir ce devine vizibil când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Elementul de suprapunere">Fragmente ale unei călimare şi a unei pane de scris imprimate în acelaşi loc pe ambele feţe, astfel că atunci când sunt privite prin transparenţă şi luminate din partea opusă privitorului, imaginea este văzută în întregime. Aceasta se află plasată, pe avers, sub denumirea băncii centrale de emisiune.</securityElement>
+				<securityElement name="Banda iridescentă">Pe revers e imprimată, în partea dreaptă, o bandă verticală de culoare transparent aurie care are înscrisă, pe verticală, de şapte ori, valoarea nominală.</securityElement>
+				<securityElement name="Microtextul">Pe avers şi pe revers, există zone imprimate cu caractere foarte mici, sub 1 mm înălţime, ce se pot vedea cu ajutorul unei lupe.</securityElement>
+				<securityElement name="Imprimare vizibilă în lumină ultravioletă">Pe revers este imprimat cu cerneală vizibilă numai în lumină ultravioletă, un patrulater ce conţine valoarea nominală. Seria bancnotelor este formată din trei cifre şi o literă, iar numărul din şapte cifre. Numărul fiecărei bancnote este unic. Seria şi numărul tipărite cu cerneală neagră, pe verticală, în stânga, se văd de culoare verde, iar seria şi numărul imprimate cu cerneală roşie, cu caractere de înălţime crescătoare, pe orizontală în dreapta, se văd de culoare portocalie în lumină ultravioletă.</securityElement>
+				<securityElement name="Imprimarea aurie">Pe aversul bancnotei, în partea centrală, există imprimată cu cerneală de culoare aurie o clepsidră, iar în fereastra transparentă, nisipul ce se scurge din clepsidră.</securityElement>
+				<securityElement name="Imprimarea în relief">Principalele elemente de design de pe ambele feţe sunt imprimate în relief.</securityElement>
+				<securityElement name="Imaginea latentă">Imaginea latentă (ferestrele clădirii, pe revers) nu este percepută la examinarea directă, dar devine vizibilă când bancnota este privită razant.</securityElement>
+				<securityElement name="Microperforaţiile">În zona elementului floral pe avers este înscrisă valoarea nominală prin perforaţii foarte fine. Acestea devin vizibile numai când bancnota este luminată din partea opusă privitorului.</securityElement>
+				<securityElement name="Cerneala care îşi schimbă culoarea">Pe avers, în partea stângă jos textul "LEI CINCI SUTE" element imprimate cu cerneală care îşi schimbă culoarea din auriu în verde, în funcţie de unghiul din care este privită.</securityElement>
+			</securityElements>
+		</banknote>
+	</banknotes>
+</money>

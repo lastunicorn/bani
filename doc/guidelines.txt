@@ -1,0 +1,2 @@
+The resolution for the sample images: 100dpi
+The resolution for the existing money images: 300dpi

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	
+	<xs:element name="money" type="moneyType"/>
+
+	<xs:complexType name="moneyType">
+		<xs:sequence>
+			<xs:element name="coins" type="coinsType"/>
+			<xs:element name="banknotes" type="banknotesType"/>
+		</xs:sequence>
+		<xs:attribute name="version" type="xs:string" use="required"/>
+		<xs:attribute name="xmlFormat" type="xs:string" fixed="elem"/>
+	</xs:complexType>
+
+	<xs:complexType name="coinsType">
+		<xs:sequence>
+			<xs:element name ="coin" type="coinType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="banknotesType">
+		<xs:sequence>
+			<xs:element name ="banknote" type="banknoteType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="coinType">
+		<xs:all>
+			<xs:element name="id" type="xs:positiveInteger"/>
+			<xs:element name="country" type="xs:string" minOccurs="0"/>
+			<xs:element name="timeInterval" type="timeIntervalType" minOccurs="0"/>
+			<xs:element name="currency" type="xs:string"/>
+			<xs:element name="value" type="xs:positiveInteger"/>
+			<xs:element name="diameter" type="positiveDecimal" minOccurs="0"/>
+			<xs:element name="thickness" type="positiveDecimal" minOccurs="0"/>
+			<xs:element name="edge" type="xs:string" minOccurs="0"/>
+			<xs:element name="weight" type="positiveDecimal" minOccurs="0"/>
+			<xs:element name="substance" type="xs:string" minOccurs="0"/>
+			<xs:element name="color" type="xs:string" minOccurs="0"/>
+			<xs:element name="description" type="descriptionType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="banknoteType">
+		<xs:all>
+			<xs:element name="id" type="xs:positiveInteger"/>
+			<xs:element name="country" type="xs:string" minOccurs="0"/>
+			<xs:element name="timeInterval" type="timeIntervalType" minOccurs="0"/>
+			<xs:element name="currency" type="xs:string"/>
+			<xs:element name="value" type="xs:positiveInteger"/>
+			<xs:element name="width" type="xs:positiveInteger" minOccurs="0"/>
+			<xs:element name="height" type="xs:positiveInteger" minOccurs="0"/>
+			<xs:element name="substance" type="xs:string" minOccurs="0"/>
+			<xs:element name="color" type="xs:string" minOccurs="0"/>
+			<xs:element name="description" type="descriptionType" minOccurs="0"/>
+			<xs:element name="securityElements" type="securityElementsType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="timeIntervalType">
+		<xs:all>
+			<xs:element name="startDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="endDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="name" type="xs:string" minOccurs="0"/>
+			<xs:element name="description" type="xs:string" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="securityElementsType">
+		<xs:sequence>
+			<xs:element name="securityElement" type="securityElementType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="securityElementType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="name" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="descriptionType">
+		<xs:sequence>
+			<xs:element name="general" type="xs:string" minOccurs="0"/>
+			<xs:element name="front" type="xs:string" minOccurs="0"/>
+			<xs:element name="back" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!--
+	<xs:simpleType name="text">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="preserve"/>
+		</xs:restriction>
+	</xs:simpleType>
+	-->
+
+	<xs:simpleType name="positiveDecimal">
+		<xs:restriction base="xs:decimal">
+			<xs:minExclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

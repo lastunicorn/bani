@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<money>
+	<coins>
+		<coin>
+			<id></id>
+			<date></date> <!-- yyyy-MM-dd -->
+			<images>
+				<front url=""></front> <!-- base64 -->
+				<back url=""></back> <!-- base64 -->
+			</images>
+			<state></state> <!-- UNC (unused); aUNC (almost unused); XF (extra fine); VF (very fine); F (fine); VG (very good); G (good); A (aceptable) -->
+			<description>
+				<general></general> <!-- string -->
+				<front></front> <!-- string -->
+				<back></back> <!-- string -->
+			</description>
+		</coin>
+	</coins>
+	<banknotes>
+		<banknote>
+			<id></id>
+			<date></date> <!-- yyyy-MM-dd -->
+			<images>
+				<front url=""></front> <!-- base64 -->
+				<back url=""></back> <!-- base64 -->
+			</images>
+			<state></state> <!-- UNC (unused); aUNC (almost unused); XF (extra fine); VF (very fine); F (fine); VG (very good); G (good); A (aceptable) -->
+			<description>
+				<general></general> <!-- string -->
+				<front></front> <!-- string -->
+				<back></back> <!-- string -->
+			</description>
+		</banknote>
+	</banknotes>
+</money>

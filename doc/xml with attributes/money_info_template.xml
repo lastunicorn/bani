@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf8"?>
+<money version="1.0" type="attr">
+	<coins>
+		<coin id="" country="" currency="" value="" diameter="" thickness="" edge="" weight="" substance="" color="">
+			<timeInterval startDate="" endDate="" name="" description=""/>
+			<description>
+				<general></general>
+				<front></front>
+				<back></back>
+			</description>
+		</coin>
+	</coins>
+	<banknotes>
+		<banknote id="" country="" currency="" value="" width="" height="" substance="" color="">
+			<timeInterval startDate="" endDate="" name="" description=""/>
+			<description>
+				<general></general> <!-- string -->
+				<front></front> <!-- string -->
+				<back></back> <!-- string -->
+			</description>
+			<securityElements>
+				<securityElement name=""></securityElement> <!-- string -->
+			</securityElements>
+		</banknote>
+	</banknotes>
+</money>

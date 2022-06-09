@@ -1,0 +1,35 @@
+MVP 1
+----------------------------------------
+
+General
+	- info
+		- DisplayName: string
+		- Value: float
+		- Unit: object
+			- Singular: string
+			- Plural: string
+		- Year: int
+		- Comments: string
+	- specimen: image[]
+
+
+MVP 2
+----------------------------------------
+
+- info
+	- Substance: string
+	- Color: string
+- scan: image[]
+
+
+
+Coin
+	- Diameter: float
+	- Edge: string
+
+Banknote
+	- Width: float
+	- Height: float
+	- Embossing: [front, back, both]
+
+

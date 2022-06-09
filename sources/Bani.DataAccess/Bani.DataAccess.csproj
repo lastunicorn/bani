@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <AssemblyName>DustInTheWind.Bani.DataAccess</AssemblyName>
+        <RootNamespace>DustInTheWind.Bani.DataAccess</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Bani.DataAccess.JsonFiles\Bani.DataAccess.JsonFiles.csproj" />
+        <ProjectReference Include="..\Bani.Domain\Bani.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

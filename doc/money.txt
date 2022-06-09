@@ -1,0 +1,19 @@
+Common
+	- DisplayName: string
+	- Value: float
+	- Unit: object
+		- Singular: string
+		- Plural: string
+	- Substance: string
+	- Color: string
+	- Comments: string
+
+Coin
+	- Diameter: float
+	- Edge: string
+
+Banknote
+	- Width: float
+	- Height: float
+	- Embossing: [front, back, both]
+

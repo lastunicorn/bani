@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	
+	<xs:element name="money" type="moneyType"/>
+
+	<xs:complexType name="moneyType">
+		<xs:sequence>
+			<xs:element name="coins" type="coinsType"/>
+			<xs:element name="banknotes" type="banknotesType"/>
+		</xs:sequence>
+		<xs:attribute name="version" type="xs:string" use="required"/>
+		<xs:attribute name="xmlFormat" type="xs:string" fixed="elem"/>
+	</xs:complexType>
+
+	<xs:complexType name="coinsType">
+		<xs:sequence>
+			<xs:element name ="coin" type="coinType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="banknotesType">
+		<xs:sequence>
+			<xs:element name ="banknote" type="banknoteType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="coinType">
+		<xs:all>
+			<xs:element name="infoId" type="xs:positiveInteger"/>
+			<xs:element name="date" type="xs:date" minOccurs="0"/>
+			<xs:element name="images" type="imagesType"/>
+			<xs:element name="state" type="stateType"/>
+			<xs:element name="description" type="descriptionType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="banknoteType">
+		<xs:all>
+			<xs:element name="infoId" type="xs:positiveInteger"/>
+			<xs:element name="date" type="xs:date" minOccurs="0"/>
+			<xs:element name="images" type="imagesType"/>
+			<xs:element name="state" type="stateType"/>
+			<xs:element name="description" type="descriptionType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="descriptionType">
+		<xs:sequence>
+			<xs:element name="general" type="xs:string" minOccurs="0"/>
+			<xs:element name="front" type="xs:string" minOccurs="0"/>
+			<xs:element name="back" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:simpleType name="stateType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UNC"/>
+			<xs:enumeration value="aUNC"/>
+			<xs:enumeration value="XF"/>
+			<xs:enumeration value="VF"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="VG"/>
+			<xs:enumeration value="G"/>
+			<xs:enumeration value="A"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="imagesType">
+		<xs:sequence>
+			<xs:element name="front" type="imageType" minOccurs="0"/>
+			<xs:element name="back" type="imageType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="imageType">
+		<xs:simpleContent>
+			<xs:extension base="xs:base64Binary">
+				<xs:attribute name="url" type="xs:anyURI"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+</xs:schema>

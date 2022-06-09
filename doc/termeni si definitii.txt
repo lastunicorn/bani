@@ -1,0 +1,39 @@
+﻿Stările de conservare ale bancnotelor (gradația):
+
+UNC (uncirculated) – este o bancnotă perfectă , aceasta nu prezintă urme de circulație, colțurile sunt perfect drepte, hârtia este tare, fară decolorări sau pete, este curată și nu are niciun pliu.
+aUNC (aproape necirculată) – este o bancnotă aproape perfectă, poate avea colțurile foarte puțin rotunjite, în rest perfectă.
+XF (extra fine) – este o bancnotă care a circulat foarte puțin, poate avea colțurile puțuin rotunjite și maxim două-trei pliuri ușoare, în rest hârtia curată, fără înscrisuri suplimentare și fără alte defecte.
+VF (very fine) – este o bancnotă cu urme vizibile de circulație cu mai multe pliuri, colțurile rotunjite, hârtia puțin murdară, ușor decolorată, dar fără rupturi.
+F (fine) – este o bancnotă cu urme evidente de circulație, multe pliuri, culorile șterse, hârtia murdară, pătată, cu mici rupturi pe margine de maxim 5mm, dar fără găuri.
+VG (very good) – este o bancnotă foarte uzată, murdară, cu mai multe rupturi, decolorată, cu înscrisuri (pix, stilou, creion, etc.), găuri, dar fără părți lipsă.
+G (good) – este o bancnotă extrem de uzată, murdară, decolorată, cu găruri, cu pete mari poate să ii lipsească mici părți (câțiva milimetri).
+A (aceptable) – este o bancnotă foarte, foarte uzată, cu multe defecte, mai multe găuri, bucăți lipsă, etc. Astfel de bancnote sunt acceptate doar în cazul în care este extrem de rară (•••••+).
+
+
+
+
+	
+Coins Grading - Coin Grades
+
+Coin grading is very important to mark a specific coin as authentic and it's value.
+An authentic coin without being graded by an official coin grading authority has a lower value as a coin that is graded by them.
+Coin grading is done by giving a certain code to the coin.
+Once graded by an official coin grading company the coin will be placed in a sealed plastic box with the grade of the coin inside the box on it.
+
+But what do these codes mean...here is a complete coin grading code list,
+  	  	 
+Grading Code - State of the Coin - Grading Explanation
+------------------------------------------------------
+FDC - Fleur du Coin - This only applies to proof coins and these coins are absolutely perfect, without any marks, wear or blemishes.
+Unc - Mint State (uncirculated) - The UNC graded coins are uncirculated and have totally no trace of wear.
+AU - Almost Uncirculated - AU graded coins have a small trace of wear visible on the highest points.
+XF or EF - Extremely Fine - XF grade coins (or EF) have a very light wear on only the highest points.
+VF - Very Fine - VF grade coins have a light to medium wear. All major features are sharp.
+F - Fine - F grade coins have moderate to heavy even wear. The coin design is clear and bold.
+VG - Very Good - VG grade coins are well worn. The design is clear, but flat and with lacking details.
+G - Good - G grade coins are heavily worn. The design and legend are visible but faint in spots.
+AG - About Good - AG grade coins have a outlined design and parts of date and legend worn smooth.
+Fair - Fair - With a coin that has been graded as fair you can identify the coin as to it's type.
+Basal - Basal State - With a basal graded coin you can identify the lump of metal as being a coin.
+
+Most coin collectors are collecting coins who are graded VG or better since the design should be recognizable. The higher the coin grade of authentication, the higher the value of the coin will be when sold.
