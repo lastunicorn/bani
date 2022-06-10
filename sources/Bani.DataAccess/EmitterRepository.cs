@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DustInTheWind.Bani.Domain;
 
@@ -7,9 +8,9 @@ namespace DustInTheWind.Bani.DataAccess
     {
         private readonly DbContext dbContext;
 
-        public EmitterRepository()
+        public EmitterRepository(DbContext dbContext)
         {
-            dbContext = new DbContext();
+            this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
         public IEnumerable<Emitter> GetAll()

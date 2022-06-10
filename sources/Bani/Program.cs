@@ -10,14 +10,17 @@ namespace DustInTheWind.Bani
     {
         private static void Main(string[] args)
         {
-            IEmitterRepository emitterRepository = new EmitterRepository();
+            //DbContext dbContext = new("/nfs/YubabaData/Alez/projects/Money/database");
+            DbContext dbContext = new(@"\\192.168.1.12\Data\Alez\projects\Money\database\");
+
+            IEmitterRepository emitterRepository = new EmitterRepository(dbContext);
 
             IEnumerable<Emitter> emitters = emitterRepository.GetAll();
 
             if (args.Length > 0)
             {
                 string emitterName = args[0];
-                
+
                 emitters = emitters
                     .Where(x => x.Name?.Contains(emitterName, StringComparison.InvariantCultureIgnoreCase) ?? false);
             }

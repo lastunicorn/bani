@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using DustInTheWind.Bani.DataAccess.JsonFiles;
@@ -5,26 +6,28 @@ using DustInTheWind.Bani.Domain;
 
 namespace DustInTheWind.Bani.DataAccess
 {
-    internal class DbContext
+    public class DbContext
     {
-        private const string DatabasePath = "/nfs/YubabaData/Alez/projects/Money/database";
-
-        public DbContext()
-        {
-            LoadEmitters();
-        }
+        private readonly string connectionString;
 
         public List<Emitter> Emitters { get; } = new();
+
+        public DbContext(string connectionString)
+        {
+            this.connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+
+            LoadEmitters();
+        }
 
         private void LoadEmitters()
         {
             Emitters.Clear();
 
-            IEnumerable<Emitter> emitters = SearchForEmitters(DatabasePath);
+            IEnumerable<Emitter> emitters = SearchForEmitters(connectionString);
             Emitters.AddRange(emitters);
         }
 
-        private IEnumerable<Emitter> SearchForEmitters(string directoryPath)
+        private static IEnumerable<Emitter> SearchForEmitters(string directoryPath)
         {
             string[] filePaths = Directory.GetFiles(directoryPath, "m-emitter.json");
 
