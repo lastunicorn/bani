@@ -1,3 +1,5 @@
+using System;
+
 namespace DustInTheWind.Bani.DataAccess.JsonFiles
 {
     public class JCoin : JItem
@@ -6,22 +8,40 @@ namespace DustInTheWind.Bani.DataAccess.JsonFiles
 
         public string Edge { get; set; }
 
-        public static JCoin Merge(JCoin coin1, JCoin coin2)
+        public JCoin()
         {
-            return new JCoin
+        }
+
+        public JCoin(JCoin coin)
+            : base(coin)
+        {
+            if (coin != null)
             {
-                DisplayName = coin2.DisplayName ?? coin1.DisplayName,
-                Value = coin2.Value ?? coin1.Value,
-                Unit = coin2.Unit ?? coin1.Unit,
-                Substance = coin2.Substance ?? coin1.Substance,
-                Color = coin2.Color ?? coin1.Color,
-                Year = coin2.Year ?? coin1.Year,
-                Diameter = coin2.Diameter ?? coin1.Diameter,
-                Obverse = coin2.Obverse ?? coin1.Obverse,
-                Reverse = coin2.Reverse ?? coin1.Reverse,
-                Edge = coin2.Edge ?? coin1.Edge,
-                InstanceCount = coin2.InstanceCount ?? coin1.InstanceCount
-            };
+                Diameter = coin.Diameter;
+                Edge = coin.Edge;
+            }
+        }
+
+        public override void MergeInto(JItem targetItem)
+        {
+            if (targetItem == null) throw new ArgumentNullException(nameof(targetItem));
+
+            if (targetItem is JCoin targetCoin)
+            {
+                MergeInto(targetCoin);
+            }
+            else
+            {
+                throw new ArgumentException($"The {nameof(targetItem)} must be a {typeof(JCoin)}.", nameof(targetItem));
+            }
+        }
+
+        private void MergeInto(JCoin targetCoin)
+        {
+            base.MergeInto(targetCoin);
+
+            if (Diameter != null) targetCoin.Diameter = Diameter;
+            if (Edge != null) targetCoin.Edge = Edge;
         }
     }
 }

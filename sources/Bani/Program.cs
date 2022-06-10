@@ -12,6 +12,7 @@ namespace DustInTheWind.Bani
         {
             //DbContext dbContext = new("/nfs/YubabaData/Alez/projects/Money/database");
             DbContext dbContext = new(@"\\192.168.1.12\Data\Alez\projects\Money\database\");
+            //DbContext dbContext = new(@"c:\Temp\database");
 
             IEmitterRepository emitterRepository = new EmitterRepository(dbContext);
 

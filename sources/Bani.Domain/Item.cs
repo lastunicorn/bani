@@ -4,7 +4,7 @@ namespace DustInTheWind.Bani.Domain
 {
     public class Item
     {
-        public string Location { get; set; }
+        public string Id { get; set; }
 
         public string DisplayName { get; set; }
 

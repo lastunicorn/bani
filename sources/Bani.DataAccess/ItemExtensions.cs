@@ -9,6 +9,7 @@ namespace DustInTheWind.Bani.DataAccess
         {
             return new Coin
             {
+                Id = coin.Location,
                 DisplayName = coin.DisplayName,
                 Value = coin.Value,
                 Unit = coin.Unit,
@@ -27,6 +28,7 @@ namespace DustInTheWind.Bani.DataAccess
         {
             return new Banknote
             {
+                Id = banknote.Location,
                 DisplayName = banknote.DisplayName,
                 Value = banknote.Value,
                 Unit = banknote.Unit,
