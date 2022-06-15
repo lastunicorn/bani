@@ -16,6 +16,8 @@ namespace DustInTheWind.Bani.Domain
 
         public string Color { get; set; }
         
+        public DateTime? IssueDate { get; set; }
+        
         public int? Year { get; set; }
 
         public Picture Obverse { get; set; }

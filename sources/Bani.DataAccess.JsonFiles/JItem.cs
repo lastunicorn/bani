@@ -19,7 +19,7 @@ namespace DustInTheWind.Bani.DataAccess.JsonFiles
 
         public string Color { get; set; }
 
-        public int? Year { get; set; }
+        public DateTime? IssueDate { get; set; }
 
         public JPicture Obverse { get; set; }
 
@@ -41,7 +41,7 @@ namespace DustInTheWind.Bani.DataAccess.JsonFiles
                 Unit = item.Unit;
                 Substance = item.Substance;
                 Color = item.Color;
-                Year = item.Year;
+                IssueDate = item.IssueDate;
                 Obverse = item.Obverse;
                 Reverse = item.Reverse;
                 InstanceCount = item.InstanceCount;
@@ -56,7 +56,7 @@ namespace DustInTheWind.Bani.DataAccess.JsonFiles
             if (Unit != null) targetItem.Unit = Unit;
             if (Substance != null) targetItem.Substance = Substance;
             if (Color != null) targetItem.Color = Color;
-            if (Year != null) targetItem.Year = Year;
+            if (IssueDate != null) targetItem.IssueDate = IssueDate;
             if (Obverse != null) targetItem.Obverse = Obverse;
             if (Reverse != null) targetItem.Reverse = Reverse;
             if (InstanceCount != null) targetItem.InstanceCount = InstanceCount;

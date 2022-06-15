@@ -10,11 +10,13 @@ namespace DustInTheWind.Bani.DataAccess.JsonFiles
 
         public bool? Embossing { get; set; }
 
+        public int? PrintYear { get; set; }
+
         public JBanknote()
         {
         }
 
-        protected JBanknote(JBanknote banknote)
+        public JBanknote(JBanknote banknote)
             : base(banknote)
         {
             if (banknote != null)
@@ -22,6 +24,7 @@ namespace DustInTheWind.Bani.DataAccess.JsonFiles
                 Width = banknote.Width;
                 Height = banknote.Height;
                 Embossing = banknote.Embossing;
+                PrintYear = banknote.PrintYear;
             }
         }
 
@@ -46,6 +49,7 @@ namespace DustInTheWind.Bani.DataAccess.JsonFiles
             if (Width != null) targetBanknote.Width = Width;
             if (Height != null) targetBanknote.Height = Height;
             if (Embossing != null) targetBanknote.Embossing = Embossing;
+            if (PrintYear != null) targetBanknote.PrintYear = PrintYear;
         }
     }
 }

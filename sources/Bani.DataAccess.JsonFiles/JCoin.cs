@@ -8,6 +8,8 @@ namespace DustInTheWind.Bani.DataAccess.JsonFiles
 
         public string Edge { get; set; }
 
+        public int? MintYear { get; set; }
+
         public JCoin()
         {
         }
@@ -19,6 +21,7 @@ namespace DustInTheWind.Bani.DataAccess.JsonFiles
             {
                 Diameter = coin.Diameter;
                 Edge = coin.Edge;
+                MintYear = coin.MintYear;
             }
         }
 
@@ -42,6 +45,7 @@ namespace DustInTheWind.Bani.DataAccess.JsonFiles
 
             if (Diameter != null) targetCoin.Diameter = Diameter;
             if (Edge != null) targetCoin.Edge = Edge;
+            if (MintYear != null) targetCoin.MintYear = MintYear;
         }
     }
 }

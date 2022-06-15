@@ -10,8 +10,8 @@ namespace DustInTheWind.Bani
     {
         private static void Main(string[] args)
         {
-            //DbContext dbContext = new("/nfs/YubabaData/Alez/projects/Money/database");
-            DbContext dbContext = new(@"\\192.168.1.12\Data\Alez\projects\Money\database\");
+            DbContext dbContext = new("/nfs/YubabaData/Alez/projects/Money/database");
+            //DbContext dbContext = new(@"\\192.168.1.12\Data\Alez\projects\Money\database\");
             //DbContext dbContext = new(@"c:\Temp\database");
 
             IEmitterRepository emitterRepository = new EmitterRepository(dbContext);
@@ -37,7 +37,7 @@ namespace DustInTheWind.Bani
                     foreach (Item item in emission.Items)
                     {
                         if (item.Year == null)
-                            Console.WriteLine($"    - {item.DisplayName}");
+                            Console.WriteLine($"    - {item.DisplayName} Count: {item.InstanceCount}");
                         else
                             Console.WriteLine($"    - {item.DisplayName} ({item.Year}) Count: {item.InstanceCount}");
                     }
