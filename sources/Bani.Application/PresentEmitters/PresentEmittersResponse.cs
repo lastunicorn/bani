@@ -14,28 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Threading.Tasks;
-using Autofac;
-using Bani.Application.PresentEmitters;
-using MediatR;
+using System.Collections.Generic;
+using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani
+namespace Bani.Application.PresentEmitters
 {
-    internal static class Program
+    public class PresentEmittersResponse
     {
-        private static async Task Main(string[] args)
-        {
-            IContainer container = SetupServices.BuildContainer();
-
-            PresentEmittersRequest request = new()
-            {
-                EmitterName = args.Length > 0 ? args[0] : null
-            };
-            IMediator mediator = container.Resolve<IMediator>();
-            PresentEmittersResponse response = await mediator.Send(request);
-
-            PresentEmittersView view = new();
-            view.Display(response);
-        }
+        public List<Emitter> Emitters { get; set; }
     }
 }

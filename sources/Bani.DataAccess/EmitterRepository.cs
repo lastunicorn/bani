@@ -22,9 +22,9 @@ namespace DustInTheWind.Bani.DataAccess
 {
     public class EmitterRepository : IEmitterRepository
     {
-        private readonly DbContext dbContext;
+        private readonly BaniDbContext dbContext;
 
-        public EmitterRepository(DbContext dbContext)
+        public EmitterRepository(BaniDbContext dbContext)
         {
             this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }

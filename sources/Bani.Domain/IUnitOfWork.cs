@@ -1,4 +1,4 @@
-﻿// Bani
+// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,28 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Threading.Tasks;
-using Autofac;
-using Bani.Application.PresentEmitters;
-using MediatR;
-
-namespace DustInTheWind.Bani
+namespace DustInTheWind.Bani.Domain
 {
-    internal static class Program
+    public interface IUnitOfWork
     {
-        private static async Task Main(string[] args)
-        {
-            IContainer container = SetupServices.BuildContainer();
-
-            PresentEmittersRequest request = new()
-            {
-                EmitterName = args.Length > 0 ? args[0] : null
-            };
-            IMediator mediator = container.Resolve<IMediator>();
-            PresentEmittersResponse response = await mediator.Send(request);
-
-            PresentEmittersView view = new();
-            view.Display(response);
-        }
+        IEmitterRepository EmitterRepository { get; }
     }
 }

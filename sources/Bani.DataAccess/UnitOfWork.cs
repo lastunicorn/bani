@@ -1,4 +1,4 @@
-// Bani
+﻿// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,32 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
 using DustInTheWind.Bani.Domain;
 
 namespace DustInTheWind.Bani.DataAccess
 {
-    public class DbContext
+    public class UnitOfWork : IUnitOfWork
     {
-        private readonly string connectionString;
+        private readonly BaniDbContext dbContext;
+        private IEmitterRepository emitterRepository;
 
-        public List<Emitter> Emitters { get; } = new();
+        public IEmitterRepository EmitterRepository => emitterRepository ??= new EmitterRepository(dbContext);
 
-        public DbContext(string connectionString)
+        public UnitOfWork(BaniDbContext dbContext)
         {
-            this.connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
-
-            LoadEmitters();
-        }
-
-        private void LoadEmitters()
-        {
-            Emitters.Clear();
-
-            EmitterCrawler emitterCrawler = new();
-            IEnumerable<Emitter> emitters = emitterCrawler.SearchForEmitters(connectionString);
-            Emitters.AddRange(emitters);
+            this.dbContext = dbContext;
         }
     }
 }
