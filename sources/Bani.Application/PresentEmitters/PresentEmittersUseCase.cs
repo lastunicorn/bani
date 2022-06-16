@@ -47,7 +47,9 @@ namespace Bani.Application.PresentEmitters
 
             PresentEmittersResponse response = new()
             {
-                Emitters = emitters.ToList()
+                Emitters = emitters
+                    .Select(x => new EmitterInfo(x))
+                    .ToList()
             };
 
             return Task.FromResult(response);

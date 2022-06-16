@@ -14,12 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using DustInTheWind.Bani.Domain;
 
 namespace Bani.Application.PresentEmitters
 {
-    public class PresentEmittersResponse
+    public class EmitterInfo
     {
-        public List<EmitterInfo> Emitters { get; set; }
+        public string Name { get; }
+
+        public List<EmissionInfo> Emissions { get; }
+
+        public EmitterInfo(Emitter emitter)
+        {
+            if (emitter == null) throw new ArgumentNullException(nameof(emitter));
+
+            Name = emitter.Name;
+            Emissions = emitter.Emissions
+                .Select(x => new EmissionInfo(x))
+                .ToList();
+        }
     }
 }

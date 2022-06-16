@@ -26,11 +26,11 @@ namespace DustInTheWind.Bani
     {
         public void Display(PresentEmittersResponse response)
         {
-            foreach (Emitter emitter in response.Emitters)
-                DisplayEmitter(emitter);
+            foreach (EmitterInfo emitterInfo in response.Emitters)
+                DisplayEmitter(emitterInfo);
         }
 
-        private static void DisplayEmitter(Emitter emitter)
+        private static void DisplayEmitter(EmitterInfo emitterInfo)
         {
             HorizontalLine horizontalLine = new()
             {
@@ -38,18 +38,18 @@ namespace DustInTheWind.Bani
             };
             horizontalLine.Display();
 
-            Console.WriteLine($"{emitter.Name}");
+            Console.WriteLine($"{emitterInfo.Name}");
             Console.WriteLine();
 
-            foreach (Emission emission in emitter.Emissions)
-                DisplayEmission(emission);
+            foreach (EmissionInfo emissionInfo in emitterInfo.Emissions)
+                DisplayEmission(emissionInfo);
         }
 
-        private static void DisplayEmission(Emission emission)
+        private static void DisplayEmission(EmissionInfo emissionInfo)
         {
             DataGrid dataGrid = new()
             {
-                Title = $"{emission.Name} [{emission.StartYear}-{emission.EndYear}]",
+                Title = $"{emissionInfo.Name} [{emissionInfo.StartYear}-{emissionInfo.EndYear}]",
                 Border =
                 {
                     Template = BorderTemplate.SingleLineBorderTemplate
@@ -67,14 +67,17 @@ namespace DustInTheWind.Bani
             Column countColumn = dataGrid.Columns.Add("Count");
             countColumn.CellHorizontalAlignment = HorizontalAlignment.Right;
 
-            foreach (Item item in emission.Items)
+            dataGrid.Columns.Add("Type");
+
+            foreach (ArtifactInfo artifactInfo in emissionInfo.Artifacts)
             {
                 ContentRow row = new();
 
-                row.AddCell(item.DisplayName);
-                row.AddCell(item.Year);
-                row.AddCell(item.IssueDate?.ToString("yyyy MM dd"));
-                row.AddCell(item.InstanceCount);
+                row.AddCell(artifactInfo.DisplayName);
+                row.AddCell(artifactInfo.Year);
+                row.AddCell(artifactInfo.IssueDate?.ToString("yyyy MM dd"));
+                row.AddCell(artifactInfo.InstanceCount);
+                row.AddCell(artifactInfo.ArtifactType);
 
                 dataGrid.Rows.Add(row);
             }

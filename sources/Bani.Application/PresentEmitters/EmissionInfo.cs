@@ -15,11 +15,29 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using System.Linq;
+using DustInTheWind.Bani.Domain;
 
 namespace Bani.Application.PresentEmitters
 {
-    public class PresentEmittersResponse
+    public class EmissionInfo
     {
-        public List<EmitterInfo> Emitters { get; set; }
+        public string Name { get; }
+
+        public int? StartYear { get; }
+
+        public int? EndYear { get; }
+
+        public List<ArtifactInfo> Artifacts { get; }
+
+        public EmissionInfo(Emission emission)
+        {
+            Name = emission.Name;
+            StartYear = emission.StartYear;
+            EndYear = emission.EndYear;
+            Artifacts = emission.Items
+                .Select(x => new ArtifactInfo(x))
+                .ToList();
+        }
     }
 }
