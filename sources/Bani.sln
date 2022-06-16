@@ -1,12 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bani", "Bani\Bani.csproj", "{85EA719E-4288-4AF5-B298-6C9947949270}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32428.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani", "Bani\Bani.csproj", "{85EA719E-4288-4AF5-B298-6C9947949270}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bani.Domain", "Bani.Domain\Bani.Domain.csproj", "{0691814D-7BA7-43FF-91DB-C0395FFDD520}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.Domain", "Bani.Domain\Bani.Domain.csproj", "{0691814D-7BA7-43FF-91DB-C0395FFDD520}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bani.DataAccess", "Bani.DataAccess\Bani.DataAccess.csproj", "{0C545F0C-4185-481F-8449-7480924462E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.DataAccess", "Bani.DataAccess\Bani.DataAccess.csproj", "{0C545F0C-4185-481F-8449-7480924462E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bani.DataAccess.JsonFiles", "Bani.DataAccess.JsonFiles\Bani.DataAccess.JsonFiles.csproj", "{42E08200-8B37-484C-B678-D63B05E416F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.DataAccess.JsonFiles", "Bani.DataAccess.JsonFiles\Bani.DataAccess.JsonFiles.csproj", "{42E08200-8B37-484C-B678-D63B05E416F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bani.Application", "Bani.Application\Bani.Application.csproj", "{6104F816-1FDD-48C0-95F0-19987C222CEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +35,15 @@ Global
 		{42E08200-8B37-484C-B678-D63B05E416F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42E08200-8B37-484C-B678-D63B05E416F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42E08200-8B37-484C-B678-D63B05E416F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6104F816-1FDD-48C0-95F0-19987C222CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6104F816-1FDD-48C0-95F0-19987C222CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6104F816-1FDD-48C0-95F0-19987C222CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6104F816-1FDD-48C0-95F0-19987C222CEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF6807FD-76E4-4C58-93F5-184FFB342C24}
 	EndGlobalSection
 EndGlobal
