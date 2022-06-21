@@ -28,6 +28,6 @@ namespace DustInTheWind.Bani.Domain
 
         public int? EndYear { get; set; }
 
-        public List<Item> Items { get; } = new();
+        public List<Artifact> Artifacts { get; } = new();
     }
 }

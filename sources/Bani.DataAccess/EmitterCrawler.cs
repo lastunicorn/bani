@@ -107,26 +107,26 @@ namespace DustInTheWind.Bani.DataAccess
 
             string rootDirectoryPath = Path.GetDirectoryName(filePath);
 
-            IEnumerable<Item> items = ReadItems(rootDirectoryPath);
-            emission.Items.AddRange(items);
+            IEnumerable<Artifact> artifacts = ReadArtifacts(rootDirectoryPath);
+            emission.Artifacts.AddRange(artifacts);
 
             return emission;
         }
 
-        private static IEnumerable<Item> ReadItems(string emissionDirectoryPath)
+        private static IEnumerable<Artifact> ReadArtifacts(string emissionDirectoryPath)
         {
             string[] subDirectories = Directory.GetDirectories(emissionDirectoryPath);
 
             foreach (string subDirectory in subDirectories)
             {
-                IEnumerable<Item> items = SearchForItems(subDirectory);
+                IEnumerable<Artifact> artifacts = SearchForArtifacts(subDirectory);
 
-                foreach (Item item in items)
+                foreach (Artifact item in artifacts)
                     yield return item;
             }
         }
 
-        private static IEnumerable<Item> SearchForItems(string directoryPath)
+        private static IEnumerable<Artifact> SearchForArtifacts(string directoryPath)
         {
             bool itemsFound = false;
 
@@ -153,9 +153,9 @@ namespace DustInTheWind.Bani.DataAccess
 
             foreach (string subDirectoryPath in subDirectoryPaths)
             {
-                IEnumerable<Item> items = SearchForItems(subDirectoryPath);
+                IEnumerable<Artifact> items = SearchForArtifacts(subDirectoryPath);
 
-                foreach (Item item in items)
+                foreach (Artifact item in items)
                     yield return item;
             }
         }

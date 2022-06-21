@@ -31,18 +31,18 @@ namespace DustInTheWind.Bani.Application.PresentEmitters
 
         public ArtifactType ArtifactType { get; }
 
-        public ArtifactInfo(Item item)
+        public ArtifactInfo(Artifact artifact)
         {
-            DisplayName = item.DisplayName;
-            IssueDate = item.IssueDate;
-            Year = item.Year;
-            InstanceCount = item.InstanceCount;
-            ArtifactType = CalculateArtifactType(item);
+            DisplayName = artifact.DisplayName;
+            IssueDate = artifact.IssueDate;
+            Year = artifact.Year;
+            InstanceCount = artifact.InstanceCount;
+            ArtifactType = CalculateArtifactType(artifact);
         }
 
-        private static ArtifactType CalculateArtifactType(Item item)
+        private static ArtifactType CalculateArtifactType(Artifact artifact)
         {
-            return item switch
+            return artifact switch
             {
                 Coin => ArtifactType.Coin,
                 Banknote => ArtifactType.Banknote,

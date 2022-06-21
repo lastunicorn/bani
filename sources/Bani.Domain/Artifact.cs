@@ -18,7 +18,7 @@ using System;
 
 namespace DustInTheWind.Bani.Domain
 {
-    public class Item
+    public class Artifact
     {
         public string Id { get; set; }
 

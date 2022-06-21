@@ -16,7 +16,7 @@
 
 namespace DustInTheWind.Bani.Domain
 {
-    public class Banknote : Item
+    public class Banknote : Artifact
     {
         public float? Width { get; set; }
         
