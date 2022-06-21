@@ -16,7 +16,7 @@
 
 using System.Threading.Tasks;
 using Autofac;
-using Bani.Application.PresentEmitters;
+using DustInTheWind.Bani.Application.PresentEmitters;
 using MediatR;
 
 namespace DustInTheWind.Bani

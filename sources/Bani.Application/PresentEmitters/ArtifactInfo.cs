@@ -17,7 +17,7 @@
 using System;
 using DustInTheWind.Bani.Domain;
 
-namespace Bani.Application.PresentEmitters
+namespace DustInTheWind.Bani.Application.PresentEmitters
 {
     public class ArtifactInfo
     {

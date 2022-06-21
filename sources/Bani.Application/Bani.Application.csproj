@@ -1,4 +1,4 @@
-<!--
+﻿<!--
 Bani
 Copyright (C) 2022 Dust in the Wind
 
@@ -20,6 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <AssemblyName>DustInTheWind.Bani.Application</AssemblyName>
+        <RootNamespace>DustInTheWind.Bani.Application</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

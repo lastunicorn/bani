@@ -16,7 +16,7 @@
 
 using System.Collections.Generic;
 
-namespace Bani.Application.PresentEmitters
+namespace DustInTheWind.Bani.Application.PresentEmitters
 {
     public class PresentEmittersResponse
     {

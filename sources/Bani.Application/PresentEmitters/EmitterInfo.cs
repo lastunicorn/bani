@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Bani.Domain;
 
-namespace Bani.Application.PresentEmitters
+namespace DustInTheWind.Bani.Application.PresentEmitters
 {
     public class EmitterInfo
     {

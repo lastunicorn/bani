@@ -16,7 +16,7 @@
 
 using MediatR;
 
-namespace Bani.Application.PresentEmitters
+namespace DustInTheWind.Bani.Application.PresentEmitters
 {
     public class PresentEmittersRequest : IRequest<PresentEmittersResponse>
     {

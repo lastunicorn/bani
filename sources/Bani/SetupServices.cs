@@ -16,7 +16,7 @@
 
 using System.Reflection;
 using Autofac;
-using Bani.Application.PresentEmitters;
+using DustInTheWind.Bani.Application.PresentEmitters;
 using DustInTheWind.Bani.DataAccess;
 using DustInTheWind.Bani.Domain;
 using MediatR.Extensions.Autofac.DependencyInjection;

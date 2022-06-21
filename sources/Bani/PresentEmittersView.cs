@@ -15,8 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Bani.Application.PresentEmitters;
-using DustInTheWind.Bani.Domain;
+using DustInTheWind.Bani.Application.PresentEmitters;
 using DustInTheWind.ConsoleTools.Controls;
 using DustInTheWind.ConsoleTools.Controls.Tables;
 

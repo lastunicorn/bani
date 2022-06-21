@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 using DustInTheWind.Bani.Domain;
 using MediatR;
 
-namespace Bani.Application.PresentEmitters
+namespace DustInTheWind.Bani.Application.PresentEmitters
 {
     internal class PresentEmittersUseCase : IRequestHandler<PresentEmittersRequest, PresentEmittersResponse>
     {
