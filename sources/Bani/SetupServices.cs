@@ -41,8 +41,8 @@ namespace DustInTheWind.Bani
             containerBuilder.RegisterType<BaniDbContext>().AsSelf();
             containerBuilder.Register<BaniDbContext>(builder =>
             {
-                //const string dbFilePath = "/nfs/YubabaData/Alez/projects/Money/database";
-                const string dbFilePath = @"\\192.168.1.12\Data\Alez\projects\Money\database";
+                const string dbFilePath = "/nfs/YubabaData/Alez/projects/Money/database";
+                //const string dbFilePath = @"\\192.168.1.12\Data\Alez\projects\Money\database";
                 //const string dbFilePath = @"c:\Temp\database";
 
                 return new BaniDbContext(dbFilePath);

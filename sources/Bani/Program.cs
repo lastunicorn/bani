@@ -27,11 +27,16 @@ namespace DustInTheWind.Bani
         {
             IContainer container = SetupServices.BuildContainer();
 
+            IMediator mediator = container.Resolve<IMediator>();
+
+            string emitterName = args.Length > 0
+                ? args[0]
+                : null;
+
             PresentEmittersRequest request = new()
             {
-                EmitterName = args.Length > 0 ? args[0] : null
+                EmitterName = emitterName
             };
-            IMediator mediator = container.Resolve<IMediator>();
             PresentEmittersResponse response = await mediator.Send(request);
 
             PresentEmittersView view = new();

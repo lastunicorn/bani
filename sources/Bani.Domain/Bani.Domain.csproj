@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Bani.DataAccess.JsonFiles\Bani.DataAccess.JsonFiles.csproj" />
+        <ProjectReference Include="..\Bani.DataAccess.JsonFiles\Bani.DataAccess.JsonFiles.csproj"/>
     </ItemGroup>
 
 </Project>
