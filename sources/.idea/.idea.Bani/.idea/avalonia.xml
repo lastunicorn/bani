@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="Bani.AvaloniaApp/App.axaml" value="Bani.AvaloniaApp/Bani.AvaloniaApp.csproj" />
+        <entry key="Bani.AvaloniaApp/Views/MainWindow.axaml" value="Bani.AvaloniaApp/Bani.AvaloniaApp.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

@@ -36,7 +36,8 @@ namespace DustInTheWind.Bani.Application.PresentEmitters
             StartYear = emission.StartYear;
             EndYear = emission.EndYear;
             Artifacts = emission.Artifacts
-                .OrderBy(x => x.Value)
+                .OrderBy(x => x.GetType().FullName)
+                .ThenBy(x => x.Value)
                 .ThenBy(x => x.Year)
                 .Select(x => new ArtifactInfo(x))
                 .ToList();

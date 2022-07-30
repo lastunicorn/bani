@@ -72,6 +72,9 @@ namespace DustInTheWind.Bani
             {
                 ContentRow row = new();
 
+                if (artifactInfo.InstanceCount == 0)
+                    row.ForegroundColor = ConsoleColor.DarkYellow;
+
                 row.AddCell(artifactInfo.DisplayName);
                 row.AddCell(artifactInfo.Year);
                 row.AddCell(artifactInfo.IssueDate?.ToString("yyyy MM dd"));
