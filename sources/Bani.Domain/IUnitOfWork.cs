@@ -18,6 +18,6 @@ namespace DustInTheWind.Bani.Domain
 {
     public interface IUnitOfWork
     {
-        IEmitterRepository EmitterRepository { get; }
+        IIssuerRepository IssuerRepository { get; }
     }
 }

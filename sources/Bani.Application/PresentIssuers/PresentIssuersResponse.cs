@@ -1,4 +1,4 @@
-// Bani
+﻿// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -16,12 +16,10 @@
 
 using System.Collections.Generic;
 
-namespace DustInTheWind.Bani.Domain
+namespace DustInTheWind.Bani.Application.PresentIssuers
 {
-    public interface IEmitterRepository
+    public class PresentIssuersResponse
     {
-        IEnumerable<Emitter> GetAll();
-        
-        IEnumerable<Emitter> GetByName(string name);
+        public List<IssuerInfo> Issuers { get; set; }
     }
 }

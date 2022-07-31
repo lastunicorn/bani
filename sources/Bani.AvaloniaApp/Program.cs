@@ -15,33 +15,30 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Threading.Tasks;
-using DustInTheWind.Bani.Application.PresentEmitters;
-using MediatR;
+using Avalonia;
+using Avalonia.ReactiveUI;
 
-namespace DustInTheWind.Bani.Presentation
+namespace DustInTheWind.Bani.AvaloniaApp
 {
-    public class PresentEmittersCommand
+    internal class Program
     {
-        private readonly IMediator mediator;
-
-        public string EmitterName { get; set; }
-
-        public PresentEmittersCommand(IMediator mediator)
+        // Initialization code. Don't use any Avalonia, third-party APIs or any
+        // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
+        // yet and stuff might break.
+        [STAThread]
+        public static void Main(string[] args)
         {
-            this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            BuildAvaloniaApp()
+                .StartWithClassicDesktopLifetime(args);
         }
 
-        public async Task Execute()
+        // Avalonia configuration, don't remove; also used by visual designer.
+        public static AppBuilder BuildAvaloniaApp()
         {
-            PresentEmittersRequest request = new()
-            {
-                EmitterName = EmitterName
-            };
-            PresentEmittersResponse response = await mediator.Send(request);
-
-            PresentEmittersView view = new();
-            view.Display(response);
+            return AppBuilder.Configure<App>()
+                .UsePlatformDetect()
+                .LogToTrace()
+                .UseReactiveUI();
         }
     }
 }

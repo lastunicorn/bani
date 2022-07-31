@@ -16,16 +16,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<Project Sdk="Microsoft.NET.Sdk">
+<Application
+    x:Class="DustInTheWind.Bani.AvaloniaApp.App"
 
-    <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
-        <AssemblyName>DustInTheWind.Bani.DataAccess.JsonFiles</AssemblyName>
-        <RootNamespace>DustInTheWind.Bani.DataAccess.JsonFiles</RootNamespace>
-    </PropertyGroup>
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:avaloniaApp="clr-namespace:DustInTheWind.Bani.AvaloniaApp">
 
-    <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta1"/>
-    </ItemGroup>
+    <Application.DataTemplates>
+        <avaloniaApp:ViewLocator />
+    </Application.DataTemplates>
 
-</Project>
+    <Application.Styles>
+        <FluentTheme Mode="Light" />
+    </Application.Styles>
+
+</Application>

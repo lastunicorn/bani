@@ -16,7 +16,7 @@
 
 using System.Reflection;
 using Autofac;
-using DustInTheWind.Bani.Application.PresentEmitters;
+using DustInTheWind.Bani.Application.PresentIssuers;
 using DustInTheWind.Bani.DataAccess;
 using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Presentation;
@@ -36,7 +36,7 @@ namespace DustInTheWind.Bani
 
         private static void ConfigureServices(ContainerBuilder containerBuilder)
         {
-            Assembly assembly = typeof(PresentEmittersRequest).Assembly;
+            Assembly assembly = typeof(PresentIssuersRequest).Assembly;
             containerBuilder.RegisterMediatR(assembly);
 
             containerBuilder.RegisterType<BaniDbContext>().AsSelf();
@@ -50,7 +50,7 @@ namespace DustInTheWind.Bani
             }).AsSelf();
             containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
-            containerBuilder.RegisterType<PresentEmittersCommand>().AsSelf();
+            containerBuilder.RegisterType<PresentIssuersCommand>().AsSelf();
         }
     }
 }

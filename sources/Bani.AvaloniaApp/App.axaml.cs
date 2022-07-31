@@ -14,31 +14,32 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using DustInTheWind.Bani.Domain;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Markup.Xaml;
+using DustInTheWind.Bani.AvaloniaApp.ViewModels;
+using DustInTheWind.Bani.AvaloniaApp.Views;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.AvaloniaApp
 {
-    public class EmitterRepository : IEmitterRepository
+    public partial class App : Application
     {
-        private readonly BaniDbContext dbContext;
-
-        public EmitterRepository(BaniDbContext dbContext)
+        public override void Initialize()
         {
-            this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            AvaloniaXamlLoader.Load(this);
         }
 
-        public IEnumerable<Emitter> GetAll()
+        public override void OnFrameworkInitializationCompleted()
         {
-            return dbContext.Emitters;
-        }
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                desktop.MainWindow = new MainWindow
+                {
+                    DataContext = new MainWindowViewModel(),
+                };
+            }
 
-        public IEnumerable<Emitter> GetByName(string name)
-        {
-            return dbContext.Emitters
-                .Where(x => x.Name?.Contains(name, StringComparison.InvariantCultureIgnoreCase) ?? false);
+            base.OnFrameworkInitializationCompleted();
         }
     }
 }

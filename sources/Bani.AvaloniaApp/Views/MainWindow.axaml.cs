@@ -1,4 +1,4 @@
-﻿// Bani
+// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,10 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+using Avalonia.Controls;
+
+namespace DustInTheWind.Bani.AvaloniaApp.Views
 {
-    public class JEmitter
+    public partial class MainWindow : Window
     {
-        public string Name { get; set; }
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
     }
 }

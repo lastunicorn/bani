@@ -14,16 +14,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.Domain
+namespace DustInTheWind.Bani.DataAccess
 {
-    public class Emitter
+    public class IssuerRepository : IIssuerRepository
     {
-        public string Name { get; set; }
+        private readonly BaniDbContext dbContext;
 
-        public string Location { get; set; }
+        public IssuerRepository(BaniDbContext dbContext)
+        {
+            this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+        }
 
-        public List<Emission> Emissions { get; } = new();
+        public IEnumerable<Issuer> GetAll()
+        {
+            return dbContext.Issuers;
+        }
+
+        public IEnumerable<Issuer> GetByName(string name)
+        {
+            return dbContext.Issuers
+                .Where(x => x.Name?.Contains(name, StringComparison.InvariantCultureIgnoreCase) ?? false);
+        }
     }
 }

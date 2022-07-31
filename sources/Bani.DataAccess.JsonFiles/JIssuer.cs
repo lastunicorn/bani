@@ -1,4 +1,4 @@
-// Bani
+﻿// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,19 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.DataAccess.JsonFiles;
-using DustInTheWind.Bani.Domain;
-
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess.JsonFiles
 {
-    internal static class EmitterExtensions
+    public class JIssuer
     {
-        public static Emitter ToDomainEntity(this JEmitter emitter)
-        {
-            return new Emitter
-            {
-                Name = emitter.Name
-            };
-        }
+        public string Name { get; set; }
     }
 }

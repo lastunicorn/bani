@@ -21,9 +21,9 @@ namespace DustInTheWind.Bani.DataAccess
     public class UnitOfWork : IUnitOfWork
     {
         private readonly BaniDbContext dbContext;
-        private IEmitterRepository emitterRepository;
+        private IIssuerRepository issuerRepository;
 
-        public IEmitterRepository EmitterRepository => emitterRepository ??= new EmitterRepository(dbContext);
+        public IIssuerRepository IssuerRepository => issuerRepository ??= new IssuerRepository(dbContext);
 
         public UnitOfWork(BaniDbContext dbContext)
         {

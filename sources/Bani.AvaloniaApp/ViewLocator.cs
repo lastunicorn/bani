@@ -15,26 +15,31 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.IO;
-using Newtonsoft.Json;
+using Avalonia.Controls;
+using Avalonia.Controls.Templates;
+using DustInTheWind.Bani.AvaloniaApp.ViewModels;
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+namespace DustInTheWind.Bani.AvaloniaApp
 {
-    public class EmitterFile
+    public class ViewLocator : IDataTemplate
     {
-        private readonly string filePath;
-
-        public EmitterFile(string filePath)
+        public IControl Build(object data)
         {
-            this.filePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
+            string? name = data.GetType().FullName!.Replace("ViewModel", "View");
+            Type? type = Type.GetType(name);
+
+            if (type != null)
+                return (Control)Activator.CreateInstance(type)!;
+
+            return new TextBlock
+            {
+                Text = "Not Found: " + name
+            };
         }
 
-        public JEmitter Emitter { get; set; }
-
-        public void Open()
+        public bool Match(object data)
         {
-            string json = File.ReadAllText(filePath);
-            Emitter = JsonConvert.DeserializeObject<JEmitter>(json);
+            return data is ViewModelBase;
         }
     }
 }

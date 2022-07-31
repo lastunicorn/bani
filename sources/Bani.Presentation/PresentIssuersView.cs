@@ -15,21 +15,21 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Bani.Application.PresentEmitters;
+using DustInTheWind.Bani.Application.PresentIssuers;
 using DustInTheWind.ConsoleTools.Controls;
 using DustInTheWind.ConsoleTools.Controls.Tables;
 
 namespace DustInTheWind.Bani.Presentation
 {
-    internal class PresentEmittersView
+    internal class PresentIssuersView
     {
-        public void Display(PresentEmittersResponse response)
+        public void Display(PresentIssuersResponse response)
         {
-            foreach (EmitterInfo emitterInfo in response.Emitters)
-                DisplayEmitter(emitterInfo);
+            foreach (IssuerInfo issuerInfo in response.Issuers)
+                DisplayIssuer(issuerInfo);
         }
 
-        private static void DisplayEmitter(EmitterInfo emitterInfo)
+        private static void DisplayIssuer(IssuerInfo issuerInfo)
         {
             HorizontalLine horizontalLine = new()
             {
@@ -37,10 +37,10 @@ namespace DustInTheWind.Bani.Presentation
             };
             horizontalLine.Display();
 
-            Console.WriteLine($"{emitterInfo.Name}");
+            Console.WriteLine($"{issuerInfo.Name}");
             Console.WriteLine();
 
-            foreach (EmissionInfo emissionInfo in emitterInfo.Emissions)
+            foreach (EmissionInfo emissionInfo in issuerInfo.Emissions)
                 DisplayEmission(emissionInfo);
         }
 
@@ -77,17 +77,13 @@ namespace DustInTheWind.Bani.Presentation
             {
                 ContentRow row = new();
 
+                if (artifactInfo.InstanceCount == 0)
+                    row.ForegroundColor = ConsoleColor.DarkYellow;
+
                 row.AddCell(artifactInfo.DisplayName);
                 row.AddCell(artifactInfo.Year);
                 row.AddCell(artifactInfo.IssueDate?.ToString("yyyy MM dd"));
-
-                ContentCell countCell = row.AddCell(artifactInfo.InstanceCount);
-                if (artifactInfo.InstanceCount == 0)
-                {
-                    countCell.ForegroundColor = ConsoleColor.Black;
-                    countCell.BackgroundColor = ConsoleColor.DarkYellow;
-                }
-
+                row.AddCell(artifactInfo.InstanceCount);
                 row.AddCell(artifactInfo.ArtifactType);
 
                 dataGrid.Rows.Add(row);

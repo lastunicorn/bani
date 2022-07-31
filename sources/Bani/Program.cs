@@ -26,8 +26,8 @@ namespace DustInTheWind.Bani
         {
             IContainer container = SetupServices.BuildContainer();
 
-            PresentEmittersCommand command = container.Resolve<PresentEmittersCommand>();
-            command.EmitterName = args.Length > 0 ? args[0] : null;
+            PresentIssuersCommand command = container.Resolve<PresentIssuersCommand>();
+            command.IssuerName = args.Length > 0 ? args[0] : null;
             await command.Execute();
         }
     }

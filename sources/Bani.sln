@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.DataAccess.JsonFiles",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.Application", "Bani.Application\Bani.Application.csproj", "{6104F816-1FDD-48C0-95F0-19987C222CEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bani.Presentation", "Bani.Presentation\Bani.Presentation.csproj", "{065D24B6-1EFC-4F60-9472-9FBACB693251}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.Presentation", "Bani.Presentation\Bani.Presentation.csproj", "{065D24B6-1EFC-4F60-9472-9FBACB693251}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.AvaloniaApp", "Bani.AvaloniaApp\Bani.AvaloniaApp.csproj", "{B1DBAD65-1B4C-4943-AEEC-6F023813F43A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{065D24B6-1EFC-4F60-9472-9FBACB693251}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{065D24B6-1EFC-4F60-9472-9FBACB693251}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{065D24B6-1EFC-4F60-9472-9FBACB693251}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1DBAD65-1B4C-4943-AEEC-6F023813F43A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1DBAD65-1B4C-4943-AEEC-6F023813F43A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1DBAD65-1B4C-4943-AEEC-6F023813F43A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1DBAD65-1B4C-4943-AEEC-6F023813F43A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

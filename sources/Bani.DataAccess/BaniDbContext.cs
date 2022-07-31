@@ -24,22 +24,22 @@ namespace DustInTheWind.Bani.DataAccess
     {
         private readonly string connectionString;
 
-        public List<Emitter> Emitters { get; } = new();
+        public List<Issuer> Issuers { get; } = new();
 
         public BaniDbContext(string connectionString)
         {
             this.connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
 
-            LoadEmitters();
+            LoadIssuers();
         }
 
-        private void LoadEmitters()
+        private void LoadIssuers()
         {
-            Emitters.Clear();
+            Issuers.Clear();
 
-            EmitterCrawler emitterCrawler = new();
-            IEnumerable<Emitter> emitters = emitterCrawler.SearchForEmitters(connectionString);
-            Emitters.AddRange(emitters);
+            IssuerCrawler issuerCrawler = new();
+            IEnumerable<Issuer> issuers = issuerCrawler.SearchForIssuers(connectionString);
+            Issuers.AddRange(issuers);
         }
     }
 }
