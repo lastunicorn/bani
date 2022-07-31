@@ -21,5 +21,7 @@ namespace DustInTheWind.Bani.Domain
     public interface IEmitterRepository
     {
         IEnumerable<Emitter> GetAll();
+        
+        IEnumerable<Emitter> GetByName(string name);
     }
 }

@@ -19,6 +19,7 @@ using Autofac;
 using DustInTheWind.Bani.Application.PresentEmitters;
 using DustInTheWind.Bani.DataAccess;
 using DustInTheWind.Bani.Domain;
+using DustInTheWind.Bani.Presentation;
 using MediatR.Extensions.Autofac.DependencyInjection;
 
 namespace DustInTheWind.Bani
@@ -39,7 +40,7 @@ namespace DustInTheWind.Bani
             containerBuilder.RegisterMediatR(assembly);
 
             containerBuilder.RegisterType<BaniDbContext>().AsSelf();
-            containerBuilder.Register<BaniDbContext>(builder =>
+            containerBuilder.Register(builder =>
             {
                 //const string dbFilePath = "/nfs/YubabaData/Alez/projects/Money/database";
                 const string dbFilePath = @"\\192.168.1.12\Data\Alez\projects\Money\database";
@@ -48,6 +49,8 @@ namespace DustInTheWind.Bani
                 return new BaniDbContext(dbFilePath);
             }).AsSelf();
             containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+
+            containerBuilder.RegisterType<PresentEmittersCommand>().AsSelf();
         }
     }
 }

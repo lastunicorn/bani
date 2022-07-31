@@ -1,4 +1,4 @@
-// Bani
+﻿// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -15,30 +15,33 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using DustInTheWind.Bani.Domain;
+using System.Threading.Tasks;
+using DustInTheWind.Bani.Application.PresentEmitters;
+using MediatR;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.Presentation
 {
-    public class EmitterRepository : IEmitterRepository
+    public class PresentEmittersCommand
     {
-        private readonly BaniDbContext dbContext;
+        private readonly IMediator mediator;
 
-        public EmitterRepository(BaniDbContext dbContext)
+        public string EmitterName { get; set; }
+
+        public PresentEmittersCommand(IMediator mediator)
         {
-            this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        public IEnumerable<Emitter> GetAll()
+        public async Task Execute()
         {
-            return dbContext.Emitters;
-        }
+            PresentEmittersRequest request = new()
+            {
+                EmitterName = EmitterName
+            };
+            PresentEmittersResponse response = await mediator.Send(request);
 
-        public IEnumerable<Emitter> GetByName(string name)
-        {
-            return dbContext.Emitters
-                .Where(x => x.Name?.Contains(name, StringComparison.InvariantCultureIgnoreCase) ?? false);
+            PresentEmittersView view = new();
+            view.Display(response);
         }
     }
 }

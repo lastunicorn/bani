@@ -162,27 +162,19 @@ namespace DustInTheWind.Bani.DataAccess
 
         private static IEnumerable<Coin> ReadCoins(string directoryPath)
         {
-            ItemCrawler<JCoin> coinCrawler = new()
-            {
-                ItemFileName = "m-coin.json"
-            };
+            CoinDirectory coinDirectory = new(directoryPath);
+            coinDirectory.Read();
 
-            coinCrawler.Analyze(directoryPath);
-
-            return coinCrawler.Items
+            return coinDirectory.Artifacts
                 .Select(x => x.ToDomainEntity());
         }
 
         private static IEnumerable<Banknote> ReadBanknotes(string directoryPath)
         {
-            ItemCrawler<JBanknote> banknoteCrawler = new()
-            {
-                ItemFileName = "m-banknote.json"
-            };
+            BanknoteDirectory banknoteDirectory = new(directoryPath);
+            banknoteDirectory.Read();
 
-            banknoteCrawler.Analyze(directoryPath);
-
-            return banknoteCrawler.Items
+            return banknoteDirectory.Artifacts
                 .Select(x => x.ToDomainEntity());
         }
     }

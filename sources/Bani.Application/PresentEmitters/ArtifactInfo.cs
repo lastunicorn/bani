@@ -23,6 +23,8 @@ namespace DustInTheWind.Bani.Application.PresentEmitters
     {
         public string DisplayName { get; }
 
+        public float? Value { get; set; }
+
         public DateTime? IssueDate { get; }
 
         public int? Year { get; }
@@ -34,6 +36,7 @@ namespace DustInTheWind.Bani.Application.PresentEmitters
         public ArtifactInfo(Artifact artifact)
         {
             DisplayName = artifact.DisplayName;
+            Value = artifact.Value;
             IssueDate = artifact.IssueDate;
             Year = artifact.Year;
             InstanceCount = artifact.InstanceCount;

@@ -15,30 +15,30 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using DustInTheWind.Bani.Domain;
+using System.IO;
+using Newtonsoft.Json;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess.JsonFiles
 {
-    public class EmitterRepository : IEmitterRepository
+    public class ArtifactFile<T>
+        where T : JArtifact
     {
-        private readonly BaniDbContext dbContext;
+        public string FilePath { get; }
 
-        public EmitterRepository(BaniDbContext dbContext)
+        public T Artifact { get; set; }
+
+        public ArtifactFile(string filePath)
         {
-            this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            FilePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
         }
 
-        public IEnumerable<Emitter> GetAll()
+        public void Open()
         {
-            return dbContext.Emitters;
-        }
+            string json = File.ReadAllText(FilePath);
+            Artifact = JsonConvert.DeserializeObject<T>(json);
 
-        public IEnumerable<Emitter> GetByName(string name)
-        {
-            return dbContext.Emitters
-                .Where(x => x.Name?.Contains(name, StringComparison.InvariantCultureIgnoreCase) ?? false);
+            if (Artifact != null)
+                Artifact.Location = FilePath;
         }
     }
 }

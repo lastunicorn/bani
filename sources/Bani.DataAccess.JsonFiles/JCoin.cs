@@ -18,7 +18,7 @@ using System;
 
 namespace DustInTheWind.Bani.DataAccess.JsonFiles
 {
-    public class JCoin : JItem
+    public class JCoin : JArtifact
     {
         public float? Diameter { get; set; }
 
@@ -41,17 +41,17 @@ namespace DustInTheWind.Bani.DataAccess.JsonFiles
             }
         }
 
-        public override void MergeInto(JItem targetItem)
+        public override void MergeInto(JArtifact targetArtifact)
         {
-            if (targetItem == null) throw new ArgumentNullException(nameof(targetItem));
+            if (targetArtifact == null) throw new ArgumentNullException(nameof(targetArtifact));
 
-            if (targetItem is JCoin targetCoin)
+            if (targetArtifact is JCoin targetCoin)
             {
                 MergeInto(targetCoin);
             }
             else
             {
-                throw new ArgumentException($"The {nameof(targetItem)} must be a {typeof(JCoin)}.", nameof(targetItem));
+                throw new ArgumentException($"The {nameof(targetArtifact)} must be a {typeof(JCoin)}.", nameof(targetArtifact));
             }
         }
 

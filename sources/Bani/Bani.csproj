@@ -1,4 +1,4 @@
-<!--
+﻿<!--
 Bani
 Copyright (C) 2022 Dust in the Wind
 
@@ -38,6 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <ProjectReference Include="..\Bani.Application\Bani.Application.csproj" />
         <ProjectReference Include="..\Bani.DataAccess\Bani.DataAccess.csproj" />
         <ProjectReference Include="..\Bani.Domain\Bani.Domain.csproj" />
+        <ProjectReference Include="..\Bani.Presentation\Bani.Presentation.csproj" />
     </ItemGroup>
 
 </Project>

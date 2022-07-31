@@ -33,6 +33,7 @@ namespace DustInTheWind.Bani.Application.PresentEmitters
 
             Name = emitter.Name;
             Emissions = emitter.Emissions
+                .OrderBy(x => x.StartYear)
                 .Select(x => new EmissionInfo(x))
                 .ToList();
         }

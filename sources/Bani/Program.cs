@@ -16,8 +16,7 @@
 
 using System.Threading.Tasks;
 using Autofac;
-using DustInTheWind.Bani.Application.PresentEmitters;
-using MediatR;
+using DustInTheWind.Bani.Presentation;
 
 namespace DustInTheWind.Bani
 {
@@ -27,15 +26,9 @@ namespace DustInTheWind.Bani
         {
             IContainer container = SetupServices.BuildContainer();
 
-            PresentEmittersRequest request = new()
-            {
-                EmitterName = args.Length > 0 ? args[0] : null
-            };
-            IMediator mediator = container.Resolve<IMediator>();
-            PresentEmittersResponse response = await mediator.Send(request);
-
-            PresentEmittersView view = new();
-            view.Display(response);
+            PresentEmittersCommand command = container.Resolve<PresentEmittersCommand>();
+            command.EmitterName = args.Length > 0 ? args[0] : null;
+            await command.Execute();
         }
     }
 }

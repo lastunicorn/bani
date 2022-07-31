@@ -35,15 +35,9 @@ namespace DustInTheWind.Bani.Application.PresentEmitters
 
         public Task<PresentEmittersResponse> Handle(PresentEmittersRequest request, CancellationToken cancellationToken)
         {
-            IEnumerable<Emitter> emitters = unitOfWork.EmitterRepository.GetAll();
-
-            if (!string.IsNullOrEmpty(request.EmitterName))
-            {
-                string emitterName = request.EmitterName;
-
-                emitters = emitters
-                    .Where(x => x.Name?.Contains(emitterName, StringComparison.InvariantCultureIgnoreCase) ?? false);
-            }
+            IEnumerable<Emitter> emitters = string.IsNullOrEmpty(request.EmitterName)
+                ? unitOfWork.EmitterRepository.GetAll()
+                : unitOfWork.EmitterRepository.GetByName(request.EmitterName);
 
             PresentEmittersResponse response = new()
             {

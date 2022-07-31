@@ -14,31 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using DustInTheWind.Bani.Domain;
-
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess.JsonFiles
 {
-    public class EmitterRepository : IEmitterRepository
+    public class BanknoteDirectory : ArtifactDirectory<JBanknote>
     {
-        private readonly BaniDbContext dbContext;
+        protected override string ArtifactFileName => "m-banknote.json";
 
-        public EmitterRepository(BaniDbContext dbContext)
+        public BanknoteDirectory(string directoryPath)
+            :base(directoryPath)
         {
-            this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-        }
-
-        public IEnumerable<Emitter> GetAll()
-        {
-            return dbContext.Emitters;
-        }
-
-        public IEnumerable<Emitter> GetByName(string name)
-        {
-            return dbContext.Emitters
-                .Where(x => x.Name?.Contains(name, StringComparison.InvariantCultureIgnoreCase) ?? false);
         }
     }
 }

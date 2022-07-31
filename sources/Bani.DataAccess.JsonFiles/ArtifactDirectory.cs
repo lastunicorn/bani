@@ -16,29 +16,32 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess.JsonFiles
 {
-    public class EmitterRepository : IEmitterRepository
+    public abstract class ArtifactDirectory<T>
+        where T:JArtifact
     {
-        private readonly BaniDbContext dbContext;
+        private readonly string directoryPath;
 
-        public EmitterRepository(BaniDbContext dbContext)
+        protected abstract string ArtifactFileName { get; }
+
+        public List<T> Artifacts { get; private set; }
+
+        protected ArtifactDirectory(string directoryPath)
         {
-            this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            this.directoryPath = directoryPath ?? throw new ArgumentNullException(nameof(directoryPath));
         }
 
-        public IEnumerable<Emitter> GetAll()
+        public void Read()
         {
-            return dbContext.Emitters;
-        }
+            ArtifactCrawler<T> artifactCrawler = new()
+            {
+                ArtifactFileName = ArtifactFileName
+            };
 
-        public IEnumerable<Emitter> GetByName(string name)
-        {
-            return dbContext.Emitters
-                .Where(x => x.Name?.Contains(name, StringComparison.InvariantCultureIgnoreCase) ?? false);
+            artifactCrawler.Analyze(directoryPath);
+            Artifacts = artifactCrawler.Artifacts;
         }
     }
 }
