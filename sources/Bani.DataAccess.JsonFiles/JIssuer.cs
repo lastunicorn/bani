@@ -19,5 +19,7 @@ namespace DustInTheWind.Bani.DataAccess.JsonFiles
     public class JIssuer
     {
         public string Name { get; set; }
+        
+        public string Comments { get; set; }
     }
 }

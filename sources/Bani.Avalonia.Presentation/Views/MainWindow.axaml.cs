@@ -14,22 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.DataAccess.JsonFiles;
-using DustInTheWind.Bani.Domain;
+using Avalonia.Controls;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.Avalonia.Presentation.Views
 {
-    internal static class EmissionExtensions
+    public partial class MainWindow : Window
     {
-        public static Emission ToDomainEntity(this JEmission emission)
+        public MainWindow()
         {
-            return new Emission
-            {
-                Name = emission.Name,
-                StartYear = emission.StartYear,
-                EndYear = emission.EndYear,
-                Comments = emission.Comments
-            };
+            InitializeComponent();
         }
     }
 }

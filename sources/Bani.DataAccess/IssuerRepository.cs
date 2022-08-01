@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Bani.Domain;
+using DustInTheWind.Bani.Domain.DataAccess;
 
 namespace DustInTheWind.Bani.DataAccess
 {
@@ -39,6 +40,12 @@ namespace DustInTheWind.Bani.DataAccess
         {
             return dbContext.Issuers
                 .Where(x => x.Name?.Contains(name, StringComparison.InvariantCultureIgnoreCase) ?? false);
+        }
+
+        public Issuer Get(string id)
+        {
+            return dbContext.Issuers
+                .FirstOrDefault(x => x.Id == id);
         }
     }
 }

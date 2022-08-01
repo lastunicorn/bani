@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32428.217
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani", "Bani\Bani.csproj", "{85EA719E-4288-4AF5-B298-6C9947949270}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.Cli", "Bani.Cli\Bani.Cli.csproj", "{85EA719E-4288-4AF5-B298-6C9947949270}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.Domain", "Bani.Domain\Bani.Domain.csproj", "{0691814D-7BA7-43FF-91DB-C0395FFDD520}"
 EndProject
@@ -11,11 +11,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.DataAccess", "Bani.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.DataAccess.JsonFiles", "Bani.DataAccess.JsonFiles\Bani.DataAccess.JsonFiles.csproj", "{42E08200-8B37-484C-B678-D63B05E416F1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.Application", "Bani.Application\Bani.Application.csproj", "{6104F816-1FDD-48C0-95F0-19987C222CEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.Cli.Application", "Bani.Cli.Application\Bani.Cli.Application.csproj", "{6104F816-1FDD-48C0-95F0-19987C222CEC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.Presentation", "Bani.Presentation\Bani.Presentation.csproj", "{065D24B6-1EFC-4F60-9472-9FBACB693251}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.Cli.Presentation", "Bani.Cli.Presentation\Bani.Cli.Presentation.csproj", "{065D24B6-1EFC-4F60-9472-9FBACB693251}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.AvaloniaApp", "Bani.AvaloniaApp\Bani.AvaloniaApp.csproj", "{B1DBAD65-1B4C-4943-AEEC-6F023813F43A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.Avalonia", "Bani.Avalonia\Bani.Avalonia.csproj", "{B1DBAD65-1B4C-4943-AEEC-6F023813F43A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cli Application", "Cli Application", "{6D08CDEB-ACEE-49FB-BA68-8963EF269064}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Avalonia Application", "Avalonia Application", "{5FCAD796-823B-4240-B1EE-E31C7F43B600}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bani.Avalonia.Presentation", "Bani.Avalonia.Presentation\Bani.Avalonia.Presentation.csproj", "{79534518-7A4D-49BD-BA77-5CA3974C53F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bani.Avalonia.Application", "Bani.Avalonia.Application\Bani.Avalonia.Application.csproj", "{52F3B818-10D4-4274-BC41-F342AC0C13E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.Infrastructure", "Bani.Infrastructure\Bani.Infrastructure.csproj", "{8E97C457-657A-4525-A896-77086940636E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,9 +61,29 @@ Global
 		{B1DBAD65-1B4C-4943-AEEC-6F023813F43A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1DBAD65-1B4C-4943-AEEC-6F023813F43A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1DBAD65-1B4C-4943-AEEC-6F023813F43A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79534518-7A4D-49BD-BA77-5CA3974C53F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79534518-7A4D-49BD-BA77-5CA3974C53F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79534518-7A4D-49BD-BA77-5CA3974C53F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79534518-7A4D-49BD-BA77-5CA3974C53F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52F3B818-10D4-4274-BC41-F342AC0C13E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52F3B818-10D4-4274-BC41-F342AC0C13E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52F3B818-10D4-4274-BC41-F342AC0C13E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52F3B818-10D4-4274-BC41-F342AC0C13E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E97C457-657A-4525-A896-77086940636E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E97C457-657A-4525-A896-77086940636E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E97C457-657A-4525-A896-77086940636E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E97C457-657A-4525-A896-77086940636E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{85EA719E-4288-4AF5-B298-6C9947949270} = {6D08CDEB-ACEE-49FB-BA68-8963EF269064}
+		{6104F816-1FDD-48C0-95F0-19987C222CEC} = {6D08CDEB-ACEE-49FB-BA68-8963EF269064}
+		{065D24B6-1EFC-4F60-9472-9FBACB693251} = {6D08CDEB-ACEE-49FB-BA68-8963EF269064}
+		{B1DBAD65-1B4C-4943-AEEC-6F023813F43A} = {5FCAD796-823B-4240-B1EE-E31C7F43B600}
+		{79534518-7A4D-49BD-BA77-5CA3974C53F3} = {5FCAD796-823B-4240-B1EE-E31C7F43B600}
+		{52F3B818-10D4-4274-BC41-F342AC0C13E5} = {5FCAD796-823B-4240-B1EE-E31C7F43B600}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF6807FD-76E4-4C58-93F5-184FFB342C24}

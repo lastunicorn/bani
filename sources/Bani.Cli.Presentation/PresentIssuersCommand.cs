@@ -1,4 +1,4 @@
-// Bani
+﻿// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -15,33 +15,33 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
+using DustInTheWind.Bani.Cli.Application.PresentIssuers;
+using MediatR;
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+namespace DustInTheWind.Bani.Cli.Presentation
 {
-    public abstract class ArtifactDirectory<T>
-        where T:JArtifact
+    public class PresentIssuersCommand
     {
-        private readonly string directoryPath;
+        private readonly IMediator mediator;
 
-        protected abstract string ArtifactFileName { get; }
+        public string IssuerName { get; set; }
 
-        public List<T> Artifacts { get; private set; }
-
-        protected ArtifactDirectory(string directoryPath)
+        public PresentIssuersCommand(IMediator mediator)
         {
-            this.directoryPath = directoryPath ?? throw new ArgumentNullException(nameof(directoryPath));
+            this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        public void Read()
+        public async Task Execute()
         {
-            ArtifactCrawler<T> artifactCrawler = new()
+            PresentIssuersRequest request = new()
             {
-                ArtifactFileName = ArtifactFileName
+                IssuerName = IssuerName
             };
+            PresentIssuersResponse response = await mediator.Send(request);
 
-            artifactCrawler.Crawl(directoryPath);
-            Artifacts = artifactCrawler.Artifacts;
+            PresentIssuersView view = new();
+            view.Display(response);
         }
     }
 }

@@ -19,7 +19,7 @@ using System.IO;
 
 namespace DustInTheWind.Bani.DataAccess.JsonFiles
 {
-    public class ArtifactCrawler<T>
+    internal class ArtifactCrawler<T>
         where T : JArtifact
     {
         private readonly Stack<T> stack = new();
@@ -28,7 +28,7 @@ namespace DustInTheWind.Bani.DataAccess.JsonFiles
 
         public List<T> Artifacts { get; private set; }
 
-        public void Analyze(string directoryPath)
+        public void Crawl(string directoryPath)
         {
             stack.Clear();
             Artifacts = new List<T>();

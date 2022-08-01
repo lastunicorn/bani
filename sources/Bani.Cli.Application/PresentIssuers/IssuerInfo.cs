@@ -1,4 +1,4 @@
-// Bani
+﻿// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -16,32 +16,26 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+namespace DustInTheWind.Bani.Cli.Application.PresentIssuers
 {
-    public abstract class ArtifactDirectory<T>
-        where T:JArtifact
+    public class IssuerInfo
     {
-        private readonly string directoryPath;
+        public string Name { get; }
 
-        protected abstract string ArtifactFileName { get; }
+        public List<EmissionInfo> Emissions { get; }
 
-        public List<T> Artifacts { get; private set; }
-
-        protected ArtifactDirectory(string directoryPath)
+        public IssuerInfo(Issuer issuer)
         {
-            this.directoryPath = directoryPath ?? throw new ArgumentNullException(nameof(directoryPath));
-        }
+            if (issuer == null) throw new ArgumentNullException(nameof(issuer));
 
-        public void Read()
-        {
-            ArtifactCrawler<T> artifactCrawler = new()
-            {
-                ArtifactFileName = ArtifactFileName
-            };
-
-            artifactCrawler.Crawl(directoryPath);
-            Artifacts = artifactCrawler.Artifacts;
+            Name = issuer.Name;
+            Emissions = issuer.Emissions
+                .OrderBy(x => x.StartYear)
+                .Select(x => new EmissionInfo(x))
+                .ToList();
         }
     }
 }

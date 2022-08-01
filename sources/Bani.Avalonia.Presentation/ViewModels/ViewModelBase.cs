@@ -1,4 +1,4 @@
-// Bani
+﻿// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,22 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.DataAccess.JsonFiles;
-using DustInTheWind.Bani.Domain;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels
 {
-    internal static class EmissionExtensions
+    public class ViewModelBase : INotifyPropertyChanged
     {
-        public static Emission ToDomainEntity(this JEmission emission)
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
-            return new Emission
-            {
-                Name = emission.Name,
-                StartYear = emission.StartYear,
-                EndYear = emission.EndYear,
-                Comments = emission.Comments
-            };
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

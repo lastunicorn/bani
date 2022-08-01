@@ -20,9 +20,11 @@ namespace DustInTheWind.Bani.Domain
 {
     public class Issuer
     {
+        public string Id { get; set; }
+
         public string Name { get; set; }
 
-        public string Location { get; set; }
+        public string Comments { get; set; }
 
         public List<Emission> Emissions { get; } = new();
     }

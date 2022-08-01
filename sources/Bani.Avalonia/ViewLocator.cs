@@ -15,33 +15,31 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
+using Avalonia.Controls;
+using Avalonia.Controls.Templates;
+using DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+namespace DustInTheWind.Bani.Avalonia
 {
-    public abstract class ArtifactDirectory<T>
-        where T:JArtifact
+    public class ViewLocator : IDataTemplate
     {
-        private readonly string directoryPath;
-
-        protected abstract string ArtifactFileName { get; }
-
-        public List<T> Artifacts { get; private set; }
-
-        protected ArtifactDirectory(string directoryPath)
+        public IControl Build(object data)
         {
-            this.directoryPath = directoryPath ?? throw new ArgumentNullException(nameof(directoryPath));
+            string? name = data.GetType().FullName!.Replace("ViewModel", "View");
+            Type? type = Type.GetType(name);
+
+            if (type != null)
+                return (Control)Activator.CreateInstance(type)!;
+
+            return new TextBlock
+            {
+                Text = "Not Found: " + name
+            };
         }
 
-        public void Read()
+        public bool Match(object data)
         {
-            ArtifactCrawler<T> artifactCrawler = new()
-            {
-                ArtifactFileName = ArtifactFileName
-            };
-
-            artifactCrawler.Crawl(directoryPath);
-            Artifacts = artifactCrawler.Artifacts;
+            return data is ViewModelBase;
         }
     }
 }

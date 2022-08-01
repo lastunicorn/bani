@@ -1,4 +1,4 @@
-// Bani
+﻿// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,34 +14,33 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
+using System.Linq;
+using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+namespace DustInTheWind.Bani.Cli.Application.PresentIssuers
 {
-    public abstract class ArtifactDirectory<T>
-        where T:JArtifact
+    public class EmissionInfo
     {
-        private readonly string directoryPath;
+        public string Name { get; }
 
-        protected abstract string ArtifactFileName { get; }
+        public int? StartYear { get; }
 
-        public List<T> Artifacts { get; private set; }
+        public int? EndYear { get; }
 
-        protected ArtifactDirectory(string directoryPath)
+        public List<ArtifactInfo> Artifacts { get; }
+
+        public EmissionInfo(Emission emission)
         {
-            this.directoryPath = directoryPath ?? throw new ArgumentNullException(nameof(directoryPath));
-        }
-
-        public void Read()
-        {
-            ArtifactCrawler<T> artifactCrawler = new()
-            {
-                ArtifactFileName = ArtifactFileName
-            };
-
-            artifactCrawler.Crawl(directoryPath);
-            Artifacts = artifactCrawler.Artifacts;
+            Name = emission.Name;
+            StartYear = emission.StartYear;
+            EndYear = emission.EndYear;
+            Artifacts = emission.Artifacts
+                .OrderBy(x => x.GetType().FullName)
+                .ThenBy(x => x.Value)
+                .ThenBy(x => x.Year)
+                .Select(x => new ArtifactInfo(x))
+                .ToList();
         }
     }
 }

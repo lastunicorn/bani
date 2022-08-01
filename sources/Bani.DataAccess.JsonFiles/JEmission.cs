@@ -23,5 +23,7 @@ namespace DustInTheWind.Bani.DataAccess.JsonFiles
         public int? StartYear { get; set; }
 
         public int? EndYear { get; set; }
+
+        public string Comments { get; set; }
     }
 }

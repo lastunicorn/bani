@@ -38,7 +38,7 @@ namespace DustInTheWind.Bani.DataAccess
             Issuers.Clear();
 
             IssuerCrawler issuerCrawler = new();
-            IEnumerable<Issuer> issuers = issuerCrawler.SearchForIssuers(connectionString);
+            IEnumerable<Issuer> issuers = issuerCrawler.Crawl(connectionString);
             Issuers.AddRange(issuers);
         }
     }

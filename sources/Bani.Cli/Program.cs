@@ -1,4 +1,4 @@
-// Bani
+﻿// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,22 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.DataAccess.JsonFiles;
-using DustInTheWind.Bani.Domain;
+using System.Threading.Tasks;
+using Autofac;
+using DustInTheWind.Bani.Cli.Presentation;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani
 {
-    internal static class EmissionExtensions
+    internal static class Program
     {
-        public static Emission ToDomainEntity(this JEmission emission)
+        private static async Task Main(string[] args)
         {
-            return new Emission
-            {
-                Name = emission.Name,
-                StartYear = emission.StartYear,
-                EndYear = emission.EndYear,
-                Comments = emission.Comments
-            };
+            IContainer container = SetupServices.BuildContainer();
+
+            PresentIssuersCommand command = container.Resolve<PresentIssuersCommand>();
+            command.IssuerName = args.Length > 0 ? args[0] : null;
+            await command.Execute();
         }
     }
 }

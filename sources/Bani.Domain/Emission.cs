@@ -20,14 +20,14 @@ namespace DustInTheWind.Bani.Domain
 {
     public class Emission
     {
-        public string Location { get; set; }
-        
         public string Name { get; set; }
 
         public int? StartYear { get; set; }
 
         public int? EndYear { get; set; }
+        
+        public string Comments { get; set; }
 
-        public List<Artifact> Artifacts { get; } = new();
+        public List<Artifact> Artifacts { get; init; } = new();
     }
 }

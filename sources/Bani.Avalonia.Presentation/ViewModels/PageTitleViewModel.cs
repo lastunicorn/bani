@@ -1,4 +1,4 @@
-// Bani
+﻿// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,34 +14,34 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels
 {
-    public abstract class ArtifactDirectory<T>
-        where T:JArtifact
+    public class PageTitleViewModel : ViewModelBase
     {
-        private readonly string directoryPath;
-
-        protected abstract string ArtifactFileName { get; }
-
-        public List<T> Artifacts { get; private set; }
-
-        protected ArtifactDirectory(string directoryPath)
+        private string? title = "Title";
+        private string? description;
+        
+        public string? Title
         {
-            this.directoryPath = directoryPath ?? throw new ArgumentNullException(nameof(directoryPath));
-        }
-
-        public void Read()
-        {
-            ArtifactCrawler<T> artifactCrawler = new()
+            get => title;
+            set
             {
-                ArtifactFileName = ArtifactFileName
-            };
-
-            artifactCrawler.Crawl(directoryPath);
-            Artifacts = artifactCrawler.Artifacts;
+                title = value;
+                OnPropertyChanged();
+            }
         }
+
+        public string? Description
+        {
+            get => description;
+            set
+            {
+                description = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsDescriptionVisible));
+            }
+        }
+
+        public bool IsDescriptionVisible => !string.IsNullOrEmpty(Description);
     }
 }

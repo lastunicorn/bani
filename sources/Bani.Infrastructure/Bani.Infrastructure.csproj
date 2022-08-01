@@ -1,4 +1,4 @@
-<!--
+﻿<!--
 Bani
 Copyright (C) 2022 Dust in the Wind
 
@@ -20,12 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <AssemblyName>DustInTheWind.Bani.Domain</AssemblyName>
-        <RootNamespace>DustInTheWind.Bani.Domain</RootNamespace>
+        <RootNamespace>DustInTheWind.Bani.Infrastructure</RootNamespace>
+        <AssemblyName>DustInTheWind.Bani.Infrastructure</AssemblyName>
     </PropertyGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\Bani.DataAccess.JsonFiles\Bani.DataAccess.JsonFiles.csproj" />
-    </ItemGroup>
 
 </Project>

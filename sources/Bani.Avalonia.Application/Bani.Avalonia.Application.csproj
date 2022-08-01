@@ -20,12 +20,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <AssemblyName>DustInTheWind.Bani.Domain</AssemblyName>
-        <RootNamespace>DustInTheWind.Bani.Domain</RootNamespace>
+        <AssemblyName>DustInTheWind.Bani.Avalonia.Application</AssemblyName>
+        <RootNamespace>DustInTheWind.Bani.Avalonia.Application</RootNamespace>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Bani.DataAccess.JsonFiles\Bani.DataAccess.JsonFiles.csproj" />
+        <PackageReference Include="MediatR" Version="10.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Bani.Domain\Bani.Domain.csproj" />
+        <ProjectReference Include="..\Bani.Infrastructure\Bani.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

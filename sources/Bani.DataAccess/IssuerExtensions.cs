@@ -25,7 +25,8 @@ namespace DustInTheWind.Bani.DataAccess
         {
             return new Issuer
             {
-                Name = issuer.Name
+                Name = issuer.Name,
+                Comments = issuer.Comments
             };
         }
     }
