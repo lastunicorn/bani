@@ -16,18 +16,17 @@
 
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess;
+
+public class UnitOfWork : IUnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    private readonly BaniDbContext dbContext;
+    private IEmitterRepository emitterRepository;
+
+    public IEmitterRepository EmitterRepository => emitterRepository ??= new EmitterRepository(dbContext);
+
+    public UnitOfWork(BaniDbContext dbContext)
     {
-        private readonly BaniDbContext dbContext;
-        private IEmitterRepository emitterRepository;
-
-        public IEmitterRepository EmitterRepository => emitterRepository ??= new EmitterRepository(dbContext);
-
-        public UnitOfWork(BaniDbContext dbContext)
-        {
-            this.dbContext = dbContext;
-        }
+        this.dbContext = dbContext;
     }
 }

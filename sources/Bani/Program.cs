@@ -19,28 +19,27 @@ using Autofac;
 using DustInTheWind.Bani.Application.PresentEmitters;
 using MediatR;
 
-namespace DustInTheWind.Bani
+namespace DustInTheWind.Bani;
+
+internal static class Program
 {
-    internal static class Program
+    private static async Task Main(string[] args)
     {
-        private static async Task Main(string[] args)
+        IContainer container = SetupServices.BuildContainer();
+
+        IMediator mediator = container.Resolve<IMediator>();
+
+        string emitterName = args.Length > 0
+            ? args[0]
+            : null;
+
+        PresentEmittersRequest request = new()
         {
-            IContainer container = SetupServices.BuildContainer();
+            EmitterName = emitterName
+        };
+        PresentEmittersResponse response = await mediator.Send(request);
 
-            IMediator mediator = container.Resolve<IMediator>();
-
-            string emitterName = args.Length > 0
-                ? args[0]
-                : null;
-
-            PresentEmittersRequest request = new()
-            {
-                EmitterName = emitterName
-            };
-            PresentEmittersResponse response = await mediator.Send(request);
-
-            PresentEmittersView view = new();
-            view.Display(response);
-        }
+        PresentEmittersView view = new();
+        view.Display(response);
     }
 }

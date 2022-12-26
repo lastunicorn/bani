@@ -16,10 +16,9 @@
 
 using MediatR;
 
-namespace DustInTheWind.Bani.Application.PresentEmitters
+namespace DustInTheWind.Bani.Application.PresentEmitters;
+
+public class PresentEmittersRequest : IRequest<PresentEmittersResponse>
 {
-    public class PresentEmittersRequest : IRequest<PresentEmittersResponse>
-    {
-        public string EmitterName { get; set; }
-    }
+    public string EmitterName { get; set; }
 }

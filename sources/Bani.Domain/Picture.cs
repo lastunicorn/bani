@@ -14,14 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.Domain
+namespace DustInTheWind.Bani.Domain;
+
+public class Picture
 {
-    public class Picture
-    {
-        public byte[] Bytes { get; set; }
+    public byte[] Bytes { get; set; }
 
-        public string FilePath { get; set; }
+    public string FilePath { get; set; }
 
-        public string Description { get; set; }
-    }
+    public string Description { get; set; }
 }

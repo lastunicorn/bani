@@ -54,10 +54,10 @@ namespace DustInTheWind.Bani.AvaloniaApp.ViewModels
                 "qwe"
             };
 
-            _ = Initialize();
+            Initialize();
         }
 
-        private async Task Initialize()
+        private async void Initialize()
         {
             await Task.Delay(2000);
             Emitters.Add("zxc");

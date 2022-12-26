@@ -18,20 +18,19 @@ using System;
 using System.Collections.Generic;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess;
+
+public class EmitterRepository : IEmitterRepository
 {
-    public class EmitterRepository : IEmitterRepository
+    private readonly BaniDbContext dbContext;
+
+    public EmitterRepository(BaniDbContext dbContext)
     {
-        private readonly BaniDbContext dbContext;
+        this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+    }
 
-        public EmitterRepository(BaniDbContext dbContext)
-        {
-            this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-        }
-
-        public IEnumerable<Emitter> GetAll()
-        {
-            return dbContext.Emitters;
-        }
+    public IEnumerable<Emitter> GetAll()
+    {
+        return dbContext.Emitters;
     }
 }

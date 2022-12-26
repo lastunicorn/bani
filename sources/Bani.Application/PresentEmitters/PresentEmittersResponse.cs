@@ -16,10 +16,9 @@
 
 using System.Collections.Generic;
 
-namespace DustInTheWind.Bani.Application.PresentEmitters
+namespace DustInTheWind.Bani.Application.PresentEmitters;
+
+public class PresentEmittersResponse
 {
-    public class PresentEmittersResponse
-    {
-        public List<EmitterInfo> Emitters { get; set; }
-    }
+    public List<EmitterInfo> Emitters { get; set; }
 }

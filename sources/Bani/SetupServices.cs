@@ -21,33 +21,32 @@ using DustInTheWind.Bani.DataAccess;
 using DustInTheWind.Bani.Domain;
 using MediatR.Extensions.Autofac.DependencyInjection;
 
-namespace DustInTheWind.Bani
+namespace DustInTheWind.Bani;
+
+internal class SetupServices
 {
-    internal class SetupServices
+    public static IContainer BuildContainer()
     {
-        public static IContainer BuildContainer()
+        ContainerBuilder containerBuilder = new();
+        ConfigureServices(containerBuilder);
+
+        return containerBuilder.Build();
+    }
+
+    private static void ConfigureServices(ContainerBuilder containerBuilder)
+    {
+        Assembly assembly = typeof(PresentEmittersRequest).Assembly;
+        containerBuilder.RegisterMediatR(assembly);
+
+        containerBuilder.RegisterType<BaniDbContext>().AsSelf();
+        containerBuilder.Register(builder =>
         {
-            ContainerBuilder containerBuilder = new();
-            ConfigureServices(containerBuilder);
+            const string dbFilePath = "/nfs/YubabaData/Alez/projects/Money/database";
+            //const string dbFilePath = @"\\192.168.1.12\Data\Alez\projects\Money\database";
+            //const string dbFilePath = @"c:\Temp\database";
 
-            return containerBuilder.Build();
-        }
-
-        private static void ConfigureServices(ContainerBuilder containerBuilder)
-        {
-            Assembly assembly = typeof(PresentEmittersRequest).Assembly;
-            containerBuilder.RegisterMediatR(assembly);
-
-            containerBuilder.RegisterType<BaniDbContext>().AsSelf();
-            containerBuilder.Register<BaniDbContext>(builder =>
-            {
-                const string dbFilePath = "/nfs/YubabaData/Alez/projects/Money/database";
-                //const string dbFilePath = @"\\192.168.1.12\Data\Alez\projects\Money\database";
-                //const string dbFilePath = @"c:\Temp\database";
-
-                return new BaniDbContext(dbFilePath);
-            }).AsSelf();
-            containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
-        }
+            return new BaniDbContext(dbFilePath);
+        }).AsSelf();
+        containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
     }
 }

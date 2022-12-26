@@ -19,72 +19,71 @@ using DustInTheWind.Bani.Application.PresentEmitters;
 using DustInTheWind.ConsoleTools.Controls;
 using DustInTheWind.ConsoleTools.Controls.Tables;
 
-namespace DustInTheWind.Bani
+namespace DustInTheWind.Bani;
+
+internal class PresentEmittersView
 {
-    internal class PresentEmittersView
+    public void Display(PresentEmittersResponse response)
     {
-        public void Display(PresentEmittersResponse response)
+        foreach (EmitterInfo emitterInfo in response.Emitters)
+            DisplayEmitter(emitterInfo);
+    }
+
+    private static void DisplayEmitter(EmitterInfo emitterInfo)
+    {
+        HorizontalLine horizontalLine = new()
         {
-            foreach (EmitterInfo emitterInfo in response.Emitters)
-                DisplayEmitter(emitterInfo);
-        }
+            Margin = 0
+        };
+        horizontalLine.Display();
 
-        private static void DisplayEmitter(EmitterInfo emitterInfo)
+        Console.WriteLine($"{emitterInfo.Name}");
+        Console.WriteLine();
+
+        foreach (EmissionInfo emissionInfo in emitterInfo.Emissions)
+            DisplayEmission(emissionInfo);
+    }
+
+    private static void DisplayEmission(EmissionInfo emissionInfo)
+    {
+        DataGrid dataGrid = new()
         {
-            HorizontalLine horizontalLine = new()
+            Title = $"{emissionInfo.Name} [{emissionInfo.StartYear}-{emissionInfo.EndYear}]",
+            Border =
             {
-                Margin = 0
-            };
-            horizontalLine.Display();
-
-            Console.WriteLine($"{emitterInfo.Name}");
-            Console.WriteLine();
-
-            foreach (EmissionInfo emissionInfo in emitterInfo.Emissions)
-                DisplayEmission(emissionInfo);
-        }
-
-        private static void DisplayEmission(EmissionInfo emissionInfo)
-        {
-            DataGrid dataGrid = new()
-            {
-                Title = $"{emissionInfo.Name} [{emissionInfo.StartYear}-{emissionInfo.EndYear}]",
-                Border =
-                {
-                    Template = BorderTemplate.SingleLineBorderTemplate
-                }
-            };
-
-            dataGrid.Columns.Add("Artifact");
-
-            Column yearColumn = dataGrid.Columns.Add("Year");
-            yearColumn.CellHorizontalAlignment = HorizontalAlignment.Right;
-
-            Column issueDateColumn = dataGrid.Columns.Add("Issue Date");
-            issueDateColumn.CellHorizontalAlignment = HorizontalAlignment.Right;
-
-            Column countColumn = dataGrid.Columns.Add("Count");
-            countColumn.CellHorizontalAlignment = HorizontalAlignment.Right;
-
-            dataGrid.Columns.Add("Type");
-
-            foreach (ArtifactInfo artifactInfo in emissionInfo.Artifacts)
-            {
-                ContentRow row = new();
-
-                if (artifactInfo.InstanceCount == 0)
-                    row.ForegroundColor = ConsoleColor.DarkYellow;
-
-                row.AddCell(artifactInfo.DisplayName);
-                row.AddCell(artifactInfo.Year);
-                row.AddCell(artifactInfo.IssueDate?.ToString("yyyy MM dd"));
-                row.AddCell(artifactInfo.InstanceCount);
-                row.AddCell(artifactInfo.ArtifactType);
-
-                dataGrid.Rows.Add(row);
+                Template = BorderTemplate.SingleLineBorderTemplate
             }
+        };
 
-            dataGrid.Display();
+        dataGrid.Columns.Add("Artifact");
+
+        Column yearColumn = dataGrid.Columns.Add("Year");
+        yearColumn.CellHorizontalAlignment = HorizontalAlignment.Right;
+
+        Column issueDateColumn = dataGrid.Columns.Add("Issue Date");
+        issueDateColumn.CellHorizontalAlignment = HorizontalAlignment.Right;
+
+        Column countColumn = dataGrid.Columns.Add("Count");
+        countColumn.CellHorizontalAlignment = HorizontalAlignment.Right;
+
+        dataGrid.Columns.Add("Type");
+
+        foreach (ArtifactInfo artifactInfo in emissionInfo.Artifacts)
+        {
+            ContentRow row = new();
+
+            if (artifactInfo.InstanceCount == 0)
+                row.ForegroundColor = ConsoleColor.DarkYellow;
+
+            row.AddCell(artifactInfo.DisplayName);
+            row.AddCell(artifactInfo.Year);
+            row.AddCell(artifactInfo.IssueDate?.ToString("yyyy MM dd"));
+            row.AddCell(artifactInfo.InstanceCount);
+            row.AddCell(artifactInfo.ArtifactType);
+
+            dataGrid.Rows.Add(row);
         }
+
+        dataGrid.Display();
     }
 }

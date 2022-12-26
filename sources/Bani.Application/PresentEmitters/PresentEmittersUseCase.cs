@@ -22,37 +22,36 @@ using System.Threading.Tasks;
 using DustInTheWind.Bani.Domain;
 using MediatR;
 
-namespace DustInTheWind.Bani.Application.PresentEmitters
+namespace DustInTheWind.Bani.Application.PresentEmitters;
+
+internal class PresentEmittersUseCase : IRequestHandler<PresentEmittersRequest, PresentEmittersResponse>
 {
-    internal class PresentEmittersUseCase : IRequestHandler<PresentEmittersRequest, PresentEmittersResponse>
+    private readonly IUnitOfWork unitOfWork;
+
+    public PresentEmittersUseCase(IUnitOfWork unitOfWork)
     {
-        private readonly IUnitOfWork unitOfWork;
+        this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+    }
 
-        public PresentEmittersUseCase(IUnitOfWork unitOfWork)
+    public Task<PresentEmittersResponse> Handle(PresentEmittersRequest request, CancellationToken cancellationToken)
+    {
+        IEnumerable<Emitter> emitters = unitOfWork.EmitterRepository.GetAll();
+        
+        if (!string.IsNullOrEmpty(request.EmitterName))
         {
-            this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+            string emitterName = request.EmitterName;
+
+            emitters = emitters
+                .Where(x => x.Name?.Contains(emitterName, StringComparison.InvariantCultureIgnoreCase) ?? false);
         }
 
-        public Task<PresentEmittersResponse> Handle(PresentEmittersRequest request, CancellationToken cancellationToken)
+        PresentEmittersResponse response = new()
         {
-            IEnumerable<Emitter> emitters = unitOfWork.EmitterRepository.GetAll();
+            Emitters = emitters
+                .Select(x => new EmitterInfo(x))
+                .ToList()
+        };
 
-            if (!string.IsNullOrEmpty(request.EmitterName))
-            {
-                string emitterName = request.EmitterName;
-
-                emitters = emitters
-                    .Where(x => x.Name?.Contains(emitterName, StringComparison.InvariantCultureIgnoreCase) ?? false);
-            }
-
-            PresentEmittersResponse response = new()
-            {
-                Emitters = emitters
-                    .Select(x => new EmitterInfo(x))
-                    .ToList()
-            };
-
-            return Task.FromResult(response);
-        }
+        return Task.FromResult(response);
     }
 }

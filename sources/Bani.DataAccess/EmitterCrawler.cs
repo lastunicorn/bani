@@ -20,170 +20,169 @@ using System.Linq;
 using DustInTheWind.Bani.DataAccess.JsonFiles;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess;
+
+internal class EmitterCrawler
 {
-    internal class EmitterCrawler
+    public IEnumerable<Emitter> SearchForEmitters(string directoryPath)
     {
-        public IEnumerable<Emitter> SearchForEmitters(string directoryPath)
+        string[] filePaths = Directory.GetFiles(directoryPath, "m-issuer.json");
+
+        if (filePaths.Length > 0)
         {
-            string[] filePaths = Directory.GetFiles(directoryPath, "m-emitter.json");
+            yield return ReadEmitter(filePaths[0]);
+        }
+        else
+        {
+            string[] subDirectoryPaths = Directory.GetDirectories(directoryPath);
 
-            if (filePaths.Length > 0)
+            foreach (string subDirectoryPath in subDirectoryPaths)
             {
-                yield return ReadEmitter(filePaths[0]);
-            }
-            else
-            {
-                string[] subDirectoryPaths = Directory.GetDirectories(directoryPath);
+                IEnumerable<Emitter> emitters = SearchForEmitters(subDirectoryPath);
 
-                foreach (string subDirectoryPath in subDirectoryPaths)
-                {
-                    IEnumerable<Emitter> emitters = SearchForEmitters(subDirectoryPath);
-
-                    foreach (Emitter emitter in emitters)
-                        yield return emitter;
-                }
+                foreach (Emitter emitter in emitters)
+                    yield return emitter;
             }
         }
+    }
 
-        private static Emitter ReadEmitter(string filePath)
+    private static Emitter ReadEmitter(string filePath)
+    {
+        EmitterFile emitterFile = new(filePath);
+        emitterFile.Open();
+
+        Emitter emitter = emitterFile.Emitter.ToDomainEntity();
+        emitter.Location = filePath;
+
+        string rootDirectoryPath = Path.GetDirectoryName(filePath);
+
+        IEnumerable<Emission> emissions = ReadEmissions(rootDirectoryPath);
+        emitter.Emissions.AddRange(emissions);
+
+        return emitter;
+    }
+
+    private static IEnumerable<Emission> ReadEmissions(string emitterDirectoryPath)
+    {
+        string[] subDirectories = Directory.GetDirectories(emitterDirectoryPath);
+
+        foreach (string subDirectory in subDirectories)
         {
-            EmitterFile emitterFile = new(filePath);
-            emitterFile.Open();
+            IEnumerable<Emission> emissions = SearchForEmissions(subDirectory);
 
-            Emitter emitter = emitterFile.Emitter.ToDomainEntity();
-            emitter.Location = filePath;
-
-            string rootDirectoryPath = Path.GetDirectoryName(filePath);
-
-            IEnumerable<Emission> emissions = ReadEmissions(rootDirectoryPath);
-            emitter.Emissions.AddRange(emissions);
-
-            return emitter;
+            foreach (Emission emission in emissions)
+                yield return emission;
         }
+    }
 
-        private static IEnumerable<Emission> ReadEmissions(string emitterDirectoryPath)
+    private static IEnumerable<Emission> SearchForEmissions(string directoryPath)
+    {
+        string[] filePaths = Directory.GetFiles(directoryPath, "m-emission.json");
+
+        if (filePaths.Length > 0)
         {
-            string[] subDirectories = Directory.GetDirectories(emitterDirectoryPath);
+            yield return ReadEmission(filePaths[0]);
+        }
+        else
+        {
+            string[] subDirectoryPaths = Directory.GetDirectories(directoryPath);
 
-            foreach (string subDirectory in subDirectories)
+            foreach (string subDirectoryPath in subDirectoryPaths)
             {
-                IEnumerable<Emission> emissions = SearchForEmissions(subDirectory);
+                IEnumerable<Emission> emissions = SearchForEmissions(subDirectoryPath);
 
                 foreach (Emission emission in emissions)
                     yield return emission;
             }
         }
+    }
 
-        private static IEnumerable<Emission> SearchForEmissions(string directoryPath)
+    private static Emission ReadEmission(string filePath)
+    {
+        EmissionFile emissionFile = new(filePath);
+        emissionFile.Open();
+
+        Emission emission = emissionFile.Emission.ToDomainEntity();
+        emission.Location = filePath;
+
+        string rootDirectoryPath = Path.GetDirectoryName(filePath);
+
+        IEnumerable<Artifact> artifacts = ReadArtifacts(rootDirectoryPath);
+        emission.Artifacts.AddRange(artifacts);
+
+        return emission;
+    }
+
+    private static IEnumerable<Artifact> ReadArtifacts(string emissionDirectoryPath)
+    {
+        string[] subDirectories = Directory.GetDirectories(emissionDirectoryPath);
+
+        foreach (string subDirectory in subDirectories)
         {
-            string[] filePaths = Directory.GetFiles(directoryPath, "m-emission.json");
+            IEnumerable<Artifact> artifacts = SearchForArtifacts(subDirectory);
 
-            if (filePaths.Length > 0)
-            {
-                yield return ReadEmission(filePaths[0]);
-            }
-            else
-            {
-                string[] subDirectoryPaths = Directory.GetDirectories(directoryPath);
+            foreach (Artifact item in artifacts)
+                yield return item;
+        }
+    }
 
-                foreach (string subDirectoryPath in subDirectoryPaths)
-                {
-                    IEnumerable<Emission> emissions = SearchForEmissions(subDirectoryPath);
+    private static IEnumerable<Artifact> SearchForArtifacts(string directoryPath)
+    {
+        bool itemsFound = false;
 
-                    foreach (Emission emission in emissions)
-                        yield return emission;
-                }
-            }
+        IEnumerable<Coin> coins = ReadCoins(directoryPath);
+
+        foreach (Coin coin in coins)
+        {
+            itemsFound = true;
+            yield return coin;
         }
 
-        private static Emission ReadEmission(string filePath)
+        IEnumerable<Banknote> banknotes = ReadBanknotes(directoryPath);
+
+        foreach (Banknote banknote in banknotes)
         {
-            EmissionFile emissionFile = new(filePath);
-            emissionFile.Open();
-
-            Emission emission = emissionFile.Emission.ToDomainEntity();
-            emission.Location = filePath;
-
-            string rootDirectoryPath = Path.GetDirectoryName(filePath);
-
-            IEnumerable<Artifact> artifacts = ReadArtifacts(rootDirectoryPath);
-            emission.Artifacts.AddRange(artifacts);
-
-            return emission;
+            itemsFound = true;
+            yield return banknote;
         }
 
-        private static IEnumerable<Artifact> ReadArtifacts(string emissionDirectoryPath)
+        if (itemsFound)
+            yield break;
+
+        string[] subDirectoryPaths = Directory.GetDirectories(directoryPath);
+
+        foreach (string subDirectoryPath in subDirectoryPaths)
         {
-            string[] subDirectories = Directory.GetDirectories(emissionDirectoryPath);
+            IEnumerable<Artifact> items = SearchForArtifacts(subDirectoryPath);
 
-            foreach (string subDirectory in subDirectories)
-            {
-                IEnumerable<Artifact> artifacts = SearchForArtifacts(subDirectory);
-
-                foreach (Artifact item in artifacts)
-                    yield return item;
-            }
+            foreach (Artifact item in items)
+                yield return item;
         }
+    }
 
-        private static IEnumerable<Artifact> SearchForArtifacts(string directoryPath)
+    private static IEnumerable<Coin> ReadCoins(string directoryPath)
+    {
+        ItemCrawler<JCoin> coinCrawler = new()
         {
-            bool itemsFound = false;
+            ItemFileName = "m-coin.json"
+        };
 
-            IEnumerable<Coin> coins = ReadCoins(directoryPath);
+        coinCrawler.Analyze(directoryPath);
 
-            foreach (Coin coin in coins)
-            {
-                itemsFound = true;
-                yield return coin;
-            }
+        return coinCrawler.Items
+            .Select(x => x.ToDomainEntity());
+    }
 
-            IEnumerable<Banknote> banknotes = ReadBanknotes(directoryPath);
-
-            foreach (Banknote banknote in banknotes)
-            {
-                itemsFound = true;
-                yield return banknote;
-            }
-
-            if (itemsFound)
-                yield break;
-
-            string[] subDirectoryPaths = Directory.GetDirectories(directoryPath);
-
-            foreach (string subDirectoryPath in subDirectoryPaths)
-            {
-                IEnumerable<Artifact> items = SearchForArtifacts(subDirectoryPath);
-
-                foreach (Artifact item in items)
-                    yield return item;
-            }
-        }
-
-        private static IEnumerable<Coin> ReadCoins(string directoryPath)
+    private static IEnumerable<Banknote> ReadBanknotes(string directoryPath)
+    {
+        ItemCrawler<JBanknote> banknoteCrawler = new()
         {
-            ItemCrawler<JCoin> coinCrawler = new()
-            {
-                ItemFileName = "m-coin.json"
-            };
+            ItemFileName = "m-banknote.json"
+        };
 
-            coinCrawler.Analyze(directoryPath);
+        banknoteCrawler.Analyze(directoryPath);
 
-            return coinCrawler.Items
-                .Select(x => x.ToDomainEntity());
-        }
-
-        private static IEnumerable<Banknote> ReadBanknotes(string directoryPath)
-        {
-            ItemCrawler<JBanknote> banknoteCrawler = new()
-            {
-                ItemFileName = "m-banknote.json"
-            };
-
-            banknoteCrawler.Analyze(directoryPath);
-
-            return banknoteCrawler.Items
-                .Select(x => x.ToDomainEntity());
-        }
+        return banknoteCrawler.Items
+            .Select(x => x.ToDomainEntity());
     }
 }

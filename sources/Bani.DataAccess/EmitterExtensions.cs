@@ -17,16 +17,15 @@
 using DustInTheWind.Bani.DataAccess.JsonFiles;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess;
+
+internal static class EmitterExtensions
 {
-    internal static class EmitterExtensions
+    public static Emitter ToDomainEntity(this JEmitter emitter)
     {
-        public static Emitter ToDomainEntity(this JEmitter emitter)
+        return new Emitter
         {
-            return new Emitter
-            {
-                Name = emitter.Name
-            };
-        }
+            Name = emitter.Name
+        };
     }
 }

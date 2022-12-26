@@ -17,18 +17,17 @@
 using DustInTheWind.Bani.DataAccess.JsonFiles;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess;
+
+internal static class EmissionExtensions
 {
-    internal static class EmissionExtensions
+    public static Emission ToDomainEntity(this JEmission emission)
     {
-        public static Emission ToDomainEntity(this JEmission emission)
+        return new Emission
         {
-            return new Emission
-            {
-                Name = emission.Name,
-                StartYear = emission.StartYear,
-                EndYear = emission.EndYear
-            };
-        }
+            Name = emission.Name,
+            StartYear = emission.StartYear,
+            EndYear = emission.EndYear
+        };
     }
 }

@@ -16,10 +16,9 @@
 
 using System.Collections.Generic;
 
-namespace DustInTheWind.Bani.Domain
+namespace DustInTheWind.Bani.Domain;
+
+public interface IEmitterRepository
 {
-    public interface IEmitterRepository
-    {
-        IEnumerable<Emitter> GetAll();
-    }
+    IEnumerable<Emitter> GetAll();
 }

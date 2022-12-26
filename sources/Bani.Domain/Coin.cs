@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.Domain
+namespace DustInTheWind.Bani.Domain;
+
+public class Coin : Artifact
 {
-    public class Coin : Artifact
-    {
-        public float? Diameter { get; set; }
+    public float? Diameter { get; set; }
         
-        public string Edge { get; set; }
-    }
+    public string Edge { get; set; }
 }
