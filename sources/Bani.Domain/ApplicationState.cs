@@ -18,6 +18,6 @@ namespace DustInTheWind.Bani.Domain
 {
     public class ApplicationState
     {
-        public string? CurrentIssuer { get; set; }
+        public string CurrentIssuer { get; set; }
     }
 }

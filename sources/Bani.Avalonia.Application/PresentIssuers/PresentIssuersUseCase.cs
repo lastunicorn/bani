@@ -19,8 +19,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using DustInTheWind.Bani.DataAccess.Port;
 using DustInTheWind.Bani.Domain;
-using DustInTheWind.Bani.Domain.DataAccess;
 using MediatR;
 
 namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuers

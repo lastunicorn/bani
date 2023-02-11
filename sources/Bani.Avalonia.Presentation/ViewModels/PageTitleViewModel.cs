@@ -18,10 +18,10 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels
 {
     public class PageTitleViewModel : ViewModelBase
     {
-        private string? title = "Title";
-        private string? description;
+        private string title = "Title";
+        private string description;
         
-        public string? Title
+        public string Title
         {
             get => title;
             set
@@ -31,7 +31,7 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels
             }
         }
 
-        public string? Description
+        public string Description
         {
             get => description;
             set

@@ -14,13 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.IO;
 using System.Reflection;
 using Autofac;
 using DustInTheWind.Bani.Cli.Application.PresentIssuers;
 using DustInTheWind.Bani.Cli.Presentation;
 using DustInTheWind.Bani.DataAccess;
-using DustInTheWind.Bani.Domain.DataAccess;
+using DustInTheWind.Bani.DataAccess.Port;
 using MediatR.Extensions.Autofac.DependencyInjection;
+using MediatR.Extensions.Autofac.DependencyInjection.Builder;
+using Microsoft.Extensions.Configuration;
 
 namespace DustInTheWind.Bani
 {
@@ -36,18 +39,35 @@ namespace DustInTheWind.Bani
 
         private static void ConfigureServices(ContainerBuilder containerBuilder)
         {
+            containerBuilder
+                .Register(builder =>
+                {
+                    IConfiguration configuration = new ConfigurationBuilder()
+                        .SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("appsettings.json", optional: false)
+                        .Build();
+
+                    return configuration;
+                })
+                .AsSelf()
+                .SingleInstance();
+
             Assembly assembly = typeof(PresentIssuersRequest).Assembly;
-            containerBuilder.RegisterMediatR(assembly);
+            MediatRConfiguration mediatRConfiguration = MediatRConfigurationBuilder.Create(assembly)
+                .WithAllOpenGenericHandlerTypesRegistered()
+                .WithRegistrationScope(RegistrationScope.Scoped) // currently only supported values are `Transient` and `Scoped`
+                .Build();
+            containerBuilder.RegisterMediatR(mediatRConfiguration);
 
             containerBuilder.RegisterType<BaniDbContext>().AsSelf();
-            containerBuilder.Register(builder =>
-            {
-                const string dbFilePath = "/nfs/YubabaData/Alez/projects/Money/database";
-                //const string dbFilePath = @"\\192.168.1.12\Data\Alez\projects\Money\database";
-                //const string dbFilePath = @"c:\Temp\database";
-
-                return new BaniDbContext(dbFilePath);
-            }).AsSelf();
+            containerBuilder
+                .Register(builder =>
+                {
+                    IConfiguration configuration = builder.Resolve<IConfiguration>();
+                    string databasePath = configuration["DatabasePath"];
+                    return new BaniDbContext(databasePath);
+                })
+                .AsSelf();
             containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
             containerBuilder.RegisterType<PresentIssuersCommand>().AsSelf();

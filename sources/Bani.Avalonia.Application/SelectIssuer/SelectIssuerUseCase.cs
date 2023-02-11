@@ -17,8 +17,8 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using DustInTheWind.Bani.DataAccess.Port;
 using DustInTheWind.Bani.Domain;
-using DustInTheWind.Bani.Domain.DataAccess;
 using DustInTheWind.Bani.Infrastructure;
 using MediatR;
 

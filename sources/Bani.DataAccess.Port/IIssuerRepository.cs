@@ -14,16 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
+using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.Domain.DataAccess
+namespace DustInTheWind.Bani.DataAccess.Port;
+
+public interface IIssuerRepository
 {
-    public interface IIssuerRepository
-    {
-        IEnumerable<Issuer> GetAll();
-        
-        IEnumerable<Issuer> GetByName(string name);
-        
-        Issuer Get(string id);
-    }
+    IEnumerable<Issuer> GetAll();
+
+    IEnumerable<Issuer> GetByName(string name);
+
+    Issuer Get(string id);
 }

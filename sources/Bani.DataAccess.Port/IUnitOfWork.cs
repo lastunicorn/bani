@@ -14,10 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.Domain.DataAccess
+namespace DustInTheWind.Bani.DataAccess.Port;
+
+public interface IUnitOfWork
 {
-    public interface IUnitOfWork
-    {
-        IIssuerRepository IssuerRepository { get; }
-    }
+    IIssuerRepository IssuerRepository { get; }
 }

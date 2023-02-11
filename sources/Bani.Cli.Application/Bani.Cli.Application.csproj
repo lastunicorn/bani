@@ -22,15 +22,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <TargetFramework>net6.0</TargetFramework>
         <AssemblyName>DustInTheWind.Bani.Cli.Application</AssemblyName>
         <RootNamespace>DustInTheWind.Bani.Cli.Application</RootNamespace>
-        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MediatR" Version="10.0.1"/>
+        <PackageReference Include="MediatR" Version="11.1.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Bani.Domain\Bani.Domain.csproj"/>
+        <ProjectReference Include="..\Bani.DataAccess.Port\Bani.DataAccess.Port.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Bani.Domain\Bani.Domain.csproj" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>

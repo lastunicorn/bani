@@ -10,26 +10,26 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.Commands
     public class SelectIssueCommand : ICommand
     {
         private readonly IMediator mediator;
-        public event EventHandler? CanExecuteChanged;
+        public event EventHandler CanExecuteChanged;
 
         public SelectIssueCommand(IMediator mediator)
         {
             this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        public bool CanExecute(object? parameter)
+        public bool CanExecute(object parameter)
         {
             return true;
         }
 
-        public void Execute(object? parameter)
+        public void Execute(object parameter)
         {
             _ = SendRequest(parameter);
         }
 
-        private async Task SendRequest(object? parameter)
+        private async Task SendRequest(object parameter)
         {
-            string? issuerId = parameter is IssuerViewModel issuerViewModel
+            string issuerId = parameter is IssuerViewModel issuerViewModel
                 ? issuerViewModel.IssuerInfo?.Id
                 : null;
             
@@ -39,6 +39,11 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.Commands
             };
 
             await mediator.Send(request);
+        }
+
+        protected virtual void OnCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

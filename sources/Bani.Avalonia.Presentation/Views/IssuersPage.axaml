@@ -38,8 +38,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Items="{Binding Issuers}"
             SelectedItem="{Binding SelectedIssuer}"
             MinWidth="200"
-            DoubleTapped="InputElement_OnDoubleTapped"
-            Margin="0 0 10 0" />
+            Tapped="InputElement_OnTapped"
+            Margin="0 0 10 0">
+
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type viewModels:IssuerViewModel}">
+                    <TextBlock
+                        Text="{Binding Text}"
+                        VerticalAlignment="Center"
+                        Padding="2 8"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            
+        </ListBox>
 
         <TextBox
             Text="{Binding IssuerComments}"

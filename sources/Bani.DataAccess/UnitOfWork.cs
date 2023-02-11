@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.Domain.DataAccess;
+using DustInTheWind.Bani.DataAccess.Port;
 
 namespace DustInTheWind.Bani.DataAccess
 {

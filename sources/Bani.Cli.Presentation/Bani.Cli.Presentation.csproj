@@ -27,11 +27,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <ItemGroup>
       <PackageReference Include="ConsoleTools.Controls" Version="1.1.0" />
       <PackageReference Include="ConsoleTools.Controls.Tables" Version="1.1.0" />
-      <PackageReference Include="MediatR" Version="10.0.1" />
+      <PackageReference Include="MediatR" Version="11.1.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Bani.Cli.Application\Bani.Cli.Application.csproj" />
+      <ProjectReference Include="..\Bani.Cli.Application\Bani.Cli.Application.csproj" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>

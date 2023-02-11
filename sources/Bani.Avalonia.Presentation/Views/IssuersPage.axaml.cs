@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using DustInTheWind.Bani.Avalonia.Presentation.Commands;
@@ -34,13 +35,13 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.Views
             AvaloniaXamlLoader.Load(this);
         }
 
-        private void InputElement_OnDoubleTapped(object? sender, RoutedEventArgs e)
+        private void InputElement_OnTapped(object sender, TappedEventArgs e)
         {
             if (DataContext is IssuersPageViewModel mainWindowViewModel)
             {
-                SelectIssueCommand? selectIssueCommand = mainWindowViewModel.SelectIssueCommand;
+                SelectIssueCommand selectIssueCommand = mainWindowViewModel.SelectIssueCommand;
 
-                object? selectedItem = sender is ListBox listBox
+                object selectedItem = sender is ListBox listBox
                     ? listBox.SelectedItem
                     : null;
 

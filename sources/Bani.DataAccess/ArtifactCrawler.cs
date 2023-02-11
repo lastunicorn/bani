@@ -4,60 +4,59 @@ using System.Linq;
 using DustInTheWind.Bani.DataAccess.JsonFiles;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess;
+
+internal class ArtifactCrawler
 {
-    internal class ArtifactCrawler
+    public IEnumerable<Artifact> Crawl(string directoryPath)
     {
-        public IEnumerable<Artifact> Crawl(string directoryPath)
+        bool itemsFound = false;
+
+        IEnumerable<Coin> coins = ReadCoins(directoryPath);
+
+        foreach (Coin coin in coins)
         {
-            bool itemsFound = false;
-
-            IEnumerable<Coin> coins = ReadCoins(directoryPath);
-
-            foreach (Coin coin in coins)
-            {
-                itemsFound = true;
-                yield return coin;
-            }
-
-            IEnumerable<Banknote> banknotes = ReadBanknotes(directoryPath);
-
-            foreach (Banknote banknote in banknotes)
-            {
-                itemsFound = true;
-                yield return banknote;
-            }
-
-            if (itemsFound)
-                yield break;
-
-            string[] subDirectoryPaths = Directory.GetDirectories(directoryPath);
-
-            foreach (string subDirectoryPath in subDirectoryPaths)
-            {
-                IEnumerable<Artifact> items = Crawl(subDirectoryPath);
-
-                foreach (Artifact item in items)
-                    yield return item;
-            }
+            itemsFound = true;
+            yield return coin;
         }
 
-        private static IEnumerable<Coin> ReadCoins(string directoryPath)
-        {
-            CoinDirectory coinDirectory = new(directoryPath);
-            coinDirectory.Read();
+        IEnumerable<Banknote> banknotes = ReadBanknotes(directoryPath);
 
-            return coinDirectory.Artifacts
-                .Select(x => x.ToDomainEntity());
+        foreach (Banknote banknote in banknotes)
+        {
+            itemsFound = true;
+            yield return banknote;
         }
 
-        private static IEnumerable<Banknote> ReadBanknotes(string directoryPath)
-        {
-            BanknoteDirectory banknoteDirectory = new(directoryPath);
-            banknoteDirectory.Read();
+        if (itemsFound)
+            yield break;
 
-            return banknoteDirectory.Artifacts
-                .Select(x => x.ToDomainEntity());
+        string[] subDirectoryPaths = Directory.GetDirectories(directoryPath);
+
+        foreach (string subDirectoryPath in subDirectoryPaths)
+        {
+            IEnumerable<Artifact> items = Crawl(subDirectoryPath);
+
+            foreach (Artifact item in items)
+                yield return item;
         }
+    }
+
+    private static IEnumerable<Coin> ReadCoins(string directoryPath)
+    {
+        CoinDirectory coinDirectory = new(directoryPath);
+        coinDirectory.Read();
+
+        return coinDirectory.Artifacts
+            .Select(x => x.ToDomainEntity());
+    }
+
+    private static IEnumerable<Banknote> ReadBanknotes(string directoryPath)
+    {
+        BanknoteDirectory banknoteDirectory = new(directoryPath);
+        banknoteDirectory.Read();
+
+        return banknoteDirectory.Artifacts
+            .Select(x => x.ToDomainEntity());
     }
 }
