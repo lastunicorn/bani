@@ -18,27 +18,28 @@ using System;
 using System.Collections.Generic;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess;
-
-public class BaniDbContext
+namespace DustInTheWind.Bani.DataAccess
 {
-    private readonly string connectionString;
-
-    public List<Emitter> Emitters { get; } = new();
-
-    public BaniDbContext(string connectionString)
+    public class BaniDbContext
     {
-        this.connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+        private readonly string connectionString;
 
-        LoadEmitters();
-    }
+        public List<Issuer> Issuers { get; } = new();
 
-    private void LoadEmitters()
-    {
-        Emitters.Clear();
+        public BaniDbContext(string connectionString)
+        {
+            this.connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
 
-        EmitterCrawler emitterCrawler = new();
-        IEnumerable<Emitter> emitters = emitterCrawler.SearchForEmitters(connectionString);
-        Emitters.AddRange(emitters);
+            LoadIssuers();
+        }
+
+        private void LoadIssuers()
+        {
+            Issuers.Clear();
+
+            IssuerCrawler issuerCrawler = new();
+            IEnumerable<Issuer> issuers = issuerCrawler.Crawl(connectionString);
+            Issuers.AddRange(issuers);
+        }
     }
 }

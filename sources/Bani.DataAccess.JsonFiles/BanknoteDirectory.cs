@@ -14,22 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.DataAccess.JsonFiles;
-using DustInTheWind.Bani.Domain;
-
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess.JsonFiles
 {
-    internal static class EmissionExtensions
+    public class BanknoteDirectory : ArtifactDirectory<JBanknote>
     {
-        public static Emission ToDomainEntity(this JEmission emission)
+        protected override string ArtifactFileName => "m-banknote.json";
+
+        public BanknoteDirectory(string directoryPath)
+            :base(directoryPath)
         {
-            return new Emission
-            {
-                Name = emission.Name,
-                StartYear = emission.StartYear,
-                EndYear = emission.EndYear,
-                Comments = emission.Comments
-            };
         }
     }
 }

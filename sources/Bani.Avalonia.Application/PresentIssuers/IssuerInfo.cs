@@ -1,4 +1,4 @@
-// Bani
+﻿// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,22 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.DataAccess.JsonFiles;
+using System;
+using System.Collections.Generic;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuers
 {
-    internal static class EmissionExtensions
+    public class IssuerInfo
     {
-        public static Emission ToDomainEntity(this JEmission emission)
+        public string Id { get; set; }
+
+        public string Name { get; }
+
+        public string Comments { get; set; }
+
+        public IssuerInfo(Issuer issuer)
         {
-            return new Emission
-            {
-                Name = emission.Name,
-                StartYear = emission.StartYear,
-                EndYear = emission.EndYear,
-                Comments = emission.Comments
-            };
+            if (issuer == null) throw new ArgumentNullException(nameof(issuer));
+
+            Id = issuer.Id;
+            Name = issuer.Name;
+            Comments = issuer.Comments;
         }
     }
 }

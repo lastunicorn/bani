@@ -14,22 +14,32 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.DataAccess.JsonFiles;
-using DustInTheWind.Bani.Domain;
+using System;
+using Avalonia.Controls;
+using Avalonia.Controls.Templates;
+using DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.Avalonia
 {
-    internal static class EmissionExtensions
+    public class ViewLocator : IDataTemplate
     {
-        public static Emission ToDomainEntity(this JEmission emission)
+        public IControl Build(object data)
         {
-            return new Emission
+            string? name = data.GetType().FullName!.Replace("ViewModel", "View");
+            Type? type = Type.GetType(name);
+
+            if (type != null)
+                return (Control)Activator.CreateInstance(type)!;
+
+            return new TextBlock
             {
-                Name = emission.Name,
-                StartYear = emission.StartYear,
-                EndYear = emission.EndYear,
-                Comments = emission.Comments
+                Text = "Not Found: " + name
             };
+        }
+
+        public bool Match(object data)
+        {
+            return data is ViewModelBase;
         }
     }
 }

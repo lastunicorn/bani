@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Bani": {
+      "commandName": "Project",
+      "commandLineArgs": "ro"
+    }
+  }
+}

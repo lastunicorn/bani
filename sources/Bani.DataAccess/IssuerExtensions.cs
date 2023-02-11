@@ -19,16 +19,14 @@ using DustInTheWind.Bani.Domain;
 
 namespace DustInTheWind.Bani.DataAccess
 {
-    internal static class EmissionExtensions
+    internal static class IssuerExtensions
     {
-        public static Emission ToDomainEntity(this JEmission emission)
+        public static Issuer ToDomainEntity(this JIssuer issuer)
         {
-            return new Emission
+            return new Issuer
             {
-                Name = emission.Name,
-                StartYear = emission.StartYear,
-                EndYear = emission.EndYear,
-                Comments = emission.Comments
+                Name = issuer.Name,
+                Comments = issuer.Comments
             };
         }
     }

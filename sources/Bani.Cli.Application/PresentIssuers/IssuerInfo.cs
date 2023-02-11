@@ -14,22 +14,28 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.DataAccess.JsonFiles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.Cli.Application.PresentIssuers
 {
-    internal static class EmissionExtensions
+    public class IssuerInfo
     {
-        public static Emission ToDomainEntity(this JEmission emission)
+        public string Name { get; }
+
+        public List<EmissionInfo> Emissions { get; }
+
+        public IssuerInfo(Issuer issuer)
         {
-            return new Emission
-            {
-                Name = emission.Name,
-                StartYear = emission.StartYear,
-                EndYear = emission.EndYear,
-                Comments = emission.Comments
-            };
+            if (issuer == null) throw new ArgumentNullException(nameof(issuer));
+
+            Name = issuer.Name;
+            Emissions = issuer.Emissions
+                .OrderBy(x => x.StartYear)
+                .Select(x => new EmissionInfo(x))
+                .ToList();
         }
     }
 }

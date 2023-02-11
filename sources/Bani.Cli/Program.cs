@@ -1,4 +1,4 @@
-﻿// Bani
+// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,20 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.Domain.DataAccess;
+using System.Threading.Tasks;
+using Autofac;
+using DustInTheWind.Bani.Cli.Presentation;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani
 {
-    public class UnitOfWork : IUnitOfWork
+    internal static class Program
     {
-        private readonly BaniDbContext dbContext;
-        private IIssuerRepository issuerRepository;
-
-        public IIssuerRepository IssuerRepository => issuerRepository ??= new IssuerRepository(dbContext);
-
-        public UnitOfWork(BaniDbContext dbContext)
+        private static async Task Main(string[] args)
         {
-            this.dbContext = dbContext;
+            IContainer container = SetupServices.BuildContainer();
+
+            PresentIssuersCommand command = container.Resolve<PresentIssuersCommand>();
+            command.IssuerName = args.Length > 0 ? args[0] : null;
+            await command.Execute();
         }
     }
 }

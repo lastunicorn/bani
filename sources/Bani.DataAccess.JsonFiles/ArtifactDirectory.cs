@@ -14,22 +14,34 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.DataAccess.JsonFiles;
-using DustInTheWind.Bani.Domain;
+using System;
+using System.Collections.Generic;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess.JsonFiles
 {
-    internal static class EmissionExtensions
+    public abstract class ArtifactDirectory<T>
+        where T:JArtifact
     {
-        public static Emission ToDomainEntity(this JEmission emission)
+        private readonly string directoryPath;
+
+        protected abstract string ArtifactFileName { get; }
+
+        public List<T> Artifacts { get; private set; }
+
+        protected ArtifactDirectory(string directoryPath)
         {
-            return new Emission
+            this.directoryPath = directoryPath ?? throw new ArgumentNullException(nameof(directoryPath));
+        }
+
+        public void Read()
+        {
+            ArtifactCrawler<T> artifactCrawler = new()
             {
-                Name = emission.Name,
-                StartYear = emission.StartYear,
-                EndYear = emission.EndYear,
-                Comments = emission.Comments
+                ArtifactFileName = ArtifactFileName
             };
+
+            artifactCrawler.Crawl(directoryPath);
+            Artifacts = artifactCrawler.Artifacts;
         }
     }
 }

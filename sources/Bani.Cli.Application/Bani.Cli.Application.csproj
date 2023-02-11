@@ -20,12 +20,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <AssemblyName>DustInTheWind.Bani.DataAccess.JsonFiles</AssemblyName>
-        <RootNamespace>DustInTheWind.Bani.DataAccess.JsonFiles</RootNamespace>
+        <AssemblyName>DustInTheWind.Bani.Cli.Application</AssemblyName>
+        <RootNamespace>DustInTheWind.Bani.Cli.Application</RootNamespace>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta1"/>
+        <PackageReference Include="MediatR" Version="10.0.1"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Bani.Domain\Bani.Domain.csproj"/>
     </ItemGroup>
 
 </Project>

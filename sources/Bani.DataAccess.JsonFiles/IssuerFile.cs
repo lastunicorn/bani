@@ -14,22 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.DataAccess.JsonFiles;
-using DustInTheWind.Bani.Domain;
+using System;
+using System.IO;
+using Newtonsoft.Json;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess.JsonFiles
 {
-    internal static class EmissionExtensions
+    public class IssuerFile
     {
-        public static Emission ToDomainEntity(this JEmission emission)
+        private readonly string filePath;
+
+        public IssuerFile(string filePath)
         {
-            return new Emission
-            {
-                Name = emission.Name,
-                StartYear = emission.StartYear,
-                EndYear = emission.EndYear,
-                Comments = emission.Comments
-            };
+            this.filePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
+        }
+
+        public JIssuer Issuer { get; set; }
+
+        public void Open()
+        {
+            string json = File.ReadAllText(filePath);
+            Issuer = JsonConvert.DeserializeObject<JIssuer>(json);
         }
     }
 }
