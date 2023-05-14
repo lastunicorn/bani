@@ -16,10 +16,9 @@
 
 using MediatR;
 
-namespace DustInTheWind.Bani.Cli.Application.PresentIssuers
+namespace DustInTheWind.Bani.Cli.Application.PresentIssuers;
+
+public class PresentIssuersRequest : IRequest<PresentIssuersResponse>
 {
-    public class PresentIssuersRequest : IRequest<PresentIssuersResponse>
-    {
-        public string IssuerName { get; set; }
-    }
+    public string IssuerName { get; set; }
 }

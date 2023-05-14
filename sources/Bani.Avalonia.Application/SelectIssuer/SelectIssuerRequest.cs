@@ -16,10 +16,9 @@
 
 using MediatR;
 
-namespace DustInTheWind.Bani.Avalonia.Application.SelectIssuer
+namespace DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
+
+public class SelectIssuerRequest : IRequest
 {
-    public class SelectIssuerRequest : IRequest
-    {
-        public string IssuerId { get; set; }
-    }
+    public string IssuerId { get; set; }
 }

@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.Cli.Application.PresentIssuers
+namespace DustInTheWind.Bani.Cli.Application.PresentIssuers;
+
+public enum ArtifactType
 {
-    public enum ArtifactType
-    {
-        Unknown,
-        Coin,
-        Banknote,
-    }
+    Unknown,
+    Coin,
+    Banknote,
 }

@@ -16,18 +16,17 @@
 
 using DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels
+namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
+
+public class IssuerViewModel
 {
-    public class IssuerViewModel
+    public IssuerInfo IssuerInfo { get; }
+
+    public string Text { get; }
+
+    public IssuerViewModel(IssuerInfo issuerInfo)
     {
-        public IssuerInfo IssuerInfo { get; }
-
-        public string Text { get; }
-
-        public IssuerViewModel(IssuerInfo issuerInfo)
-        {
-            IssuerInfo = issuerInfo;
-            Text = IssuerInfo?.Name;
-        }
+        IssuerInfo = issuerInfo;
+        Text = IssuerInfo?.Name;
     }
 }

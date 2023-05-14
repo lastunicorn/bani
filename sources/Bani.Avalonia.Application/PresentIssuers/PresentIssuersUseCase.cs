@@ -1,4 +1,4 @@
-// Bani
+﻿// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -23,37 +23,36 @@ using DustInTheWind.Bani.DataAccess.Port;
 using DustInTheWind.Bani.Domain;
 using MediatR;
 
-namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuers
+namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
+
+internal class PresentIssuersUseCase : IRequestHandler<PresentIssuersRequest, PresentIssuersResponse>
 {
-    internal class PresentIssuersUseCase : IRequestHandler<PresentIssuersRequest, PresentIssuersResponse>
+    private readonly IUnitOfWork unitOfWork;
+
+    public PresentIssuersUseCase(IUnitOfWork unitOfWork)
     {
-        private readonly IUnitOfWork unitOfWork;
+        this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+    }
 
-        public PresentIssuersUseCase(IUnitOfWork unitOfWork)
+    public Task<PresentIssuersResponse> Handle(PresentIssuersRequest request, CancellationToken cancellationToken)
+    {
+        IEnumerable<Issuer> issuers = unitOfWork.IssuerRepository.GetAll();
+
+        if (!string.IsNullOrEmpty(request.IssuersName))
         {
-            this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+            string issuerName = request.IssuersName;
+
+            issuers = issuers
+                .Where(x => x.Name?.Contains(issuerName, StringComparison.InvariantCultureIgnoreCase) ?? false);
         }
 
-        public Task<PresentIssuersResponse> Handle(PresentIssuersRequest request, CancellationToken cancellationToken)
+        PresentIssuersResponse response = new()
         {
-            IEnumerable<Issuer> issuers = unitOfWork.IssuerRepository.GetAll();
+            Issuers = issuers
+                .Select(x => new IssuerInfo(x))
+                .ToList()
+        };
 
-            if (!string.IsNullOrEmpty(request.IssuersName))
-            {
-                string issuerName = request.IssuersName;
-
-                issuers = issuers
-                    .Where(x => x.Name?.Contains(issuerName, StringComparison.InvariantCultureIgnoreCase) ?? false);
-            }
-
-            PresentIssuersResponse response = new()
-            {
-                Issuers = issuers
-                    .Select(x => new IssuerInfo(x))
-                    .ToList()
-            };
-
-            return Task.FromResult(response);
-        }
+        return Task.FromResult(response);
     }
 }

@@ -17,36 +17,35 @@
 using System;
 using System.Collections.Generic;
 
-namespace DustInTheWind.Bani.Infrastructure
+namespace DustInTheWind.Bani.Infrastructure;
+
+public class EventBus
 {
-    public class EventBus
+    private readonly Dictionary<Type, List<object>> subscribers = new();
+
+    public void Subscribe<TEvent>(Action<TEvent> action)
     {
-        private readonly Dictionary<Type, List<object>> subscribers = new();
+        List<object> actions;
 
-        public void Subscribe<TEvent>(Action<TEvent> action)
+        if (subscribers.ContainsKey(typeof(TEvent)))
+            actions = subscribers[typeof(TEvent)];
+        else
         {
-            List<object> actions;
-
-            if (subscribers.ContainsKey(typeof(TEvent)))
-                actions = subscribers[typeof(TEvent)];
-            else
-            {
-                actions = new List<object>();
-                subscribers.Add(typeof(TEvent), actions);
-            }
-
-            actions.Add(action);
+            actions = new List<object>();
+            subscribers.Add(typeof(TEvent), actions);
         }
 
-        public void Publish<TEvent>(TEvent @event)
-        {
-            if (subscribers.ContainsKey(typeof(TEvent)))
-            {
-                List<object> actions = subscribers[typeof(TEvent)];
+        actions.Add(action);
+    }
 
-                foreach (Action<TEvent> action in actions)
-                    action(@event);
-            }
+    public void Publish<TEvent>(TEvent @event)
+    {
+        if (subscribers.ContainsKey(typeof(TEvent)))
+        {
+            List<object> actions = subscribers[typeof(TEvent)];
+
+            foreach (Action<TEvent> action in actions)
+                action(@event);
         }
     }
 }

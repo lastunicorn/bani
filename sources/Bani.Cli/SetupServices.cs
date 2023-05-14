@@ -26,53 +26,52 @@ using MediatR.Extensions.Autofac.DependencyInjection;
 using MediatR.Extensions.Autofac.DependencyInjection.Builder;
 using Microsoft.Extensions.Configuration;
 
-namespace DustInTheWind.Bani
+namespace DustInTheWind.Bani;
+
+internal class SetupServices
 {
-    internal class SetupServices
+    public static IContainer BuildContainer()
     {
-        public static IContainer BuildContainer()
-        {
-            ContainerBuilder containerBuilder = new();
-            ConfigureServices(containerBuilder);
+        ContainerBuilder containerBuilder = new();
+        ConfigureServices(containerBuilder);
 
-            return containerBuilder.Build();
-        }
+        return containerBuilder.Build();
+    }
 
-        private static void ConfigureServices(ContainerBuilder containerBuilder)
-        {
-            containerBuilder
-                .Register(builder =>
-                {
-                    IConfiguration configuration = new ConfigurationBuilder()
-                        .SetBasePath(Directory.GetCurrentDirectory())
-                        .AddJsonFile("appsettings.json", optional: false)
-                        .Build();
+    private static void ConfigureServices(ContainerBuilder containerBuilder)
+    {
+        containerBuilder
+            .Register(builder =>
+            {
+                IConfiguration configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: false)
+                    .Build();
 
-                    return configuration;
-                })
-                .AsSelf()
-                .SingleInstance();
+                return configuration;
+            })
+            .AsSelf()
+            .SingleInstance();
 
-            Assembly applicationAssembly = typeof(PresentIssuersRequest).Assembly;
-            MediatRConfiguration mediatRConfiguration = MediatRConfigurationBuilder.Create(applicationAssembly)
-                .WithAllOpenGenericHandlerTypesRegistered()
-                .WithRegistrationScope(RegistrationScope.Scoped) // currently only supported values are `Transient` and `Scoped`
-                .Build();
-            containerBuilder.RegisterMediatR(mediatRConfiguration);
+        Assembly applicationAssembly = typeof(PresentIssuersRequest).Assembly;
+        MediatRConfiguration mediatRConfiguration = MediatRConfigurationBuilder.Create(applicationAssembly)
+            .WithAllOpenGenericHandlerTypesRegistered()
+            .WithRegistrationScope(RegistrationScope.Scoped) // currently only supported values are `Transient` and `Scoped`
+            .Build();
+        containerBuilder.RegisterMediatR(mediatRConfiguration);
 
-            containerBuilder.RegisterType<BaniDbContext>().AsSelf();
-            containerBuilder
-                .Register(builder =>
-                {
-                    IConfiguration configuration = builder.Resolve<IConfiguration>();
-                    string databasePath = configuration["DatabasePath"];
-                    return new BaniDbContext(databasePath);
-                })
-                .AsSelf();
-            containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+        containerBuilder.RegisterType<BaniDbContext>().AsSelf();
+        containerBuilder
+            .Register(builder =>
+            {
+                IConfiguration configuration = builder.Resolve<IConfiguration>();
+                string databasePath = configuration["DatabasePath"];
+                return new BaniDbContext(databasePath);
+            })
+            .AsSelf();
+        containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
-            Assembly presentationAssembly = typeof(PresentIssuersCommand).Assembly;
-            containerBuilder.RegisterCommando(presentationAssembly);
-        }
+        Assembly presentationAssembly = typeof(PresentIssuersCommand).Assembly;
+        containerBuilder.RegisterCommando(presentationAssembly);
     }
 }

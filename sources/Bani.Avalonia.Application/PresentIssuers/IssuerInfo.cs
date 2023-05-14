@@ -15,26 +15,24 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuers
+namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
+
+public class IssuerInfo
 {
-    public class IssuerInfo
+    public string Id { get; set; }
+
+    public string Name { get; }
+
+    public string Comments { get; set; }
+
+    public IssuerInfo(Issuer issuer)
     {
-        public string Id { get; set; }
+        if (issuer == null) throw new ArgumentNullException(nameof(issuer));
 
-        public string Name { get; }
-
-        public string Comments { get; set; }
-
-        public IssuerInfo(Issuer issuer)
-        {
-            if (issuer == null) throw new ArgumentNullException(nameof(issuer));
-
-            Id = issuer.Id;
-            Name = issuer.Name;
-            Comments = issuer.Comments;
-        }
+        Id = issuer.Id;
+        Name = issuer.Name;
+        Comments = issuer.Comments;
     }
 }

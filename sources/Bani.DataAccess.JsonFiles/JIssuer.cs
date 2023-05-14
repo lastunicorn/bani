@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+namespace DustInTheWind.Bani.DataAccess.JsonFiles;
+
+public class JIssuer
 {
-    public class JIssuer
-    {
-        public string Name { get; set; }
-        
-        public string Comments { get; set; }
-    }
+    public string Name { get; set; }
+
+    public string Comments { get; set; }
 }

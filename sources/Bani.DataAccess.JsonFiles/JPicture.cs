@@ -14,14 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
-{
-    public class JPicture
-    {
-        public byte[] Bytes { get; set; }
-        
-        public string FilePath { get; set; }
+namespace DustInTheWind.Bani.DataAccess.JsonFiles;
 
-        public string Description { get; set; }
-    }
+public class JPicture
+{
+    public byte[] Bytes { get; set; }
+
+    public string FilePath { get; set; }
+
+    public string Description { get; set; }
 }

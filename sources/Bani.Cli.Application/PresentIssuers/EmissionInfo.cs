@@ -18,29 +18,28 @@ using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.Cli.Application.PresentIssuers
+namespace DustInTheWind.Bani.Cli.Application.PresentIssuers;
+
+public class EmissionInfo
 {
-    public class EmissionInfo
+    public string Name { get; }
+
+    public int? StartYear { get; }
+
+    public int? EndYear { get; }
+
+    public List<ArtifactInfo> Artifacts { get; }
+
+    public EmissionInfo(Emission emission)
     {
-        public string Name { get; }
-
-        public int? StartYear { get; }
-
-        public int? EndYear { get; }
-
-        public List<ArtifactInfo> Artifacts { get; }
-
-        public EmissionInfo(Emission emission)
-        {
-            Name = emission.Name;
-            StartYear = emission.StartYear;
-            EndYear = emission.EndYear;
-            Artifacts = emission.Artifacts
-                .OrderBy(x => x.GetType().FullName)
-                .ThenBy(x => x.Value)
-                .ThenBy(x => x.Year)
-                .Select(x => new ArtifactInfo(x))
-                .ToList();
-        }
+        Name = emission.Name;
+        StartYear = emission.StartYear;
+        EndYear = emission.EndYear;
+        Artifacts = emission.Artifacts
+            .OrderBy(x => x.GetType().FullName)
+            .ThenBy(x => x.Value)
+            .ThenBy(x => x.Year)
+            .Select(x => new ArtifactInfo(x))
+            .ToList();
     }
 }

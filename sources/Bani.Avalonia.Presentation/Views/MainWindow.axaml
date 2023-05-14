@@ -53,7 +53,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Padding="15 10" />
 
         <views1:IssuersPage
-            DataContext="{Binding IssuersPageViewModel}"/>
+            DataContext="{Binding IssuersPageViewModel}" />
 
     </DockPanel>
 

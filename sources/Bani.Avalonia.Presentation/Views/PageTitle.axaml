@@ -46,7 +46,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 IsVisible="{Binding IsDescriptionVisible}"
                 Margin="10 5 0 0"
                 FontSize="12"
-                TextWrapping="Wrap"/>
+                TextWrapping="Wrap" />
 
         </DockPanel>
 

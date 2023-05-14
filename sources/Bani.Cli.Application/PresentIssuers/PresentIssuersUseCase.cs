@@ -23,31 +23,30 @@ using DustInTheWind.Bani.DataAccess.Port;
 using DustInTheWind.Bani.Domain;
 using MediatR;
 
-namespace DustInTheWind.Bani.Cli.Application.PresentIssuers
+namespace DustInTheWind.Bani.Cli.Application.PresentIssuers;
+
+internal class PresentIssuersUseCase : IRequestHandler<PresentIssuersRequest, PresentIssuersResponse>
 {
-    internal class PresentIssuersUseCase : IRequestHandler<PresentIssuersRequest, PresentIssuersResponse>
+    private readonly IUnitOfWork unitOfWork;
+
+    public PresentIssuersUseCase(IUnitOfWork unitOfWork)
     {
-        private readonly IUnitOfWork unitOfWork;
+        this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+    }
 
-        public PresentIssuersUseCase(IUnitOfWork unitOfWork)
+    public Task<PresentIssuersResponse> Handle(PresentIssuersRequest request, CancellationToken cancellationToken)
+    {
+        IEnumerable<Issuer> issuers = string.IsNullOrEmpty(request.IssuerName)
+            ? unitOfWork.IssuerRepository.GetAll()
+            : unitOfWork.IssuerRepository.GetByName(request.IssuerName);
+
+        PresentIssuersResponse response = new()
         {
-            this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-        }
+            Issuers = issuers
+                .Select(x => new IssuerInfo(x))
+                .ToList()
+        };
 
-        public Task<PresentIssuersResponse> Handle(PresentIssuersRequest request, CancellationToken cancellationToken)
-        {
-            IEnumerable<Issuer> issuers = string.IsNullOrEmpty(request.IssuerName)
-                ? unitOfWork.IssuerRepository.GetAll()
-                : unitOfWork.IssuerRepository.GetByName(request.IssuerName);
-
-            PresentIssuersResponse response = new()
-            {
-                Issuers = issuers
-                    .Select(x => new IssuerInfo(x))
-                    .ToList()
-            };
-
-            return Task.FromResult(response);
-        }
+        return Task.FromResult(response);
     }
 }

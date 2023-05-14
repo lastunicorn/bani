@@ -16,38 +16,36 @@
 
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using DustInTheWind.Bani.Avalonia.Presentation.Commands;
 using DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.Views
+namespace DustInTheWind.Bani.Avalonia.Presentation.Views;
+
+public partial class IssuersPage : UserControl
 {
-    public partial class IssuersPage : UserControl
+    public IssuersPage()
     {
-        public IssuersPage()
+        InitializeComponent();
+    }
+
+    private void InitializeComponent()
+    {
+        AvaloniaXamlLoader.Load(this);
+    }
+
+    private void InputElement_OnTapped(object sender, TappedEventArgs e)
+    {
+        if (DataContext is IssuersPageViewModel mainWindowViewModel)
         {
-            InitializeComponent();
-        }
+            SelectIssueCommand selectIssueCommand = mainWindowViewModel.SelectIssueCommand;
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+            object selectedItem = sender is ListBox listBox
+                ? listBox.SelectedItem
+                : null;
 
-        private void InputElement_OnTapped(object sender, TappedEventArgs e)
-        {
-            if (DataContext is IssuersPageViewModel mainWindowViewModel)
-            {
-                SelectIssueCommand selectIssueCommand = mainWindowViewModel.SelectIssueCommand;
-
-                object selectedItem = sender is ListBox listBox
-                    ? listBox.SelectedItem
-                    : null;
-
-                if (selectIssueCommand?.CanExecute(selectedItem) == true)
-                    selectIssueCommand.Execute(selectedItem);
-            }
+            if (selectIssueCommand?.CanExecute(selectedItem) == true)
+                selectIssueCommand.Execute(selectedItem);
         }
     }
 }

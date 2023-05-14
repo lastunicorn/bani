@@ -19,6 +19,6 @@ namespace DustInTheWind.Bani.Domain;
 public class Coin : Artifact
 {
     public float? Diameter { get; set; }
-        
+
     public string Edge { get; set; }
 }

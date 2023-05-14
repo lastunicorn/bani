@@ -46,10 +46,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     <TextBlock
                         Text="{Binding Text}"
                         VerticalAlignment="Center"
-                        Padding="2 8"/>
+                        Padding="2 8" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
-            
+
         </ListBox>
 
         <TextBox

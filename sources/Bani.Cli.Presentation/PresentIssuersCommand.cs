@@ -30,7 +30,7 @@ public class PresentIssuersCommand : ICommand
 
     [CommandParameter(Order = 1, IsOptional = true)]
     public string IssuerName { get; set; }
-    
+
     public List<IssuerInfo> Issuers { get; private set; }
 
     public PresentIssuersCommand(IMediator mediator)

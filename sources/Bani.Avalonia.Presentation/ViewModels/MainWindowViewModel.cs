@@ -20,58 +20,57 @@ using DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
 using DustInTheWind.Bani.Avalonia.Presentation.Commands;
 using DustInTheWind.Bani.Infrastructure;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels
+namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
+
+public class MainWindowViewModel : ViewModelBase
 {
-    public class MainWindowViewModel : ViewModelBase
+    private string breadCrumbs;
+
+    public string WindowTitle
     {
-        private string breadCrumbs;
-
-        public string WindowTitle
+        get
         {
-            get
-            {
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                AssemblyName assemblyName = assembly.GetName();
-                Version version = assemblyName.Version;
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            AssemblyName assemblyName = assembly.GetName();
+            Version version = assemblyName.Version;
 
-                return $"Bani {version.ToString(3)}";
-            }
+            return $"Bani {version.ToString(3)}";
         }
+    }
 
-        public PageTitleViewModel PageTitleViewModel { get; } = new();
+    public PageTitleViewModel PageTitleViewModel { get; } = new();
 
-        public string BreadCrumbs
+    public string BreadCrumbs
+    {
+        get => breadCrumbs;
+        set
         {
-            get => breadCrumbs;
-            set
-            {
-                breadCrumbs = value;
-                OnPropertyChanged();
-            }
+            breadCrumbs = value;
+            OnPropertyChanged();
         }
+    }
 
-        public SelectIssueCommand SelectIssueCommand { get; }
+    public SelectIssueCommand SelectIssueCommand { get; }
 
-        public IssuersPageViewModel IssuersPageViewModel { get; }
+    public IssuersPageViewModel IssuersPageViewModel { get; }
 
-        public MainWindowViewModel(EventBus eventBus, SelectIssueCommand selectIssueCommand, IssuersPageViewModel issuersPageViewModel)
-        {
-            SelectIssueCommand = selectIssueCommand;
-            IssuersPageViewModel = issuersPageViewModel;
+    public MainWindowViewModel(EventBus eventBus, SelectIssueCommand selectIssueCommand, IssuersPageViewModel issuersPageViewModel)
+    {
+        SelectIssueCommand = selectIssueCommand;
+        IssuersPageViewModel = issuersPageViewModel;
 
-            eventBus.Subscribe<IssuerChangedEvent>(HandleIssuerChanged);
+        eventBus.Subscribe<IssuerChangedEvent>(HandleIssuerChanged);
 
-            PageTitleViewModel.Title = "Issuer";
-            PageTitleViewModel.Description = "Please select the issuer from the list.";
+        PageTitleViewModel.Title = "Issuer";
+        PageTitleViewModel.Description = "Please select the issuer from the list.";
 
-            BreadCrumbs = "> ";
-        }
+        BreadCrumbs = "> ";
+    }
 
-        private void HandleIssuerChanged(IssuerChangedEvent ev)
-        {
-            BreadCrumbs = "> " + ev.Issuer?.Name;
+    private void HandleIssuerChanged(IssuerChangedEvent ev)
+    {
+        BreadCrumbs = "> " + ev.Issuer?.Name;
 
-            // todo: display the catalogs page
-        }
+        // todo: display the catalogs page
     }
 }

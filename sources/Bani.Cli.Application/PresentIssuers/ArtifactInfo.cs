@@ -17,40 +17,39 @@
 using System;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.Cli.Application.PresentIssuers
+namespace DustInTheWind.Bani.Cli.Application.PresentIssuers;
+
+public class ArtifactInfo
 {
-    public class ArtifactInfo
+    public string DisplayName { get; }
+
+    public float? Value { get; set; }
+
+    public DateTime? IssueDate { get; }
+
+    public int? Year { get; }
+
+    public int InstanceCount { get; }
+
+    public ArtifactType ArtifactType { get; }
+
+    public ArtifactInfo(Artifact artifact)
     {
-        public string DisplayName { get; }
+        DisplayName = artifact.DisplayName;
+        Value = artifact.Value;
+        IssueDate = artifact.IssueDate;
+        Year = artifact.Year;
+        InstanceCount = artifact.InstanceCount;
+        ArtifactType = CalculateArtifactType(artifact);
+    }
 
-        public float? Value { get; set; }
-
-        public DateTime? IssueDate { get; }
-
-        public int? Year { get; }
-
-        public int InstanceCount { get; }
-
-        public ArtifactType ArtifactType { get; }
-
-        public ArtifactInfo(Artifact artifact)
+    private static ArtifactType CalculateArtifactType(Artifact artifact)
+    {
+        return artifact switch
         {
-            DisplayName = artifact.DisplayName;
-            Value = artifact.Value;
-            IssueDate = artifact.IssueDate;
-            Year = artifact.Year;
-            InstanceCount = artifact.InstanceCount;
-            ArtifactType = CalculateArtifactType(artifact);
-        }
-
-        private static ArtifactType CalculateArtifactType(Artifact artifact)
-        {
-            return artifact switch
-            {
-                Coin => ArtifactType.Coin,
-                Banknote => ArtifactType.Banknote,
-                _ => ArtifactType.Unknown
-            };
-        }
+            Coin => ArtifactType.Coin,
+            Banknote => ArtifactType.Banknote,
+            _ => ArtifactType.Unknown
+        };
     }
 }

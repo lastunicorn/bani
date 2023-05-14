@@ -22,40 +22,39 @@ using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Infrastructure;
 using MediatR;
 
-namespace DustInTheWind.Bani.Avalonia.Application.SelectIssuer
+namespace DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
+
+internal class SelectIssuerUseCase : IRequestHandler<SelectIssuerRequest>
 {
-    internal class SelectIssuerUseCase : IRequestHandler<SelectIssuerRequest>
+    private readonly ApplicationState applicationState;
+    private readonly EventBus eventBus;
+    private readonly IUnitOfWork unitOfWork;
+
+    public SelectIssuerUseCase(ApplicationState applicationState, EventBus eventBus, IUnitOfWork unitOfWork)
     {
-        private readonly ApplicationState applicationState;
-        private readonly EventBus eventBus;
-        private readonly IUnitOfWork unitOfWork;
+        this.applicationState = applicationState ?? throw new ArgumentNullException(nameof(applicationState));
+        this.eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
+        this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+    }
 
-        public SelectIssuerUseCase(ApplicationState applicationState, EventBus eventBus, IUnitOfWork unitOfWork)
+    public Task<Unit> Handle(SelectIssuerRequest request, CancellationToken cancellationToken)
+    {
+        Issuer issuer = unitOfWork.IssuerRepository.Get(request.IssuerId);
+
+        applicationState.CurrentIssuer = request.IssuerId;
+
+        RaiseIssuerChangedEvent(issuer);
+
+        return Task.FromResult(Unit.Value);
+    }
+
+    private void RaiseIssuerChangedEvent(Issuer issuer)
+    {
+        IssuerChangedEvent ev = new()
         {
-            this.applicationState = applicationState ?? throw new ArgumentNullException(nameof(applicationState));
-            this.eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
-            this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-        }
+            Issuer = issuer
+        };
 
-        public Task<Unit> Handle(SelectIssuerRequest request, CancellationToken cancellationToken)
-        {
-            Issuer issuer = unitOfWork.IssuerRepository.Get(request.IssuerId);
-
-            applicationState.CurrentIssuer = request.IssuerId;
-
-            RaiseIssuerChangedEvent(issuer);
-
-            return Task.FromResult(Unit.Value);
-        }
-
-        private void RaiseIssuerChangedEvent(Issuer issuer)
-        {
-            IssuerChangedEvent ev = new()
-            {
-                Issuer = issuer
-            };
-
-            eventBus.Publish(ev);
-        }
+        eventBus.Publish(ev);
     }
 }

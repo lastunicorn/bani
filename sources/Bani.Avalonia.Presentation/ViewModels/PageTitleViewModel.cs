@@ -14,34 +14,33 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels
+namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
+
+public class PageTitleViewModel : ViewModelBase
 {
-    public class PageTitleViewModel : ViewModelBase
+    private string title = "Title";
+    private string description;
+
+    public string Title
     {
-        private string title = "Title";
-        private string description;
-        
-        public string Title
+        get => title;
+        set
         {
-            get => title;
-            set
-            {
-                title = value;
-                OnPropertyChanged();
-            }
+            title = value;
+            OnPropertyChanged();
         }
-
-        public string Description
-        {
-            get => description;
-            set
-            {
-                description = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(IsDescriptionVisible));
-            }
-        }
-
-        public bool IsDescriptionVisible => !string.IsNullOrEmpty(Description);
     }
+
+    public string Description
+    {
+        get => description;
+        set
+        {
+            description = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsDescriptionVisible));
+        }
+    }
+
+    public bool IsDescriptionVisible => !string.IsNullOrEmpty(Description);
 }

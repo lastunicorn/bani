@@ -16,52 +16,51 @@
 
 using System;
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+namespace DustInTheWind.Bani.DataAccess.JsonFiles;
+
+public class JCoin : JArtifact
 {
-    public class JCoin : JArtifact
+    public float? Diameter { get; set; }
+
+    public string Edge { get; set; }
+
+    public int? MintYear { get; set; }
+
+    public JCoin()
     {
-        public float? Diameter { get; set; }
+    }
 
-        public string Edge { get; set; }
-
-        public int? MintYear { get; set; }
-
-        public JCoin()
+    public JCoin(JCoin coin)
+        : base(coin)
+    {
+        if (coin != null)
         {
+            Diameter = coin.Diameter;
+            Edge = coin.Edge;
+            MintYear = coin.MintYear;
         }
+    }
 
-        public JCoin(JCoin coin)
-            : base(coin)
+    public override void MergeInto(JArtifact targetArtifact)
+    {
+        if (targetArtifact == null) throw new ArgumentNullException(nameof(targetArtifact));
+
+        if (targetArtifact is JCoin targetCoin)
         {
-            if (coin != null)
-            {
-                Diameter = coin.Diameter;
-                Edge = coin.Edge;
-                MintYear = coin.MintYear;
-            }
+            MergeInto(targetCoin);
         }
-
-        public override void MergeInto(JArtifact targetArtifact)
+        else
         {
-            if (targetArtifact == null) throw new ArgumentNullException(nameof(targetArtifact));
-
-            if (targetArtifact is JCoin targetCoin)
-            {
-                MergeInto(targetCoin);
-            }
-            else
-            {
-                throw new ArgumentException($"The {nameof(targetArtifact)} must be a {typeof(JCoin)}.", nameof(targetArtifact));
-            }
+            throw new ArgumentException($"The {nameof(targetArtifact)} must be a {typeof(JCoin)}.", nameof(targetArtifact));
         }
+    }
 
-        private void MergeInto(JCoin targetCoin)
-        {
-            base.MergeInto(targetCoin);
+    private void MergeInto(JCoin targetCoin)
+    {
+        base.MergeInto(targetCoin);
 
-            if (Diameter != null) targetCoin.Diameter = Diameter;
-            if (Edge != null) targetCoin.Edge = Edge;
-            if (MintYear != null) targetCoin.MintYear = MintYear;
-        }
+        if (Diameter != null) targetCoin.Diameter = Diameter;
+        if (Edge != null) targetCoin.Edge = Edge;
+        if (MintYear != null) targetCoin.MintYear = MintYear;
     }
 }

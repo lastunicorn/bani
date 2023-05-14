@@ -19,27 +19,26 @@ using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
 
-namespace DustInTheWind.Bani.Avalonia
+namespace DustInTheWind.Bani.Avalonia;
+
+public class ViewLocator : IDataTemplate
 {
-    public class ViewLocator : IDataTemplate
+    public Control Build(object data)
     {
-        public Control Build(object data)
+        string name = data.GetType().FullName!.Replace("ViewModel", "View");
+        Type type = Type.GetType(name);
+
+        if (type != null)
+            return (Control)Activator.CreateInstance(type)!;
+
+        return new TextBlock
         {
-            string name = data.GetType().FullName!.Replace("ViewModel", "View");
-            Type type = Type.GetType(name);
+            Text = "Not Found: " + name
+        };
+    }
 
-            if (type != null)
-                return (Control)Activator.CreateInstance(type)!;
-
-            return new TextBlock
-            {
-                Text = "Not Found: " + name
-            };
-        }
-
-        public bool Match(object data)
-        {
-            return data is ViewModelBase;
-        }
+    public bool Match(object data)
+    {
+        return data is ViewModelBase;
     }
 }

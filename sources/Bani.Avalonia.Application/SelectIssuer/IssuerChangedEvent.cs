@@ -16,10 +16,9 @@
 
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.Avalonia.Application.SelectIssuer
+namespace DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
+
+public class IssuerChangedEvent
 {
-    public class IssuerChangedEvent
-    {
-        public Issuer Issuer { get; set; }
-    }
+    public Issuer Issuer { get; set; }
 }

@@ -16,10 +16,9 @@
 
 using MediatR;
 
-namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuers
+namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
+
+public class PresentIssuersRequest : IRequest<PresentIssuersResponse>
 {
-    public class PresentIssuersRequest : IRequest<PresentIssuersResponse>
-    {
-        public string IssuersName { get; set; }
-    }
+    public string IssuersName { get; set; }
 }

@@ -20,30 +20,29 @@ using Avalonia.Markup.Xaml;
 using DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
 using DustInTheWind.Bani.Avalonia.Presentation.Views;
 
-namespace DustInTheWind.Bani.Avalonia
+namespace DustInTheWind.Bani.Avalonia;
+
+public partial class App : global::Avalonia.Application
 {
-    public partial class App : global::Avalonia.Application
+    private IContainer container;
+
+    public override void Initialize()
     {
-        private IContainer container;
+        container = SetupServices.BuildContainer();
 
-        public override void Initialize()
+        AvaloniaXamlLoader.Load(this);
+    }
+
+    public override void OnFrameworkInitializationCompleted()
+    {
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            container = SetupServices.BuildContainer();
-
-            AvaloniaXamlLoader.Load(this);
-        }
-
-        public override void OnFrameworkInitializationCompleted()
-        {
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            desktop.MainWindow = new MainWindow
             {
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = container?.Resolve<MainWindowViewModel>()
-                };
-            }
-
-            base.OnFrameworkInitializationCompleted();
+                DataContext = container?.Resolve<MainWindowViewModel>()
+            };
         }
+
+        base.OnFrameworkInitializationCompleted();
     }
 }

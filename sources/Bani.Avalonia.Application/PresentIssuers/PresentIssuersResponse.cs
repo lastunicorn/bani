@@ -16,10 +16,9 @@
 
 using System.Collections.Generic;
 
-namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuers
+namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
+
+public class PresentIssuersResponse
 {
-    public class PresentIssuersResponse
-    {
-        public List<IssuerInfo> Issuers { get; set; }
-    }
+    public List<IssuerInfo> Issuers { get; set; }
 }

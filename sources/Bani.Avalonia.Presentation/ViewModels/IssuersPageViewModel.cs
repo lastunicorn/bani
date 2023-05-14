@@ -23,58 +23,57 @@ using DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
 using DustInTheWind.Bani.Avalonia.Presentation.Commands;
 using MediatR;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels
+namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
+
+public class IssuersPageViewModel : ViewModelBase
 {
-    public class IssuersPageViewModel : ViewModelBase
+    private readonly IMediator mediator;
+    private IssuerViewModel selectedIssuer;
+    private string issuerComments;
+
+    public ObservableCollection<IssuerViewModel> Issuers { get; } = new();
+
+    public IssuerViewModel SelectedIssuer
     {
-        private readonly IMediator mediator;
-        private IssuerViewModel selectedIssuer;
-        private string issuerComments;
-
-        public ObservableCollection<IssuerViewModel> Issuers { get; } = new();
-
-        public IssuerViewModel SelectedIssuer
+        get => selectedIssuer;
+        set
         {
-            get => selectedIssuer;
-            set
-            {
-                selectedIssuer = value;
-                OnPropertyChanged();
+            selectedIssuer = value;
+            OnPropertyChanged();
 
-                IssuerComments = value?.IssuerInfo?.Comments;
-            }
+            IssuerComments = value?.IssuerInfo?.Comments;
         }
+    }
 
-        public string IssuerComments
+    public string IssuerComments
+    {
+        get => issuerComments;
+        set
         {
-            get => issuerComments;
-            set
-            {
-                issuerComments = value;
-                OnPropertyChanged();
-            }
+            issuerComments = value;
+            OnPropertyChanged();
         }
+    }
 
-        public SelectIssueCommand SelectIssueCommand { get; }
+    public SelectIssueCommand SelectIssueCommand { get; }
 
-        public IssuersPageViewModel(IMediator mediator, SelectIssueCommand selectIssueCommand)
-        {
-            this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-            SelectIssueCommand = selectIssueCommand;
+    public IssuersPageViewModel(IMediator mediator, SelectIssueCommand selectIssueCommand)
+    {
+        this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        SelectIssueCommand = selectIssueCommand;
 
-            _ = Initialize();
-        }
+        _ = Initialize();
+    }
 
-        private async Task Initialize()
-        {
-            PresentIssuersRequest request = new();
-            PresentIssuersResponse response = await mediator.Send(request);
+    private async Task Initialize()
+    {
+        PresentIssuersRequest request = new();
+        PresentIssuersResponse response = await mediator.Send(request);
 
-            IEnumerable<IssuerViewModel> issuerViewModels = response.Issuers
-                .Select(x => new IssuerViewModel(x));
+        IEnumerable<IssuerViewModel> issuerViewModels = response.Issuers
+            .Select(x => new IssuerViewModel(x));
 
-            foreach (IssuerViewModel issuerViewModel in issuerViewModels)
-                Issuers.Add(issuerViewModel);
-        }
+        foreach (IssuerViewModel issuerViewModel in issuerViewModels)
+            Issuers.Add(issuerViewModel);
     }
 }

@@ -19,23 +19,22 @@ using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.Cli.Application.PresentIssuers
+namespace DustInTheWind.Bani.Cli.Application.PresentIssuers;
+
+public class IssuerInfo
 {
-    public class IssuerInfo
+    public string Name { get; }
+
+    public List<EmissionInfo> Emissions { get; }
+
+    public IssuerInfo(Issuer issuer)
     {
-        public string Name { get; }
+        if (issuer == null) throw new ArgumentNullException(nameof(issuer));
 
-        public List<EmissionInfo> Emissions { get; }
-
-        public IssuerInfo(Issuer issuer)
-        {
-            if (issuer == null) throw new ArgumentNullException(nameof(issuer));
-
-            Name = issuer.Name;
-            Emissions = issuer.Emissions
-                .OrderBy(x => x.StartYear)
-                .Select(x => new EmissionInfo(x))
-                .ToList();
-        }
+        Name = issuer.Name;
+        Emissions = issuer.Emissions
+            .OrderBy(x => x.StartYear)
+            .Select(x => new EmissionInfo(x))
+            .ToList();
     }
 }
