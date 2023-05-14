@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 Bani
 Copyright (C) 2022 Dust in the Wind
 
@@ -25,11 +25,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MediatR" Version="10.0.1" />
+        <PackageReference Include="MediatR" Version="11.1.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Bani.Domain\Bani.Domain.csproj" />
+        <ProjectReference Include="..\Bani.DataAccess.Port\Bani.DataAccess.Port.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Bani.Domain\Bani.Domain.csproj" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>

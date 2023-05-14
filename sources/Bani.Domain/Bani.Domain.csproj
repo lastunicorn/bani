@@ -24,8 +24,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <RootNamespace>DustInTheWind.Bani.Domain</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Bani.DataAccess.JsonFiles\Bani.DataAccess.JsonFiles.csproj" />
-    </ItemGroup>
-
 </Project>

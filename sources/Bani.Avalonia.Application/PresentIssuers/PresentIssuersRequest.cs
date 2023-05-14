@@ -20,5 +20,6 @@ namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuers
 {
     public class PresentIssuersRequest : IRequest<PresentIssuersResponse>
     {
+        public string IssuersName { get; set; }
     }
 }

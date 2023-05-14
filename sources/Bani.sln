@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bani.Avalonia.Application",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.Infrastructure", "Bani.Infrastructure\Bani.Infrastructure.csproj", "{8E97C457-657A-4525-A896-77086940636E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bani.DataAccess.Port", "Bani.DataAccess.Port\Bani.DataAccess.Port.csproj", "{CBF34384-111D-451D-B891-6E591B95A521}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{8E97C457-657A-4525-A896-77086940636E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E97C457-657A-4525-A896-77086940636E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E97C457-657A-4525-A896-77086940636E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBF34384-111D-451D-B891-6E591B95A521}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBF34384-111D-451D-B891-6E591B95A521}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBF34384-111D-451D-B891-6E591B95A521}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBF34384-111D-451D-B891-6E591B95A521}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

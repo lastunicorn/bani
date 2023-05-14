@@ -1,4 +1,4 @@
-﻿// Bani
+// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,48 +14,63 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.IO;
 using System.Reflection;
 using Autofac;
 using DustInTheWind.Bani.Cli.Application.PresentIssuers;
 using DustInTheWind.Bani.Cli.Presentation;
 using DustInTheWind.Bani.DataAccess;
-using DustInTheWind.Bani.Domain.DataAccess;
-using DustInTheWind.ConsoleTools.Commando.Autofac.DependencyInjection;
+using DustInTheWind.Bani.DataAccess.Port;
 using MediatR.Extensions.Autofac.DependencyInjection;
+using MediatR.Extensions.Autofac.DependencyInjection.Builder;
+using Microsoft.Extensions.Configuration;
 
-namespace DustInTheWind.Bani;
-
-internal class SetupServices
+namespace DustInTheWind.Bani
 {
-    public static IContainer BuildContainer()
+    internal class SetupServices
     {
-        ContainerBuilder containerBuilder = new();
-        ConfigureServices(containerBuilder);
+        public static IContainer BuildContainer()
+        {
+            ContainerBuilder containerBuilder = new();
+            ConfigureServices(containerBuilder);
 
-        return containerBuilder.Build();
-    }
+            return containerBuilder.Build();
+        }
 
-    private static void ConfigureServices(ContainerBuilder containerBuilder)
-    {
-        Assembly presentationAssembly = typeof(PresentIssuersCommand).Assembly;
-        containerBuilder.RegisterCommando(presentationAssembly);
+        private static void ConfigureServices(ContainerBuilder containerBuilder)
+        {
+            containerBuilder
+                .Register(builder =>
+                {
+                    IConfiguration configuration = new ConfigurationBuilder()
+                        .SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("appsettings.json", optional: false)
+                        .Build();
 
-        Assembly applicationAssembly = typeof(PresentIssuersRequest).Assembly;
-        containerBuilder.RegisterMediatR(applicationAssembly);
+                    return configuration;
+                })
+                .AsSelf()
+                .SingleInstance();
 
-        containerBuilder.RegisterType<BaniDbContext>().AsSelf();
-        containerBuilder
-            .Register(builder =>
-            {
-                const string dbFilePath = "/nfs/YubabaData/Alez/projects/Money/database";
-                //const string dbFilePath = @"\\192.168.1.12\Data\Alez\projects\Money\database";
-                //const string dbFilePath = @"c:\Temp\database";
+            Assembly assembly = typeof(PresentIssuersRequest).Assembly;
+            MediatRConfiguration mediatRConfiguration = MediatRConfigurationBuilder.Create(assembly)
+                .WithAllOpenGenericHandlerTypesRegistered()
+                .WithRegistrationScope(RegistrationScope.Scoped) // currently only supported values are `Transient` and `Scoped`
+                .Build();
+            containerBuilder.RegisterMediatR(mediatRConfiguration);
 
-                return new BaniDbContext(dbFilePath);
-            })
-            .AsSelf();
-        containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+            containerBuilder.RegisterType<BaniDbContext>().AsSelf();
+            containerBuilder
+                .Register(builder =>
+                {
+                    IConfiguration configuration = builder.Resolve<IConfiguration>();
+                    string databasePath = configuration["DatabasePath"];
+                    return new BaniDbContext(databasePath);
+                })
+                .AsSelf();
+            containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
-        containerBuilder.RegisterType<PresentIssuersCommand>().AsSelf();
+            containerBuilder.RegisterType<PresentIssuersCommand>().AsSelf();
+        }
     }
 }

@@ -22,14 +22,12 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels
     {
         public IssuerInfo IssuerInfo { get; }
 
+        public string Text { get; }
+
         public IssuerViewModel(IssuerInfo issuerInfo)
         {
             IssuerInfo = issuerInfo;
-        }
-
-        public override string ToString()
-        {
-            return IssuerInfo?.Name ?? string.Empty;
+            Text = IssuerInfo?.Name;
         }
     }
 }

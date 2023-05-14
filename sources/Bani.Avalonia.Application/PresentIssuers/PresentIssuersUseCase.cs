@@ -1,4 +1,4 @@
-﻿// Bani
+// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -19,8 +19,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using DustInTheWind.Bani.DataAccess.Port;
 using DustInTheWind.Bani.Domain;
-using DustInTheWind.Bani.Domain.DataAccess;
 using MediatR;
 
 namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuers
@@ -37,6 +37,14 @@ namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuers
         public Task<PresentIssuersResponse> Handle(PresentIssuersRequest request, CancellationToken cancellationToken)
         {
             IEnumerable<Issuer> issuers = unitOfWork.IssuerRepository.GetAll();
+
+            if (!string.IsNullOrEmpty(request.IssuersName))
+            {
+                string issuerName = request.IssuersName;
+
+                issuers = issuers
+                    .Where(x => x.Name?.Contains(issuerName, StringComparison.InvariantCultureIgnoreCase) ?? false);
+            }
 
             PresentIssuersResponse response = new()
             {

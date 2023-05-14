@@ -32,7 +32,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </Design.DataContext>
 
     <Border
-        Background="WhiteSmoke"
         Padding="20 15">
 
         <DockPanel>

@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 Bani
 Copyright (C) 2022 Dust in the Wind
 
@@ -26,20 +26,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Autofac" Version="6.4.0" />
-        <PackageReference Include="ConsoleTools" Version="1.1.1" />
         <PackageReference Include="ConsoleTools.Commando.Autofac.DependencyInjection" Version="1.5.0" />
-        <PackageReference Include="MediatR" Version="10.0.1" />
-        <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="8.1.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+        <PackageReference Include="Autofac" Version="6.5.0" />
+        <PackageReference Include="ConsoleTools" Version="1.1.1" />
+        <PackageReference Include="MediatR" Version="11.1.0" />
+        <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="9.2.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Bani.Cli.Application\Bani.Cli.Application.csproj" />
-        <ProjectReference Include="..\Bani.DataAccess\Bani.DataAccess.csproj" />
-        <ProjectReference Include="..\Bani.Domain\Bani.Domain.csproj" />
-        <ProjectReference Include="..\Bani.Cli.Presentation\Bani.Cli.Presentation.csproj" />
+        <ProjectReference Include="..\Bani.Cli.Application\Bani.Cli.Application.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Bani.DataAccess.Port\Bani.DataAccess.Port.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Bani.DataAccess\Bani.DataAccess.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Bani.Domain\Bani.Domain.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Bani.Cli.Presentation\Bani.Cli.Presentation.csproj" PrivateAssets="All" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

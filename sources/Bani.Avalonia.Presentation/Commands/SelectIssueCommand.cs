@@ -40,5 +40,10 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.Commands
 
             await mediator.Send(request);
         }
+
+        protected virtual void OnCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

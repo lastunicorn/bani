@@ -39,7 +39,7 @@ namespace DustInTheWind.Bani.Avalonia
             {
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = container.Resolve<MainWindowViewModel>()
+                    DataContext = container?.Resolve<MainWindowViewModel>()
                 };
             }
 
