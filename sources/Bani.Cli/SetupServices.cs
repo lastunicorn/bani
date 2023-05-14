@@ -21,6 +21,7 @@ using DustInTheWind.Bani.Cli.Application.PresentIssuers;
 using DustInTheWind.Bani.Cli.Presentation;
 using DustInTheWind.Bani.DataAccess;
 using DustInTheWind.Bani.DataAccess.Port;
+using DustInTheWind.ConsoleTools.Commando.Autofac.DependencyInjection;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using MediatR.Extensions.Autofac.DependencyInjection.Builder;
 using Microsoft.Extensions.Configuration;
@@ -52,8 +53,8 @@ namespace DustInTheWind.Bani
                 .AsSelf()
                 .SingleInstance();
 
-            Assembly assembly = typeof(PresentIssuersRequest).Assembly;
-            MediatRConfiguration mediatRConfiguration = MediatRConfigurationBuilder.Create(assembly)
+            Assembly applicationAssembly = typeof(PresentIssuersRequest).Assembly;
+            MediatRConfiguration mediatRConfiguration = MediatRConfigurationBuilder.Create(applicationAssembly)
                 .WithAllOpenGenericHandlerTypesRegistered()
                 .WithRegistrationScope(RegistrationScope.Scoped) // currently only supported values are `Transient` and `Scoped`
                 .Build();
@@ -70,7 +71,8 @@ namespace DustInTheWind.Bani
                 .AsSelf();
             containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
-            containerBuilder.RegisterType<PresentIssuersCommand>().AsSelf();
+            Assembly presentationAssembly = typeof(PresentIssuersCommand).Assembly;
+            containerBuilder.RegisterCommando(presentationAssembly);
         }
     }
 }
