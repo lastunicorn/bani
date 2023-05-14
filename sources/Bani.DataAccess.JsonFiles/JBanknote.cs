@@ -16,56 +16,55 @@
 
 using System;
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+namespace DustInTheWind.Bani.DataAccess.JsonFiles;
+
+public class JBanknote : JArtifact
 {
-    public class JBanknote : JArtifact
+    public float? Width { get; set; }
+
+    public float? Height { get; set; }
+
+    public bool? Embossing { get; set; }
+
+    public int? PrintYear { get; set; }
+
+    public JBanknote()
     {
-        public float? Width { get; set; }
+    }
 
-        public float? Height { get; set; }
-
-        public bool? Embossing { get; set; }
-
-        public int? PrintYear { get; set; }
-
-        public JBanknote()
+    public JBanknote(JBanknote banknote)
+        : base(banknote)
+    {
+        if (banknote != null)
         {
+            Width = banknote.Width;
+            Height = banknote.Height;
+            Embossing = banknote.Embossing;
+            PrintYear = banknote.PrintYear;
         }
+    }
 
-        public JBanknote(JBanknote banknote)
-            : base(banknote)
+    public override void MergeInto(JArtifact targetArtifact)
+    {
+        if (targetArtifact == null) throw new ArgumentNullException(nameof(targetArtifact));
+
+        if (targetArtifact is JBanknote targetBanknote)
         {
-            if (banknote != null)
-            {
-                Width = banknote.Width;
-                Height = banknote.Height;
-                Embossing = banknote.Embossing;
-                PrintYear = banknote.PrintYear;
-            }
+            MergeInto(targetBanknote);
         }
-
-        public override void MergeInto(JArtifact targetArtifact)
+        else
         {
-            if (targetArtifact == null) throw new ArgumentNullException(nameof(targetArtifact));
-
-            if (targetArtifact is JBanknote targetBanknote)
-            {
-                MergeInto(targetBanknote);
-            }
-            else
-            {
-                throw new ArgumentException($"The {nameof(targetArtifact)} must be a {typeof(JBanknote)}.", nameof(targetArtifact));
-            }
+            throw new ArgumentException($"The {nameof(targetArtifact)} must be a {typeof(JBanknote)}.", nameof(targetArtifact));
         }
+    }
 
-        private void MergeInto(JBanknote targetBanknote)
-        {
-            base.MergeInto(targetBanknote);
+    private void MergeInto(JBanknote targetBanknote)
+    {
+        base.MergeInto(targetBanknote);
 
-            if (Width != null) targetBanknote.Width = Width;
-            if (Height != null) targetBanknote.Height = Height;
-            if (Embossing != null) targetBanknote.Embossing = Embossing;
-            if (PrintYear != null) targetBanknote.PrintYear = PrintYear;
-        }
+        if (Width != null) targetBanknote.Width = Width;
+        if (Height != null) targetBanknote.Height = Height;
+        if (Embossing != null) targetBanknote.Embossing = Embossing;
+        if (PrintYear != null) targetBanknote.PrintYear = PrintYear;
     }
 }

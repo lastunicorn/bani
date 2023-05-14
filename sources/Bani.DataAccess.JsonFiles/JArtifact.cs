@@ -18,75 +18,73 @@ using System;
 using System.Reflection;
 using Newtonsoft.Json;
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+namespace DustInTheWind.Bani.DataAccess.JsonFiles;
+
+public abstract class JArtifact : ICloneable
 {
-    public abstract class JArtifact : ICloneable
+    [JsonIgnore] public string Location { get; set; }
+
+    public string DisplayName { get; set; }
+
+    public float? Value { get; set; }
+
+    public string Unit { get; set; }
+
+    public string Substance { get; set; }
+
+    public string Color { get; set; }
+
+    public DateTime? IssueDate { get; set; }
+
+    public JPicture Obverse { get; set; }
+
+    public JPicture Reverse { get; set; }
+
+    public int? InstanceCount { get; set; }
+
+    protected JArtifact()
     {
-        [JsonIgnore]
-        public string Location { get; set; }
+    }
 
-        public string DisplayName { get; set; }
-
-        public float? Value { get; set; }
-
-        public string Unit { get; set; }
-
-        public string Substance { get; set; }
-
-        public string Color { get; set; }
-
-        public DateTime? IssueDate { get; set; }
-
-        public JPicture Obverse { get; set; }
-
-        public JPicture Reverse { get; set; }
-
-        public int? InstanceCount { get; set; }
-
-        protected JArtifact()
+    protected JArtifact(JArtifact artifact)
+    {
+        if (artifact != null)
         {
+            Location = artifact.Location;
+            DisplayName = artifact.DisplayName;
+            Value = artifact.Value;
+            Unit = artifact.Unit;
+            Substance = artifact.Substance;
+            Color = artifact.Color;
+            IssueDate = artifact.IssueDate;
+            Obverse = artifact.Obverse;
+            Reverse = artifact.Reverse;
+            InstanceCount = artifact.InstanceCount;
         }
+    }
 
-        protected JArtifact(JArtifact artifact)
-        {
-            if (artifact != null)
-            {
-                Location = artifact.Location;
-                DisplayName = artifact.DisplayName;
-                Value = artifact.Value;
-                Unit = artifact.Unit;
-                Substance = artifact.Substance;
-                Color = artifact.Color;
-                IssueDate = artifact.IssueDate;
-                Obverse = artifact.Obverse;
-                Reverse = artifact.Reverse;
-                InstanceCount = artifact.InstanceCount;
-            }
-        }
+    public virtual void MergeInto(JArtifact targetArtifact)
+    {
+        if (Location != null) targetArtifact.Location = Location;
+        if (DisplayName != null) targetArtifact.DisplayName = DisplayName;
+        if (Value != null) targetArtifact.Value = Value;
+        if (Unit != null) targetArtifact.Unit = Unit;
+        if (Substance != null) targetArtifact.Substance = Substance;
+        if (Color != null) targetArtifact.Color = Color;
+        if (IssueDate != null) targetArtifact.IssueDate = IssueDate;
+        if (Obverse != null) targetArtifact.Obverse = Obverse;
+        if (Reverse != null) targetArtifact.Reverse = Reverse;
+        if (InstanceCount != null) targetArtifact.InstanceCount = InstanceCount;
+    }
 
-        public virtual void MergeInto(JArtifact targetArtifact)
-        {
-            if (Location != null) targetArtifact.Location = Location;
-            if (DisplayName != null) targetArtifact.DisplayName = DisplayName;
-            if (Value != null) targetArtifact.Value = Value;
-            if (Unit != null) targetArtifact.Unit = Unit;
-            if (Substance != null) targetArtifact.Substance = Substance;
-            if (Color != null) targetArtifact.Color = Color;
-            if (IssueDate != null) targetArtifact.IssueDate = IssueDate;
-            if (Obverse != null) targetArtifact.Obverse = Obverse;
-            if (Reverse != null) targetArtifact.Reverse = Reverse;
-            if (InstanceCount != null) targetArtifact.InstanceCount = InstanceCount;
-        }
+    public object Clone()
+    {
+        Type type = GetType();
+        ConstructorInfo ctor = type.GetConstructor(new[] { type });
 
-        public object Clone()
-        {
-            Type type = GetType();
-            ConstructorInfo ctor = type.GetConstructor(new[] { type });
+        if (ctor != null)
+            return ctor.Invoke(new object[] { this });
 
-            if (ctor != null)
-                return ctor.Invoke(new object[] { this });
-
-            return null!;
-        }
+        return null!;
     }
 }

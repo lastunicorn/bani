@@ -18,23 +18,22 @@ using System;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+namespace DustInTheWind.Bani.DataAccess.JsonFiles;
+
+public class IssuerFile
 {
-    public class IssuerFile
+    private readonly string filePath;
+
+    public IssuerFile(string filePath)
     {
-        private readonly string filePath;
+        this.filePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
+    }
 
-        public IssuerFile(string filePath)
-        {
-            this.filePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
-        }
+    public JIssuer Issuer { get; set; }
 
-        public JIssuer Issuer { get; set; }
-
-        public void Open()
-        {
-            string json = File.ReadAllText(filePath);
-            Issuer = JsonConvert.DeserializeObject<JIssuer>(json);
-        }
+    public void Open()
+    {
+        string json = File.ReadAllText(filePath);
+        Issuer = JsonConvert.DeserializeObject<JIssuer>(json);
     }
 }

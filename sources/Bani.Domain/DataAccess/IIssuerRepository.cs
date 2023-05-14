@@ -16,14 +16,13 @@
 
 using System.Collections.Generic;
 
-namespace DustInTheWind.Bani.Domain.DataAccess
+namespace DustInTheWind.Bani.Domain.DataAccess;
+
+public interface IIssuerRepository
 {
-    public interface IIssuerRepository
-    {
-        IEnumerable<Issuer> GetAll();
-        
-        IEnumerable<Issuer> GetByName(string name);
-        
-        Issuer Get(string id);
-    }
+    IEnumerable<Issuer> GetAll();
+
+    IEnumerable<Issuer> GetByName(string name);
+
+    Issuer Get(string id);
 }

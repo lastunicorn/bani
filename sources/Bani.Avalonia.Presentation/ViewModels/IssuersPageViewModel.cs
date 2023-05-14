@@ -28,12 +28,12 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels
     public class IssuersPageViewModel : ViewModelBase
     {
         private readonly IMediator mediator;
-        private IssuerViewModel? selectedIssuer;
-        private string? issuerComments;
+        private IssuerViewModel selectedIssuer;
+        private string issuerComments;
 
         public ObservableCollection<IssuerViewModel> Issuers { get; } = new();
 
-        public IssuerViewModel? SelectedIssuer
+        public IssuerViewModel SelectedIssuer
         {
             get => selectedIssuer;
             set
@@ -45,7 +45,7 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels
             }
         }
 
-        public string? IssuerComments
+        public string IssuerComments
         {
             get => issuerComments;
             set
@@ -55,7 +55,7 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels
             }
         }
 
-        public SelectIssueCommand? SelectIssueCommand { get; }
+        public SelectIssueCommand SelectIssueCommand { get; }
 
         public IssuersPageViewModel(IMediator mediator, SelectIssueCommand selectIssueCommand)
         {

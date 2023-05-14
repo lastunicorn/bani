@@ -19,61 +19,60 @@ using System.IO;
 using DustInTheWind.Bani.DataAccess.JsonFiles;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess;
+
+internal class IssuerCrawler
 {
-    internal class IssuerCrawler
+    public IEnumerable<Issuer> Crawl(string directoryPath)
     {
-        public IEnumerable<Issuer> Crawl(string directoryPath)
+        string issuerFilePath = Path.Combine(directoryPath, "m-issuer.json");
+        bool fileExists = File.Exists(issuerFilePath);
+
+        if (fileExists)
         {
-            string issuerFilePath = Path.Combine(directoryPath, "m-issuer.json");
-            bool fileExists = File.Exists(issuerFilePath);
+            yield return ReadIssuer(issuerFilePath);
+        }
+        else
+        {
+            string[] subDirectoryPaths = Directory.GetDirectories(directoryPath);
 
-            if (fileExists)
+            foreach (string subDirectoryPath in subDirectoryPaths)
             {
-                yield return ReadIssuer(issuerFilePath);
-            }
-            else
-            {
-                string[] subDirectoryPaths = Directory.GetDirectories(directoryPath);
+                IEnumerable<Issuer> issuers = Crawl(subDirectoryPath);
 
-                foreach (string subDirectoryPath in subDirectoryPaths)
-                {
-                    IEnumerable<Issuer> issuers = Crawl(subDirectoryPath);
-
-                    foreach (Issuer issuer in issuers)
-                        yield return issuer;
-                }
+                foreach (Issuer issuer in issuers)
+                    yield return issuer;
             }
         }
+    }
 
-        private static Issuer ReadIssuer(string filePath)
+    private static Issuer ReadIssuer(string filePath)
+    {
+        IssuerFile issuerFile = new(filePath);
+        issuerFile.Open();
+
+        Issuer issuer = issuerFile.Issuer.ToDomainEntity();
+        issuer.Id = filePath;
+
+        string rootDirectoryPath = Path.GetDirectoryName(filePath);
+
+        IEnumerable<Emission> emissions = ReadEmissions(rootDirectoryPath);
+        issuer.Emissions.AddRange(emissions);
+
+        return issuer;
+    }
+
+    private static IEnumerable<Emission> ReadEmissions(string issuerDirectoryPath)
+    {
+        string[] subDirectories = Directory.GetDirectories(issuerDirectoryPath);
+
+        foreach (string subDirectory in subDirectories)
         {
-            IssuerFile issuerFile = new(filePath);
-            issuerFile.Open();
+            EmissionCrawler emissionCrawler = new();
+            IEnumerable<Emission> emissions = emissionCrawler.Crawl(subDirectory);
 
-            Issuer issuer = issuerFile.Issuer.ToDomainEntity();
-            issuer.Id = filePath;
-
-            string rootDirectoryPath = Path.GetDirectoryName(filePath);
-
-            IEnumerable<Emission> emissions = ReadEmissions(rootDirectoryPath);
-            issuer.Emissions.AddRange(emissions);
-
-            return issuer;
-        }
-
-        private static IEnumerable<Emission> ReadEmissions(string issuerDirectoryPath)
-        {
-            string[] subDirectories = Directory.GetDirectories(issuerDirectoryPath);
-
-            foreach (string subDirectory in subDirectories)
-            {
-                EmissionCrawler emissionCrawler = new();
-                IEnumerable<Emission> emissions = emissionCrawler.Crawl(subDirectory);
-
-                foreach (Emission emission in emissions)
-                    yield return emission;
-            }
+            foreach (Emission emission in emissions)
+                yield return emission;
         }
     }
 }

@@ -17,17 +17,16 @@
 using DustInTheWind.Bani.DataAccess.JsonFiles;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess;
+
+internal static class IssuerExtensions
 {
-    internal static class IssuerExtensions
+    public static Issuer ToDomainEntity(this JIssuer issuer)
     {
-        public static Issuer ToDomainEntity(this JIssuer issuer)
+        return new Issuer
         {
-            return new Issuer
-            {
-                Name = issuer.Name,
-                Comments = issuer.Comments
-            };
-        }
+            Name = issuer.Name,
+            Comments = issuer.Comments
+        };
     }
 }

@@ -18,23 +18,22 @@ using System;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+namespace DustInTheWind.Bani.DataAccess.JsonFiles;
+
+public class BanknoteFile
 {
-    public class BanknoteFile
+    private readonly string filePath;
+
+    public JBanknote Banknote { get; set; }
+
+    public BanknoteFile(string filePath)
     {
-        private readonly string filePath;
+        this.filePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
+    }
 
-        public JBanknote Banknote { get; set; }
-
-        public BanknoteFile(string filePath)
-        {
-            this.filePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
-        }
-
-        public void Open()
-        {
-            string json = File.ReadAllText(filePath);
-            Banknote = JsonConvert.DeserializeObject<JBanknote>(json);
-        }
+    public void Open()
+    {
+        string json = File.ReadAllText(filePath);
+        Banknote = JsonConvert.DeserializeObject<JBanknote>(json);
     }
 }

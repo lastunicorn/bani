@@ -14,15 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
-{
-    public class BanknoteDirectory : ArtifactDirectory<JBanknote>
-    {
-        protected override string ArtifactFileName => "m-banknote.json";
+namespace DustInTheWind.Bani.DataAccess.JsonFiles;
 
-        public BanknoteDirectory(string directoryPath)
-            :base(directoryPath)
-        {
-        }
+public class BanknoteDirectory : ArtifactDirectory<JBanknote>
+{
+    protected override string ArtifactFileName => "m-banknote.json";
+
+    public BanknoteDirectory(string directoryPath)
+        : base(directoryPath)
+    {
     }
 }

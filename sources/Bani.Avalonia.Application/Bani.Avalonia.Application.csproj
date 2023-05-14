@@ -19,10 +19,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <AssemblyName>DustInTheWind.Bani.Avalonia.Application</AssemblyName>
         <RootNamespace>DustInTheWind.Bani.Avalonia.Application</RootNamespace>
-        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>

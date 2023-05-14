@@ -16,16 +16,15 @@
 
 using System.Collections.Generic;
 
-namespace DustInTheWind.Bani.Domain
+namespace DustInTheWind.Bani.Domain;
+
+public class Issuer
 {
-    public class Issuer
-    {
-        public string Id { get; set; }
+    public string Id { get; set; }
 
-        public string Name { get; set; }
+    public string Name { get; set; }
 
-        public string Comments { get; set; }
+    public string Comments { get; set; }
 
-        public List<Emission> Emissions { get; } = new();
-    }
+    public List<Emission> Emissions { get; } = new();
 }

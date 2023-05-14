@@ -15,33 +15,37 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DustInTheWind.Bani.Cli.Application.PresentIssuers;
+using DustInTheWind.ConsoleTools.Commando;
 using MediatR;
 
-namespace DustInTheWind.Bani.Cli.Presentation
+namespace DustInTheWind.Bani.Cli.Presentation;
+
+[Command("issuer", ShortDescription = "Displays the list of issuers.")]
+public class PresentIssuersCommand : ICommand
 {
-    public class PresentIssuersCommand
+    private readonly IMediator mediator;
+
+    [CommandParameter(Order = 1, IsOptional = true)]
+    public string IssuerName { get; set; }
+    
+    public List<IssuerInfo> Issuers { get; private set; }
+
+    public PresentIssuersCommand(IMediator mediator)
     {
-        private readonly IMediator mediator;
+        this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+    }
 
-        public string IssuerName { get; set; }
-
-        public PresentIssuersCommand(IMediator mediator)
+    public async Task Execute()
+    {
+        PresentIssuersRequest request = new()
         {
-            this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-        }
+            IssuerName = IssuerName
+        };
+        PresentIssuersResponse response = await mediator.Send(request);
 
-        public async Task Execute()
-        {
-            PresentIssuersRequest request = new()
-            {
-                IssuerName = IssuerName
-            };
-            PresentIssuersResponse response = await mediator.Send(request);
-
-            PresentIssuersView view = new();
-            view.Display(response);
-        }
+        Issuers = response.Issuers;
     }
 }

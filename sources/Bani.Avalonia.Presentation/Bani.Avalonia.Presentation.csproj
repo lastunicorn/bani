@@ -19,8 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
-        <Nullable>enable</Nullable>
+        <TargetFramework>net6.0</TargetFramework>
         <!--Avalonia doesen't support TrimMode=link currently,but we are working on that https://github.com/AvaloniaUI/Avalonia/issues/6892 -->
         <TrimMode>copyused</TrimMode>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
@@ -29,11 +28,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </PropertyGroup>
 
     <ItemGroup>
-      <None Remove="Assets\avalonia-logo.ico" />
+        <None Remove="Assets\avalonia-logo.ico" />
     </ItemGroup>
 
     <ItemGroup>
-      <AvaloniaResource Include="Assets\avalonia-logo.ico" />
+        <AvaloniaResource Include="Assets\avalonia-logo.ico" />
     </ItemGroup>
 
     <ItemGroup>
@@ -54,7 +53,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Bani.Avalonia.Application\Bani.Avalonia.Application.csproj" />
+        <ProjectReference Include="..\Bani.Avalonia.Application\Bani.Avalonia.Application.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -62,7 +61,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <DependentUpon>%(Filename)</DependentUpon>
         </Compile>
         <Compile Update="Views\IssuersPage.axaml.cs">
-          <DependentUpon>IssuersPage.axaml</DependentUpon>
+            <DependentUpon>IssuersPage.axaml</DependentUpon>
         </Compile>
         <Compile Update="Views\PageTitle.axaml.cs">
             <DependentUpon>%(Filename)</DependentUpon>

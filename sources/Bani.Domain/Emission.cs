@@ -16,18 +16,17 @@
 
 using System.Collections.Generic;
 
-namespace DustInTheWind.Bani.Domain
+namespace DustInTheWind.Bani.Domain;
+
+public class Emission
 {
-    public class Emission
-    {
-        public string Name { get; set; }
+    public string Name { get; set; }
 
-        public int? StartYear { get; set; }
+    public int? StartYear { get; set; }
 
-        public int? EndYear { get; set; }
-        
-        public string Comments { get; set; }
+    public int? EndYear { get; set; }
 
-        public List<Artifact> Artifacts { get; init; } = new();
-    }
+    public string Comments { get; set; }
+
+    public List<Artifact> Artifacts { get; init; } = new();
 }

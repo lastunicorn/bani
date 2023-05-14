@@ -19,39 +19,43 @@ using Autofac;
 using DustInTheWind.Bani.Cli.Application.PresentIssuers;
 using DustInTheWind.Bani.Cli.Presentation;
 using DustInTheWind.Bani.DataAccess;
-using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Domain.DataAccess;
+using DustInTheWind.ConsoleTools.Commando.Autofac.DependencyInjection;
 using MediatR.Extensions.Autofac.DependencyInjection;
 
-namespace DustInTheWind.Bani
+namespace DustInTheWind.Bani;
+
+internal class SetupServices
 {
-    internal class SetupServices
+    public static IContainer BuildContainer()
     {
-        public static IContainer BuildContainer()
-        {
-            ContainerBuilder containerBuilder = new();
-            ConfigureServices(containerBuilder);
+        ContainerBuilder containerBuilder = new();
+        ConfigureServices(containerBuilder);
 
-            return containerBuilder.Build();
-        }
+        return containerBuilder.Build();
+    }
 
-        private static void ConfigureServices(ContainerBuilder containerBuilder)
-        {
-            Assembly assembly = typeof(PresentIssuersRequest).Assembly;
-            containerBuilder.RegisterMediatR(assembly);
+    private static void ConfigureServices(ContainerBuilder containerBuilder)
+    {
+        Assembly presentationAssembly = typeof(PresentIssuersCommand).Assembly;
+        containerBuilder.RegisterCommando(presentationAssembly);
 
-            containerBuilder.RegisterType<BaniDbContext>().AsSelf();
-            containerBuilder.Register(builder =>
+        Assembly applicationAssembly = typeof(PresentIssuersRequest).Assembly;
+        containerBuilder.RegisterMediatR(applicationAssembly);
+
+        containerBuilder.RegisterType<BaniDbContext>().AsSelf();
+        containerBuilder
+            .Register(builder =>
             {
-                //const string dbFilePath = "/nfs/YubabaData/Alez/projects/Money/database";
-                const string dbFilePath = @"\\192.168.1.12\Data\Alez\projects\Money\database";
+                const string dbFilePath = "/nfs/YubabaData/Alez/projects/Money/database";
+                //const string dbFilePath = @"\\192.168.1.12\Data\Alez\projects\Money\database";
                 //const string dbFilePath = @"c:\Temp\database";
 
                 return new BaniDbContext(dbFilePath);
-            }).AsSelf();
-            containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+            })
+            .AsSelf();
+        containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
-            containerBuilder.RegisterType<PresentIssuersCommand>().AsSelf();
-        }
+        containerBuilder.RegisterType<PresentIssuersCommand>().AsSelf();
     }
 }

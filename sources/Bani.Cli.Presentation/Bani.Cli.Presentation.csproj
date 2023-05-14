@@ -19,19 +19,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <AssemblyName>DustInTheWind.Bani.Cli.Presentation</AssemblyName>
         <RootNamespace>DustInTheWind.Bani.Cli.Presentation</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="ConsoleTools.Controls" Version="1.1.0" />
-      <PackageReference Include="ConsoleTools.Controls.Tables" Version="1.1.0" />
-      <PackageReference Include="MediatR" Version="10.0.1" />
+        <PackageReference Include="ConsoleTools.Commando" Version="1.5.0" />
+        <PackageReference Include="ConsoleTools.Controls" Version="1.1.0" />
+        <PackageReference Include="ConsoleTools.Controls.Tables" Version="1.1.0" />
+        <PackageReference Include="MediatR" Version="10.0.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Bani.Cli.Application\Bani.Cli.Application.csproj" />
+        <ProjectReference Include="..\Bani.Cli.Application\Bani.Cli.Application.csproj" />
     </ItemGroup>
 
 </Project>

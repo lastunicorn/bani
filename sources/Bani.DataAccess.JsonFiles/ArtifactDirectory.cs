@@ -17,31 +17,30 @@
 using System;
 using System.Collections.Generic;
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+namespace DustInTheWind.Bani.DataAccess.JsonFiles;
+
+public abstract class ArtifactDirectory<T>
+    where T : JArtifact
 {
-    public abstract class ArtifactDirectory<T>
-        where T:JArtifact
+    private readonly string directoryPath;
+
+    protected abstract string ArtifactFileName { get; }
+
+    public List<T> Artifacts { get; private set; }
+
+    protected ArtifactDirectory(string directoryPath)
     {
-        private readonly string directoryPath;
+        this.directoryPath = directoryPath ?? throw new ArgumentNullException(nameof(directoryPath));
+    }
 
-        protected abstract string ArtifactFileName { get; }
-
-        public List<T> Artifacts { get; private set; }
-
-        protected ArtifactDirectory(string directoryPath)
+    public void Read()
+    {
+        ArtifactCrawler<T> artifactCrawler = new()
         {
-            this.directoryPath = directoryPath ?? throw new ArgumentNullException(nameof(directoryPath));
-        }
+            ArtifactFileName = ArtifactFileName
+        };
 
-        public void Read()
-        {
-            ArtifactCrawler<T> artifactCrawler = new()
-            {
-                ArtifactFileName = ArtifactFileName
-            };
-
-            artifactCrawler.Crawl(directoryPath);
-            Artifacts = artifactCrawler.Artifacts;
-        }
+        artifactCrawler.Crawl(directoryPath);
+        Artifacts = artifactCrawler.Artifacts;
     }
 }

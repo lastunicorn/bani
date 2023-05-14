@@ -20,32 +20,31 @@ using System.Linq;
 using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Domain.DataAccess;
 
-namespace DustInTheWind.Bani.DataAccess
+namespace DustInTheWind.Bani.DataAccess;
+
+public class IssuerRepository : IIssuerRepository
 {
-    public class IssuerRepository : IIssuerRepository
+    private readonly BaniDbContext dbContext;
+
+    public IssuerRepository(BaniDbContext dbContext)
     {
-        private readonly BaniDbContext dbContext;
+        this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+    }
 
-        public IssuerRepository(BaniDbContext dbContext)
-        {
-            this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-        }
+    public IEnumerable<Issuer> GetAll()
+    {
+        return dbContext.Issuers;
+    }
 
-        public IEnumerable<Issuer> GetAll()
-        {
-            return dbContext.Issuers;
-        }
+    public IEnumerable<Issuer> GetByName(string name)
+    {
+        return dbContext.Issuers
+            .Where(x => x.Name?.Contains(name, StringComparison.InvariantCultureIgnoreCase) ?? false);
+    }
 
-        public IEnumerable<Issuer> GetByName(string name)
-        {
-            return dbContext.Issuers
-                .Where(x => x.Name?.Contains(name, StringComparison.InvariantCultureIgnoreCase) ?? false);
-        }
-
-        public Issuer Get(string id)
-        {
-            return dbContext.Issuers
-                .FirstOrDefault(x => x.Id == id);
-        }
+    public Issuer Get(string id)
+    {
+        return dbContext.Issuers
+            .FirstOrDefault(x => x.Id == id);
     }
 }

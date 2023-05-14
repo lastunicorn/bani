@@ -16,19 +16,17 @@
 
 using System.Threading.Tasks;
 using Autofac;
-using DustInTheWind.Bani.Cli.Presentation;
+using DustInTheWind.ConsoleTools.Commando;
 
-namespace DustInTheWind.Bani
+namespace DustInTheWind.Bani;
+
+internal static class Program
 {
-    internal static class Program
+    private static async Task Main(string[] args)
     {
-        private static async Task Main(string[] args)
-        {
-            IContainer container = SetupServices.BuildContainer();
+        IContainer container = SetupServices.BuildContainer();
 
-            PresentIssuersCommand command = container.Resolve<PresentIssuersCommand>();
-            command.IssuerName = args.Length > 0 ? args[0] : null;
-            await command.Execute();
-        }
+        Application application = container.Resolve<Application>();
+        await application.Run(args);
     }
 }

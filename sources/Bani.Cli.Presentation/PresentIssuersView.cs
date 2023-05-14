@@ -16,80 +16,48 @@
 
 using System;
 using DustInTheWind.Bani.Cli.Application.PresentIssuers;
+using DustInTheWind.ConsoleTools.Commando;
 using DustInTheWind.ConsoleTools.Controls;
-using DustInTheWind.ConsoleTools.Controls.Tables;
 
-namespace DustInTheWind.Bani.Cli.Presentation
+namespace DustInTheWind.Bani.Cli.Presentation;
+
+internal class PresentIssuersView : IView<PresentIssuersCommand>
 {
-    internal class PresentIssuersView
+    public void Display(PresentIssuersCommand command)
     {
-        public void Display(PresentIssuersResponse response)
-        {
-            foreach (IssuerInfo issuerInfo in response.Issuers)
-                DisplayIssuer(issuerInfo);
-        }
+        foreach (IssuerInfo issuerInfo in command.Issuers)
+            DisplayIssuer(issuerInfo);
+    }
 
-        private static void DisplayIssuer(IssuerInfo issuerInfo)
-        {
-            HorizontalLine horizontalLine = new()
-            {
-                Margin = 0
-            };
-            horizontalLine.Display();
+    private static void DisplayIssuer(IssuerInfo issuerInfo)
+    {
+        DisplayIssuerHeader(issuerInfo);
 
-            Console.WriteLine($"{issuerInfo.Name}");
+        foreach (EmissionInfo emissionInfo in issuerInfo.Emissions)
+        {
+            DisplayEmission(emissionInfo);
             Console.WriteLine();
-
-            foreach (EmissionInfo emissionInfo in issuerInfo.Emissions)
-                DisplayEmission(emissionInfo);
         }
+    }
 
-        private static void DisplayEmission(EmissionInfo emissionInfo)
+    private static void DisplayIssuerHeader(IssuerInfo issuerInfo)
+    {
+        HorizontalLine horizontalLine = new()
         {
-            DataGrid dataGrid = new()
-            {
-                Title = $"{emissionInfo.Name} [{emissionInfo.StartYear}-{emissionInfo.EndYear}]",
-                TitleRow =
-                {
-                    ForegroundColor = ConsoleColor.Black,
-                    BackgroundColor = ConsoleColor.Gray
-                },
-                Border =
-                {
-                    Template = BorderTemplate.SingleLineBorderTemplate
-                }
-            };
+            Margin = 0
+        };
+        horizontalLine.Display();
 
-            dataGrid.Columns.Add("Artifact");
+        Console.WriteLine($"{issuerInfo.Name}");
+        Console.WriteLine();
+    }
 
-            Column yearColumn = dataGrid.Columns.Add("Year");
-            yearColumn.CellHorizontalAlignment = HorizontalAlignment.Right;
-
-            Column issueDateColumn = dataGrid.Columns.Add("Issue Date");
-            issueDateColumn.CellHorizontalAlignment = HorizontalAlignment.Right;
-
-            Column countColumn = dataGrid.Columns.Add("Count");
-            countColumn.CellHorizontalAlignment = HorizontalAlignment.Right;
-
-            dataGrid.Columns.Add("Type");
-
-            foreach (ArtifactInfo artifactInfo in emissionInfo.Artifacts)
-            {
-                ContentRow row = new();
-
-                if (artifactInfo.InstanceCount == 0)
-                    row.ForegroundColor = ConsoleColor.DarkYellow;
-
-                row.AddCell(artifactInfo.DisplayName);
-                row.AddCell(artifactInfo.Year);
-                row.AddCell(artifactInfo.IssueDate?.ToString("yyyy MM dd"));
-                row.AddCell(artifactInfo.InstanceCount);
-                row.AddCell(artifactInfo.ArtifactType);
-
-                dataGrid.Rows.Add(row);
-            }
-
-            dataGrid.Display();
-        }
+    private static void DisplayEmission(EmissionInfo emissionInfo)
+    {
+        EmissionControl emissionControl = new()
+        {
+            EmissionInfo = emissionInfo
+        };
+        emissionControl.Display();
     }
 }

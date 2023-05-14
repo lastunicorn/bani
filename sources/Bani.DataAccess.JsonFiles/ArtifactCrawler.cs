@@ -17,69 +17,68 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+namespace DustInTheWind.Bani.DataAccess.JsonFiles;
+
+internal class ArtifactCrawler<T>
+    where T : JArtifact
 {
-    internal class ArtifactCrawler<T>
-        where T : JArtifact
+    private readonly Stack<T> stack = new();
+
+    public string ArtifactFileName { get; set; }
+
+    public List<T> Artifacts { get; private set; }
+
+    public void Crawl(string directoryPath)
     {
-        private readonly Stack<T> stack = new();
+        stack.Clear();
+        Artifacts = new List<T>();
 
-        public string ArtifactFileName { get; set; }
+        ProcessDirectory(directoryPath);
+    }
 
-        public List<T> Artifacts { get; private set; }
+    private bool ProcessDirectory(string directoryPath)
+    {
+        string artifactFilePath = Path.Combine(directoryPath, ArtifactFileName);
+        bool artifactFileExists = File.Exists(artifactFilePath);
 
-        public void Crawl(string directoryPath)
+        if (artifactFileExists)
+            ReadArtifactAndPushToStack(artifactFilePath);
+
+        IEnumerable<string> subDirectoryPaths = Directory.EnumerateDirectories(directoryPath);
+
+        bool subArtifactWasFound = false;
+
+        foreach (string subDirectoryPath in subDirectoryPaths)
+            subArtifactWasFound |= ProcessDirectory(subDirectoryPath);
+
+        if (artifactFileExists)
         {
-            stack.Clear();
-            Artifacts = new List<T>();
+            T currentItem = stack.Pop();
 
-            ProcessDirectory(directoryPath);
+            if (!subArtifactWasFound)
+                Artifacts.Add(currentItem);
         }
 
-        private bool ProcessDirectory(string directoryPath)
+        return subArtifactWasFound || artifactFileExists;
+    }
+
+    private void ReadArtifactAndPushToStack(string artifactFilePath)
+    {
+        ArtifactFile<T> artifactFile = new(artifactFilePath);
+        artifactFile.Open();
+
+        T currentArtifact = artifactFile.Artifact;
+
+        if (stack.Count > 0)
         {
-            string artifactFilePath = Path.Combine(directoryPath, ArtifactFileName);
-            bool artifactFileExists = File.Exists(artifactFilePath);
-
-            if (artifactFileExists)
-                ReadArtifactAndPushToStack(artifactFilePath);
-
-            IEnumerable<string> subDirectoryPaths = Directory.EnumerateDirectories(directoryPath);
-
-            bool subArtifactWasFound = false;
-
-            foreach (string subDirectoryPath in subDirectoryPaths)
-                subArtifactWasFound |= ProcessDirectory(subDirectoryPath);
-
-            if (artifactFileExists)
-            {
-                T currentItem = stack.Pop();
-
-                if (!subArtifactWasFound)
-                    Artifacts.Add(currentItem);
-            }
-
-            return subArtifactWasFound || artifactFileExists;
+            T stackArtifact = stack.Peek();
+            T newArtifact = stackArtifact.Clone() as T;
+            currentArtifact.MergeInto(newArtifact);
+            stack.Push(newArtifact);
         }
-
-        private void ReadArtifactAndPushToStack(string artifactFilePath)
+        else
         {
-            ArtifactFile<T> artifactFile = new(artifactFilePath);
-            artifactFile.Open();
-
-            T currentArtifact = artifactFile.Artifact;
-
-            if (stack.Count > 0)
-            {
-                T stackArtifact = stack.Peek();
-                T newArtifact = stackArtifact.Clone() as T;
-                currentArtifact.MergeInto(newArtifact);
-                stack.Push(newArtifact);
-            }
-            else
-            {
-                stack.Push(currentArtifact);
-            }
+            stack.Push(currentArtifact);
         }
     }
 }

@@ -18,27 +18,26 @@ using System;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace DustInTheWind.Bani.DataAccess.JsonFiles
+namespace DustInTheWind.Bani.DataAccess.JsonFiles;
+
+public class ArtifactFile<T>
+    where T : JArtifact
 {
-    public class ArtifactFile<T>
-        where T : JArtifact
+    public string FilePath { get; }
+
+    public T Artifact { get; set; }
+
+    public ArtifactFile(string filePath)
     {
-        public string FilePath { get; }
+        FilePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
+    }
 
-        public T Artifact { get; set; }
+    public void Open()
+    {
+        string json = File.ReadAllText(FilePath);
+        Artifact = JsonConvert.DeserializeObject<T>(json);
 
-        public ArtifactFile(string filePath)
-        {
-            FilePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
-        }
-
-        public void Open()
-        {
-            string json = File.ReadAllText(FilePath);
-            Artifact = JsonConvert.DeserializeObject<T>(json);
-
-            if (Artifact != null)
-                Artifact.Location = FilePath;
-        }
+        if (Artifact != null)
+            Artifact.Location = FilePath;
     }
 }

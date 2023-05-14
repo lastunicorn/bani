@@ -34,13 +34,13 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.Views
             AvaloniaXamlLoader.Load(this);
         }
 
-        private void InputElement_OnDoubleTapped(object? sender, RoutedEventArgs e)
+        private void InputElement_OnDoubleTapped(object sender, RoutedEventArgs e)
         {
             if (DataContext is IssuersPageViewModel mainWindowViewModel)
             {
-                SelectIssueCommand? selectIssueCommand = mainWindowViewModel.SelectIssueCommand;
+                SelectIssueCommand selectIssueCommand = mainWindowViewModel.SelectIssueCommand;
 
-                object? selectedItem = sender is ListBox listBox
+                object selectedItem = sender is ListBox listBox
                     ? listBox.SelectedItem
                     : null;
 

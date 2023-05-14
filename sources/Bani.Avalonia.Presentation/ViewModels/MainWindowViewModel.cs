@@ -24,7 +24,7 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private string? breadCrumbs;
+        private string breadCrumbs;
 
         public string WindowTitle
         {
@@ -40,7 +40,7 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels
 
         public PageTitleViewModel PageTitleViewModel { get; } = new();
 
-        public string? BreadCrumbs
+        public string BreadCrumbs
         {
             get => breadCrumbs;
             set
@@ -50,7 +50,7 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels
             }
         }
 
-        public SelectIssueCommand? SelectIssueCommand { get; }
+        public SelectIssueCommand SelectIssueCommand { get; }
 
         public IssuersPageViewModel IssuersPageViewModel { get; }
 
