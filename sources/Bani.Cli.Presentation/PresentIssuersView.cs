@@ -21,35 +21,23 @@ using DustInTheWind.ConsoleTools.Controls;
 
 namespace DustInTheWind.Bani.Cli.Presentation;
 
-internal class PresentIssuersView : IView<PresentIssuersCommand>
+internal class PresentIssuersView : ViewBase<IssuerCommand>
 {
-    public void Display(PresentIssuersCommand command)
+    public override void Display(IssuerCommand command)
     {
         foreach (IssuerInfo issuerInfo in command.Issuers)
             DisplayIssuer(issuerInfo);
     }
 
-    private static void DisplayIssuer(IssuerInfo issuerInfo)
+    private void DisplayIssuer(IssuerInfo issuerInfo)
     {
-        DisplayIssuerHeader(issuerInfo);
+        WriteTitle(issuerInfo.Name);
 
         foreach (EmissionInfo emissionInfo in issuerInfo.Emissions)
         {
             DisplayEmission(emissionInfo);
             Console.WriteLine();
         }
-    }
-
-    private static void DisplayIssuerHeader(IssuerInfo issuerInfo)
-    {
-        HorizontalLine horizontalLine = new()
-        {
-            Margin = 0
-        };
-        horizontalLine.Display();
-
-        Console.WriteLine($"{issuerInfo.Name}");
-        Console.WriteLine();
     }
 
     private static void DisplayEmission(EmissionInfo emissionInfo)

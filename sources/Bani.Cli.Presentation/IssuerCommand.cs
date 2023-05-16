@@ -23,17 +23,23 @@ using MediatR;
 
 namespace DustInTheWind.Bani.Cli.Presentation;
 
-[Command("issuer", ShortDescription = "Displays the list of issuers.")]
-public class PresentIssuersCommand : ICommand
+[NamedCommand("issuer", Description = "Displays the list of issuers.")]
+public class IssuerCommand : ICommand
 {
     private readonly IMediator mediator;
 
-    [CommandParameter(Order = 1, IsOptional = true)]
+    [NamedParameter("name", ShortName = 'n', IsOptional = true)]
     public string IssuerName { get; set; }
 
+    [NamedParameter("start-year", ShortName = 's', IsOptional = true)]
+    public int? StartYear { get; set; }
+
+    [NamedParameter("end-year", ShortName = 'e', IsOptional = true)]
+    public int? EndYear { get; set; }
+    
     public List<IssuerInfo> Issuers { get; private set; }
 
-    public PresentIssuersCommand(IMediator mediator)
+    public IssuerCommand(IMediator mediator)
     {
         this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
     }
@@ -42,7 +48,9 @@ public class PresentIssuersCommand : ICommand
     {
         PresentIssuersRequest request = new()
         {
-            IssuerName = IssuerName
+            IssuerName = IssuerName,
+            StartYear = StartYear,
+            EndYear = EndYear
         };
         PresentIssuersResponse response = await mediator.Send(request);
 

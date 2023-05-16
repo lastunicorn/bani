@@ -30,5 +30,26 @@ public class Emission
 
     public string Comments { get; set; }
 
-    public List<Artifact> Artifacts { get; init; } = new();
+    public List<Artifact> Artifacts { get; } = new();
+
+    public bool IsBetween(int? startYear, int? endYear)
+    {
+        if (startYear == null && endYear == null)
+            return true;
+
+        if (startYear == null)
+            return StartYear == null || endYear.Value >= StartYear.Value;
+
+        if (endYear == null)
+            return EndYear == null || startYear.Value <= EndYear.Value;
+
+        return ContainsDate(endYear.Value) ||
+               ((EndYear == null || endYear.Value > EndYear.Value) && StartYear.Value <= EndYear);
+    }
+
+    public bool ContainsDate(int year)
+    {
+        return (StartYear == null || year >= StartYear.Value) &&
+               (EndYear == null || year <= EndYear.Value);
+    }
 }

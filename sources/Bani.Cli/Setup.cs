@@ -18,27 +18,17 @@ using System.IO;
 using System.Reflection;
 using Autofac;
 using DustInTheWind.Bani.Cli.Application.PresentIssuers;
-using DustInTheWind.Bani.Cli.Presentation;
 using DustInTheWind.Bani.DataAccess;
 using DustInTheWind.Bani.DataAccess.Port;
-using DustInTheWind.ConsoleTools.Commando.Autofac.DependencyInjection;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using MediatR.Extensions.Autofac.DependencyInjection.Builder;
 using Microsoft.Extensions.Configuration;
 
 namespace DustInTheWind.Bani;
 
-internal class SetupServices
+internal class Setup
 {
-    public static IContainer BuildContainer()
-    {
-        ContainerBuilder containerBuilder = new();
-        ConfigureServices(containerBuilder);
-
-        return containerBuilder.Build();
-    }
-
-    private static void ConfigureServices(ContainerBuilder containerBuilder)
+    public static void ConfigureServices(ContainerBuilder containerBuilder)
     {
         containerBuilder
             .Register(builder =>
@@ -70,8 +60,5 @@ internal class SetupServices
             })
             .AsSelf();
         containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
-
-        Assembly presentationAssembly = typeof(PresentIssuersCommand).Assembly;
-        containerBuilder.RegisterCommando(presentationAssembly);
     }
 }

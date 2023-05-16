@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using DustInTheWind.Bani.DataAccess.Port;
@@ -43,7 +44,7 @@ internal class PresentIssuersUseCase : IRequestHandler<PresentIssuersRequest, Pr
         PresentIssuersResponse response = new()
         {
             Issuers = issuers
-                .Select(x => new IssuerInfo(x))
+                .Select(x => new IssuerInfo(x, request.StartYear, request.EndYear))
                 .ToList()
         };
 

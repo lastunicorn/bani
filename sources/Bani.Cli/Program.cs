@@ -15,8 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Threading.Tasks;
-using Autofac;
+using DustInTheWind.Bani.Cli.Presentation;
 using DustInTheWind.ConsoleTools.Commando;
+using DustInTheWind.ConsoleTools.Commando.Builder.Autofac;
 
 namespace DustInTheWind.Bani;
 
@@ -24,9 +25,11 @@ internal static class Program
 {
     private static async Task Main(string[] args)
     {
-        IContainer container = SetupServices.BuildContainer();
+        Application application = ApplicationBuilder.Create()
+            .RegisterCommandsFrom(typeof(IssuerCommand).Assembly)
+            .ConfigureServices(Setup.ConfigureServices)
+            .Build();
 
-        Application application = container.Resolve<Application>();
-        await application.Run(args);
+        await application.RunAsync(args);
     }
 }

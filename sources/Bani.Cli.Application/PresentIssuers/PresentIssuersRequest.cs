@@ -21,4 +21,8 @@ namespace DustInTheWind.Bani.Cli.Application.PresentIssuers;
 public class PresentIssuersRequest : IRequest<PresentIssuersResponse>
 {
     public string IssuerName { get; set; }
+    
+    public int? StartYear { get; set; }
+    
+    public int? EndYear { get; set; }
 }

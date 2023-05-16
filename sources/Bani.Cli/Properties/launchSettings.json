@@ -2,7 +2,7 @@
   "profiles": {
     "Bani": {
       "commandName": "Project",
-      "commandLineArgs": "ro"
+      "commandLineArgs": "issuer -s 2005 -- ro"
     }
   }
 }

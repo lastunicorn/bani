@@ -27,12 +27,13 @@ public class IssuerInfo
 
     public List<EmissionInfo> Emissions { get; }
 
-    public IssuerInfo(Issuer issuer)
+    public IssuerInfo(Issuer issuer, int? startYear, int? endYear)
     {
         if (issuer == null) throw new ArgumentNullException(nameof(issuer));
 
         Name = issuer.Name;
         Emissions = issuer.Emissions
+            .Where(x => x.IsBetween(startYear, endYear))
             .OrderBy(x => x.StartYear)
             .Select(x => new EmissionInfo(x))
             .ToList();
