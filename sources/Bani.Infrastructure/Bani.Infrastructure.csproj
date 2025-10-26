@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 Bani
 Copyright (C) 2022 Dust in the Wind
 
@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <RootNamespace>DustInTheWind.Bani.Infrastructure</RootNamespace>
         <AssemblyName>DustInTheWind.Bani.Infrastructure</AssemblyName>
     </PropertyGroup>
