@@ -16,7 +16,7 @@
 
 using DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
+namespace DustInTheWind.Bani.Avalonia.Presentation.Issuers;
 
 public class IssuerViewModel
 {

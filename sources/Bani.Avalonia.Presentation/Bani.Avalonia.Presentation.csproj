@@ -23,8 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <!--Avalonia doesen't support TrimMode=link currently,but we are working on that https://github.com/AvaloniaUI/Avalonia/issues/6892 -->
         <TrimMode>copyused</TrimMode>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-        <AssemblyName>DustInTheWind.Bani.Avalonia.Presentation</AssemblyName>
-        <RootNamespace>DustInTheWind.Bani.Avalonia.Presentation</RootNamespace>
+		<AssemblyName>DustInTheWind.$(MSBuildProjectName)</AssemblyName>
+		<RootNamespace>DustInTheWind.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -59,14 +59,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Update="Views\MainWindow.axaml.cs">
+        <Compile Update="Main\MainWindow.axaml.cs">
             <DependentUpon>%(Filename)</DependentUpon>
         </Compile>
-        <Compile Update="Views\IssuersPage.axaml.cs">
+        <Compile Update="Issuers\IssuersPage.axaml.cs">
             <DependentUpon>IssuersPage.axaml</DependentUpon>
         </Compile>
-        <Compile Update="Views\PageTitle.axaml.cs">
-            <DependentUpon>%(Filename)</DependentUpon>
+        <Compile Update="PageTitle\PageTitleControl.axaml.cs">
+            <DependentUpon>PageTitleControl.axaml</DependentUpon>
         </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views\" />
     </ItemGroup>
 </Project>

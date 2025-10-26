@@ -17,10 +17,9 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
-using DustInTheWind.Bani.Avalonia.Presentation.Commands;
-using DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
+using DustInTheWind.Bani.Avalonia.Presentation.Main;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.Views;
+namespace DustInTheWind.Bani.Avalonia.Presentation.Issuers;
 
 public partial class IssuersPage : UserControl
 {

@@ -21,35 +21,35 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.ViewModels"
+    xmlns:pageTitle="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.PageTitle"
 
-    x:Class="DustInTheWind.Bani.Avalonia.Presentation.Views.PageTitle"
+    x:Class="DustInTheWind.Bani.Avalonia.Presentation.PageTitle.PageTitleControl"
 
     mc:Ignorable="d">
 
-    <Design.DataContext>
-        <viewModels:PageTitleViewModel />
-    </Design.DataContext>
+	<Design.DataContext>
+		<pageTitle:PageTitleViewModel />
+	</Design.DataContext>
 
-    <Border
+	<Border
         Padding="20 15">
 
-        <DockPanel>
+		<DockPanel>
 
-            <TextBlock
+			<TextBlock
                 DockPanel.Dock="Top"
                 Text="{Binding Title}"
                 FontSize="18" />
 
-            <TextBlock
+			<TextBlock
                 Text="{Binding Description}"
                 IsVisible="{Binding IsDescriptionVisible}"
                 Margin="10 5 0 0"
                 FontSize="12"
                 TextWrapping="Wrap" />
 
-        </DockPanel>
+		</DockPanel>
 
-    </Border>
+	</Border>
 
 </UserControl>

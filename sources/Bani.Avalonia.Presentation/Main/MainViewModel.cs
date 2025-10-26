@@ -17,12 +17,14 @@
 using System;
 using System.Reflection;
 using DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
-using DustInTheWind.Bani.Avalonia.Presentation.Commands;
+using DustInTheWind.Bani.Avalonia.Presentation.Issuers;
+using DustInTheWind.Bani.Avalonia.Presentation.PageTitle;
+using DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
 using DustInTheWind.Bani.Infrastructure;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
+namespace DustInTheWind.Bani.Avalonia.Presentation.Main;
 
-public class MainWindowViewModel : ViewModelBase
+public class MainViewModel : ViewModelBase
 {
     private string breadCrumbs;
 
@@ -54,7 +56,7 @@ public class MainWindowViewModel : ViewModelBase
 
     public IssuersPageViewModel IssuersPageViewModel { get; }
 
-    public MainWindowViewModel(EventBus eventBus, SelectIssueCommand selectIssueCommand, IssuersPageViewModel issuersPageViewModel)
+    public MainViewModel(EventBus eventBus, SelectIssueCommand selectIssueCommand, IssuersPageViewModel issuersPageViewModel)
     {
         SelectIssueCommand = selectIssueCommand;
         IssuersPageViewModel = issuersPageViewModel;

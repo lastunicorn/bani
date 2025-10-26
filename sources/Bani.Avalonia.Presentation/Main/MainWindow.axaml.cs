@@ -1,4 +1,4 @@
-﻿// Bani
+// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,33 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
+using Avalonia.Controls;
 
-public class PageTitleViewModel : ViewModelBase
+namespace DustInTheWind.Bani.Avalonia.Presentation.Main;
+
+public partial class MainWindow : Window
 {
-    private string title = "Title";
-    private string description;
-
-    public string Title
+    public MainWindow()
     {
-        get => title;
-        set
-        {
-            title = value;
-            OnPropertyChanged();
-        }
+        InitializeComponent();
     }
-
-    public string Description
-    {
-        get => description;
-        set
-        {
-            description = value;
-            OnPropertyChanged();
-            OnPropertyChanged(nameof(IsDescriptionVisible));
-        }
-    }
-
-    public bool IsDescriptionVisible => !string.IsNullOrEmpty(Description);
 }

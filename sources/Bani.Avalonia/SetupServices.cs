@@ -18,8 +18,8 @@ using System.IO;
 using System.Reflection;
 using Autofac;
 using DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
-using DustInTheWind.Bani.Avalonia.Presentation.Commands;
-using DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
+using DustInTheWind.Bani.Avalonia.Presentation.Issuers;
+using DustInTheWind.Bani.Avalonia.Presentation.Main;
 using DustInTheWind.Bani.DataAccess;
 using DustInTheWind.Bani.DataAccess.Port;
 using DustInTheWind.Bani.Domain;
@@ -77,7 +77,7 @@ internal static class SetupServices
             .AsSelf();
         containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
-        containerBuilder.RegisterType<MainWindowViewModel>().AsSelf();
+        containerBuilder.RegisterType<MainViewModel>().AsSelf();
         containerBuilder.RegisterType<IssuersPageViewModel>().AsSelf();
         containerBuilder.RegisterType<SelectIssueCommand>().AsSelf();
     }

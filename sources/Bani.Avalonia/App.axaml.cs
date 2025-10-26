@@ -17,8 +17,7 @@
 using Autofac;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
-using DustInTheWind.Bani.Avalonia.Presentation.Views;
+using DustInTheWind.Bani.Avalonia.Presentation.Main;
 
 namespace DustInTheWind.Bani.Avalonia;
 
@@ -39,7 +38,7 @@ public partial class App : global::Avalonia.Application
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = container?.Resolve<MainWindowViewModel>()
+                DataContext = container?.Resolve<MainViewModel>()
             };
         }
 

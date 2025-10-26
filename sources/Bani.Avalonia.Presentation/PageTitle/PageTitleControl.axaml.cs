@@ -17,11 +17,11 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.Views;
+namespace DustInTheWind.Bani.Avalonia.Presentation.PageTitle;
 
-public partial class PageTitle : UserControl
+public partial class PageTitleControl : UserControl
 {
-    public PageTitle()
+    public PageTitleControl()
     {
         InitializeComponent();
     }

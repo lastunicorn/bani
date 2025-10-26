@@ -21,10 +21,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.ViewModels"
-    xmlns:views1="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Views"
+    xmlns:main="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Main"
+    xmlns:pageTitle="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.PageTitle"
+    xmlns:issuers="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Issuers"
 
-    x:Class="DustInTheWind.Bani.Avalonia.Presentation.Views.MainWindow"
+    x:Class="DustInTheWind.Bani.Avalonia.Presentation.Main.MainWindow"
 
     mc:Ignorable="d"
     d:DesignWidth="800"
@@ -35,13 +36,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Height="600">
 
     <Design.DataContext>
-        <viewModels:MainWindowViewModel />
+		<main:MainViewModel />
     </Design.DataContext>
 
     <DockPanel
         Margin="20">
 
-        <views1:PageTitle
+		<pageTitle:PageTitleControl
             DockPanel.Dock="Top"
             Margin="0 0 0 10"
             DataContext="{Binding PageTitleViewModel}" />
@@ -52,7 +53,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Margin="0 0 0 10"
             Padding="15 10" />
 
-        <views1:IssuersPage
+		<issuers:IssuersPage
             DataContext="{Binding IssuersPageViewModel}" />
 
     </DockPanel>

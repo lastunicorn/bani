@@ -21,14 +21,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.ViewModels"
+    xmlns:issuers="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Issuers"
 
-    x:Class="DustInTheWind.Bani.Avalonia.Presentation.Views.IssuersPage"
+    x:Class="DustInTheWind.Bani.Avalonia.Presentation.Issuers.IssuersPage"
 
     mc:Ignorable="d">
 
     <Design.DataContext>
-        <viewModels:IssuersPageViewModel />
+		<issuers:IssuersPageViewModel />
     </Design.DataContext>
 
     <DockPanel>
@@ -42,7 +42,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Margin="0 0 10 0">
 
             <ListBox.ItemTemplate>
-                <DataTemplate DataType="{x:Type viewModels:IssuerViewModel}">
+                <DataTemplate DataType="{x:Type issuers:IssuerViewModel}">
                     <TextBlock
                         Text="{Binding Text}"
                         VerticalAlignment="Center"
