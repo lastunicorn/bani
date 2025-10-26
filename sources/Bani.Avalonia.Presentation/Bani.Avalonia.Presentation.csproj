@@ -59,18 +59,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Update="Main\MainWindow.axaml.cs">
+        <Compile Update="Controls\Main\MainWindow.axaml.cs">
             <DependentUpon>%(Filename)</DependentUpon>
         </Compile>
-        <Compile Update="Issuers\IssuersPage.axaml.cs">
+        <Compile Update="Controls\Issuers\IssuersPage.axaml.cs">
             <DependentUpon>IssuersPage.axaml</DependentUpon>
         </Compile>
-        <Compile Update="PageTitle\PageTitleControl.axaml.cs">
+        <Compile Update="Controls\PageTitle\PageTitleControl.axaml.cs">
             <DependentUpon>PageTitleControl.axaml</DependentUpon>
         </Compile>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Views\" />
     </ItemGroup>
 </Project>

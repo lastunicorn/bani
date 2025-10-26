@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
-using DustInTheWind.Bani.Avalonia.Presentation.Issuers;
+using DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers;
 using MediatR;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.Main;
+namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.Main;
 
 public class SelectIssueCommand : ICommand
 {

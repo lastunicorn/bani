@@ -17,7 +17,7 @@
 using Autofac;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using DustInTheWind.Bani.Avalonia.Presentation.Main;
+using DustInTheWind.Bani.Avalonia.Presentation.Controls.Main;
 
 namespace DustInTheWind.Bani.Avalonia;
 

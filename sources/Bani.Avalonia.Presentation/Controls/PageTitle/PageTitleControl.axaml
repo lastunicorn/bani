@@ -21,9 +21,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pageTitle="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.PageTitle"
+    xmlns:pageTitle="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Controls.PageTitle"
 
-    x:Class="DustInTheWind.Bani.Avalonia.Presentation.PageTitle.PageTitleControl"
+    x:Class="DustInTheWind.Bani.Avalonia.Presentation.Controls.PageTitle.PageTitleControl"
 
     mc:Ignorable="d">
 

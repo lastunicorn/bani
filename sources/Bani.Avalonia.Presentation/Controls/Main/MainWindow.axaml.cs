@@ -16,7 +16,7 @@
 
 using Avalonia.Controls;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.Main;
+namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.Main;
 
 public partial class MainWindow : Window
 {

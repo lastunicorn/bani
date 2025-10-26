@@ -20,11 +20,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
-using DustInTheWind.Bani.Avalonia.Presentation.Main;
-using DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
+using DustInTheWind.Bani.Avalonia.Presentation.Controls.Main;
+using DustInTheWind.Bani.Avalonia.Presentation.Infrastructure;
 using MediatR;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.Issuers;
+namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers;
 
 public class IssuersPageViewModel : ViewModelBase
 {

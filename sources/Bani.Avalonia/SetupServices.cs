@@ -18,8 +18,8 @@ using System.IO;
 using System.Reflection;
 using Autofac;
 using DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
-using DustInTheWind.Bani.Avalonia.Presentation.Issuers;
-using DustInTheWind.Bani.Avalonia.Presentation.Main;
+using DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers;
+using DustInTheWind.Bani.Avalonia.Presentation.Controls.Main;
 using DustInTheWind.Bani.DataAccess;
 using DustInTheWind.Bani.DataAccess.Port;
 using DustInTheWind.Bani.Domain;
@@ -66,6 +66,19 @@ internal static class SetupServices
 
         containerBuilder.RegisterType<ApplicationState>().AsSelf().SingleInstance();
 
+        RegisterPortAdapters(containerBuilder);
+        RegisterPresentation(containerBuilder);
+    }
+
+    private static void RegisterPresentation(ContainerBuilder containerBuilder)
+    {
+        containerBuilder.RegisterType<MainViewModel>().AsSelf();
+        containerBuilder.RegisterType<IssuersPageViewModel>().AsSelf();
+        containerBuilder.RegisterType<SelectIssueCommand>().AsSelf();
+    }
+
+    private static void RegisterPortAdapters(ContainerBuilder containerBuilder)
+    {
         containerBuilder.RegisterType<BaniDbContext>().AsSelf();
         containerBuilder
             .Register(builder =>
@@ -76,9 +89,5 @@ internal static class SetupServices
             })
             .AsSelf();
         containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
-
-        containerBuilder.RegisterType<MainViewModel>().AsSelf();
-        containerBuilder.RegisterType<IssuersPageViewModel>().AsSelf();
-        containerBuilder.RegisterType<SelectIssueCommand>().AsSelf();
     }
 }

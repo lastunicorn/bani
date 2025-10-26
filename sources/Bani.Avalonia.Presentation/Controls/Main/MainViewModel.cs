@@ -17,12 +17,12 @@
 using System;
 using System.Reflection;
 using DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
-using DustInTheWind.Bani.Avalonia.Presentation.Issuers;
-using DustInTheWind.Bani.Avalonia.Presentation.PageTitle;
-using DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
+using DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers;
+using DustInTheWind.Bani.Avalonia.Presentation.Controls.PageTitle;
+using DustInTheWind.Bani.Avalonia.Presentation.Infrastructure;
 using DustInTheWind.Bani.Infrastructure;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.Main;
+namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.Main;
 
 public class MainViewModel : ViewModelBase
 {

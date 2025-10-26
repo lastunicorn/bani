@@ -14,17 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
+namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers;
 
-public class ViewModelBase : INotifyPropertyChanged
+public class IssuerViewModel
 {
-    public event PropertyChangedEventHandler PropertyChanged;
+    public IssuerInfo IssuerInfo { get; }
 
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    public string Text { get; }
+
+    public IssuerViewModel(IssuerInfo issuerInfo)
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        IssuerInfo = issuerInfo;
+        Text = IssuerInfo?.Name;
     }
 }

@@ -15,15 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using Avalonia.Controls;
-using Avalonia.Input;
 using Avalonia.Markup.Xaml;
-using DustInTheWind.Bani.Avalonia.Presentation.Main;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.Issuers;
+namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.PageTitle;
 
-public partial class IssuersPage : UserControl
+public partial class PageTitleControl : UserControl
 {
-    public IssuersPage()
+    public PageTitleControl()
     {
         InitializeComponent();
     }
@@ -31,20 +29,5 @@ public partial class IssuersPage : UserControl
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
-    }
-
-    private void InputElement_OnTapped(object sender, TappedEventArgs e)
-    {
-        if (DataContext is IssuersPageViewModel mainWindowViewModel)
-        {
-            SelectIssueCommand selectIssueCommand = mainWindowViewModel.SelectIssueCommand;
-
-            object selectedItem = sender is ListBox listBox
-                ? listBox.SelectedItem
-                : null;
-
-            if (selectIssueCommand?.CanExecute(selectedItem) == true)
-                selectIssueCommand.Execute(selectedItem);
-        }
     }
 }

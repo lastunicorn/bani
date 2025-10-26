@@ -17,7 +17,7 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using DustInTheWind.Bani.Avalonia.Presentation.ViewModels;
+using DustInTheWind.Bani.Avalonia.Presentation.Infrastructure;
 
 namespace DustInTheWind.Bani.Avalonia;
 
