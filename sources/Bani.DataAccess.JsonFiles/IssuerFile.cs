@@ -36,4 +36,13 @@ public class IssuerFile
         string json = File.ReadAllText(filePath);
         Issuer = JsonConvert.DeserializeObject<JIssuer>(json);
     }
+
+    public void Save()
+    {
+        if (Issuer == null)
+            throw new InvalidOperationException("Cannot save null issuer. Call Open() first or set the Issuer property.");
+
+        string json = JsonConvert.SerializeObject(Issuer, Formatting.Indented);
+        File.WriteAllText(filePath, json);
+    }
 }

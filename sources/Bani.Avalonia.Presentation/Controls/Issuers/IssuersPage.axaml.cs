@@ -16,6 +16,7 @@
 
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using DustInTheWind.Bani.Avalonia.Presentation.Controls.Main;
 
@@ -25,7 +26,7 @@ public partial class IssuersPage : UserControl
 {
     public IssuersPage()
     {
-        InitializeComponent();
+   InitializeComponent();
     }
 
     private void InitializeComponent()
@@ -35,16 +36,24 @@ public partial class IssuersPage : UserControl
 
     private void InputElement_OnTapped(object sender, TappedEventArgs e)
     {
-        if (DataContext is IssuersPageViewModel mainWindowViewModel)
-        {
-            SelectIssueCommand selectIssueCommand = mainWindowViewModel.SelectIssueCommand;
+   if (DataContext is IssuersPageViewModel mainWindowViewModel)
+   {
+        SelectIssueCommand selectIssueCommand = mainWindowViewModel.SelectIssueCommand;
 
-            object selectedItem = sender is ListBox listBox
-                ? listBox.SelectedItem
+ object selectedItem = sender is ListBox listBox
+     ? listBox.SelectedItem
                 : null;
 
-            if (selectIssueCommand?.CanExecute(selectedItem) == true)
-                selectIssueCommand.Execute(selectedItem);
+         if (selectIssueCommand?.CanExecute(selectedItem) == true)
+     selectIssueCommand.Execute(selectedItem);
         }
+    }
+
+ private async void CommentsTextBox_LostFocus(object sender, RoutedEventArgs e)
+    {
+        if (DataContext is IssuersPageViewModel viewModel)
+   {
+  await viewModel.SaveIssuerComments();
+     }
     }
 }

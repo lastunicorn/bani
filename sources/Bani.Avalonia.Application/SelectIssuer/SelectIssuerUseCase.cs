@@ -17,9 +17,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using DustInTheWind.Bani.DataAccess.Port;
 using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Infrastructure;
+using DustInTheWind.Bani.Ports.DataAccess;
 using MediatR;
 
 namespace DustInTheWind.Bani.Avalonia.Application.SelectIssuer;

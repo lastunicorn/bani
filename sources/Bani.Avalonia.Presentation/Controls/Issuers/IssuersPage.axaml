@@ -39,7 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			SelectedItem="{Binding SelectedIssuer}"
 			MinWidth="200"
 			Tapped="InputElement_OnTapped"
-            Margin="0 0 10 0">
+     Margin="0 0 10 0">
 
 			<ListBox.ItemTemplate>
 				<DataTemplate DataType="{x:Type issuers:IssuerViewModel}">
@@ -70,9 +70,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 					Text="{Binding IssuerComments}"
 					VerticalAlignment="Stretch"
 					HorizontalAlignment="Stretch"
-					IsReadOnly="True"
+					IsReadOnly="False"
 					AcceptsReturn="True"
-					BorderBrush="WhiteSmoke" />
+					BorderBrush="WhiteSmoke"
+					LostFocus="CommentsTextBox_LostFocus" />
 				
 			</DockPanel>
 

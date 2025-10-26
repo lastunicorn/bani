@@ -17,12 +17,15 @@
 using DustInTheWind.Bani.DataAccess.JsonFiles;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess;
+namespace DustInTheWind.Bani.Adapters.DataAccess.DataMapping;
 
 internal static class ItemExtensions
 {
     public static Coin ToDomainEntity(this JCoin coin)
     {
+        if (coin == null)
+            return null;
+
         return new Coin
         {
             Id = coin.Location,
@@ -43,6 +46,9 @@ internal static class ItemExtensions
 
     public static Banknote ToDomainEntity(this JBanknote banknote)
     {
+        if (banknote == null)
+            return null;
+
         return new Banknote
         {
             Id = banknote.Location,

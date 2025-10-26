@@ -14,28 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.DataAccess.JsonFiles;
-using DustInTheWind.Bani.Domain;
+namespace DustInTheWind.Bani.Adapters.DataAccess.Infrastructure;
 
-namespace DustInTheWind.Bani.DataAccess;
-
-internal static class IssuerExtensions
+internal enum EntityState
 {
-    public static Issuer ToDomainEntity(this JIssuer issuer)
-    {
-        return new Issuer
-        {
-          Name = issuer.Name,
- Comments = issuer.Comments
-   };
-    }
-
-    public static JIssuer ToJsonEntity(this Issuer issuer)
-    {
-        return new JIssuer
-        {
-      Name = issuer.Name,
-            Comments = issuer.Comments
-        };
-    }
+    Added,
+    Modified,
+    Deleted
 }

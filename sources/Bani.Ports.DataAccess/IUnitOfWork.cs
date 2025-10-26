@@ -14,9 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.DataAccess.Port;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
-public interface IUnitOfWork
+namespace DustInTheWind.Bani.Ports.DataAccess;
+
+public interface IUnitOfWork : IDisposable
 {
     IIssuerRepository IssuerRepository { get; }
+
+    /// <summary>
+    /// Saves all changes made in this unit of work to the underlying data store.
+    /// </summary>
+    void SaveChanges();
+
+    /// <summary>
+    /// Asynchronously saves all changes made in this unit of work to the underlying data store.
+    /// </summary>
+    Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }

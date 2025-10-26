@@ -20,7 +20,7 @@ using System.Reflection;
 using Autofac;
 using DustInTheWind.Bani.Cli.Application.PresentIssuers;
 using DustInTheWind.Bani.DataAccess;
-using DustInTheWind.Bani.DataAccess.Port;
+using DustInTheWind.Bani.Ports.DataAccess;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using MediatR.Extensions.Autofac.DependencyInjection.Builder;
 using Microsoft.Extensions.Configuration;

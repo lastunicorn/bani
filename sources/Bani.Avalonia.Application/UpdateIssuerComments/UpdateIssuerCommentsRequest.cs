@@ -14,28 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.DataAccess.JsonFiles;
-using DustInTheWind.Bani.Domain;
+using MediatR;
 
-namespace DustInTheWind.Bani.DataAccess;
+namespace DustInTheWind.Bani.Avalonia.Application.UpdateIssuerComments;
 
-internal static class IssuerExtensions
+public class UpdateIssuerCommentsRequest : IRequest
 {
-    public static Issuer ToDomainEntity(this JIssuer issuer)
-    {
-        return new Issuer
-        {
-          Name = issuer.Name,
- Comments = issuer.Comments
-   };
-    }
+    public string IssuerId { get; set; }
 
-    public static JIssuer ToJsonEntity(this Issuer issuer)
-    {
-        return new JIssuer
-        {
-      Name = issuer.Name,
-            Comments = issuer.Comments
-        };
-    }
+    public string Comments { get; set; }
 }

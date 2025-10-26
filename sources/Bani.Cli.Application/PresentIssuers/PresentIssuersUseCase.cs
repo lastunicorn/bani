@@ -20,8 +20,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using DustInTheWind.Bani.DataAccess.Port;
 using DustInTheWind.Bani.Domain;
+using DustInTheWind.Bani.Ports.DataAccess;
 using MediatR;
 
 namespace DustInTheWind.Bani.Cli.Application.PresentIssuers;

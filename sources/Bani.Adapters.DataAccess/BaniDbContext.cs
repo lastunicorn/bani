@@ -24,7 +24,7 @@ public class BaniDbContext
 {
     private readonly string connectionString;
 
-    public List<Issuer> Issuers { get; } = new();
+    public List<Issuer> Issuers { get; } = [];
 
     public BaniDbContext(string connectionString)
     {
