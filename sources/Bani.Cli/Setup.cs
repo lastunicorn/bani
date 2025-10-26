@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.IO;
 using System.Reflection;
 using Autofac;
@@ -50,15 +51,27 @@ internal class Setup
             .Build();
         containerBuilder.RegisterMediatR(mediatRConfiguration);
 
-        containerBuilder.RegisterType<BaniDbContext>().AsSelf();
+        RegisterPortAdapters(containerBuilder);
+    }
+
+    private static void RegisterPortAdapters(ContainerBuilder containerBuilder)
+    {
         containerBuilder
-            .Register(builder =>
+            .RegisterType<BaniDbContext>()
+            .AsSelf();
+
+        containerBuilder
+            .Register(context =>
             {
-                IConfiguration configuration = builder.Resolve<IConfiguration>();
-                string databasePath = configuration["DatabasePath"];
+                IConfiguration configuration = context.Resolve<IConfiguration>();
+                string databasePath = configuration.GetConnectionString("DefaultConnection");
                 return new BaniDbContext(databasePath);
             })
             .AsSelf();
-        containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+
+        containerBuilder
+            .RegisterType<UnitOfWork>()
+            .As<IUnitOfWork>()
+            .InstancePerLifetimeScope();
     }
 }

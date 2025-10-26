@@ -62,9 +62,15 @@ internal static class SetupServices
             .Build();
         containerBuilder.RegisterMediatR(mediatRConfiguration);
 
-        containerBuilder.RegisterType<EventBus>().AsSelf().SingleInstance();
+        containerBuilder
+            .RegisterType<EventBus>()
+            .AsSelf()
+            .SingleInstance();
 
-        containerBuilder.RegisterType<ApplicationState>().AsSelf().SingleInstance();
+        containerBuilder
+            .RegisterType<ApplicationState>()
+            .AsSelf()
+            .SingleInstance();
 
         RegisterPortAdapters(containerBuilder);
         RegisterPresentation(containerBuilder);
@@ -79,15 +85,22 @@ internal static class SetupServices
 
     private static void RegisterPortAdapters(ContainerBuilder containerBuilder)
     {
-        containerBuilder.RegisterType<BaniDbContext>().AsSelf();
         containerBuilder
-            .Register(builder =>
+            .RegisterType<BaniDbContext>()
+            .AsSelf();
+
+        containerBuilder
+            .Register(context =>
             {
-                IConfiguration configuration = builder.Resolve<IConfiguration>();
-                string databasePath = configuration["DatabasePath"];
+                IConfiguration configuration = context.Resolve<IConfiguration>();
+                string databasePath = configuration.GetConnectionString("DefaultConnection");
                 return new BaniDbContext(databasePath);
             })
             .AsSelf();
-        containerBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+
+        containerBuilder
+            .RegisterType<UnitOfWork>()
+            .As<IUnitOfWork>()
+            .InstancePerLifetimeScope();
     }
 }
