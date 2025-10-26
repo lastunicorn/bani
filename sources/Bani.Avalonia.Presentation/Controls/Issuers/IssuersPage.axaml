@@ -35,7 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
         <ListBox
             DockPanel.Dock="Left"
-            Items="{Binding Issuers}"
+            ItemsSource="{Binding Issuers}"
             SelectedItem="{Binding SelectedIssuer}"
             MinWidth="200"
             Tapped="InputElement_OnTapped"
