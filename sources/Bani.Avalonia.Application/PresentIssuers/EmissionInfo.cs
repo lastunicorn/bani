@@ -15,32 +15,27 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using DustInTheWind.Bani.Domain;
 
 namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
 
-public class IssuerInfo
+public class EmissionInfo
 {
-    public string Id { get; set; }
-
     public string Name { get; }
 
-    public string Comments { get; set; }
+    public int? StartYear { get; }
 
-    public List<EmissionInfo> Emissions { get; }
+    public int? EndYear { get; }
 
-    public IssuerInfo(Issuer issuer)
+    public string Comments { get; }
+
+    public EmissionInfo(Emission emission)
     {
-        if (issuer == null) throw new ArgumentNullException(nameof(issuer));
+        ArgumentNullException.ThrowIfNull(emission);
 
-        Id = issuer.Id;
-        Name = issuer.Name;
-        Comments = issuer.Comments;
-        Emissions = issuer.Emissions
-            .OrderBy(x => x.StartYear)
-            .Select(x => new EmissionInfo(x))
-            .ToList();
+        Name = emission.Name;
+        StartYear = emission.StartYear;
+        EndYear = emission.EndYear;
+        Comments = emission.Comments;
     }
 }

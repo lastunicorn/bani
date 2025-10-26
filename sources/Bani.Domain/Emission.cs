@@ -30,7 +30,7 @@ public class Emission
 
     public string Comments { get; set; }
 
-    public List<Artifact> Artifacts { get; } = new();
+    public List<Artifact> Artifacts { get; } = [];
 
     public bool IsBetween(int? startYear, int? endYear)
     {

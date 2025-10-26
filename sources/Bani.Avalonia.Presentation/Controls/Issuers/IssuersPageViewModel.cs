@@ -1,4 +1,4 @@
-﻿// Bani
+// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -31,8 +31,9 @@ public class IssuersPageViewModel : ViewModelBase
     private readonly IMediator mediator;
     private IssuerViewModel selectedIssuer;
     private string issuerComments;
+    private ObservableCollection<EmissionViewModel> emissions;
 
-    public ObservableCollection<IssuerViewModel> Issuers { get; } = new();
+    public ObservableCollection<IssuerViewModel> Issuers { get; } = [];
 
     public IssuerViewModel SelectedIssuer
     {
@@ -43,6 +44,7 @@ public class IssuersPageViewModel : ViewModelBase
             OnPropertyChanged();
 
             IssuerComments = value?.IssuerInfo?.Comments;
+            Emissions = value?.Emissions ?? [];
         }
     }
 
@@ -52,6 +54,16 @@ public class IssuersPageViewModel : ViewModelBase
         set
         {
             issuerComments = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public ObservableCollection<EmissionViewModel> Emissions
+    {
+        get => emissions;
+        set
+        {
+            emissions = value;
             OnPropertyChanged();
         }
     }

@@ -28,5 +28,5 @@ public class Issuer
 
     public string Comments { get; set; }
 
-    public List<Emission> Emissions { get; } = new();
+    public List<Emission> Emissions { get; } = [];
 }
