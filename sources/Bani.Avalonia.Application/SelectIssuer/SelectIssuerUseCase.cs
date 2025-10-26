@@ -37,7 +37,7 @@ internal class SelectIssuerUseCase : IRequestHandler<SelectIssuerRequest>
         this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
     }
 
-    public Task<Unit> Handle(SelectIssuerRequest request, CancellationToken cancellationToken)
+    public Task Handle(SelectIssuerRequest request, CancellationToken cancellationToken)
     {
         Issuer issuer = unitOfWork.IssuerRepository.Get(request.IssuerId);
 

@@ -56,7 +56,7 @@ internal static class SetupServices
             .SingleInstance();
 
         Assembly assembly = typeof(PresentIssuersRequest).Assembly;
-        MediatRConfiguration mediatRConfiguration = MediatRConfigurationBuilder.Create(assembly)
+        MediatRConfiguration mediatRConfiguration = MediatRConfigurationBuilder.Create("", assembly)
             .WithAllOpenGenericHandlerTypesRegistered()
             .WithRegistrationScope(RegistrationScope.Scoped) // currently only supported values are `Transient` and `Scoped`
             .Build();

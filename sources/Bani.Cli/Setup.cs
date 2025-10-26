@@ -44,7 +44,7 @@ internal class Setup
             .SingleInstance();
 
         Assembly applicationAssembly = typeof(PresentIssuersRequest).Assembly;
-        MediatRConfiguration mediatRConfiguration = MediatRConfigurationBuilder.Create(applicationAssembly)
+        MediatRConfiguration mediatRConfiguration = MediatRConfigurationBuilder.Create("", applicationAssembly)
             .WithAllOpenGenericHandlerTypesRegistered()
             .WithRegistrationScope(RegistrationScope.Scoped) // currently only supported values are `Transient` and `Scoped`
             .Build();
