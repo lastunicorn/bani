@@ -30,7 +30,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace DustInTheWind.Bani.Avalonia;
 
-internal class SetupServices
+internal static class SetupServices
 {
     public static IContainer BuildContainer()
     {

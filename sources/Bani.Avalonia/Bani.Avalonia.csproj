@@ -53,8 +53,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <ItemGroup>
         <ProjectReference Include="..\Bani.Avalonia.Application\Bani.Avalonia.Application.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Bani.Avalonia.Presentation\Bani.Avalonia.Presentation.csproj" PrivateAssets="All" />
-        <ProjectReference Include="..\Bani.DataAccess.Port\Bani.DataAccess.Port.csproj" PrivateAssets="All" />
-        <ProjectReference Include="..\Bani.DataAccess\Bani.DataAccess.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Bani.Ports.DataAccess\Bani.Ports.DataAccess.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Bani.Adapters.DataAccess\Bani.Adapters.DataAccess.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Bani.Domain\Bani.Domain.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Bani.Infrastructure\Bani.Infrastructure.csproj" PrivateAssets="All" />
     </ItemGroup>

@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     <ItemGroup>
         <ProjectReference Include="..\Bani.DataAccess.JsonFiles\Bani.DataAccess.JsonFiles.csproj" PrivateAssets="" />
-        <ProjectReference Include="..\Bani.DataAccess.Port\Bani.DataAccess.Port.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Bani.Ports.DataAccess\Bani.Ports.DataAccess.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Bani.Domain\Bani.Domain.csproj" PrivateAssets="All" />
     </ItemGroup>
 

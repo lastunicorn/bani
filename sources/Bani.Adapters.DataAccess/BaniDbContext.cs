@@ -1,4 +1,4 @@
-﻿// Bani
+// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -15,29 +15,30 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Avalonia;
-using Avalonia.ReactiveUI;
+using System.Collections.Generic;
+using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.Avalonia;
+namespace DustInTheWind.Bani.DataAccess;
 
-internal static class Program
+public class BaniDbContext
 {
-    // Initialization code. Don't use any Avalonia, third-party APIs or any
-    // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
-    // yet and stuff might break.
-    [STAThread]
-    private static void Main(string[] args)
+    private readonly string connectionString;
+
+    public List<Issuer> Issuers { get; } = new();
+
+    public BaniDbContext(string connectionString)
     {
-        BuildAvaloniaApp()
-            .StartWithClassicDesktopLifetime(args);
+        this.connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+
+        LoadIssuers();
     }
 
-    // Avalonia configuration, don't remove; also used by visual designer.
-    public static AppBuilder BuildAvaloniaApp()
+    private void LoadIssuers()
     {
-        return AppBuilder.Configure<App>()
-            .UsePlatformDetect()
-            .LogToTrace()
-            .UseReactiveUI();
+        Issuers.Clear();
+
+        IssuerCrawler issuerCrawler = new();
+        IEnumerable<Issuer> issuers = issuerCrawler.Crawl(connectionString);
+        Issuers.AddRange(issuers);
     }
 }

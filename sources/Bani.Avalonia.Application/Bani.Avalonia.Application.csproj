@@ -29,7 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Bani.DataAccess.Port\Bani.DataAccess.Port.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Bani.Ports.DataAccess\Bani.Ports.DataAccess.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Bani.Domain\Bani.Domain.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Bani.Infrastructure\Bani.Infrastructure.csproj" PrivateAssets="All" />
     </ItemGroup>
