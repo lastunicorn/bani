@@ -26,7 +26,8 @@ namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
 /// An observable collection that automatically tracks additions and removals of entities.
 /// </summary>
 /// <typeparam name="T">The type of entities in the collection.</typeparam>
-public class ObservableEntityCollection<T> : ICollection<T> where T : class, IEntity
+public class ObservableEntityCollection<T> : ICollection<T>
+    where T : class, IEntity
 {
     private readonly List<T> items = [];
     private readonly HashSet<T> originalItems = [];
@@ -73,17 +74,7 @@ public class ObservableEntityCollection<T> : ICollection<T> where T : class, IEn
     public bool Remove(T item)
     {
         ArgumentNullException.ThrowIfNull(item);
-
-        bool removed = items.Remove(item);
-
-        if (removed)
-        {
-            // Only track as removal if this item was in the original collection
-            if (originalItems.Contains(item))
-                changeTracker.TrackRemove(item);
-        }
-
-        return removed;
+        return RemoveInternal(item);
     }
 
     public bool RemoveById(string id)
@@ -98,6 +89,20 @@ public class ObservableEntityCollection<T> : ICollection<T> where T : class, IEn
         return false;
     }
 
+    private bool RemoveInternal(T item)
+    {
+        bool isRemoved = items.Remove(item);
+
+        if (isRemoved)
+        {
+            // Only track as removal if this item was in the original collection
+            if (originalItems.Contains(item))
+                changeTracker.TrackRemove(item);
+        }
+
+        return isRemoved;
+    }
+
     public void Clear()
     {
         foreach (T item in items.Where(originalItems.Contains))
@@ -106,13 +111,25 @@ public class ObservableEntityCollection<T> : ICollection<T> where T : class, IEn
         items.Clear();
     }
 
-    public bool Contains(T item) => items.Contains(item);
+    public bool Contains(T item)
+    {
+        return items.Contains(item);
+    }
 
-    public void CopyTo(T[] array, int arrayIndex) => items.CopyTo(array, arrayIndex);
+    public void CopyTo(T[] array, int arrayIndex)
+    {
+        items.CopyTo(array, arrayIndex);
+    }
 
-    public IEnumerator<T> GetEnumerator() => items.GetEnumerator();
+    public IEnumerator<T> GetEnumerator()
+    {
+        return items.GetEnumerator();
+    }
 
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 
     public void CommitChanges()
     {
@@ -122,21 +139,6 @@ public class ObservableEntityCollection<T> : ICollection<T> where T : class, IEn
             originalItems.Add(item);
 
         changeTracker.Clear();
-    }
-
-    public T FirstOrDefault(Func<T, bool> predicate)
-    {
-        return items.FirstOrDefault(predicate);
-    }
-
-    public IEnumerable<T> Where(Func<T, bool> predicate)
-    {
-        return items.Where(predicate);
-    }
-
-    public bool Any(Func<T, bool> predicate)
-    {
-        return items.Any(predicate);
     }
 
     public void TrackUpdate(T entity)

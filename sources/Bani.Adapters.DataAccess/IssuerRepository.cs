@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DustInTheWind.Bani.Adapters.DataAccess.Database;
 using DustInTheWind.Bani.Adapters.DataAccess.Helpers;
 using DustInTheWind.Bani.Domain;
@@ -46,7 +47,7 @@ internal class IssuerRepository : IIssuerRepository
             .Where(x => x.Name?.Contains(name, StringComparison.InvariantCultureIgnoreCase) ?? false);
     }
 
-    public Issuer Get(string id)
+    public Issuer GetById(string id)
     {
         if (id.IsNullOrEmpty())
             return null;
@@ -77,7 +78,9 @@ internal class IssuerRepository : IIssuerRepository
             throw new ArgumentException("Issuer Id cannot be null or empty.", nameof(issuer));
 
         // Find existing issuer in memory
-        Issuer existingIssuer = dbContext.Issuers.FirstOrDefault(x => x.Id == issuer.Id);
+        Issuer existingIssuer = dbContext.Issuers
+            .FirstOrDefault(x => x.Id == issuer.Id);
+
         if (existingIssuer == null)
             throw new InvalidOperationException($"Issuer with Id '{issuer.Id}' not found.");
 
@@ -94,7 +97,6 @@ internal class IssuerRepository : IIssuerRepository
     public void Remove(Issuer issuer)
     {
         ArgumentNullException.ThrowIfNull(issuer);
-
         Remove(issuer.Id);
     }
 

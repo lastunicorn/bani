@@ -37,11 +37,10 @@ internal class UpdateIssuerCommentsUseCase : IRequestHandler<UpdateIssuerComment
         ValidateRequest(request);
 
         Issuer issuer = RetrieveIssuer(request);
-
         issuer.Comments = request.Comments;
+
         unitOfWork.IssuerRepository.Update(issuer);
 
-        // Save changes using the Unit of Work pattern
         await unitOfWork.SaveChangesAsync(cancellationToken);
     }
 
@@ -53,7 +52,7 @@ internal class UpdateIssuerCommentsUseCase : IRequestHandler<UpdateIssuerComment
 
     private Issuer RetrieveIssuer(UpdateIssuerCommentsRequest request)
     {
-        Issuer issuer = unitOfWork.IssuerRepository.Get(request.IssuerId);
+        Issuer issuer = unitOfWork.IssuerRepository.GetById(request.IssuerId);
 
         if (issuer == null)
             throw new InvalidOperationException($"Issuer with id '{request.IssuerId}' not found.");

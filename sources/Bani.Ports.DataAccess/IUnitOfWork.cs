@@ -20,13 +20,7 @@ public interface IUnitOfWork
 {
     IIssuerRepository IssuerRepository { get; }
 
-    /// <summary>
-    /// Saves all changes made in this unit of work to the underlying data store.
-    /// </summary>
     void SaveChanges();
 
-    /// <summary>
-    /// Asynchronously saves all changes made in this unit of work to the underlying data store.
-    /// </summary>
     Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }

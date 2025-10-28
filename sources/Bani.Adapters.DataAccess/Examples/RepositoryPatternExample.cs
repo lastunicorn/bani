@@ -39,7 +39,7 @@ public class RepositoryPatternExample
     public async Task UpdateIssuerCommentsExample(string issuerId, string newComments)
     {
         // Get the issuer using the repository
-        Issuer? issuer = unitOfWork.IssuerRepository.Get(issuerId);
+        Issuer? issuer = unitOfWork.IssuerRepository.GetById(issuerId);
 
         if (issuer == null)
             throw new InvalidOperationException($"Issuer with ID '{issuerId}' not found.");
@@ -107,7 +107,7 @@ public class RepositoryPatternExample
         unitOfWork.IssuerRepository.Add(newIssuer);
 
         // Update existing issuer
-        Issuer? existingIssuer = unitOfWork.IssuerRepository.Get("/path/to/existing/issuer.json");
+        Issuer? existingIssuer = unitOfWork.IssuerRepository.GetById("/path/to/existing/issuer.json");
         if (existingIssuer != null)
         {
             existingIssuer.Comments = "Updated comments";

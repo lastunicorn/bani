@@ -48,7 +48,7 @@ public class AutomaticChangeTrackingExample
         unitOfWork.IssuerRepository.Add(newIssuer);
 
         // 2. Update an existing issuer - manually tracked as Modified (since we're changing properties)
-        var existingIssuer = unitOfWork.IssuerRepository.Get("/some/existing/issuer.json");
+        var existingIssuer = unitOfWork.IssuerRepository.GetById("/some/existing/issuer.json");
         if (existingIssuer != null)
         {
             var updatedIssuer = new Issuer

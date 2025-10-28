@@ -39,7 +39,7 @@ internal class SelectIssuerUseCase : IRequestHandler<SelectIssuerRequest>
 
     public Task Handle(SelectIssuerRequest request, CancellationToken cancellationToken)
     {
-        Issuer issuer = unitOfWork.IssuerRepository.Get(request.IssuerId);
+        Issuer issuer = unitOfWork.IssuerRepository.GetById(request.IssuerId);
 
         applicationState.CurrentIssuer = request.IssuerId;
 
