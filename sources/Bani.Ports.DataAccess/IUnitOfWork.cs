@@ -14,13 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-
 namespace DustInTheWind.Bani.Ports.DataAccess;
 
-public interface IUnitOfWork : IDisposable
+public interface IUnitOfWork
 {
     IIssuerRepository IssuerRepository { get; }
 

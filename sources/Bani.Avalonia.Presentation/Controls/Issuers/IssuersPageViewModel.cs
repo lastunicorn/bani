@@ -41,21 +41,25 @@ public class IssuersPageViewModel : ViewModelBase
         get => selectedIssuer;
         set
         {
-    selectedIssuer = value;
- OnPropertyChanged();
+            selectedIssuer = value;
+            OnPropertyChanged();
 
-        IssuerComments = value?.IssuerInfo?.Comments;
+            IssuerComments = value?.IssuerInfo?.Comments;
             Emissions = value?.Emissions ?? [];
-   }
+        }
     }
 
     public string IssuerComments
     {
-      get => issuerComments;
+        get => issuerComments;
         set
-      {
-         issuerComments = value;
-   OnPropertyChanged();
+        {
+            issuerComments = value;
+            OnPropertyChanged();
+
+            bool isChanged = selectedIssuer?.IssuerInfo?.Comments != issuerComments;
+            if (isChanged)
+                _ = SaveIssuerComments();
         }
     }
 
@@ -63,10 +67,10 @@ public class IssuersPageViewModel : ViewModelBase
     {
         get => emissions;
         set
-{
+        {
             emissions = value;
-     OnPropertyChanged();
-      }
+            OnPropertyChanged();
+        }
     }
 
     public SelectIssueCommand SelectIssueCommand { get; }
@@ -74,46 +78,46 @@ public class IssuersPageViewModel : ViewModelBase
     public IssuersPageViewModel(IMediator mediator, SelectIssueCommand selectIssueCommand)
     {
         this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-  SelectIssueCommand = selectIssueCommand;
+        SelectIssueCommand = selectIssueCommand;
 
         _ = Initialize();
     }
 
     private async Task Initialize()
     {
-   PresentIssuersRequest request = new();
+        PresentIssuersRequest request = new();
         PresentIssuersResponse response = await mediator.Send(request);
 
         IEnumerable<IssuerViewModel> issuerViewModels = response.Issuers
             .Select(x => new IssuerViewModel(x));
 
-foreach (IssuerViewModel issuerViewModel in issuerViewModels)
+        foreach (IssuerViewModel issuerViewModel in issuerViewModels)
             Issuers.Add(issuerViewModel);
     }
 
-    public async Task SaveIssuerComments()
+    private async Task SaveIssuerComments()
     {
         if (selectedIssuer?.IssuerInfo?.Id == null)
-   return;
+            return;
 
         try
         {
- UpdateIssuerCommentsRequest request = new()
-         {
-  IssuerId = selectedIssuer.IssuerInfo.Id,
-    Comments = issuerComments
-      };
+            UpdateIssuerCommentsRequest request = new()
+            {
+                IssuerId = selectedIssuer.IssuerInfo.Id,
+                Comments = issuerComments
+            };
 
-  await mediator.Send(request);
+            await mediator.Send(request);
 
-// Update the local model
-    selectedIssuer.IssuerInfo.Comments = issuerComments;
+            // Update the local model
+            selectedIssuer.IssuerInfo.Comments = issuerComments;
         }
         catch (Exception ex)
         {
             // In a real application, you might want to show an error message to the user
             // For now, we'll just ignore the error to keep the demo simple
-   System.Diagnostics.Debug.WriteLine($"Error saving issuer comments: {ex.Message}");
-    }
+            System.Diagnostics.Debug.WriteLine($"Error saving issuer comments: {ex.Message}");
+        }
     }
 }

@@ -16,22 +16,20 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using DustInTheWind.Bani.Adapters.DataAccess.Infrastructure;
+using DustInTheWind.Bani.Adapters.DataAccess.Database;
+using DustInTheWind.Bani.Adapters.DataAccess.Helpers;
 using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Ports.DataAccess;
 
-namespace DustInTheWind.Bani.DataAccess;
+namespace DustInTheWind.Bani.Adapters.DataAccess;
 
 internal class IssuerRepository : IIssuerRepository
 {
     private readonly BaniDbContext dbContext;
-    private readonly ChangeTracker changeTracker;
 
-    public IssuerRepository(BaniDbContext dbContext, ChangeTracker changeTracker)
+    public IssuerRepository(BaniDbContext dbContext)
     {
         this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-        this.changeTracker = changeTracker ?? throw new ArgumentNullException(nameof(changeTracker));
     }
 
     public IEnumerable<Issuer> GetAll()
@@ -45,7 +43,7 @@ internal class IssuerRepository : IIssuerRepository
             return [];
 
         return dbContext.Issuers
-         .Where(x => x.Name?.Contains(name, StringComparison.InvariantCultureIgnoreCase) ?? false);
+            .Where(x => x.Name?.Contains(name, StringComparison.InvariantCultureIgnoreCase) ?? false);
     }
 
     public Issuer Get(string id)
@@ -67,8 +65,8 @@ internal class IssuerRepository : IIssuerRepository
         if (dbContext.Issuers.Any(x => x.Id == issuer.Id))
             throw new InvalidOperationException($"An issuer with Id '{issuer.Id}' already exists.");
 
+        // ObservableEntityCollection will automatically call changeTracker.TrackAdd
         dbContext.Issuers.Add(issuer);
-        changeTracker.TrackAdd(issuer);
     }
 
     public void Update(Issuer issuer)
@@ -89,8 +87,8 @@ internal class IssuerRepository : IIssuerRepository
         existingIssuer.Comments = issuer.Comments;
         // Note: We don't update Emissions here as they might be managed separately
 
-        // Track the change
-        changeTracker.TrackUpdate(existingIssuer);
+        // Manually track the update since we're modifying an existing object's properties
+        dbContext.Issuers.TrackUpdate(existingIssuer);
     }
 
     public void Remove(Issuer issuer)
@@ -107,14 +105,10 @@ internal class IssuerRepository : IIssuerRepository
         if (id.Length == 0)
             throw new ArgumentException("Issuer Id cannot be empty.", nameof(id));
 
-        // Find and remove from in-memory collection
-        Issuer existingIssuer = dbContext.Issuers.FirstOrDefault(x => x.Id == id);
+        // ObservableEntityCollection will automatically call changeTracker.TrackRemove
+        bool removed = dbContext.Issuers.RemoveById(id);
 
-        if (existingIssuer == null)
+        if (!removed)
             throw new InvalidOperationException($"Issuer with Id '{id}' not found.");
-
-        dbContext.Issuers.Remove(existingIssuer);
-
-        changeTracker.TrackRemove(existingIssuer);
     }
 }

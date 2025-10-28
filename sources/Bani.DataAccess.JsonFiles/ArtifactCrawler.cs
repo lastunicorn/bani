@@ -31,7 +31,7 @@ internal class ArtifactCrawler<T>
     public void Crawl(string directoryPath)
     {
         stack.Clear();
-        Artifacts = new List<T>();
+        Artifacts = [];
 
         ProcessDirectory(directoryPath);
     }

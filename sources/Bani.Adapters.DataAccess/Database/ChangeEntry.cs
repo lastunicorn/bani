@@ -14,21 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.DataAccess.JsonFiles;
-using DustInTheWind.Bani.Domain;
+namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
 
-namespace DustInTheWind.Bani.Adapters.DataAccess;
-
-internal static class EmissionExtensions
+public class ChangeEntry<T>
 {
-    public static Emission ToDomainEntity(this JEmission emission)
-    {
-        return new Emission
-        {
-            Name = emission.Name,
-            StartYear = emission.StartYear,
-            EndYear = emission.EndYear,
-            Comments = emission.Comments
-        };
-    }
+    public T Entity { get; set; }
+
+    public EntityState State { get; set; }
 }

@@ -14,21 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.DataAccess.JsonFiles;
-using DustInTheWind.Bani.Domain;
+namespace DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.Adapters.DataAccess;
-
-internal static class EmissionExtensions
+/// <summary>
+/// Represents an entity that can be converted to its JSON representation.
+/// </summary>
+/// <typeparam name="TJson">The type of the JSON entity.</typeparam>
+public interface IJsonConvertible<out TJson>
 {
-    public static Emission ToDomainEntity(this JEmission emission)
-    {
-        return new Emission
-        {
-            Name = emission.Name,
-            StartYear = emission.StartYear,
-            EndYear = emission.EndYear,
-            Comments = emission.Comments
-        };
-    }
+    /// <summary>
+    /// Converts the entity to its JSON representation.
+    /// </summary>
+    /// <returns>The JSON representation of the entity.</returns>
+    TJson ToJsonEntity();
 }

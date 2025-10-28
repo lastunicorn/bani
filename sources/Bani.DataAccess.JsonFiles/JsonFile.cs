@@ -16,33 +16,55 @@
 
 using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace DustInTheWind.Bani.DataAccess.JsonFiles;
 
-public class IssuerFile
+public class JsonFile<T>
+    where T : class
 {
     private readonly string filePath;
 
-    public IssuerFile(string filePath)
+    public JsonFile(string filePath)
     {
         this.filePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
     }
 
-    public JIssuer Issuer { get; set; }
+    public T Data { get; set; }
+
+    public bool Exists()
+    {
+        return File.Exists(filePath);
+    }
 
     public void Open()
     {
         string json = File.ReadAllText(filePath);
-        Issuer = JsonConvert.DeserializeObject<JIssuer>(json);
+        Data = JsonConvert.DeserializeObject<T>(json);
     }
 
     public void Save()
     {
-        if (Issuer == null)
+        if (Data == null)
             throw new InvalidOperationException("Cannot save null issuer. Call Open() first or set the Issuer property.");
 
-        string json = JsonConvert.SerializeObject(Issuer, Formatting.Indented);
+        string json = JsonConvert.SerializeObject(Data, Formatting.Indented);
         File.WriteAllText(filePath, json);
+    }
+
+    public Task SaveAsync(CancellationToken cancellationToken = default)
+    {
+        if (Data == null)
+            throw new InvalidOperationException("Cannot save null issuer. Call Open() first or set the Issuer property.");
+
+        string json = JsonConvert.SerializeObject(Data, Formatting.Indented);
+        return File.WriteAllTextAsync(filePath, json, cancellationToken);
+    }
+
+    public void Delete()
+    {
+        File.Delete(filePath);
     }
 }

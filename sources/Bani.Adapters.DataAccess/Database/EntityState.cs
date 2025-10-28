@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.Adapters.DataAccess.Infrastructure;
+namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
 
-internal enum EntityState
+public enum EntityState
 {
     Added,
     Modified,

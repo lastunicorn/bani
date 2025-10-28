@@ -1,4 +1,4 @@
-// Bani
+﻿// Bani
 // Copyright (C) 2022 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,11 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.Adapters.DataAccess.Infrastructure;
+using DustInTheWind.Bani.DataAccess.JsonFiles;
+using DustInTheWind.Bani.Domain;
 
-internal class ChangeEntry<T>
+namespace DustInTheWind.Bani.Adapters.DataAccess.DataMapping;
+
+internal static class JPictureExtensions
 {
-    public T Entity { get; set; }
+    public static Picture ToDomainEntity(this JPicture picture)
+    {
+        if (picture == null)
+            return null;
 
-    public EntityState State { get; set; }
+        return new Picture
+        {
+            FilePath = picture.FilePath,
+            Bytes = picture.Bytes,
+            Description = picture.Description
+        };
+    }
 }

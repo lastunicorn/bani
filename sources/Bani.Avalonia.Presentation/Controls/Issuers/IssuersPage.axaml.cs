@@ -26,7 +26,7 @@ public partial class IssuersPage : UserControl
 {
     public IssuersPage()
     {
-   InitializeComponent();
+        InitializeComponent();
     }
 
     private void InitializeComponent()
@@ -36,24 +36,24 @@ public partial class IssuersPage : UserControl
 
     private void InputElement_OnTapped(object sender, TappedEventArgs e)
     {
-   if (DataContext is IssuersPageViewModel mainWindowViewModel)
-   {
-        SelectIssueCommand selectIssueCommand = mainWindowViewModel.SelectIssueCommand;
+        if (DataContext is IssuersPageViewModel mainWindowViewModel)
+        {
+            SelectIssueCommand selectIssueCommand = mainWindowViewModel.SelectIssueCommand;
 
- object selectedItem = sender is ListBox listBox
-     ? listBox.SelectedItem
+            object selectedItem = sender is ListBox listBox
+                ? listBox.SelectedItem
                 : null;
 
-         if (selectIssueCommand?.CanExecute(selectedItem) == true)
-     selectIssueCommand.Execute(selectedItem);
+            if (selectIssueCommand?.CanExecute(selectedItem) == true)
+                selectIssueCommand.Execute(selectedItem);
         }
     }
 
- private async void CommentsTextBox_LostFocus(object sender, RoutedEventArgs e)
+    private async void CommentsTextBox_LostFocus(object sender, RoutedEventArgs e)
     {
         if (DataContext is IssuersPageViewModel viewModel)
-   {
-  await viewModel.SaveIssuerComments();
-     }
+        {
+            await viewModel.SaveIssuerComments();
+        }
     }
 }

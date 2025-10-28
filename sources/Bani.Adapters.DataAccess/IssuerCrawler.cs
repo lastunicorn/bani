@@ -19,7 +19,7 @@ using System.IO;
 using DustInTheWind.Bani.DataAccess.JsonFiles;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess;
+namespace DustInTheWind.Bani.Adapters.DataAccess;
 
 internal class IssuerCrawler
 {
@@ -48,10 +48,10 @@ internal class IssuerCrawler
 
     private static Issuer ReadIssuer(string filePath)
     {
-        IssuerFile issuerFile = new(filePath);
+        JsonFile<JIssuer> issuerFile = new(filePath);
         issuerFile.Open();
 
-        Issuer issuer = issuerFile.Issuer.ToDomainEntity();
+        Issuer issuer = issuerFile.Data.ToDomainEntity();
         issuer.Id = filePath;
 
         string rootDirectoryPath = Path.GetDirectoryName(filePath);

@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.IO;
 using System.Reflection;
 using Autofac;
+using DustInTheWind.Bani.Adapters.DataAccess;
 using DustInTheWind.Bani.Cli.Application.PresentIssuers;
-using DustInTheWind.Bani.DataAccess;
 using DustInTheWind.Bani.Ports.DataAccess;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using MediatR.Extensions.Autofac.DependencyInjection.Builder;
@@ -57,20 +56,12 @@ internal class Setup
     private static void RegisterPortAdapters(ContainerBuilder containerBuilder)
     {
         containerBuilder
-            .RegisterType<BaniDbContext>()
-            .AsSelf();
-
-        containerBuilder
             .Register(context =>
             {
                 IConfiguration configuration = context.Resolve<IConfiguration>();
                 string databasePath = configuration.GetConnectionString("DefaultConnection");
-                return new BaniDbContext(databasePath);
+                return new UnitOfWork(databasePath);
             })
-            .AsSelf();
-
-        containerBuilder
-            .RegisterType<UnitOfWork>()
             .As<IUnitOfWork>()
             .InstancePerLifetimeScope();
     }

@@ -19,7 +19,7 @@ using DustInTheWind.Bani.Domain;
 
 namespace DustInTheWind.Bani.Adapters.DataAccess.DataMapping;
 
-internal static class ItemExtensions
+internal static class JCoinExtensions
 {
     public static Coin ToDomainEntity(this JCoin coin)
     {
@@ -41,43 +41,6 @@ internal static class ItemExtensions
             Reverse = coin.Reverse.ToDomainEntity(),
             Edge = coin.Edge,
             InstanceCount = coin.InstanceCount ?? 0
-        };
-    }
-
-    public static Banknote ToDomainEntity(this JBanknote banknote)
-    {
-        if (banknote == null)
-            return null;
-
-        return new Banknote
-        {
-            Id = banknote.Location,
-            DisplayName = banknote.DisplayName,
-            Value = banknote.Value,
-            Unit = banknote.Unit,
-            Substance = banknote.Substance,
-            Color = banknote.Color,
-            Width = banknote.Width,
-            Height = banknote.Height,
-            Embossing = banknote.Embossing,
-            IssueDate = banknote.IssueDate,
-            Year = banknote.PrintYear,
-            Obverse = banknote.Obverse.ToDomainEntity(),
-            Reverse = banknote.Reverse.ToDomainEntity(),
-            InstanceCount = banknote.InstanceCount ?? 0
-        };
-    }
-
-    private static Picture ToDomainEntity(this JPicture picture)
-    {
-        if (picture == null)
-            return null;
-
-        return new Picture
-        {
-            FilePath = picture.FilePath,
-            Bytes = picture.Bytes,
-            Description = picture.Description
         };
     }
 }

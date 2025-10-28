@@ -14,31 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using DustInTheWind.Bani.Domain;
+namespace DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess;
-
-public class BaniDbContext
+/// <summary>
+/// Represents an entity that has a unique identifier.
+/// </summary>
+public interface IEntity
 {
-    private readonly string connectionString;
-
-    public List<Issuer> Issuers { get; } = [];
-
-    public BaniDbContext(string connectionString)
-    {
-        this.connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
-
-        LoadIssuers();
-    }
-
-    private void LoadIssuers()
-    {
-        Issuers.Clear();
-
-        IssuerCrawler issuerCrawler = new();
-        IEnumerable<Issuer> issuers = issuerCrawler.Crawl(connectionString);
-        Issuers.AddRange(issuers);
-    }
+  /// <summary>
+    /// Gets the unique identifier of the entity.
+    /// </summary>
+    string Id { get; }
 }

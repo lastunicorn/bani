@@ -17,10 +17,10 @@
 using System.IO;
 using System.Reflection;
 using Autofac;
+using DustInTheWind.Bani.Adapters.DataAccess;
 using DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
 using DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers;
 using DustInTheWind.Bani.Avalonia.Presentation.Controls.Main;
-using DustInTheWind.Bani.DataAccess;
 using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Infrastructure;
 using DustInTheWind.Bani.Ports.DataAccess;
@@ -86,20 +86,12 @@ internal static class SetupServices
     private static void RegisterPortAdapters(ContainerBuilder containerBuilder)
     {
         containerBuilder
-            .RegisterType<BaniDbContext>()
-            .AsSelf();
-
-        containerBuilder
             .Register(context =>
             {
                 IConfiguration configuration = context.Resolve<IConfiguration>();
                 string databasePath = configuration.GetConnectionString("DefaultConnection");
-                return new BaniDbContext(databasePath);
+                return new UnitOfWork(databasePath);
             })
-            .AsSelf();
-
-        containerBuilder
-            .RegisterType<UnitOfWork>()
             .As<IUnitOfWork>()
             .InstancePerLifetimeScope();
     }

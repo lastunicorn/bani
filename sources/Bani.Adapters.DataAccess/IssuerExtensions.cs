@@ -17,7 +17,7 @@
 using DustInTheWind.Bani.DataAccess.JsonFiles;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.DataAccess;
+namespace DustInTheWind.Bani.Adapters.DataAccess;
 
 internal static class IssuerExtensions
 {
@@ -25,16 +25,16 @@ internal static class IssuerExtensions
     {
         return new Issuer
         {
-          Name = issuer.Name,
- Comments = issuer.Comments
-   };
+            Name = issuer.Name,
+            Comments = issuer.Comments
+        };
     }
 
     public static JIssuer ToJsonEntity(this Issuer issuer)
     {
         return new JIssuer
         {
-      Name = issuer.Name,
+            Name = issuer.Name,
             Comments = issuer.Comments
         };
     }

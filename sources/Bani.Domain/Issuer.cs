@@ -18,9 +18,9 @@ using System.Collections.Generic;
 
 namespace DustInTheWind.Bani.Domain;
 
-public class Issuer
+public class Issuer : IEntity
 {
-    public string Id { get; set; }
+  public string Id { get; set; }
 
     public string Name { get; set; }
 

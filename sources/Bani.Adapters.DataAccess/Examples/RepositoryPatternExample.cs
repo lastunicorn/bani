@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Ports.DataAccess;
 
-namespace DustInTheWind.Bani.DataAccess.Examples;
+namespace DustInTheWind.Bani.Adapters.DataAccess.Examples;
 
 /// <summary>
 /// Example demonstrating proper usage of the Repository and Unit of Work patterns.

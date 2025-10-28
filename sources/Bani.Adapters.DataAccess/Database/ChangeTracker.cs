@@ -18,70 +18,71 @@ using System;
 using System.Collections.Generic;
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.Adapters.DataAccess.Infrastructure;
+namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
 
-internal class ChangeTracker
+public class ChangeTracker<TEntity>
+    where TEntity : class, IEntity
 {
-    private readonly Dictionary<string, ChangeEntry<Issuer>> issuerChanges = [];
+    private readonly Dictionary<string, ChangeEntry<TEntity>> changes = [];
 
-    public bool HasChanges => issuerChanges.Count > 0;
+    public bool HasChanges => changes.Count > 0;
 
-    public void TrackAdd(Issuer issuer)
+    public void TrackAdd(TEntity entity)
     {
-        ArgumentNullException.ThrowIfNull(issuer);
+        ArgumentNullException.ThrowIfNull(entity);
 
-        if (string.IsNullOrEmpty(issuer.Id))
-            throw new ArgumentException("Issuer must have an Id", nameof(issuer));
+        if (string.IsNullOrEmpty(entity.Id))
+            throw new ArgumentException("Entity must have an Id", nameof(entity));
 
-        issuerChanges[issuer.Id] = new ChangeEntry<Issuer>
+        changes[entity.Id] = new ChangeEntry<TEntity>
         {
-            Entity = issuer,
+            Entity = entity,
             State = EntityState.Added
         };
     }
 
-    public void TrackUpdate(Issuer issuer)
+    public void TrackUpdate(TEntity entity)
     {
-        ArgumentNullException.ThrowIfNull(issuer);
+        ArgumentNullException.ThrowIfNull(entity);
 
-        if (string.IsNullOrEmpty(issuer.Id))
-            throw new ArgumentException("Issuer must have an Id", nameof(issuer));
+        if (string.IsNullOrEmpty(entity.Id))
+            throw new ArgumentException("Entity must have an Id", nameof(entity));
 
-        bool changeItemExists = issuerChanges.ContainsKey(issuer.Id);
+        bool changeItemExists = changes.ContainsKey(entity.Id);
 
         if (changeItemExists)
             return;
 
-        issuerChanges[issuer.Id] = new ChangeEntry<Issuer>
+        changes[entity.Id] = new ChangeEntry<TEntity>
         {
-            Entity = issuer,
+            Entity = entity,
             State = EntityState.Modified
         };
     }
 
-    public void TrackRemove(Issuer issuer)
+    public void TrackRemove(TEntity entity)
     {
-        ArgumentNullException.ThrowIfNull(issuer);
-        TrackRemove(issuer.Id);
+        ArgumentNullException.ThrowIfNull(entity);
+        TrackRemove(entity.Id);
     }
 
-    public void TrackRemove(string issuerId)
+    public void TrackRemove(string entityId)
     {
-        if (string.IsNullOrEmpty(issuerId))
-            throw new ArgumentException("Issuer Id cannot be null or empty", nameof(issuerId));
+        if (string.IsNullOrEmpty(entityId))
+            throw new ArgumentException("Entity Id cannot be null or empty", nameof(entityId));
 
-        bool changeItemExists = issuerChanges.TryGetValue(issuerId, out ChangeEntry<Issuer> existingEntry);
+        bool changeItemExists = changes.TryGetValue(entityId, out ChangeEntry<TEntity> existingEntry);
 
         if (changeItemExists)
         {
             switch (existingEntry.State)
             {
                 case EntityState.Added:
-                    issuerChanges.Remove(issuerId);
+                    changes.Remove(entityId);
                     return;
 
                 case EntityState.Modified:
-                    issuerChanges[issuerId] = new ChangeEntry<Issuer>
+                    changes[entityId] = new ChangeEntry<TEntity>
                     {
                         Entity = existingEntry?.Entity,
                         State = EntityState.Deleted
@@ -96,20 +97,20 @@ internal class ChangeTracker
             }
         }
 
-        issuerChanges[issuerId] = new ChangeEntry<Issuer>
+        changes[entityId] = new ChangeEntry<TEntity>
         {
             Entity = existingEntry?.Entity,
             State = EntityState.Deleted
         };
     }
 
-    public IEnumerable<ChangeEntry<Issuer>> GetIssuerChanges()
+    public IEnumerable<ChangeEntry<TEntity>> GetChanges()
     {
-        return issuerChanges.Values;
+        return changes.Values;
     }
 
     public void Clear()
     {
-        issuerChanges.Clear();
+        changes.Clear();
     }
 }
