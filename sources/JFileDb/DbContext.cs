@@ -18,20 +18,34 @@ using System.Reflection;
 
 namespace DustInTheWind.JFileDb;
 
+/// <summary>
+/// Abstract base class for database contexts that manage entity persistence operations.
+/// Provides automatic change tracking and persistence for ObservableEntityCollection properties using reflection.
+/// </summary>
 public abstract class DbContext
 {
     private readonly EntityPersisterFactory entityPersisterFactory;
 
+    /// <summary>
+    /// Initializes a new instance of the DbContext class.
+    /// Creates the entity persister factory and registers persisters.
+    /// </summary>
     protected DbContext()
     {
         entityPersisterFactory = new EntityPersisterFactory();
         RegisterPersisters(entityPersisterFactory);
     }
 
+    /// <summary>
+    /// Registers entity persisters with the factory.
+    /// Derived classes must implement this method to register persisters for their specific entity types.
+    /// </summary>
+    /// <param name="entityPersisterFactory">The factory to register persisters with.</param>
     protected abstract void RegisterPersisters(EntityPersisterFactory entityPersisterFactory);
 
     /// <summary>
     /// Commits changes for all ObservableEntityCollection properties using reflection.
+    /// Automatically discovers all collection properties and persists their changes to storage.
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for async operations.</param>
     /// <returns>A task representing the async operation.</returns>
@@ -55,6 +69,14 @@ public abstract class DbContext
         }
     }
 
+    /// <summary>
+    /// Persists changes for a specific collection using reflection to call the appropriate generic method.
+    /// This method dynamically invokes PersistChangesAsync with the correct entity type.
+    /// </summary>
+    /// <param name="collection">The collection to persist changes for.</param>
+    /// <param name="entityType">The type of entities in the collection.</param>
+    /// <param name="cancellationToken">Cancellation token for async operations.</param>
+    /// <returns>A task representing the async operation.</returns>
     private Task PersistChangesForCollectionAsync(object collection, Type entityType, CancellationToken cancellationToken)
     {
         MethodInfo method = typeof(DbContext).GetMethod("PersistChangesAsync", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -63,6 +85,14 @@ public abstract class DbContext
         return (Task)genericMethod.Invoke(this, new object[] { collection, cancellationToken });
     }
 
+    /// <summary>
+    /// Persists changes for a specific ObservableEntityCollection by processing all tracked changes.
+    /// Handles Added, Modified, and Deleted entity states by calling the appropriate persister methods.
+    /// </summary>
+    /// <typeparam name="TEntity">The type of entities in the collection, must implement IEntity.</typeparam>
+    /// <param name="collection">The collection containing entities to persist.</param>
+    /// <param name="cancellationToken">Cancellation token for async operations.</param>
+    /// <returns>A task representing the async operation.</returns>
     /// <remarks>
     /// This method is called using Reflection to persist changes for a specific ObservableEntityCollection.
     /// </remarks>
