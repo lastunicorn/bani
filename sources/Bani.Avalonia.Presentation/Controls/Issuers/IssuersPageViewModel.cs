@@ -14,11 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 using DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
 using DustInTheWind.Bani.Avalonia.Application.UpdateIssuerComments;
 using DustInTheWind.Bani.Avalonia.Presentation.Controls.Main;
