@@ -53,40 +53,10 @@ public class BaniDbContext
         Issuers.InitializeWith(issuers);
     }
 
-    public void CommitChanges()
-    {
-        PersistChanges(Issuers);
-        Issuers.CommitChanges();
-    }
-
     public async Task CommitChangesAsync(CancellationToken cancellationToken = default)
     {
         await PersistChangesAsync(Issuers, cancellationToken);
         Issuers.CommitChanges();
-    }
-
-    private void PersistChanges<TEntity>(ObservableEntityCollection<TEntity> collection)
-        where TEntity : class, IEntity
-    {
-        IEntityPersister<TEntity> persister = persisterFactory.GetPersister<TEntity>();
-
-        foreach (ChangeEntry<TEntity> change in collection.GetChanges())
-        {
-            switch (change.State)
-            {
-                case EntityState.Added:
-                    persister.PersistAdded(change.Entity);
-                    break;
-
-                case EntityState.Modified:
-                    persister.PersistModified(change.Entity);
-                    break;
-
-                case EntityState.Deleted:
-                    persister.PersistDeleted(change.Entity);
-                    break;
-            }
-        }
     }
 
     private async Task PersistChangesAsync<TEntity>(ObservableEntityCollection<TEntity> collection, CancellationToken cancellationToken = default)

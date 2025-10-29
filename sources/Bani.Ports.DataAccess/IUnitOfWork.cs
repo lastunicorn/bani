@@ -20,7 +20,5 @@ public interface IUnitOfWork
 {
     IIssuerRepository IssuerRepository { get; }
 
-    void SaveChanges();
-
     Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }

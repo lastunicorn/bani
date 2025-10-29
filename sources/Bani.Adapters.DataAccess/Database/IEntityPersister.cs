@@ -25,12 +25,6 @@ namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
 public interface IEntityPersister<in TEntity>
     where TEntity : class, IEntity
 {
-    void PersistAdded(TEntity entity);
-
-    void PersistModified(TEntity entity);
-
-    void PersistDeleted(TEntity entity);
-
     Task PersistAddedAsync(TEntity entity, CancellationToken cancellationToken = default);
 
     Task PersistModifiedAsync(TEntity entity, CancellationToken cancellationToken = default);

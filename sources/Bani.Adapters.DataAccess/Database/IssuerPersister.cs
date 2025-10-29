@@ -21,37 +21,6 @@ namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
 
 public class IssuerPersister : IEntityPersister<Issuer>
 {
-    public void PersistAdded(Issuer entity)
-    {
-        JsonFile<JIssuer> issuerFile = new(entity.Id)
-        {
-            Data = entity.ToJsonEntity()
-        };
-
-        issuerFile.Save();
-    }
-
-    public void PersistModified(Issuer entity)
-    {
-        JsonFile<JIssuer> issuerFile = new(entity.Id)
-        {
-            Data = entity.ToJsonEntity()
-        };
-
-        issuerFile.Save();
-    }
-
-    public void PersistDeleted(Issuer entity)
-    {
-        JsonFile<JIssuer> issuerFile = new(entity.Id)
-        {
-            Data = entity.ToJsonEntity()
-        };
-
-        if (issuerFile.Exists())
-            issuerFile.Delete();
-    }
-
     public async Task PersistAddedAsync(Issuer entity, CancellationToken cancellationToken = default)
     {
         JsonFile<JIssuer> issuerFile = new(entity.Id)

@@ -33,19 +33,6 @@ public class UnitOfWork : IUnitOfWork
         dbContext = new BaniDbContext(connectionString);
     }
 
-    public void SaveChanges()
-    {
-        try
-        {
-            dbContext.CommitChanges();
-        }
-        catch (Exception ex)
-        {
-            // In a real scenario, you might want to rollback in-memory changes here
-            throw new InvalidOperationException("Failed to save changes to data store.", ex);
-        }
-    }
-
     public Task SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         try
