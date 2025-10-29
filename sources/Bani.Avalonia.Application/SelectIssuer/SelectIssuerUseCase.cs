@@ -14,23 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Infrastructure;
 using DustInTheWind.Bani.Ports.DataAccess;
+using DustInTheWind.Bani.Ports.StateAccess;
 using MediatR;
 
 namespace DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
 
 internal class SelectIssuerUseCase : IRequestHandler<SelectIssuerRequest>
 {
-    private readonly ApplicationState applicationState;
+    private readonly IApplicationState applicationState;
     private readonly EventBus eventBus;
     private readonly IUnitOfWork unitOfWork;
 
-    public SelectIssuerUseCase(ApplicationState applicationState, EventBus eventBus, IUnitOfWork unitOfWork)
+    public SelectIssuerUseCase(IApplicationState applicationState, EventBus eventBus, IUnitOfWork unitOfWork)
     {
         this.applicationState = applicationState ?? throw new ArgumentNullException(nameof(applicationState));
         this.eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));

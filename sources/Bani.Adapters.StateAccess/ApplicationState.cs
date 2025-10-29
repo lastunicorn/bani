@@ -14,9 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.Domain;
+using DustInTheWind.Bani.Ports.StateAccess;
 
-public class ApplicationState
+namespace DustInTheWind.Bani.Adapters.StateAccess;
+
+public class ApplicationState : IApplicationState
 {
     public string CurrentIssuer { get; set; }
 }
