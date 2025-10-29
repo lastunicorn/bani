@@ -14,21 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.Domain;
+namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
 
-namespace DustInTheWind.Bani.Ports.DataAccess;
-
-public interface IIssuerRepository
+/// <summary>
+/// Interface for proxy entities to support target entity setup.
+/// </summary>
+public interface IEntityProxy
 {
-    IEnumerable<Issuer> GetAll();
-
-    IEnumerable<Issuer> GetByName(string name);
-
-    Issuer GetById(string id);
-
-    void Add(Issuer issuer);
-
-    void Remove(Issuer issuer);
-
-    void Remove(string id);
+    void SetTarget(object target);
 }

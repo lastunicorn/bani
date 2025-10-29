@@ -48,12 +48,4 @@ public partial class IssuersPage : UserControl
                 selectIssueCommand.Execute(selectedItem);
         }
     }
-
-    private async void CommentsTextBox_LostFocus(object sender, RoutedEventArgs e)
-    {
-        if (DataContext is IssuersPageViewModel viewModel)
-        {
-            await viewModel.SaveIssuerComments();
-        }
-    }
 }

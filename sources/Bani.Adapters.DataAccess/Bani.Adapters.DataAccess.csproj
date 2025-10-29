@@ -30,4 +30,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <ProjectReference Include="..\Bani.Domain\Bani.Domain.csproj" PrivateAssets="All" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Debug\" />
+    </ItemGroup>
+
 </Project>

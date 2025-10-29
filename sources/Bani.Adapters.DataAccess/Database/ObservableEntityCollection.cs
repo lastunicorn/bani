@@ -23,15 +23,15 @@ using DustInTheWind.Bani.Domain;
 namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
 
 /// <summary>
-/// An observable collection that automatically tracks additions and removals of entities.
+/// An observable collection that automatically tracks additions, removals, and modifications of entities
+/// using snapshot-based change detection.
 /// </summary>
 /// <typeparam name="T">The type of entities in the collection.</typeparam>
 public class ObservableEntityCollection<T> : ICollection<T>
     where T : class, IEntity
 {
     private readonly List<T> items = [];
-    private readonly HashSet<T> originalItems = [];
-    private readonly ChangeTracker<T> changeTracker;
+    private readonly SnapshotChangeTracker<T> changeTracker;
 
     public int Count => items.Count;
 
@@ -39,24 +39,26 @@ public class ObservableEntityCollection<T> : ICollection<T>
 
     public ObservableEntityCollection()
     {
-        changeTracker = new ChangeTracker<T>();
+        changeTracker = new SnapshotChangeTracker<T>();
     }
 
     /// <summary>
-    /// Initializes the collection with existing items without tracking them as changes.
-    /// This should be called when loading data from the data source.
+    /// Initializes the collection with a set of entities from the data source.
+    /// These entities are tracked as unchanged initially.
     /// </summary>
+    /// <param name="initialItems">The entities loaded from the data source.</param>
     public void InitializeWith(IEnumerable<T> initialItems)
     {
         items.Clear();
-        originalItems.Clear();
+        changeTracker.Clear();
 
         if (initialItems != null)
         {
-            items.AddRange(initialItems);
-
-            foreach (T item in items)
-                originalItems.Add(item);
+            foreach (T item in initialItems)
+            {
+                items.Add(item);
+                changeTracker.TrackEntity(item);
+            }
         }
     }
 
@@ -66,15 +68,21 @@ public class ObservableEntityCollection<T> : ICollection<T>
 
         items.Add(item);
 
-        // Only track as addition if this item wasn't in the original collection
-        if (!originalItems.Contains(item))
+        EntityEntry<T> existingEntry = changeTracker.GetEntry(item.Id);
+
+        if (existingEntry?.State == EntityState.Deleted)
+            existingEntry.State = EntityState.Unchanged;
+        else if (existingEntry == null)
             changeTracker.TrackAdd(item);
+
+        // If existingEntry exists and is not deleted, it means the entity is already in the collection
+        // and this might be a duplicate add - we'll allow it but won't change tracking
     }
 
     public bool Remove(T item)
     {
         ArgumentNullException.ThrowIfNull(item);
-        return RemoveInternal(item);
+        return RemoveById(item.Id);
     }
 
     public bool RemoveById(string id)
@@ -83,21 +91,21 @@ public class ObservableEntityCollection<T> : ICollection<T>
             return false;
 
         T item = items.FirstOrDefault(x => x.Id == id);
-        if (item != null)
-            return Remove(item);
+        if (item == null)
+            return false;
 
-        return false;
-    }
-
-    private bool RemoveInternal(T item)
-    {
         bool isRemoved = items.Remove(item);
 
         if (isRemoved)
         {
-            // Only track as removal if this item was in the original collection
-            if (originalItems.Contains(item))
-                changeTracker.TrackRemove(item);
+            EntityEntry<T> entry = changeTracker.GetEntry(id);
+            if (entry != null)
+            {
+                if (entry.State == EntityState.Added)
+                    changeTracker.StopTracking(id);
+                else
+                    changeTracker.TrackRemove(id);
+            }
         }
 
         return isRemoved;
@@ -105,8 +113,18 @@ public class ObservableEntityCollection<T> : ICollection<T>
 
     public void Clear()
     {
-        foreach (T item in items.Where(originalItems.Contains))
-            changeTracker.TrackRemove(item);
+        List<T> trackedEntities = changeTracker.GetAllTrackedEntities()
+            .ToList();
+
+        foreach (T item in trackedEntities)
+        {
+            EntityEntry<T> entry = changeTracker.GetEntry(item.Id);
+
+            if (entry?.State == EntityState.Added)
+                changeTracker.StopTracking(item.Id);
+            else if (entry != null)
+                changeTracker.TrackRemove(item.Id);
+        }
 
         items.Clear();
     }
@@ -131,23 +149,69 @@ public class ObservableEntityCollection<T> : ICollection<T>
         return GetEnumerator();
     }
 
+    /// <summary>
+    /// Commits all changes by accepting them in the change tracker and updating the baseline.
+    /// </summary>
     public void CommitChanges()
     {
-        originalItems.Clear();
-
-        foreach (T item in items)
-            originalItems.Add(item);
-
-        changeTracker.Clear();
+        changeTracker.AcceptChanges();
     }
 
-    public void TrackUpdate(T entity)
+    /// <summary>
+    /// Manually triggers change detection on all tracked entities.
+    /// This compares current entity values with their snapshots.
+    /// Usually called before getting changes or saving.
+    /// </summary>
+    public void DetectChanges()
     {
-        changeTracker.TrackUpdate(entity);
+        changeTracker.DetectChanges();
     }
 
+    /// <summary>
+    /// Gets all pending changes that need to be persisted.
+    /// Automatically triggers change detection before returning results.
+    /// </summary>
+    /// <returns>A collection of change entries representing the pending changes.</returns>
     public IEnumerable<ChangeEntry<T>> GetChanges()
     {
         return changeTracker.GetChanges();
+    }
+
+    /// <summary>
+    /// Gets whether the collection has any pending changes.
+    /// </summary>
+    public bool HasChanges => changeTracker.HasChanges;
+
+    /// <summary>
+    /// Gets detailed information about a specific entity's tracking state.
+    /// </summary>
+    /// <param name="entityId">The ID of the entity to get entry information for.</param>
+    /// <returns>The entity entry containing state and change information, or null if not tracked.</returns>
+    public EntityEntry<T> GetEntry(string entityId)
+    {
+        return changeTracker.GetEntry(entityId);
+    }
+
+    /// <summary>
+    /// Gets detailed information about a specific entity's tracking state.
+    /// </summary>
+    /// <param name="entity">The entity to get entry information for.</param>
+    /// <returns>The entity entry containing state and change information, or null if not tracked.</returns>
+    public EntityEntry<T> GetEntry(T entity)
+    {
+        return changeTracker.GetEntry(entity);
+    }
+
+    /// <summary>
+    /// Legacy method for backward compatibility.
+    /// In snapshot-based tracking, this is equivalent to calling DetectChanges() first.
+    /// </summary>
+    /// <param name="entity">The entity to track for updates.</param>
+    public void TrackUpdate(T entity)
+    {
+        if (changeTracker.GetEntry(entity) == null)
+            changeTracker.TrackEntity(entity);
+
+        changeTracker.DetectChanges();
     }
 }

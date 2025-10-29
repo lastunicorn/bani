@@ -18,7 +18,23 @@ namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
 
 public enum EntityState
 {
+    /// <summary>
+    /// The entity has not been modified since it was loaded or last saved.
+    /// </summary>
+    Unchanged,
+
+    /// <summary>
+    /// The entity is new and will be inserted when changes are saved.
+    /// </summary>
     Added,
+
+    /// <summary>
+    /// The entity has been modified and will be updated when changes are saved.
+    /// </summary>
     Modified,
+
+    /// <summary>
+    /// The entity has been marked for deletion and will be deleted when changes are saved.
+    /// </summary>
     Deleted
 }

@@ -39,8 +39,6 @@ internal class UpdateIssuerCommentsUseCase : IRequestHandler<UpdateIssuerComment
         Issuer issuer = RetrieveIssuer(request);
         issuer.Comments = request.Comments;
 
-        unitOfWork.IssuerRepository.Update(issuer);
-
         await unitOfWork.SaveChangesAsync(cancellationToken);
     }
 

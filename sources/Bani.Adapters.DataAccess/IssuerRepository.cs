@@ -66,32 +66,7 @@ internal class IssuerRepository : IIssuerRepository
         if (dbContext.Issuers.Any(x => x.Id == issuer.Id))
             throw new InvalidOperationException($"An issuer with Id '{issuer.Id}' already exists.");
 
-        // ObservableEntityCollection will automatically call changeTracker.TrackAdd
         dbContext.Issuers.Add(issuer);
-    }
-
-    public void Update(Issuer issuer)
-    {
-        ArgumentNullException.ThrowIfNull(issuer);
-
-        if (string.IsNullOrEmpty(issuer.Id))
-            throw new ArgumentException("Issuer Id cannot be null or empty.", nameof(issuer));
-
-        // Find existing issuer in memory
-        Issuer existingIssuer = dbContext.Issuers
-            .FirstOrDefault(x => x.Id == issuer.Id);
-
-        if (existingIssuer == null)
-            throw new InvalidOperationException($"Issuer with Id '{issuer.Id}' not found.");
-
-        // Update the existing issuer properties
-        existingIssuer.Name = issuer.Name;
-        existingIssuer.Location = issuer.Location;
-        existingIssuer.Comments = issuer.Comments;
-        // Note: We don't update Emissions here as they might be managed separately
-
-        // Manually track the update since we're modifying an existing object's properties
-        dbContext.Issuers.TrackUpdate(existingIssuer);
     }
 
     public void Remove(Issuer issuer)
@@ -107,7 +82,6 @@ internal class IssuerRepository : IIssuerRepository
         if (id.Length == 0)
             throw new ArgumentException("Issuer Id cannot be empty.", nameof(id));
 
-        // ObservableEntityCollection will automatically call changeTracker.TrackRemove
         bool removed = dbContext.Issuers.RemoveById(id);
 
         if (!removed)
