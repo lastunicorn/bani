@@ -1,5 +1,5 @@
 // Bani
-// Copyright (C) 2022 Dust in the Wind
+// Copyright (C) 2022-2025 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,7 +34,6 @@ public class BaniDbContext
         this.connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
         persisterFactory = new EntityPersisterFactory();
 
-        // Register persisters for each entity type
         RegisterPersisters();
 
         Issuers = [];
@@ -44,7 +43,6 @@ public class BaniDbContext
 
     private void RegisterPersisters()
     {
-        // Register the Issuer persister
         persisterFactory.Register(new IssuerPersister());
 
         // When you add more entity types, register their persisters here:
