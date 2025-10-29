@@ -15,9 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections;
-using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
+namespace DustInTheWind.JFileDb;
 
 /// <summary>
 /// An observable collection that automatically tracks additions, removals, and modifications of entities

@@ -14,12 +14,30 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
+namespace DustInTheWind.JFileDb;
 
 /// <summary>
-/// Interface for proxy entities to support target entity setup.
+/// Represents the state of an entity in the change tracking system.
 /// </summary>
-public interface IEntityProxy
+public enum EntityState
 {
-    void SetTarget(object target);
+    /// <summary>
+    /// The entity has not been modified since it was loaded or last saved.
+    /// </summary>
+    Unchanged,
+
+    /// <summary>
+    /// The entity is new and will be inserted when changes are saved.
+    /// </summary>
+    Added,
+
+    /// <summary>
+    /// The entity has been modified and will be updated when changes are saved.
+    /// </summary>
+    Modified,
+
+    /// <summary>
+    /// The entity has been marked for deletion and will be deleted when changes are saved.
+    /// </summary>
+    Deleted
 }

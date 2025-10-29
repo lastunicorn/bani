@@ -15,9 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Reflection;
-using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
+namespace DustInTheWind.JFileDb;
 
 /// <summary>
 /// Represents the state and change tracking information for an entity.

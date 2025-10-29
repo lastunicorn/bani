@@ -15,35 +15,30 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.Bani.Domain;
+using DustInTheWind.JFileDb;
 
 namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
 
-public class BaniDbContext
+public class BaniDbContext : DbContext
 {
     private readonly string connectionString;
-    private readonly EntityPersisterFactory persisterFactory;
 
     public ObservableEntityCollection<Issuer> Issuers { get; }
 
     public BaniDbContext(string connectionString)
     {
         this.connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
-        persisterFactory = new EntityPersisterFactory();
-
-        RegisterPersisters();
 
         Issuers = [];
 
         LoadIssuers();
     }
 
-    private void RegisterPersisters()
+    protected override void RegisterPersisters(EntityPersisterFactory entityPersisterFactory)
     {
-        persisterFactory.Register(new IssuerPersister());
-
-        // When you add more entity types, register their persisters here:
-        // persisterFactory.Register<Emission>(new EmissionPersister());
-        // persisterFactory.Register<Artifact>(new ArtifactPersister());
+        entityPersisterFactory.Register(new IssuerPersister());
+        //entityPersisterFactory.Register<Emission>(new EmissionPersister());
+        //entityPersisterFactory.Register<Artifact>(new ArtifactPersister());
     }
 
     private void LoadIssuers()
@@ -51,37 +46,5 @@ public class BaniDbContext
         IssuerCrawler issuerCrawler = new();
         IEnumerable<Issuer> issuers = issuerCrawler.Crawl(connectionString);
         Issuers.InitializeWith(issuers);
-    }
-
-    public async Task CommitChangesAsync(CancellationToken cancellationToken = default)
-    {
-        await PersistChangesAsync(Issuers, cancellationToken);
-        Issuers.CommitChanges();
-    }
-
-    private async Task PersistChangesAsync<TEntity>(ObservableEntityCollection<TEntity> collection, CancellationToken cancellationToken = default)
-        where TEntity : class, IEntity
-    {
-        IEntityPersister<TEntity> persister = persisterFactory.GetPersister<TEntity>();
-
-        foreach (ChangeEntry<TEntity> change in collection.GetChanges())
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-
-            switch (change.State)
-            {
-                case EntityState.Added:
-                    await persister.PersistAddedAsync(change.Entity, cancellationToken);
-                    break;
-
-                case EntityState.Modified:
-                    await persister.PersistModifiedAsync(change.Entity, cancellationToken);
-                    break;
-
-                case EntityState.Deleted:
-                    await persister.PersistDeletedAsync(change.Entity, cancellationToken);
-                    break;
-            }
-        }
     }
 }

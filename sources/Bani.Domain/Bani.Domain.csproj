@@ -24,4 +24,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		<RootNamespace>DustInTheWind.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\JFileDb\JFileDb.csproj" PrivateAssets="All" />
+    </ItemGroup>
+
 </Project>

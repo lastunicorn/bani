@@ -42,6 +42,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bani.Adapters.StateAccess",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{1EA5E2D0-175A-4E32-B681-D09AE1BD85FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JFileDb", "JFileDb\JFileDb.csproj", "{5429C7C0-DAF2-4648-B9C3-53F9CD60CD10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,10 @@ Global
 		{26B1A0ED-C8E3-4B2E-98BD-F0AB79FF297D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26B1A0ED-C8E3-4B2E-98BD-F0AB79FF297D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26B1A0ED-C8E3-4B2E-98BD-F0AB79FF297D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5429C7C0-DAF2-4648-B9C3-53F9CD60CD10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5429C7C0-DAF2-4648-B9C3-53F9CD60CD10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5429C7C0-DAF2-4648-B9C3-53F9CD60CD10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5429C7C0-DAF2-4648-B9C3-53F9CD60CD10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

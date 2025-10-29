@@ -14,27 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
+namespace DustInTheWind.JFileDb;
 
-public enum EntityState
+/// <summary>
+/// Represents a change to an entity, including the entity itself and its state.
+/// </summary>
+/// <typeparam name="T">The type of the entity.</typeparam>
+public class ChangeEntry<T>
 {
     /// <summary>
-    /// The entity has not been modified since it was loaded or last saved.
+    /// Gets or sets the entity that has been changed.
     /// </summary>
-    Unchanged,
+    public T Entity { get; set; }
 
     /// <summary>
-    /// The entity is new and will be inserted when changes are saved.
+    /// Gets or sets the state of the entity (Added, Modified, Deleted, etc.).
     /// </summary>
-    Added,
-
-    /// <summary>
-    /// The entity has been modified and will be updated when changes are saved.
-    /// </summary>
-    Modified,
-
-    /// <summary>
-    /// The entity has been marked for deletion and will be deleted when changes are saved.
-    /// </summary>
-    Deleted
+    public EntityState State { get; set; }
 }

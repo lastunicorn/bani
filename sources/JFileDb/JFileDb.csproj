@@ -1,4 +1,4 @@
-<!--
+﻿<!--
 Bani
 Copyright (C) 2022-2025 Dust in the Wind
 
@@ -18,17 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
 		<AssemblyName>DustInTheWind.$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>DustInTheWind.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\Bani.DataAccess.JsonFiles\Bani.DataAccess.JsonFiles.csproj" PrivateAssets="" />
-        <ProjectReference Include="..\Bani.Ports.DataAccess\Bani.Ports.DataAccess.csproj" PrivateAssets="All" />
-        <ProjectReference Include="..\Bani.Domain\Bani.Domain.csproj" PrivateAssets="All" />
-        <ProjectReference Include="..\JFileDb\JFileDb.csproj" PrivateAssets="All" />
-    </ItemGroup>
+	</PropertyGroup>
 
 </Project>

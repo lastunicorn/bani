@@ -14,14 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Bani.Domain;
+namespace DustInTheWind.JFileDb;
 
 /// <summary>
 /// Represents an entity that has a unique identifier.
+/// This is a generic interface that can be used by any data persistence framework.
 /// </summary>
 public interface IEntity
 {
-  /// <summary>
+    /// <summary>
     /// Gets the unique identifier of the entity.
     /// </summary>
     string Id { get; }

@@ -14,20 +14,37 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.Domain;
-
-namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
+namespace DustInTheWind.JFileDb;
 
 /// <summary>
 /// Defines the contract for persisting entities to storage.
+/// This is a generic interface that can be implemented for any storage mechanism.
 /// </summary>
 /// <typeparam name="TEntity">The type of entity to persist.</typeparam>
 public interface IEntityPersister<in TEntity>
     where TEntity : class, IEntity
 {
+    /// <summary>
+    /// Persists a newly added entity to storage.
+    /// </summary>
+    /// <param name="entity">The entity to persist.</param>
+    /// <param name="cancellationToken">Cancellation token for async operations.</param>
+    /// <returns>A task representing the async operation.</returns>
     Task PersistAddedAsync(TEntity entity, CancellationToken cancellationToken = default);
 
+    /// <summary>
+    /// Persists modifications to an existing entity in storage.
+    /// </summary>
+    /// <param name="entity">The entity to update.</param>
+    /// <param name="cancellationToken">Cancellation token for async operations.</param>
+    /// <returns>A task representing the async operation.</returns>
     Task PersistModifiedAsync(TEntity entity, CancellationToken cancellationToken = default);
 
+    /// <summary>
+    /// Removes an entity from storage.
+    /// </summary>
+    /// <param name="entity">The entity to delete.</param>
+    /// <param name="cancellationToken">Cancellation token for async operations.</param>
+    /// <returns>A task representing the async operation.</returns>
     Task PersistDeletedAsync(TEntity entity, CancellationToken cancellationToken = default);
 }
