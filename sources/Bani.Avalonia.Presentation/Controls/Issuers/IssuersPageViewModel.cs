@@ -14,106 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.ObjectModel;
-using DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
-using DustInTheWind.Bani.Avalonia.Application.UpdateIssuerComments;
-using DustInTheWind.Bani.Avalonia.Presentation.Controls.Main;
 using DustInTheWind.Bani.Avalonia.Presentation.Infrastructure;
-using MediatR;
 
 namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers;
 
 public class IssuersPageViewModel : ViewModelBase
 {
-    private readonly IMediator mediator;
-    private IssuerViewModel selectedIssuer;
-    private string issuerComments;
-    private ObservableCollection<EmissionViewModel> emissions;
-
-    public ObservableCollection<IssuerViewModel> Issuers { get; } = [];
-
-    public IssuerViewModel SelectedIssuer
+    public IssuersPageViewModel()
     {
-        get => selectedIssuer;
-        set
-        {
-            selectedIssuer = value;
-            OnPropertyChanged();
-
-            IssuerComments = value?.IssuerInfo?.Comments;
-            Emissions = value?.Emissions ?? [];
-        }
-    }
-
-    public string IssuerComments
-    {
-        get => issuerComments;
-        set
-        {
-            issuerComments = value;
-            OnPropertyChanged();
-
-            bool isChanged = selectedIssuer?.IssuerInfo?.Comments != issuerComments;
-            if (isChanged)
-                _ = SaveIssuerComments();
-        }
-    }
-
-    public ObservableCollection<EmissionViewModel> Emissions
-    {
-        get => emissions;
-        set
-        {
-            emissions = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public SelectIssueCommand SelectIssueCommand { get; }
-
-    public IssuersPageViewModel(IMediator mediator, SelectIssueCommand selectIssueCommand)
-    {
-        this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-        SelectIssueCommand = selectIssueCommand;
-
-        _ = Initialize();
-    }
-
-    private async Task Initialize()
-    {
-        PresentIssuersRequest request = new();
-        PresentIssuersResponse response = await mediator.Send(request);
-
-        IEnumerable<IssuerViewModel> issuerViewModels = response.Issuers
-            .Select(x => new IssuerViewModel(x));
-
-        foreach (IssuerViewModel issuerViewModel in issuerViewModels)
-            Issuers.Add(issuerViewModel);
-    }
-
-    private async Task SaveIssuerComments()
-    {
-        if (selectedIssuer?.IssuerInfo?.Id == null)
-            return;
-
-        try
-        {
-            UpdateIssuerCommentsRequest request = new()
-            {
-                IssuerId = selectedIssuer.IssuerInfo.Id,
-                Comments = issuerComments
-            };
-
-            await mediator.Send(request);
-
-            // Update the local model
-            selectedIssuer.IssuerInfo.Comments = issuerComments;
-        }
-        catch (Exception ex)
-        {
-            // In a real application, you might want to show an error message to the user
-            // For now, we'll just ignore the error to keep the demo simple
-            System.Diagnostics.Debug.WriteLine($"Error saving issuer comments: {ex.Message}");
-        }
+        // Simplified view model with no issuer list functionality
     }
 }

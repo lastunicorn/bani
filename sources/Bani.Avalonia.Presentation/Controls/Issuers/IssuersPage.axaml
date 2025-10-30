@@ -22,99 +22,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:issuers="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers"
-    xmlns:converters="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Converters"
 
-    x:Class="DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers.IssuersPage"
+x:Class="DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers.IssuersPage"
 
-  mc:Ignorable="d">
-
-	<UserControl.Resources>
-		<converters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter" />
-	</UserControl.Resources>
+    mc:Ignorable="d">
 
 	<Design.DataContext>
 		<issuers:IssuersPageViewModel />
 	</Design.DataContext>
 
-	<DockPanel>
-
-		<ListBox
-			DockPanel.Dock="Left"
-			ItemsSource="{Binding Issuers}"
-			SelectedItem="{Binding SelectedIssuer}"
-			MinWidth="200"
-			Tapped="InputElement_OnTapped"
-			Margin="0 0 10 0">
-
-			<ListBox.ItemTemplate>
-				<DataTemplate DataType="{x:Type issuers:IssuerViewModel}">
-					<TextBlock
-						Text="{Binding Text}"
-						VerticalAlignment="Center"
-						Padding="2 8" />
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-
-		</ListBox>
-
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
-
-			<DockPanel
-				Grid.Row="0"
-				IsEnabled="{Binding SelectedIssuer, Converter={StaticResource ObjectToVisibilityConverter}}">
-
-				<TextBlock
-					DockPanel.Dock="Top"
-					Text="Comments"
-					FontWeight="Bold"
-					Margin="0 0 0 5" />
-
-				<TextBox
-					Text="{Binding IssuerComments, UpdateSourceTrigger=LostFocus}"
-					VerticalAlignment="Stretch"
-					HorizontalAlignment="Stretch"
-					IsReadOnly="False"
-					AcceptsReturn="True"
-					BorderBrush="WhiteSmoke" />
-				
-			</DockPanel>
-
-			<DockPanel
-				Grid.Row="1"
-				Margin="0 10 0 0"
-				IsEnabled="{Binding SelectedIssuer, Converter={StaticResource ObjectToVisibilityConverter}}">
-
-				<TextBlock
-					DockPanel.Dock="Top"
-					Text="Emissions"
-					FontWeight="Bold"
-					Margin="0 0 0 5" />
-
-				<ListBox
-					ItemsSource="{Binding Emissions}"
-					VerticalAlignment="Stretch"
-					HorizontalAlignment="Stretch"
-					BorderBrush="WhiteSmoke">
-
-					<ListBox.ItemTemplate>
-						<DataTemplate DataType="{x:Type issuers:EmissionViewModel}">
-							<TextBlock
-								Text="{Binding DisplayText}"
-								VerticalAlignment="Center"
-								Padding="4" />
-						</DataTemplate>
-					</ListBox.ItemTemplate>
-
-				</ListBox>
-
-			</DockPanel>
-
-		</Grid>
-
-	</DockPanel>
+	<TextBlock
+		Text="Issuer selection functionality has been removed."
+		HorizontalAlignment="Center"
+		VerticalAlignment="Center"
+		FontSize="16" />
 
 </UserControl>
