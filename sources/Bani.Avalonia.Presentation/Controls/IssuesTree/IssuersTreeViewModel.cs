@@ -15,8 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.ObjectModel;
-using Avalonia.Controls;
 using DustInTheWind.Bani.Avalonia.Application.PresentIssuesTree;
+using DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
 using DustInTheWind.Bani.Avalonia.Presentation.Infrastructure;
 using MediatR;
 
@@ -36,6 +36,8 @@ public class IssuersTreeViewModel : ViewModelBase
         {
             selectedItem = value;
             OnPropertyChanged();
+
+            _ = HandleSelectionChanged(value);
         }
     }
 
@@ -47,21 +49,34 @@ public class IssuersTreeViewModel : ViewModelBase
 
     private async Task InitializeAsync()
     {
-        try
-        {
-            PresentIssuersTreeRequest request = new();
-            PresentIssuersTreeResponse response = await mediator.Send(request);
+        PresentIssuersTreeRequest request = new();
+        PresentIssuersTreeResponse response = await mediator.Send(request);
 
-            IEnumerable<IssuerTreeNodeViewModel> issueViewModels = response.Issuers
-                .Select(x => new IssuerTreeNodeViewModel(x));
+        IEnumerable<IssuerTreeNodeViewModel> issueViewModels = response.Issuers
+            .Select(x => new IssuerTreeNodeViewModel(x));
 
-            foreach (IssuerTreeNodeViewModel issueViewModel in issueViewModels)
-                Issues.Add(issueViewModel);
-        }
-        catch (Exception ex)
+        foreach (IssuerTreeNodeViewModel issueViewModel in issueViewModels)
+            Issues.Add(issueViewModel);
+    }
+
+    private async Task HandleSelectionChanged(object selectedItem)
+    {
+        if (selectedItem is IssuerTreeNodeViewModel issuerNode)
         {
-            // Log the exception or handle it appropriately
-            System.Diagnostics.Debug.WriteLine($"Failed to initialize IssuersTreeViewModel: {ex.Message}");
+            try
+            {
+                SelectIssuerRequest request = new()
+                {
+                    IssuerId = issuerNode.Id
+                };
+
+                await mediator.Send(request);
+            }
+            catch (Exception ex)
+            {
+                // Log error but don't throw to avoid breaking UI
+                System.Diagnostics.Debug.WriteLine($"Error selecting issuer: {ex.Message}");
+            }
         }
     }
 }
