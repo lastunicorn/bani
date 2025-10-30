@@ -20,6 +20,7 @@ using DustInTheWind.Bani.Adapters.DataAccess;
 using DustInTheWind.Bani.Adapters.StateAccess;
 using DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
 using DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers;
+using DustInTheWind.Bani.Avalonia.Presentation.Controls.IssuesTree;
 using DustInTheWind.Bani.Avalonia.Presentation.Controls.Main;
 using DustInTheWind.Bani.Infrastructure;
 using DustInTheWind.Bani.Ports.DataAccess;
@@ -80,6 +81,7 @@ internal static class SetupServices
     {
         containerBuilder.RegisterType<MainViewModel>().AsSelf();
         containerBuilder.RegisterType<IssuersPageViewModel>().AsSelf();
+        containerBuilder.RegisterType<IssuersTreeViewModel>().AsSelf();
         containerBuilder.RegisterType<SelectIssueCommand>().AsSelf();
     }
 

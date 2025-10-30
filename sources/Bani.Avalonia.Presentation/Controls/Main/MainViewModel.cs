@@ -1,4 +1,4 @@
-﻿// Bani
+// Bani
 // Copyright (C) 2022-2025 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -18,6 +18,7 @@ using System;
 using System.Reflection;
 using DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
 using DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers;
+using DustInTheWind.Bani.Avalonia.Presentation.Controls.IssuesTree;
 using DustInTheWind.Bani.Avalonia.Presentation.Controls.PageTitle;
 using DustInTheWind.Bani.Avalonia.Presentation.Infrastructure;
 using DustInTheWind.Bani.Infrastructure;
@@ -56,10 +57,13 @@ public class MainViewModel : ViewModelBase
 
     public IssuersPageViewModel IssuersPageViewModel { get; }
 
-    public MainViewModel(EventBus eventBus, SelectIssueCommand selectIssueCommand, IssuersPageViewModel issuersPageViewModel)
+    public IssuersTreeViewModel IssuersTreeViewModel { get; }
+
+    public MainViewModel(EventBus eventBus, SelectIssueCommand selectIssueCommand, IssuersPageViewModel issuersPageViewModel, IssuersTreeViewModel issuesTreeViewModel)
     {
         SelectIssueCommand = selectIssueCommand;
         IssuersPageViewModel = issuersPageViewModel;
+        IssuersTreeViewModel = issuesTreeViewModel;
 
         eventBus.Subscribe<IssuerChangedEvent>(HandleIssuerChanged);
 
