@@ -21,9 +21,9 @@ using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Infrastructure;
 using MediatR;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers;
+namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.Details;
 
-public class IssuersPageViewModel : ViewModelBase
+public class DetailsPageViewModel : ViewModelBase
 {
     private readonly IMediator mediator;
     private Issuer currentIssuer;
@@ -59,7 +59,7 @@ public class IssuersPageViewModel : ViewModelBase
 
     public bool IsVisible => CurrentIssuer != null;
 
-    public IssuersPageViewModel(EventBus eventBus, IMediator mediator)
+    public DetailsPageViewModel(EventBus eventBus, IMediator mediator)
     {
         ArgumentNullException.ThrowIfNull(eventBus);
         this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));

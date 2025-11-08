@@ -16,7 +16,7 @@
 
 using System.Reflection;
 using DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
-using DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers;
+using DustInTheWind.Bani.Avalonia.Presentation.Controls.Details;
 using DustInTheWind.Bani.Avalonia.Presentation.Controls.IssuesTree;
 using DustInTheWind.Bani.Avalonia.Presentation.Infrastructure;
 using DustInTheWind.Bani.Infrastructure;
@@ -51,15 +51,15 @@ public class MainViewModel : ViewModelBase
 
     public SelectIssueCommand SelectIssueCommand { get; }
 
-    public IssuersPageViewModel IssuersPageViewModel { get; }
+    public DetailsPageViewModel DetailsPageViewModel { get; }
 
     public IssuersTreeViewModel IssuersTreeViewModel { get; }
 
     public MainViewModel(EventBus eventBus, SelectIssueCommand selectIssueCommand,
-        IssuersPageViewModel issuersPageViewModel, IssuersTreeViewModel issuesTreeViewModel)
+        DetailsPageViewModel detailsPageViewModel, IssuersTreeViewModel issuesTreeViewModel)
     {
         SelectIssueCommand = selectIssueCommand;
-        IssuersPageViewModel = issuersPageViewModel;
+        DetailsPageViewModel = detailsPageViewModel;
         IssuersTreeViewModel = issuesTreeViewModel;
 
         eventBus.Subscribe<IssuerChangedEvent>(HandleIssuerChanged);

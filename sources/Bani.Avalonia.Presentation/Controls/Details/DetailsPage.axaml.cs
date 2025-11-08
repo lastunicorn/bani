@@ -17,11 +17,11 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers;
+namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.Details;
 
-public partial class IssuersPage : UserControl
+public partial class DetailsPage : UserControl
 {
-    public IssuersPage()
+    public DetailsPage()
     {
         InitializeComponent();
     }

@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:main="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Controls.Main"
     xmlns:pageTitle="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Controls.PageTitle"
-    xmlns:issuers="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers"
+    xmlns:details="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Controls.Details"
     xmlns:issuesTree="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Controls.IssuesTree"
 
     mc:Ignorable="d"
@@ -55,9 +55,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Margin="0 0 20 0"
             DataContext="{Binding IssuersTreeViewModel}" />
 
-		<!-- Right side: Issuers Page -->
-		<issuers:IssuersPage
-            DataContext="{Binding IssuersPageViewModel}" />
+		<!-- Right side: Details Page -->
+		<details:DetailsPage
+            DataContext="{Binding DetailsPageViewModel}" />
 
 	</DockPanel>
 

@@ -1,4 +1,4 @@
-﻿// Bani
+// Bani
 // Copyright (C) 2022-2025 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -19,7 +19,7 @@ using Autofac;
 using DustInTheWind.Bani.Adapters.DataAccess;
 using DustInTheWind.Bani.Adapters.StateAccess;
 using DustInTheWind.Bani.Avalonia.Application.PresentIssuers;
-using DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers;
+using DustInTheWind.Bani.Avalonia.Presentation.Controls.Details;
 using DustInTheWind.Bani.Avalonia.Presentation.Controls.IssuesTree;
 using DustInTheWind.Bani.Avalonia.Presentation.Controls.Main;
 using DustInTheWind.Bani.Infrastructure;
@@ -80,7 +80,7 @@ internal static class SetupServices
     private static void RegisterPresentation(ContainerBuilder containerBuilder)
     {
         containerBuilder.RegisterType<MainViewModel>().AsSelf();
-        containerBuilder.RegisterType<IssuersPageViewModel>().AsSelf();
+        containerBuilder.RegisterType<DetailsPageViewModel>().AsSelf();
         containerBuilder.RegisterType<IssuersTreeViewModel>().AsSelf();
         containerBuilder.RegisterType<SelectIssueCommand>().AsSelf();
     }
