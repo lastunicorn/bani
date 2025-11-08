@@ -61,8 +61,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <Compile Update="Controls\Main\MainWindow.axaml.cs">
             <DependentUpon>%(Filename)</DependentUpon>
         </Compile>
-        <Compile Update="Controls\PageTitle\PageTitleControl.axaml.cs">
-            <DependentUpon>PageTitleControl.axaml</DependentUpon>
-        </Compile>
     </ItemGroup>
 </Project>

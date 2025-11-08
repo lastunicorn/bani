@@ -17,24 +17,65 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <UserControl
-    xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:issuers="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers"
+	x:Class="DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers.IssuersPage"
 
-x:Class="DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers.IssuersPage"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:issuers="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers"
 
-    mc:Ignorable="d">
+	mc:Ignorable="d">
 
 	<Design.DataContext>
 		<issuers:IssuersPageViewModel />
 	</Design.DataContext>
 
-	<TextBlock
-		Text="Issuer selection functionality has been removed."
-		HorizontalAlignment="Center"
-		VerticalAlignment="Center"
-		FontSize="16" />
+	<Grid>
+		<!-- Content when issuer is selected -->
+		<Border
+			IsVisible="{Binding IsVisible}">
+
+			<StackPanel Spacing="16">
+
+				<!-- Issuer Name -->
+				<TextBlock
+					Text="{Binding IssuerName}"
+					FontSize="24"
+					FontWeight="Bold"
+					Margin="0 0 0 8" />
+
+				<!-- Comments Section -->
+				<DockPanel>
+
+					<TextBlock
+						DockPanel.Dock="Top"
+						Text="Comments"
+						FontSize="16"
+						FontWeight="SemiBold"
+						Margin="0 0 0 5" />
+
+					<TextBox
+						Text="{Binding Comments}"
+						AcceptsReturn="True"
+						TextWrapping="Wrap"
+						Watermark="Enter comments about this issuer..."
+						BorderThickness="0"
+						Padding="0" />
+
+				</DockPanel>
+			</StackPanel>
+		</Border>
+
+		<!-- Placeholder when no issuer is selected -->
+		<TextBlock
+			IsVisible="{Binding !IsVisible}"
+			Text="Select an issuer to view and edit its information."
+			HorizontalAlignment="Center"
+			VerticalAlignment="Center"
+			FontSize="16"
+			Foreground="Gray" />
+
+	</Grid>
 
 </UserControl>

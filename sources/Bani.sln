@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.Cli.Presentation", "Ba
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bani.Avalonia", "Bani.Avalonia\Bani.Avalonia.csproj", "{B1DBAD65-1B4C-4943-AEEC-6F023813F43A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cli Application", "Cli Application", "{6D08CDEB-ACEE-49FB-BA68-8963EF269064}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App.Cli", "App.Cli", "{6D08CDEB-ACEE-49FB-BA68-8963EF269064}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Avalonia Application", "Avalonia Application", "{5FCAD796-823B-4240-B1EE-E31C7F43B600}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App.Avalonia", "App.Avalonia", "{5FCAD796-823B-4240-B1EE-E31C7F43B600}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bani.Avalonia.Presentation", "Bani.Avalonia.Presentation\Bani.Avalonia.Presentation.csproj", "{79534518-7A4D-49BD-BA77-5CA3974C53F3}"
 EndProject

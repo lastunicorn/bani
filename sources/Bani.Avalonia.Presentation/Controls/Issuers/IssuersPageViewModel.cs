@@ -14,14 +14,84 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
+using DustInTheWind.Bani.Avalonia.Application.UpdateIssuerComments;
 using DustInTheWind.Bani.Avalonia.Presentation.Infrastructure;
+using DustInTheWind.Bani.Domain;
+using DustInTheWind.Bani.Infrastructure;
+using MediatR;
 
 namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers;
 
 public class IssuersPageViewModel : ViewModelBase
 {
-    public IssuersPageViewModel()
+    private readonly IMediator mediator;
+    private Issuer currentIssuer;
+    private string comments;
+
+    public Issuer CurrentIssuer
     {
-        // Simplified view model with no issuer list functionality
+        get => currentIssuer;
+        private set
+        {
+            currentIssuer = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IssuerName));
+            OnPropertyChanged(nameof(IsVisible));
+        }
+    }
+
+    public string IssuerName => CurrentIssuer?.Name ?? string.Empty;
+
+    public string Comments
+    {
+        get => comments;
+        set
+        {
+            if (comments != value)
+            {
+                comments = value;
+                OnPropertyChanged();
+                _ = UpdateCommentsAsync();
+            }
+        }
+    }
+
+    public bool IsVisible => CurrentIssuer != null;
+
+    public IssuersPageViewModel(EventBus eventBus, IMediator mediator)
+    {
+        ArgumentNullException.ThrowIfNull(eventBus);
+        this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+
+        eventBus.Subscribe<IssuerChangedEvent>(OnIssuerChanged);
+    }
+
+    private void OnIssuerChanged(IssuerChangedEvent issuerChangedEvent)
+    {
+        CurrentIssuer = issuerChangedEvent.Issuer;
+        Comments = CurrentIssuer?.Comments ?? string.Empty;
+    }
+
+    private async Task UpdateCommentsAsync()
+    {
+        if (CurrentIssuer == null)
+            return;
+
+        try
+        {
+            UpdateIssuerCommentsRequest request = new()
+            {
+                IssuerId = CurrentIssuer.Id,
+                Comments = Comments
+            };
+
+            await mediator.Send(request);
+        }
+        catch (Exception ex)
+        {
+            // Log error but don't throw to avoid breaking UI
+            System.Diagnostics.Debug.WriteLine($"Error updating issuer comments: {ex.Message}");
+        }
     }
 }

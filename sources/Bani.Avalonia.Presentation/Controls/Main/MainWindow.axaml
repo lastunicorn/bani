@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <Window
+    x:Class="DustInTheWind.Bani.Avalonia.Presentation.Controls.Main.MainWindow"
+
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -25,8 +27,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     xmlns:pageTitle="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Controls.PageTitle"
     xmlns:issuers="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Controls.Issuers"
     xmlns:issuesTree="clr-namespace:DustInTheWind.Bani.Avalonia.Presentation.Controls.IssuesTree"
-
-    x:Class="DustInTheWind.Bani.Avalonia.Presentation.Controls.Main.MainWindow"
 
     mc:Ignorable="d"
     d:DesignWidth="800"
@@ -42,16 +42,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 	<DockPanel Margin="20">
 
-		<pageTitle:PageTitleControl
-            DockPanel.Dock="Top"
-            Margin="0 0 0 10"
-            DataContext="{Binding PageTitleViewModel}" />
-
 		<TextBlock
             DockPanel.Dock="Top"
             Text="{Binding BreadCrumbs}"
             Margin="0 0 0 10"
-            Padding="15 10" />
+            Padding="0 10" />
 
 		<!-- Left side: Issues Tree -->
 		<issuesTree:IssuersTreeControl

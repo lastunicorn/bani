@@ -22,9 +22,13 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.IssuesTree;
 public class EmissionTreeNodeViewModel : ViewModelBase
 {
     public string Name { get; }
- public string DisplayText { get; }
+    
+    public string DisplayText { get; }
+    
     public TreeNodeType NodeType { get; }
+    
     public int? StartYear { get; }
+    
     public int? EndYear { get; }
 
     public EmissionTreeNodeViewModel(EmissionTreeNodeInfo emissionInfo)
@@ -32,9 +36,9 @@ public class EmissionTreeNodeViewModel : ViewModelBase
         ArgumentNullException.ThrowIfNull(emissionInfo);
 
         Name = emissionInfo.Name;
-    DisplayText = emissionInfo.DisplayText;
+        DisplayText = emissionInfo.DisplayText;
         NodeType = emissionInfo.NodeType;
         StartYear = emissionInfo.StartYear;
-     EndYear = emissionInfo.EndYear;
+        EndYear = emissionInfo.EndYear;
     }
 }
