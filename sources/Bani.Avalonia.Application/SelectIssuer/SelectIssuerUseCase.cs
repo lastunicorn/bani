@@ -18,11 +18,11 @@ using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Infrastructure;
 using DustInTheWind.Bani.Ports.DataAccess;
 using DustInTheWind.Bani.Ports.StateAccess;
-using MediatR;
+using DustInTheWind.RequestR;
 
 namespace DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
 
-internal class SelectIssuerUseCase : IRequestHandler<SelectIssuerRequest>
+internal class SelectIssuerUseCase : IUseCase<SelectIssuerRequest>
 {
     private readonly IApplicationState applicationState;
     private readonly EventBus eventBus;
@@ -35,7 +35,7 @@ internal class SelectIssuerUseCase : IRequestHandler<SelectIssuerRequest>
         this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
     }
 
-    public Task Handle(SelectIssuerRequest request, CancellationToken cancellationToken)
+    public Task Execute(SelectIssuerRequest request, CancellationToken cancellationToken)
     {
         Issuer issuer = unitOfWork.IssuerRepository.GetById(request.IssuerId);
 
@@ -43,7 +43,7 @@ internal class SelectIssuerUseCase : IRequestHandler<SelectIssuerRequest>
 
         RaiseIssuerChangedEvent(issuer);
 
-        return Task.FromResult(Unit.Value);
+        return Task.CompletedTask;
     }
 
     private void RaiseIssuerChangedEvent(Issuer issuer)

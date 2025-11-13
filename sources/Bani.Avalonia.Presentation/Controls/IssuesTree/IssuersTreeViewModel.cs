@@ -18,13 +18,13 @@ using System.Collections.ObjectModel;
 using DustInTheWind.Bani.Avalonia.Application.PresentIssuesTree;
 using DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
 using DustInTheWind.Bani.Avalonia.Presentation.Infrastructure;
-using MediatR;
+using DustInTheWind.RequestR;
 
 namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.IssuesTree;
 
 public class IssuersTreeViewModel : ViewModelBase
 {
-    private readonly IMediator mediator;
+    private readonly RequestBus requestBus;
     private object selectedItem;
 
     public ObservableCollection<IssuerTreeNodeViewModel> Issues { get; } = [];
@@ -41,16 +41,16 @@ public class IssuersTreeViewModel : ViewModelBase
         }
     }
 
-    public IssuersTreeViewModel(IMediator mediator)
+    public IssuersTreeViewModel(RequestBus requestBus)
     {
-        this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
         _ = InitializeAsync();
     }
 
     private async Task InitializeAsync()
     {
         PresentIssuersTreeRequest request = new();
-        PresentIssuersTreeResponse response = await mediator.Send(request);
+        PresentIssuersTreeResponse response = await requestBus.ProcessAsync<PresentIssuersTreeRequest, PresentIssuersTreeResponse>(request);
 
         IEnumerable<IssuerTreeNodeViewModel> issueViewModels = response.Issuers
             .Select(x => new IssuerTreeNodeViewModel(x));
@@ -70,7 +70,7 @@ public class IssuersTreeViewModel : ViewModelBase
                     IssuerId = issuerNode.Id
                 };
 
-                await mediator.Send(request);
+                await requestBus.ProcessAsync(request);
             }
             catch (Exception ex)
             {

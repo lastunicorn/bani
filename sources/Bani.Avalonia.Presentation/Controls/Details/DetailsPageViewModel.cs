@@ -19,13 +19,13 @@ using DustInTheWind.Bani.Avalonia.Application.UpdateIssuerComments;
 using DustInTheWind.Bani.Avalonia.Presentation.Infrastructure;
 using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Infrastructure;
-using MediatR;
+using DustInTheWind.RequestR;
 
 namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.Details;
 
 public class DetailsPageViewModel : ViewModelBase
 {
-    private readonly IMediator mediator;
+    private readonly RequestBus requestBus;
     private Issuer currentIssuer;
     private string comments;
 
@@ -59,10 +59,10 @@ public class DetailsPageViewModel : ViewModelBase
 
     public bool IsVisible => CurrentIssuer != null;
 
-    public DetailsPageViewModel(EventBus eventBus, IMediator mediator)
+    public DetailsPageViewModel(EventBus eventBus, RequestBus requestBus)
     {
         ArgumentNullException.ThrowIfNull(eventBus);
-        this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
 
         eventBus.Subscribe<IssuerChangedEvent>(OnIssuerChanged);
     }
@@ -86,7 +86,7 @@ public class DetailsPageViewModel : ViewModelBase
                 Comments = Comments
             };
 
-            await mediator.Send(request);
+            await requestBus.ProcessAsync(request);
         }
         catch (Exception ex)
         {

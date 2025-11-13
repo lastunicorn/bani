@@ -16,18 +16,18 @@
 
 using System.Windows.Input;
 using DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
-using MediatR;
+using DustInTheWind.RequestR;
 
 namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.Main;
 
 public class SelectIssueCommand : ICommand
 {
-    private readonly IMediator mediator;
+    private readonly RequestBus requestBus;
     public event EventHandler CanExecuteChanged;
 
-    public SelectIssueCommand(IMediator mediator)
+    public SelectIssueCommand(RequestBus requestBus)
     {
-        this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
     }
 
     public bool CanExecute(object parameter)
@@ -49,7 +49,7 @@ public class SelectIssueCommand : ICommand
             IssuerId = issuerId
         };
 
-        await mediator.Send(request);
+        await requestBus.ProcessAsync(request);
     }
 
     protected virtual void OnCanExecuteChanged()

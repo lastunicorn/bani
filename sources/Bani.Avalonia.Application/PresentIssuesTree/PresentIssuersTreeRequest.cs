@@ -14,10 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using MediatR;
-
 namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuesTree;
 
-public class PresentIssuersTreeRequest : IRequest<PresentIssuersTreeResponse>
+public class PresentIssuersTreeRequest
 {
 }

@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Reflection;
 using Autofac;
 using DustInTheWind.Bani.Adapters.DataAccess;
 using DustInTheWind.Bani.Adapters.StateAccess;
@@ -25,8 +24,7 @@ using DustInTheWind.Bani.Avalonia.Presentation.Controls.Main;
 using DustInTheWind.Bani.Infrastructure;
 using DustInTheWind.Bani.Ports.DataAccess;
 using DustInTheWind.Bani.Ports.StateAccess;
-using MediatR.Extensions.Autofac.DependencyInjection;
-using MediatR.Extensions.Autofac.DependencyInjection.Builder;
+using DustInTheWind.RequestR.Extensions.Autofac;
 using Microsoft.Extensions.Configuration;
 
 namespace DustInTheWind.Bani.Avalonia;
@@ -56,12 +54,10 @@ internal static class SetupServices
             .AsSelf()
             .SingleInstance();
 
-        Assembly assembly = typeof(PresentIssuersRequest).Assembly;
-        MediatRConfiguration mediatRConfiguration = MediatRConfigurationBuilder.Create("", assembly)
-            .WithAllOpenGenericHandlerTypesRegistered()
-            .WithRegistrationScope(RegistrationScope.Scoped) // currently only supported values are `Transient` and `Scoped`
-            .Build();
-        containerBuilder.RegisterMediatR(mediatRConfiguration);
+        containerBuilder.RegisterUseCaseEngine(options =>
+        {
+            options.AddFromAssemblyContaining<PresentIssuersRequest>();
+        });
 
         containerBuilder
             .RegisterType<EventBus>()

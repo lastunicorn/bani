@@ -16,11 +16,11 @@
 
 using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Ports.DataAccess;
-using MediatR;
+using DustInTheWind.RequestR;
 
 namespace DustInTheWind.Bani.Avalonia.Application.PresentIssuesTree;
 
-internal class PresentIssuersTreeUseCase : IRequestHandler<PresentIssuersTreeRequest, PresentIssuersTreeResponse>
+internal class PresentIssuersTreeUseCase : IUseCase<PresentIssuersTreeRequest, PresentIssuersTreeResponse>
 {
     private readonly IUnitOfWork unitOfWork;
 
@@ -29,7 +29,7 @@ internal class PresentIssuersTreeUseCase : IRequestHandler<PresentIssuersTreeReq
         this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
     }
 
-    public Task<PresentIssuersTreeResponse> Handle(PresentIssuersTreeRequest request, CancellationToken cancellationToken)
+    public Task<PresentIssuersTreeResponse> Execute(PresentIssuersTreeRequest request, CancellationToken cancellationToken)
     {
         IEnumerable<Issuer> issuers = unitOfWork.IssuerRepository.GetAll();
 

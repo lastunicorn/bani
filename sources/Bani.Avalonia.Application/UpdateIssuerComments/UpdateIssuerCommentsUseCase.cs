@@ -16,11 +16,11 @@
 
 using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Ports.DataAccess;
-using MediatR;
+using DustInTheWind.RequestR;
 
 namespace DustInTheWind.Bani.Avalonia.Application.UpdateIssuerComments;
 
-internal class UpdateIssuerCommentsUseCase : IRequestHandler<UpdateIssuerCommentsRequest>
+internal class UpdateIssuerCommentsUseCase : IUseCase<UpdateIssuerCommentsRequest>
 {
     private readonly IUnitOfWork unitOfWork;
 
@@ -29,7 +29,7 @@ internal class UpdateIssuerCommentsUseCase : IRequestHandler<UpdateIssuerComment
         this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
     }
 
-    public async Task Handle(UpdateIssuerCommentsRequest request, CancellationToken cancellationToken)
+    public async Task Execute(UpdateIssuerCommentsRequest request, CancellationToken cancellationToken)
     {
         ValidateRequest(request);
 
