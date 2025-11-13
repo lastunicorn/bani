@@ -14,19 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Ports.DataAccess;
-using MediatR;
+using DustInTheWind.RequestR;
 
 namespace DustInTheWind.Bani.Cli.Application.PresentIssuers;
 
-internal class PresentIssuersUseCase : IRequestHandler<PresentIssuersRequest, PresentIssuersResponse>
+internal class PresentIssuersUseCase : IUseCase<PresentIssuersRequest, PresentIssuersResponse>
 {
     private readonly IUnitOfWork unitOfWork;
 
@@ -35,7 +29,7 @@ internal class PresentIssuersUseCase : IRequestHandler<PresentIssuersRequest, Pr
         this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
     }
 
-    public Task<PresentIssuersResponse> Handle(PresentIssuersRequest request, CancellationToken cancellationToken)
+    public Task<PresentIssuersResponse> Execute(PresentIssuersRequest request, CancellationToken cancellationToken)
     {
         IEnumerable<Issuer> issuers = string.IsNullOrEmpty(request.IssuerName)
             ? unitOfWork.IssuerRepository.GetAll()

@@ -14,14 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.IO;
-using System.Reflection;
 using Autofac;
 using DustInTheWind.Bani.Adapters.DataAccess;
 using DustInTheWind.Bani.Cli.Application.PresentIssuers;
 using DustInTheWind.Bani.Ports.DataAccess;
-using MediatR.Extensions.Autofac.DependencyInjection;
-using MediatR.Extensions.Autofac.DependencyInjection.Builder;
+using DustInTheWind.RequestR.Extensions.Autofac;
 using Microsoft.Extensions.Configuration;
 
 namespace DustInTheWind.Bani;
@@ -43,12 +40,10 @@ internal class Setup
             .AsSelf()
             .SingleInstance();
 
-        Assembly applicationAssembly = typeof(PresentIssuersRequest).Assembly;
-        MediatRConfiguration mediatRConfiguration = MediatRConfigurationBuilder.Create("", applicationAssembly)
-            .WithAllOpenGenericHandlerTypesRegistered()
-            .WithRegistrationScope(RegistrationScope.Scoped) // currently only supported values are `Transient` and `Scoped`
-            .Build();
-        containerBuilder.RegisterMediatR(mediatRConfiguration);
+        containerBuilder.RegisterUseCaseEngine(options =>
+        {
+            options.AddFromAssemblyContaining<PresentIssuersRequest>();
+        });
 
         RegisterPortAdapters(containerBuilder);
     }

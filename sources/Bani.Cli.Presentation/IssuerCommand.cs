@@ -14,19 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using DustInTheWind.Bani.Cli.Application.PresentIssuers;
 using DustInTheWind.ConsoleTools.Commando;
-using MediatR;
+using DustInTheWind.RequestR;
 
 namespace DustInTheWind.Bani.Cli.Presentation;
 
 [NamedCommand("issuer", Description = "Displays the list of issuers.")]
 public class IssuerCommand : ICommand
 {
-    private readonly IMediator mediator;
+    private readonly RequestBus requestBus;
 
     [NamedParameter("name", ShortName = 'n', IsOptional = true)]
     public string IssuerName { get; set; }
@@ -39,9 +36,9 @@ public class IssuerCommand : ICommand
     
     public List<IssuerInfo> Issuers { get; private set; }
 
-    public IssuerCommand(IMediator mediator)
+    public IssuerCommand(RequestBus requestBus)
     {
-        this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
     }
 
     public async Task Execute()
@@ -52,7 +49,7 @@ public class IssuerCommand : ICommand
             StartYear = StartYear,
             EndYear = EndYear
         };
-        PresentIssuersResponse response = await mediator.Send(request);
+        PresentIssuersResponse response = await requestBus.ProcessAsync<PresentIssuersRequest, PresentIssuersResponse>(request);
 
         Issuers = response.Issuers;
     }

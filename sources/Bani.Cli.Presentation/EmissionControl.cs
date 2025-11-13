@@ -19,10 +19,7 @@ internal class EmissionControl
                 ForegroundColor = ConsoleColor.Black,
                 BackgroundColor = ConsoleColor.Gray
             },
-            Border =
-            {
-                Template = BorderTemplate.SingleLineBorderTemplate
-            }
+            BorderTemplate = BorderTemplate.SingleLineBorderTemplate
         };
 
         dataGrid.Columns.Add("Artifact");

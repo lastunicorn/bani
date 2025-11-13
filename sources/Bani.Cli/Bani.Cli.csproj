@@ -29,10 +29,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <PackageReference Include="ConsoleTools.Commando.Builder.Autofac" Version="2.0.0-beta" />
         <PackageReference Include="Autofac" Version="8.4.0" />
         <PackageReference Include="ConsoleTools" Version="1.1.1" />
-        <PackageReference Include="MediatR" Version="13.1.0" />
-        <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="13.1.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.10" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.10" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0" />
+        <PackageReference Include="RequestR.Extensions.Autofac" Version="2.0.0" />
     </ItemGroup>
 
     <ItemGroup>
