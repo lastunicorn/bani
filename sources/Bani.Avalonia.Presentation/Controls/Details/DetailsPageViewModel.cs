@@ -26,22 +26,34 @@ namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.Details;
 public class DetailsPageViewModel : ViewModelBase
 {
     private readonly RequestBus requestBus;
-    private Issuer currentIssuer;
+    private object currentItem;
+    private string title;
     private string comments;
 
-    public Issuer CurrentIssuer
+    public object CurrentItem
     {
-        get => currentIssuer;
+        get => currentItem;
         private set
         {
-            currentIssuer = value;
+            currentItem = value;
             OnPropertyChanged();
-            OnPropertyChanged(nameof(IssuerName));
+            OnPropertyChanged(nameof(Title));
             OnPropertyChanged(nameof(IsVisible));
         }
     }
 
-    public string IssuerName => CurrentIssuer?.Name ?? string.Empty;
+    public string Title
+    {
+        get => title;
+        set
+        {
+            if (title != value)
+            {
+                title = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     public string Comments
     {
@@ -52,46 +64,58 @@ public class DetailsPageViewModel : ViewModelBase
             {
                 comments = value;
                 OnPropertyChanged();
+
                 _ = UpdateCommentsAsync();
             }
         }
     }
 
-    public bool IsVisible => CurrentIssuer != null;
+    public bool IsVisible => CurrentItem != null;
 
     public DetailsPageViewModel(EventBus eventBus, RequestBus requestBus)
     {
         ArgumentNullException.ThrowIfNull(eventBus);
         this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
 
-        eventBus.Subscribe<IssuerChangedEvent>(OnIssuerChanged);
+        eventBus.Subscribe<CurrentItemChangedEvent>(OnIssuerChanged);
     }
 
-    private void OnIssuerChanged(IssuerChangedEvent issuerChangedEvent)
+    private void OnIssuerChanged(CurrentItemChangedEvent issuerChangedEvent)
     {
-        CurrentIssuer = issuerChangedEvent.Issuer;
-        Comments = CurrentIssuer?.Comments ?? string.Empty;
+        CurrentItem = issuerChangedEvent.CurrentItem;
+        Title = issuerChangedEvent.CurrentItem switch
+        {
+            Issuer issuer => issuer.Name,
+            Emission emission => emission.Name,
+            _ => string.Empty
+        };
+        Comments = issuerChangedEvent.CurrentItem switch
+        {
+            Issuer issuer => issuer.Comments,
+            Emission emission => emission.Comments,
+            _ => string.Empty
+        };
     }
 
     private async Task UpdateCommentsAsync()
     {
-        if (CurrentIssuer == null)
-            return;
+        //if (CurrentItem == null)
+        //    return;
 
-        try
-        {
-            UpdateIssuerCommentsRequest request = new()
-            {
-                IssuerId = CurrentIssuer.Id,
-                Comments = Comments
-            };
+        //try
+        //{
+        //    UpdateIssuerCommentsRequest request = new()
+        //    {
+        //        IssuerId = CurrentItem.Id,
+        //        Comments = Comments
+        //    };
 
-            await requestBus.ProcessAsync(request);
-        }
-        catch (Exception ex)
-        {
-            // Log error but don't throw to avoid breaking UI
-            System.Diagnostics.Debug.WriteLine($"Error updating issuer comments: {ex.Message}");
-        }
+        //    await requestBus.ProcessAsync(request);
+        //}
+        //catch (Exception ex)
+        //{
+        //    // Log error but don't throw to avoid breaking UI
+        //    System.Diagnostics.Debug.WriteLine($"Error updating issuer comments: {ex.Message}");
+        //}
     }
 }

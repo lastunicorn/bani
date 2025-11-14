@@ -18,6 +18,8 @@ using System.Collections.ObjectModel;
 using DustInTheWind.Bani.Avalonia.Application.PresentIssuesTree;
 using DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
 using DustInTheWind.Bani.Avalonia.Presentation.Infrastructure;
+using DustInTheWind.Bani.Domain;
+using DustInTheWind.Bani.Ports.StateAccess;
 using DustInTheWind.RequestR;
 
 namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.IssuesTree;
@@ -61,22 +63,20 @@ public class IssuersTreeViewModel : ViewModelBase
 
     private async Task HandleSelectionChanged(object selectedItem)
     {
+        SelectIssuerRequest request = new();
+
         if (selectedItem is IssuerTreeNodeViewModel issuerNode)
         {
-            try
-            {
-                SelectIssuerRequest request = new()
-                {
-                    IssuerId = issuerNode.Id
-                };
+            request.ItemId = issuerNode.Id;
+            request.ItemType = ItemType.Issuer;
 
-                await requestBus.ProcessAsync(request);
-            }
-            catch (Exception ex)
-            {
-                // Log error but don't throw to avoid breaking UI
-                System.Diagnostics.Debug.WriteLine($"Error selecting issuer: {ex.Message}");
-            }
         }
+        else if (selectedItem is EmissionTreeNodeViewModel emissionNode)
+        {
+            request.ItemId = emissionNode.Name;
+            request.ItemType = ItemType.Emission;
+        }
+
+        await requestBus.ProcessAsync(request);
     }
 }

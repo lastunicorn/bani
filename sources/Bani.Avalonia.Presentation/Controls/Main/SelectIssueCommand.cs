@@ -46,7 +46,7 @@ public class SelectIssueCommand : ICommand
 
         SelectIssuerRequest request = new()
         {
-            IssuerId = issuerId
+            ItemId = issuerId
         };
 
         await requestBus.ProcessAsync(request);

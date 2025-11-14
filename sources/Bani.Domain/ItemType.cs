@@ -14,17 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Bani.Domain;
+namespace DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.Ports.StateAccess;
-
-public interface IApplicationState
+public enum ItemType
 {
-    Issuer CurrentIssuer { get; set; }
-
-    Emission CurrentEmission { get; set; }
-
-    ItemType CurrentItemType { get; }
-
-    void RemoveCurrent();
+    None = 0,
+    Issuer,
+    Emission
 }

@@ -37,20 +37,59 @@ internal class SelectIssuerUseCase : IUseCase<SelectIssuerRequest>
 
     public Task Execute(SelectIssuerRequest request, CancellationToken cancellationToken)
     {
-        Issuer issuer = unitOfWork.IssuerRepository.GetById(request.IssuerId);
+        Issuer issuer = unitOfWork.IssuerRepository.GetById(request.ItemId);
 
-        applicationState.CurrentIssuer = request.IssuerId;
+        if (issuer != null)
+        {
+            applicationState.CurrentIssuer = issuer;
+            RaiseCurrentItemChangedEvent(issuer);
+        }
+        else
+        {
+            Emission emission = unitOfWork.EmissionRepository.GetById(request.ItemId);
 
-        RaiseIssuerChangedEvent(issuer);
+            if (emission != null)
+            {
+                applicationState.CurrentEmission = emission;
+                RaiseCurrentItemChangedEvent(emission);
+            }
+            else
+            {
+                applicationState.RemoveCurrent();
+                RaiseCurrentItemChangedEvent();
+            }
+        }
 
         return Task.CompletedTask;
     }
 
-    private void RaiseIssuerChangedEvent(Issuer issuer)
+    private void RaiseCurrentItemChangedEvent(Issuer issuer)
     {
-        IssuerChangedEvent ev = new()
+        CurrentItemChangedEvent ev = new()
         {
-            Issuer = issuer
+            CurrentItem = issuer,
+            ItemType = ItemType.Issuer
+        };
+
+        eventBus.Publish(ev);
+    }
+
+    private void RaiseCurrentItemChangedEvent(Emission emission)
+    {
+        CurrentItemChangedEvent ev = new()
+        {
+            CurrentItem = emission,
+            ItemType = ItemType.Emission
+        };
+
+        eventBus.Publish(ev);
+    }
+
+    private void RaiseCurrentItemChangedEvent()
+    {
+        CurrentItemChangedEvent ev = new()
+        {
+            ItemType = ItemType.None
         };
 
         eventBus.Publish(ev);

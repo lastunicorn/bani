@@ -19,6 +19,7 @@ using DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
 using DustInTheWind.Bani.Avalonia.Presentation.Controls.Details;
 using DustInTheWind.Bani.Avalonia.Presentation.Controls.IssuesTree;
 using DustInTheWind.Bani.Avalonia.Presentation.Infrastructure;
+using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Infrastructure;
 
 namespace DustInTheWind.Bani.Avalonia.Presentation.Controls.Main;
@@ -62,14 +63,19 @@ public class MainViewModel : ViewModelBase
         DetailsPageViewModel = detailsPageViewModel;
         IssuersTreeViewModel = issuesTreeViewModel;
 
-        eventBus.Subscribe<IssuerChangedEvent>(HandleIssuerChanged);
+        eventBus.Subscribe<CurrentItemChangedEvent>(HandleIssuerChanged);
 
         BreadCrumbs = "> ";
     }
 
-    private void HandleIssuerChanged(IssuerChangedEvent ev)
+    private void HandleIssuerChanged(CurrentItemChangedEvent ev)
     {
-        BreadCrumbs = "> " + ev.Issuer?.Name;
+        BreadCrumbs = "> " + ev.CurrentItem switch
+        {
+            Issuer issuer => issuer.Name,
+            Emission emission => emission.Name,
+            _ => string.Empty
+        };
 
         // todo: display the catalogs page
     }

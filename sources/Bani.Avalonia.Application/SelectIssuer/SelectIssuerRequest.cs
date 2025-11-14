@@ -14,9 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.Bani.Domain;
+using DustInTheWind.Bani.Ports.StateAccess;
+
 namespace DustInTheWind.Bani.Avalonia.Application.SelectIssuer;
 
 public class SelectIssuerRequest
 {
-    public string IssuerId { get; set; }
+    public string ItemId { get; set; }
+
+    public ItemType ItemType { get; set; }
 }

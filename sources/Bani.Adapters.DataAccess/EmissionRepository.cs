@@ -1,4 +1,4 @@
-﻿// Bani
+// Bani
 // Copyright (C) 2022-2025 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,17 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.Bani.Adapters.DataAccess.Database;
 using DustInTheWind.Bani.Domain;
+using DustInTheWind.Bani.Ports.DataAccess;
 
-namespace DustInTheWind.Bani.Ports.StateAccess;
+namespace DustInTheWind.Bani.Adapters.DataAccess;
 
-public interface IApplicationState
+internal class EmissionRepository : IEmissionRepository
 {
-    Issuer CurrentIssuer { get; set; }
+    private readonly BaniDbContext dbContext;
 
-    Emission CurrentEmission { get; set; }
+    public EmissionRepository(BaniDbContext dbContext)
+    {
+        this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+    }
 
-    ItemType CurrentItemType { get; }
-
-    void RemoveCurrent();
+    public Emission GetById(string id)
+    {
+        return dbContext.Issuers
+            .SelectMany(x => x.Emissions)
+            .Where(x => x.Name == id)
+            .FirstOrDefault();
+    }
 }

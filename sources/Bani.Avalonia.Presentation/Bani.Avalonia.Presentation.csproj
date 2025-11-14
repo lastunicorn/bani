@@ -62,8 +62,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <DependentUpon>%(Filename)</DependentUpon>
         </Compile>
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Controls\Issuers\" />
-    </ItemGroup>
 </Project>

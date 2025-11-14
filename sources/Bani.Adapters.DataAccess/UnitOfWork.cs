@@ -23,8 +23,11 @@ public class UnitOfWork : IUnitOfWork
 {
     private readonly BaniDbContext dbContext;
     private IIssuerRepository issuerRepository;
+    private IEmissionRepository emissionRepository;
 
     public IIssuerRepository IssuerRepository => issuerRepository ??= new IssuerRepository(dbContext);
+
+    public IEmissionRepository EmissionRepository => emissionRepository ??= new EmissionRepository(dbContext);
 
     public UnitOfWork(string connectionString)
     {

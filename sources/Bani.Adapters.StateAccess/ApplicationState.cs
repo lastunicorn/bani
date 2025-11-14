@@ -14,11 +14,40 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.Bani.Domain;
 using DustInTheWind.Bani.Ports.StateAccess;
 
 namespace DustInTheWind.Bani.Adapters.StateAccess;
 
 public class ApplicationState : IApplicationState
 {
-    public string CurrentIssuer { get; set; }
+    private Issuer currentIssuer;
+    private Emission currentEmission;
+
+    public ItemType CurrentItemType { get; private set; }
+
+    public Issuer CurrentIssuer
+    {
+        get => CurrentItemType == ItemType.Issuer ? currentIssuer : null;
+        set
+        {
+            currentIssuer = value;
+            CurrentItemType = ItemType.Issuer;
+        }
+    }
+
+    public Emission CurrentEmission
+    {
+        get => CurrentItemType == ItemType.Emission ? currentEmission : null;
+        set
+        {
+            currentEmission = value;
+            CurrentItemType = ItemType.Emission;
+        }
+    }
+
+    public void RemoveCurrent()
+    {
+        CurrentItemType = ItemType.None;
+    }
 }

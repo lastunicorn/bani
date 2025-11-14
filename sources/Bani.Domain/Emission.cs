@@ -30,6 +30,8 @@ public class Emission
 
     public List<Artifact> Artifacts { get; } = [];
 
+    public Issuer Issuer { get; set; }
+
     public bool IsBetween(int? startYear, int? endYear)
     {
         if (startYear == null && endYear == null)

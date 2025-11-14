@@ -40,7 +40,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 				<!-- Issuer Name -->
 				<TextBlock
-					Text="{Binding IssuerName}"
+					Text="{Binding Title}"
 					FontSize="24"
 					FontWeight="Bold"
 					Margin="0 0 0 8" />

@@ -1,4 +1,4 @@
-﻿// Bani
+// Bani
 // Copyright (C) 2022-2025 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -16,15 +16,9 @@
 
 using DustInTheWind.Bani.Domain;
 
-namespace DustInTheWind.Bani.Ports.StateAccess;
+namespace DustInTheWind.Bani.Ports.DataAccess;
 
-public interface IApplicationState
+public interface IEmissionRepository
 {
-    Issuer CurrentIssuer { get; set; }
-
-    Emission CurrentEmission { get; set; }
-
-    ItemType CurrentItemType { get; }
-
-    void RemoveCurrent();
+    Emission GetById(string id);
 }
