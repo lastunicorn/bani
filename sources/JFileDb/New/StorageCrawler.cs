@@ -1,6 +1,6 @@
 ﻿namespace DustInTheWind.JFileDb.New;
 
-internal class StorageCrawler
+public class StorageCrawler
 {
     private readonly string rootPath;
 
@@ -45,16 +45,7 @@ internal class StorageCrawler
                 Directories = GetRelativePath(directoryPath)
             };
 
-            // For main documents, recursively search all subdirectories for child documents
-            string[] subDirectories = Directory.GetDirectories(directoryPath);
-            foreach (string subDirectory in subDirectories)
-            {
-                IEnumerable<DocumentMetadata> children = CrawlAndAttachOrphans(subDirectory, documentMetadata);
-                documentMetadata.Children.AddRange(children);
-            }
-
             // Add child documents from the same directory to this main document
-            // Child documents use their actual directory path, not virtual series directories
             foreach (DocumentFile childDocument in childDocuments)
             {
                 DocumentMetadata childMetadata = new()
@@ -63,6 +54,15 @@ internal class StorageCrawler
                     Directories = GetRelativePath(directoryPath)
                 };
                 documentMetadata.Children.Add(childMetadata);
+            }
+
+            // For main documents, recursively search all subdirectories for child documents
+            string[] subDirectories = Directory.GetDirectories(directoryPath);
+            foreach (string subDirectory in subDirectories)
+            {
+                IEnumerable<DocumentMetadata> children = CrawlAndAttachOrphans(subDirectory, documentMetadata);
+                foreach (DocumentMetadata child in children)
+                    documentMetadata.Children.Add(child);
             }
 
             yield return documentMetadata;
@@ -88,9 +88,7 @@ internal class StorageCrawler
             foreach (string subDirectory in subDirectories)
             {
                 foreach (DocumentMetadata document in Crawl(subDirectory))
-                {
                     yield return document;
-                }
             }
         }
     }
@@ -124,27 +122,41 @@ internal class StorageCrawler
                 Directories = GetRelativePath(directoryPath)
             };
 
+            // Add child documents from the same directory to this main document
+            foreach (DocumentFile childDocument in childDocuments)
+            {
+                DocumentMetadata childMetadata = new()
+                {
+                    TypeId = childDocument.TypeId,
+                    Directories = GetRelativePath(directoryPath)
+                };
+                documentMetadata.Children.Add(childMetadata);
+            }
+
             // For main documents, recursively search all subdirectories
             string[] subDirectories = Directory.GetDirectories(directoryPath);
             foreach (string subDirectory in subDirectories)
             {
                 IEnumerable<DocumentMetadata> children = CrawlAndAttachOrphans(subDirectory, documentMetadata);
-                documentMetadata.Children.AddRange(children);
+                foreach (DocumentMetadata child in children)
+                    documentMetadata.Children.Add(child);
             }
 
             yield return documentMetadata;
         }
 
-        // Attach orphaned child documents to the parent main document
-        // Child documents use their actual directory path, not virtual series directories
-        foreach (DocumentFile childDocument in childDocuments)
+        // If no main documents were found, attach orphaned child documents to the parent main document
+        if (!mainDocuments.Any() && childDocuments.Any())
         {
-            DocumentMetadata childMetadata = new()
+            foreach (DocumentFile childDocument in childDocuments)
             {
-                TypeId = childDocument.TypeId,
-                Directories = GetRelativePath(directoryPath)
-            };
-            parentMainDocument.Children.Add(childMetadata);
+                DocumentMetadata childMetadata = new()
+                {
+                    TypeId = childDocument.TypeId,
+                    Directories = GetRelativePath(directoryPath)
+                };
+                parentMainDocument.Children.Add(childMetadata);
+            }
         }
 
         // If no main documents were found, still search subdirectories but attach any found documents to parent
@@ -154,9 +166,7 @@ internal class StorageCrawler
             foreach (string subDirectory in subDirectories)
             {
                 foreach (DocumentMetadata document in CrawlAndAttachOrphans(subDirectory, parentMainDocument))
-                {
                     yield return document;
-                }
             }
         }
     }

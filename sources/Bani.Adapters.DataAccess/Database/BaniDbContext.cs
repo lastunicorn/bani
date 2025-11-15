@@ -14,8 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.Bani.DataAccess.JsonFiles;
 using DustInTheWind.Bani.Domain;
 using DustInTheWind.JFileDb;
+using DustInTheWind.JFileDb.New;
 
 namespace DustInTheWind.Bani.Adapters.DataAccess.Database;
 
@@ -43,8 +45,33 @@ public class BaniDbContext : DbContext
 
     private void LoadIssuers()
     {
+        //StorageCrawler storageCrawler = new(connectionString);
+        //storageCrawler.Open();
+
+        //IEnumerable<Issuer> issuers = storageCrawler.Items
+        //    .Where(x => x.TypeId == "issuer")
+        //    .Select(x => ReadIssuer(x.GetFullPath()));
+
+        //Issuers.InitializeWith(issuers);
+
         IssuerCrawler issuerCrawler = new();
         IEnumerable<Issuer> issuers = issuerCrawler.Crawl(connectionString);
         Issuers.InitializeWith(issuers);
+    }
+
+    private static Issuer ReadIssuer(string filePath)
+    {
+        JsonFile<JIssuer> issuerFile = new(filePath);
+        issuerFile.Open();
+
+        Issuer issuer = issuerFile.Data.ToDomainEntity();
+        issuer.Id = filePath;
+
+        string rootDirectoryPath = Path.GetDirectoryName(filePath);
+
+        //IEnumerable<Emission> emissions = ReadEmissions(rootDirectoryPath);
+        //issuer.Emissions.AddRange(emissions);
+
+        return issuer;
     }
 }

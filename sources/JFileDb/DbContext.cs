@@ -79,7 +79,7 @@ public abstract class DbContext
     /// <returns>A task representing the async operation.</returns>
     private Task PersistChangesForCollectionAsync(object collection, Type entityType, CancellationToken cancellationToken)
     {
-        MethodInfo method = typeof(DbContext).GetMethod("PersistChangesAsync", BindingFlags.NonPublic | BindingFlags.Instance);
+        MethodInfo method = typeof(DbContext).GetMethod(nameof(PersistChangesAsync), BindingFlags.NonPublic | BindingFlags.Instance);
         MethodInfo genericMethod = method.MakeGenericMethod(entityType);
 
         return (Task)genericMethod.Invoke(this, new object[] { collection, cancellationToken });

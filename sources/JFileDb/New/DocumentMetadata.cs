@@ -1,7 +1,9 @@
 ﻿namespace DustInTheWind.JFileDb.New;
 
-internal class DocumentMetadata
+public class DocumentMetadata
 {
+    private DocumentMetadata parent;
+
     /// <summary>
     /// Gets or sets the unique identifier that identifies the document type.
     /// It is used in the name of the file that stores the document data.
@@ -22,5 +24,88 @@ internal class DocumentMetadata
     /// <summary>
     /// Gets or sets the list of child documents.
     /// </summary>
-    public List<DocumentMetadata> Children { get; set; } = [];
+    public DocumentMetadataCollection Children { get; set; }
+
+    /// <summary>
+    /// Gets or sets the parent document metadata. This is null for root-level documents.
+    /// </summary>
+    public DocumentMetadata Parent
+    {
+        get => parent;
+        set
+        {
+            DocumentMetadata oldParent = parent;
+            if (oldParent != value)
+            {
+                parent = value;
+                OnParentChanged(new ParentChangedEventArgs(oldParent, value));
+            }
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the Parent property value changes.
+    /// </summary>
+    public event EventHandler<ParentChangedEventArgs> ParentChanged;
+
+    public DocumentMetadata()
+    {
+        Children = new DocumentMetadataCollection(this);
+    }
+
+    public string GetFullPath()
+    {
+        string[] pathParts = EnumeratePathParts()
+            .ToArray();
+
+        return Path.Combine(pathParts);
+    }
+
+    private IEnumerable<string> EnumeratePathParts()
+    {
+        IEnumerable<DocumentMetadata> ancestors = EnumerateAncestors().Reverse();
+
+        foreach (DocumentMetadata ancestor in ancestors)
+        {
+            if (ancestor.Directories != null)
+            {
+                foreach (string directoryName in ancestor.Directories)
+                    yield return directoryName;
+            }
+        }
+
+        if (Directories != null)
+        {
+            foreach (string directoryName in Directories)
+                yield return directoryName;
+        }
+
+        yield return GetFileName();
+    }
+
+    private IEnumerable<DocumentMetadata> EnumerateAncestors()
+    {
+        DocumentMetadata current = Parent;
+
+        while (current != null)
+        {
+            yield return current;
+            current = current.Parent;
+        }
+    }
+
+    private string GetFileName()
+    {
+        string prefix = Parent == null ? "m-" : "c-";
+        return $"{prefix}{TypeId}.json";
+    }
+
+    /// <summary>
+    /// Raises the ParentChanged event.
+    /// </summary>
+    /// <param name="e">The event arguments containing the old and new parent values.</param>
+    protected virtual void OnParentChanged(ParentChangedEventArgs e)
+    {
+        ParentChanged?.Invoke(this, e);
+    }
 }

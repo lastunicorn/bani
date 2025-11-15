@@ -18,7 +18,7 @@ internal static class DocumentMetadataAssert
     /// <exception cref="XunitException">Thrown when the instances are not deeply equal</exception>
     public static void DeepEqual(DocumentMetadata expected, DocumentMetadata actual)
     {
-        DeepEqual(expected, actual, string.Empty);
+        DeepEqual(expected, actual, string.Empty, new HashSet<DocumentMetadata>(), new HashSet<DocumentMetadata>());
     }
 
     /// <summary>
@@ -34,7 +34,7 @@ internal static class DocumentMetadataAssert
         DeepEqual(expected, actual, string.Empty);
     }
 
-    private static void DeepEqual(DocumentMetadata expected, DocumentMetadata actual, string path)
+    private static void DeepEqual(DocumentMetadata expected, DocumentMetadata actual, string path, HashSet<DocumentMetadata> visitedExpected, HashSet<DocumentMetadata> visitedActual)
     {
         string currentPath = string.IsNullOrEmpty(path) ? "Root" : path;
 
@@ -47,23 +47,57 @@ internal static class DocumentMetadataAssert
         if (actual == null)
             throw new XunitException($"Expected DocumentMetadata at {currentPath} to not be null, but was null.");
 
-        // Compare TypeId
-        if (expected.TypeId != actual.TypeId)
-            throw new XunitException($"Expected TypeId at {currentPath} to be '{expected.TypeId}', but was '{actual.TypeId}'.");
+        // Check for circular references
+        if (visitedExpected.Contains(expected) || visitedActual.Contains(actual))
+            return; // Skip circular references
 
-        // Compare Directories (order-independent)
-        DeepEqualOrderIndependent(expected.Directories, actual.Directories, $"{currentPath}.Directories");
+        visitedExpected.Add(expected);
+        visitedActual.Add(actual);
 
-        // Compare Children (order-independent)
-        DeepEqualOrderIndependent(expected.Children, actual.Children, $"{currentPath}.Children");
+        try
+        {
+            // Compare TypeId
+            if (expected.TypeId != actual.TypeId)
+                throw new XunitException($"Expected TypeId at {currentPath} to be '{expected.TypeId}', but was '{actual.TypeId}'.");
+
+            // Compare Directories (order-independent)
+            DeepEqualOrderIndependent(expected.Directories, actual.Directories, $"{currentPath}.Directories");
+
+            // Compare Parent references (but only TypeId to avoid infinite recursion)
+            CompareParentReferences(expected.Parent, actual.Parent, $"{currentPath}.Parent");
+
+            // Compare Children (order-independent)
+            DeepEqualOrderIndependent(expected.Children, actual.Children, $"{currentPath}.Children", visitedExpected, visitedActual);
+        }
+        finally
+        {
+            visitedExpected.Remove(expected);
+            visitedActual.Remove(actual);
+        }
+    }
+
+    private static void CompareParentReferences(DocumentMetadata expectedParent, DocumentMetadata actualParent, string path)
+    {
+        if (expectedParent == null && actualParent == null)
+            return;
+
+        if (expectedParent == null)
+            throw new XunitException($"Expected Parent at {path} to be null, but was not null.");
+
+        if (actualParent == null)
+            throw new XunitException($"Expected Parent at {path} to not be null, but was null.");
+
+        // Only compare TypeId to avoid infinite recursion
+        if (expectedParent.TypeId != actualParent.TypeId)
+            throw new XunitException($"Expected Parent TypeId at {path} to be '{expectedParent.TypeId}', but was '{actualParent.TypeId}'.");
     }
 
     private static void DeepEqual(IEnumerable<DocumentMetadata> expected, IEnumerable<DocumentMetadata> actual, string path)
     {
-        DeepEqualOrderIndependent(expected, actual, path);
+        DeepEqualOrderIndependent(expected, actual, path, new HashSet<DocumentMetadata>(), new HashSet<DocumentMetadata>());
     }
 
-    private static void DeepEqualOrderIndependent(IEnumerable<DocumentMetadata> expected, IEnumerable<DocumentMetadata> actual, string path)
+    private static void DeepEqualOrderIndependent(IEnumerable<DocumentMetadata> expected, IEnumerable<DocumentMetadata> actual, string path, HashSet<DocumentMetadata> visitedExpected, HashSet<DocumentMetadata> visitedActual)
     {
         List<DocumentMetadata> expectedList = expected?.ToList() ?? [];
         List<DocumentMetadata> actualList = actual?.ToList() ?? [];
@@ -84,7 +118,7 @@ internal static class DocumentMetadataAssert
                 try
                 {
                     // Try to match this item
-                    DeepEqual(expectedItem, remainingActual[j], $"{path}[expected:{i}]");
+                    DeepEqual(expectedItem, remainingActual[j], $"{path}[expected:{i}]", visitedExpected, visitedActual);
                     // If no exception was thrown, we found a match
                     remainingActual.RemoveAt(j);
                     found = true;
