@@ -99,23 +99,28 @@ public class DetailsPageViewModel : ViewModelBase
 
     private async Task UpdateCommentsAsync()
     {
-        //if (CurrentItem == null)
-        //    return;
+        if (CurrentItem == null)
+            return;
 
-        //try
-        //{
-        //    UpdateIssuerCommentsRequest request = new()
-        //    {
-        //        IssuerId = CurrentItem.Id,
-        //        Comments = Comments
-        //    };
+        try
+        {
+            UpdateIssuerCommentsRequest request = new()
+            {
+                IssuerId = CurrentItem switch
+                {
+                    Issuer issuer => issuer.Id,
+                    Emission emission => emission.Name,
+                    _ => string.Empty
+                },
+                Comments = Comments
+            };
 
-        //    await requestBus.ProcessAsync(request);
-        //}
-        //catch (Exception ex)
-        //{
-        //    // Log error but don't throw to avoid breaking UI
-        //    System.Diagnostics.Debug.WriteLine($"Error updating issuer comments: {ex.Message}");
-        //}
+            await requestBus.ProcessAsync(request);
+        }
+        catch (Exception ex)
+        {
+            // Log error but don't throw to avoid breaking UI
+            System.Diagnostics.Debug.WriteLine($"Error updating issuer comments: {ex.Message}");
+        }
     }
 }

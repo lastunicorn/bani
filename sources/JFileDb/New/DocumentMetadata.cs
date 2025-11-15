@@ -96,7 +96,10 @@ public class DocumentMetadata
 
     private string GetFileName()
     {
-        string prefix = Parent == null ? "m-" : "c-";
+        string prefix = Parent != null && (Directories == null || Directories.Count == 0)
+            ? "c-"
+            : "m-";
+
         return $"{prefix}{TypeId}.json";
     }
 

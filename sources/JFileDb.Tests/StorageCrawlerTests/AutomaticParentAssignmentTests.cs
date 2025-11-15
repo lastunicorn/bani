@@ -9,12 +9,12 @@ public class AutomaticParentAssignmentTests
     public void Open_WhenCrawlingDocuments_ParentIsSetAutomaticallyByCollection()
     {
         // Arrange
-        using TemporaryDatabase temporaryDatabase = new TemporaryDatabase();
+        using TemporaryDatabase temporaryDatabase = new();
         temporaryDatabase.CreateMainDocument("issuer");
         temporaryDatabase.CreateChildDocument("emission");
         temporaryDatabase.CreateChildDocument("coin");
 
-        StorageCrawler storageCrawler = new StorageCrawler(temporaryDatabase.RootPath);
+        StorageCrawler storageCrawler = new(temporaryDatabase.RootPath);
 
         // Act
         storageCrawler.Open();
@@ -41,12 +41,12 @@ public class AutomaticParentAssignmentTests
     public void Open_WhenCrawlingNestedDocuments_ParentChainIsSetAutomaticallyByCollections()
     {
         // Arrange
-        using TemporaryDatabase temporaryDatabase = new TemporaryDatabase();
+        using TemporaryDatabase temporaryDatabase = new();
         temporaryDatabase.CreateMainDocument("issuer");
         temporaryDatabase.CreateMainDocument("emission", "romania");
         temporaryDatabase.CreateChildDocument("banknote", "romania");
 
-        StorageCrawler storageCrawler = new StorageCrawler(temporaryDatabase.RootPath);
+        StorageCrawler storageCrawler = new(temporaryDatabase.RootPath);
 
         // Act
         storageCrawler.Open();

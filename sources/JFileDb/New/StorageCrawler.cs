@@ -13,10 +13,10 @@ public class StorageCrawler
 
     public void Open()
     {
-        Items = Crawl(rootPath).ToList();
+        Items = Crawl(rootPath, null).ToList();
     }
 
-    private IEnumerable<DocumentMetadata> Crawl(string directoryPath)
+    private IEnumerable<DocumentMetadata> Crawl(string directoryPath, DocumentMetadata parentDocument)
     {
         if (!Directory.Exists(directoryPath))
             yield break;
@@ -42,7 +42,8 @@ public class StorageCrawler
             DocumentMetadata documentMetadata = new()
             {
                 TypeId = documentFile.TypeId,
-                Directories = GetRelativePath(directoryPath)
+                Directories = GetDirectoriesRelativeToParent(directoryPath, parentDocument),
+                Parent = parentDocument
             };
 
             // Add child documents from the same directory to this main document
@@ -51,7 +52,8 @@ public class StorageCrawler
                 DocumentMetadata childMetadata = new()
                 {
                     TypeId = childDocument.TypeId,
-                    Directories = GetRelativePath(directoryPath)
+                    Directories = [], // Child documents in same directory have no additional directories
+                    Parent = documentMetadata
                 };
                 documentMetadata.Children.Add(childMetadata);
             }
@@ -78,7 +80,8 @@ public class StorageCrawler
                 DocumentMetadata childMetadata = new()
                 {
                     TypeId = childDocument.TypeId,
-                    Directories = GetRelativePath(directoryPath)
+                    Directories = GetDirectoriesRelativeToParent(directoryPath, parentDocument),
+                    Parent = parentDocument
                 };
                 yield return childMetadata;
             }
@@ -87,7 +90,7 @@ public class StorageCrawler
             string[] subDirectories = Directory.GetDirectories(directoryPath);
             foreach (string subDirectory in subDirectories)
             {
-                foreach (DocumentMetadata document in Crawl(subDirectory))
+                foreach (DocumentMetadata document in Crawl(subDirectory, parentDocument))
                     yield return document;
             }
         }
@@ -119,7 +122,8 @@ public class StorageCrawler
             DocumentMetadata documentMetadata = new()
             {
                 TypeId = documentFile.TypeId,
-                Directories = GetRelativePath(directoryPath)
+                Directories = GetDirectoriesRelativeToParent(directoryPath, parentMainDocument),
+                Parent = parentMainDocument
             };
 
             // Add child documents from the same directory to this main document
@@ -128,7 +132,8 @@ public class StorageCrawler
                 DocumentMetadata childMetadata = new()
                 {
                     TypeId = childDocument.TypeId,
-                    Directories = GetRelativePath(directoryPath)
+                    Directories = [], // Child documents in same directory have no additional directories
+                    Parent = documentMetadata
                 };
                 documentMetadata.Children.Add(childMetadata);
             }
@@ -153,7 +158,8 @@ public class StorageCrawler
                 DocumentMetadata childMetadata = new()
                 {
                     TypeId = childDocument.TypeId,
-                    Directories = GetRelativePath(directoryPath)
+                    Directories = GetDirectoriesRelativeToParent(directoryPath, parentMainDocument),
+                    Parent = parentMainDocument
                 };
                 parentMainDocument.Children.Add(childMetadata);
             }
@@ -169,6 +175,63 @@ public class StorageCrawler
                     yield return document;
             }
         }
+    }
+
+    private List<string> GetDirectoriesRelativeToParent(string directoryPath, DocumentMetadata parentDocument)
+    {
+        // For root-level documents (no parent), use path relative to root
+        if (parentDocument == null)
+        {
+            return GetRelativePath(directoryPath);
+        }
+
+        // For child documents, calculate path relative to parent document's path
+        string parentPath = GetParentDocumentPath(parentDocument);
+        string relativePath = Path.GetRelativePath(parentPath, directoryPath);
+
+        if (relativePath == "." || string.IsNullOrEmpty(relativePath))
+            return [];
+
+        return relativePath.Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries).ToList();
+    }
+
+    private string GetParentDocumentPath(DocumentMetadata parentDocument)
+    {
+        // Build the full path to the parent document's directory
+        List<string> pathParts = [rootPath];
+        
+        // Get all directories from root to parent
+        List<string> allDirectories = GetAllDirectoriesToDocument(parentDocument);
+        pathParts.AddRange(allDirectories);
+
+        return Path.Combine(pathParts.ToArray());
+    }
+
+    private List<string> GetAllDirectoriesToDocument(DocumentMetadata document)
+    {
+        List<string> allDirectories = [];
+        
+        // Collect all directories from root to this document
+        List<DocumentMetadata> ancestors = [];
+        DocumentMetadata current = document;
+        while (current != null)
+        {
+            ancestors.Add(current);
+            current = current.Parent;
+        }
+        
+        // Reverse to go from root to document
+        ancestors.Reverse();
+        
+        foreach (DocumentMetadata ancestor in ancestors)
+        {
+            if (ancestor.Directories != null)
+            {
+                allDirectories.AddRange(ancestor.Directories);
+            }
+        }
+        
+        return allDirectories;
     }
 
     private List<string> GetRelativePath(string directoryPath)

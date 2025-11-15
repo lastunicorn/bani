@@ -77,7 +77,7 @@ public class GetFullPathTests
         string result = child.GetFullPath();
 
         // Assert
-        Assert.Equal(Path.Combine("subfolder", "c-child.json"), result);
+        Assert.Equal(Path.Combine("subfolder", "m-child.json"), result);
     }
 
     [Fact]
@@ -100,7 +100,7 @@ public class GetFullPathTests
         string result = child.GetFullPath();
 
         // Assert
-        string expected = Path.Combine("parentfolder1", "parentfolder2", "childfolder", "c-child.json");
+        string expected = Path.Combine("parentfolder1", "parentfolder2", "childfolder", "m-child.json");
         Assert.Equal(expected, result);
     }
 
@@ -130,7 +130,7 @@ public class GetFullPathTests
         string result = leaf.GetFullPath();
 
         // Assert
-        string expected = Path.Combine("rootdir", "middledir", "leafdir", "c-leaf.json");
+        string expected = Path.Combine("rootdir", "middledir", "leafdir", "m-leaf.json");
         Assert.Equal(expected, result);
     }
 
@@ -159,7 +159,7 @@ public class GetFullPathTests
         string result = child.GetFullPath();
 
         // Assert
-        string expected = Path.Combine("parentdir", "childdir", "c-child.json");
+        string expected = Path.Combine("parentdir", "childdir", "m-child.json");
         Assert.Equal(expected, result);
     }
 
@@ -216,6 +216,30 @@ public class GetFullPathTests
 
         // Assert
         string expected = Path.Combine("dir1", "dir2", "c-child.json");
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void GetFullPath_WhenChildHasTwoDirectories_IncludesAllDirectories()
+    {
+        // Arrange
+        DocumentMetadata parent = new()
+        {
+            TypeId = "parent",
+            Directories = ["parentdir"]
+        };
+        DocumentMetadata child = new()
+        {
+            TypeId = "child",
+            Parent = parent,
+            Directories = ["dir1", "dir2"]
+        };
+
+        // Act
+        string result = child.GetFullPath();
+
+        // Assert
+        string expected = Path.Combine("parentdir", "dir1", "dir2", "m-child.json");
         Assert.Equal(expected, result);
     }
 }

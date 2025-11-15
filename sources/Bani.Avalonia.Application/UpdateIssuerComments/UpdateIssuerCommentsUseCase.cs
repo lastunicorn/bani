@@ -31,12 +31,12 @@ internal class UpdateIssuerCommentsUseCase : IUseCase<UpdateIssuerCommentsReques
 
     public async Task Execute(UpdateIssuerCommentsRequest request, CancellationToken cancellationToken)
     {
-        ValidateRequest(request);
+        //ValidateRequest(request);
 
-        Issuer issuer = RetrieveIssuer(request);
-        issuer.Comments = request.Comments;
+        //Issuer issuer = RetrieveIssuer(request);
+        //issuer.Comments = request.Comments;
 
-        await unitOfWork.SaveChangesAsync(cancellationToken);
+        //await unitOfWork.SaveChangesAsync(cancellationToken);
     }
 
     private static void ValidateRequest(UpdateIssuerCommentsRequest request)

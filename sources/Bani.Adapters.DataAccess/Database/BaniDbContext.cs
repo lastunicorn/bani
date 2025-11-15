@@ -45,18 +45,37 @@ public class BaniDbContext : DbContext
 
     private void LoadIssuers()
     {
-        //StorageCrawler storageCrawler = new(connectionString);
-        //storageCrawler.Open();
+        StorageCrawler storageCrawler = new(connectionString);
+        storageCrawler.Open();
 
-        //IEnumerable<Issuer> issuers = storageCrawler.Items
-        //    .Where(x => x.TypeId == "issuer")
-        //    .Select(x => ReadIssuer(x.GetFullPath()));
+        IEnumerable<Issuer> issuers = storageCrawler.Items
+            .Where(x => x.TypeId == "issuer")
+            .Select(x =>
+            {
+                string filePath = x.GetFullPath();
+                string fullPath = Path.Combine(connectionString, filePath);
+                Issuer issuer = ReadIssuer(fullPath);
 
-        //Issuers.InitializeWith(issuers);
+                x.Children
+                    .Where(c => c.TypeId == "emission")
+                    .ToList()
+                    .ForEach(c =>
+                    {
+                        string emissionFilePath = c.GetFullPath();
+                        string emissionFullPath = Path.Combine(connectionString, emissionFilePath);
+                        Emission emission = ReadEmission(emissionFullPath);
+                        issuer.Emissions.Add(emission);
+                    });
 
-        IssuerCrawler issuerCrawler = new();
-        IEnumerable<Issuer> issuers = issuerCrawler.Crawl(connectionString);
+                return issuer;
+            })
+            .ToList();
+
         Issuers.InitializeWith(issuers);
+
+        //IssuerCrawler issuerCrawler = new();
+        //IEnumerable<Issuer> issuers = issuerCrawler.Crawl(connectionString);
+        //Issuers.InitializeWith(issuers);
     }
 
     private static Issuer ReadIssuer(string filePath)
@@ -67,11 +86,16 @@ public class BaniDbContext : DbContext
         Issuer issuer = issuerFile.Data.ToDomainEntity();
         issuer.Id = filePath;
 
-        string rootDirectoryPath = Path.GetDirectoryName(filePath);
-
-        //IEnumerable<Emission> emissions = ReadEmissions(rootDirectoryPath);
-        //issuer.Emissions.AddRange(emissions);
-
         return issuer;
+    }
+
+    private static Emission ReadEmission(string filePath)
+    {
+        EmissionFile emissionFile = new(filePath);
+        emissionFile.Open();
+
+        Emission emission = emissionFile.Emission.ToDomainEntity();
+
+        return emission;
     }
 }
