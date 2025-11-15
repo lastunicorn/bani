@@ -44,6 +44,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{1E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JFileDb", "JFileDb\JFileDb.csproj", "{5429C7C0-DAF2-4648-B9C3-53F9CD60CD10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JFileDb.Tests", "JFileDb.Tests\JFileDb.Tests.csproj", "{AC3E60EC-871F-413C-9D23-865C6907E652}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,6 +108,10 @@ Global
 		{5429C7C0-DAF2-4648-B9C3-53F9CD60CD10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5429C7C0-DAF2-4648-B9C3-53F9CD60CD10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5429C7C0-DAF2-4648-B9C3-53F9CD60CD10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC3E60EC-871F-413C-9D23-865C6907E652}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC3E60EC-871F-413C-9D23-865C6907E652}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC3E60EC-871F-413C-9D23-865C6907E652}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC3E60EC-871F-413C-9D23-865C6907E652}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
